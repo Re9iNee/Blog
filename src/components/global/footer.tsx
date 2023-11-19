@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { AiOutlineMediumWorkmark } from "react-icons/ai";
 import { FaMedium } from "react-icons/fa6";
-import { Separator } from "../ui/separator";
 
 function Footer() {
   return (

@@ -5,9 +5,9 @@ import { Separator } from "../ui/separator";
 
 function Header() {
   return (
-    <>
+    <div className='bg-amber-400' id='header'>
       <header className='flex justify-between p-4 items-center'>
-        <section className='inline-flex gap-2 cursor-pointer text-6xl'>
+        <section className='inline-flex gap-2 cursor-pointer text-6xl text-black'>
           <FaMedium />
           <AiOutlineMediumWorkmark />
         </section>
@@ -17,7 +17,7 @@ function Header() {
         </Button>
       </header>
       <Separator />
-    </>
+    </div>
   );
 }
 
