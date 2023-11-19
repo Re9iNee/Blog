@@ -4,7 +4,7 @@ import { FaMedium } from "react-icons/fa6";
 
 function Footer() {
   return (
-    <div className='flex flex-col p-4'>
+    <div className='flex flex-col p-4 bg-neutral-900 text-white'>
       <section className='inline-flex gap-2 cursor-pointer text-6xl'>
         <FaMedium />
         <AiOutlineMediumWorkmark />
