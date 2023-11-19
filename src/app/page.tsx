@@ -106,7 +106,12 @@ export default function Home() {
           mainImageUrl='https://mora-uploads.s3.eu-central-1.amazonaws.com/1*M2Kg81dKdity7YM8n3s8Fg.jpg'
         />
 
-        <Button variant={"outline"}>Load more stories</Button>
+        <Button
+          variant={"outline"}
+          className='self-center rounded-3xl px-4 font-light border-neutral-950 text-neutral-950 my-4'
+        >
+          Load more stories
+        </Button>
       </section>
     </main>
   );
