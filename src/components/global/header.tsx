@@ -6,7 +6,7 @@ import Link from "next/link";
 
 function Header() {
   return (
-    <header className='bg-amber-400 ' id='header'>
+    <header className='bg-yellow-500 ' id='header'>
       <nav className='inline-flex p-4 gap-2 items-center justify-between w-full text-black'>
         <Link href={"/"} className='inline-flex gap-2 text-6xl'>
           <FaMedium />

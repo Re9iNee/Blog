@@ -12,7 +12,7 @@ const useDynamicHeight = (mainSectionId: string, otherDivId: string) => {
         const viewportHeight = window.innerHeight;
         const mainSectionHeight = viewportHeight - otherDivHeight;
 
-        mainSection.style.height = `${mainSectionHeight}px`;
+        mainSection.style.minHeight = `${mainSectionHeight}px`;
       }
     };
 
