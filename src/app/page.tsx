@@ -51,7 +51,7 @@ export default function Home() {
         </section>
         <Link
           href='/tags'
-          className='text-green-600 hover:text-black cursor-pointer'
+          className='text-green-600 hover:text-black cursor-pointer hover:dark:text-white'
         >
           See more topics
         </Link>

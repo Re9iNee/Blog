@@ -20,7 +20,7 @@ function BlogCard({
   return (
     <article className='flex gap-4'>
       <div className='flex-grow'>
-        <div className='flex gap-2'>
+        <Link href={`/author/${author.name}`} className='flex gap-2'>
           <Image
             className='rounded-full'
             objectFit='cover'
@@ -30,7 +30,7 @@ function BlogCard({
             src={author.avatarUrl}
           />
           <p>{author.name}</p>
-        </div>
+        </Link>
         <header>
           <h3>
             <Link href='/posts/link-to-post-1'>
