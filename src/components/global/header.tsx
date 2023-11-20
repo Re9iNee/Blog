@@ -1,12 +1,20 @@
-import { FaMedium } from "react-icons/fa6";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AiOutlineMediumWorkmark } from "react-icons/ai";
+import { FaMedium } from "react-icons/fa6";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
-import Link from "next/link";
 
 function Header() {
+  const pathname = usePathname();
+  const headerBg = pathname.startsWith("/posts/")
+    ? "bg-white"
+    : "bg-yellow-500";
+
   return (
-    <header className='bg-yellow-500 ' id='header'>
+    <header className={`${headerBg}`} id='header'>
       <nav className='inline-flex p-4 gap-2 items-center justify-between w-full text-black'>
         <Link href={"/"} className='inline-flex gap-2 text-6xl'>
           <FaMedium />
@@ -24,7 +32,10 @@ function Header() {
             Contact
           </Link>
 
-          <Button variant={"outline"} className='rounded-3xl text-gray-200'>
+          <Button
+            variant={"outline"}
+            className='rounded-3xl dark:text-gray-200'
+          >
             Get Started
           </Button>
         </div>
