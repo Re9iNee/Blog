@@ -1,5 +1,6 @@
 import Chip from "@/components/ui/chips";
 import {
+  convertDateToMonthAndDay,
   getAvatarPlaceholderUrl,
   getMainImagePlaceholderUrl,
 } from "@/lib/utils";
@@ -12,7 +13,7 @@ type Props = {
   data: Omit<PostModel, "categories">;
 };
 function BlogCard({ data }: Props) {
-  const { title, readingTime, author, mainImageUrl, publishedAt } = data;
+  const { id, title, readingTime, author, mainImageUrl, publishedAt } = data;
 
   return (
     <article className='flex gap-4'>
@@ -29,17 +30,11 @@ function BlogCard({ data }: Props) {
         </Link>
         <header>
           <h3 className='text-lg font-semibold'>
-            <Link href='/posts/link-to-post-1'>{title}</Link>
+            <Link href={`/posts/${id}`}>{title}</Link>
           </h3>
         </header>
         <h6 className='flex gap-1 items-center text-neutral-500'>
-          {/* format date to show: Nov 16 */}
-          <time>
-            {publishedAt?.toLocaleString("en-US", {
-              month: "short",
-              day: "numeric",
-            })}
-          </time>
+          <time>{convertDateToMonthAndDay(publishedAt)}</time>
           <RxDotFilled />
           <span>{readingTime} min read</span>
           <RxDotFilled className='hidden lg:block' />

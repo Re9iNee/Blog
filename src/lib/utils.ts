@@ -12,3 +12,10 @@ export function getAvatarPlaceholderUrl(): string {
 export function getMainImagePlaceholderUrl(): string {
   return "https://placehold.co/192x128";
 }
+
+/* format date to show: Nov 16 */
+export function convertDateToMonthAndDay(date: Date | null): string {
+  if (!date) return "Unknown";
+
+  return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}

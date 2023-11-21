@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { PostModel } from "@/types/post";
+import { notFound } from "next/navigation";
 
 export async function getAllPosts(
   take?: number
@@ -12,4 +13,15 @@ export async function getAllPosts(
   });
 
   return posts;
+}
+
+export async function getPost(id: number): Promise<PostModel> {
+  const post = await prisma.post.findUnique({
+    where: { id },
+    include: { author: true, categories: true },
+  });
+
+  if (!post) notFound();
+
+  return post;
 }
