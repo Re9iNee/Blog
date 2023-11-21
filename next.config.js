@@ -8,7 +8,18 @@ const nextConfig = {
         hostname: "mora-uploads.s3.eu-central-1.amazonaws.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "api.dicebear.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+        pathname: "**",
+      },
     ],
+    dangerouslyAllowSVG: true,
   },
 };
 
