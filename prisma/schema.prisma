@@ -5,6 +5,8 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// TODO: Enable acceleration
+// URL: https://console.prisma.io/clp6szjiz003tmr0g5sapq6xy/clp6szphd003wmr0go8uvw9t5/accelerate/insights?from=last24h
 datasource db {
   provider = "postgresql"
   url      = env("AWS_POSTGRES_URL") // uses connection pooling
@@ -14,17 +16,18 @@ datasource db {
 model Post {
   id Int @id @default(autoincrement())
 
-  readingTime Int
-  authorId    Int
-  title       String
-  summery     String
-  body        String?
-  publishedAt DateTime?
-  categories  Category[]
-  updatedAt   DateTime   @updatedAt
-  published   Boolean    @default(false)
-  createdAt   DateTime   @default(now())
-  author      User       @relation(fields: [authorId], references: [id])
+  readingTime  Int
+  authorId     Int
+  title        String
+  summery      String
+  body         String?
+  mainImageUrl String?
+  publishedAt  DateTime?
+  categories   Category[]
+  updatedAt    DateTime   @updatedAt
+  published    Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+  author       User       @relation(fields: [authorId], references: [id])
 
   @@map("posts")
 }
@@ -34,6 +37,7 @@ model User {
 
   name      String
   posts     Post[]
+  avatarUrl String?
   email     String   @unique
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
