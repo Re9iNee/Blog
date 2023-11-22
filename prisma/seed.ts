@@ -1,9 +1,12 @@
 import { PrismaClient } from "@prisma/client";
+import { withAccelerate } from "@prisma/extension-accelerate";
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient().$extends(withAccelerate());
 
 async function main() {
-  const result = await prisma.category.findMany({});
+  const result = await prisma.post.findMany({
+    cacheStrategy: { swr: 1000 * 60 * 60 * 24 },
+  });
   console.log(result);
 }
 
