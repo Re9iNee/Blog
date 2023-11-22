@@ -8,9 +8,9 @@ generator client {
 // TODO: Enable acceleration
 // URL: https://console.prisma.io/clp6szjiz003tmr0g5sapq6xy/clp6szphd003wmr0go8uvw9t5/accelerate/insights?from=last24h
 datasource db {
-  provider = "postgresql"
-  url      = env("AWS_POSTGRES_URL") // uses connection pooling
-  // directUrl = env("VERCEL_POSTGRES_URL_NON_POOLING") // uses a direct connection
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("AWS_POSTGRES_URL")
 }
 
 model Post {
