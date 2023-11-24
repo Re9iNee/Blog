@@ -5,9 +5,9 @@ export const postSchema = z.object({
 
   title: z.string(),
   summery: z.string(),
-  publishedAt: z.string().datetime(),
   readingTime: z.number(),
   body: z.string().optional(),
+  publishedAt: z.date().nullish(),
 
   mainImageUrl: z.string().url().optional(),
   published: z.boolean().default(false),

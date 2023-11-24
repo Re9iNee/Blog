@@ -13,6 +13,12 @@ datasource db {
   directUrl = env("AWS_POSTGRES_URL")
 }
 
+enum PostStatus {
+  draft
+  removed
+  published
+}
+
 model Post {
   id Int @id @default(autoincrement())
 
@@ -25,6 +31,7 @@ model Post {
   publishedAt  DateTime?
   categories   Category[]
   updatedAt    DateTime   @updatedAt
+  status       PostStatus @default(draft)
   published    Boolean    @default(false)
   createdAt    DateTime   @default(now())
   author       User       @relation(fields: [authorId], references: [id])

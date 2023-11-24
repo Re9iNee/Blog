@@ -4,9 +4,19 @@ import { withAccelerate } from "@prisma/extension-accelerate";
 const prisma = new PrismaClient().$extends(withAccelerate());
 
 async function main() {
-  const result = await prisma.post.findMany({
-    cacheStrategy: { swr: 1000 * 60 * 60 * 24 },
+  const result = await prisma.post.create({
+    data: {
+      author: { connect: { id: 1 } },
+      title: "My first post",
+      summery: "This is my first post",
+      readingTime: 5,
+      body: "This is the body of my first post",
+      published: true,
+      publishedAt: new Date(),
+      status: "published",
+    },
   });
+
   console.log(result);
 }
 

@@ -7,7 +7,8 @@
     "readingTime": 4,
     "body": "I'll back up the cross-platform HTTP feed, that should feed the COM monitor! Try to navigate the SCSI transmitter, maybe it will navigate the a",
     "mainImageUrl": "https://source.unsplash.com/random/800x600",
-    "published": true
+    "published": true,
+    "status": "draft"
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@
     "readingTime": 4,
     "body": "I'll back up the cross-platform HTTP feed, that should feed the COM monitor! Try to navigate the SCSI transmitter, maybe it will navigate the a",
     "mainImageUrl": "https://source.unsplash.com/random/800x600",
-    "published": false
+    "published": false,
+    "status": "published"
   },
   {
     "id": 3,
@@ -27,7 +29,8 @@
     "readingTime": 4,
     "body": "I'll back up the cross-platform HTTP feed, that should feed the COM monitor! Try to navigate the SCSI transmitter, maybe it will navigate the a",
     "mainImageUrl": "https://source.unsplash.com/random/800x600",
-    "published": true
+    "published": true,
+    "status": "removed"
   },
   {
     "id": 4,
@@ -37,6 +40,7 @@
     "readingTime": 4,
     "body": "I'll back up the cross-platform HTTP feed, that should feed the COM monitor! Try to navigate the SCSI transmitter, maybe it will navigate the a",
     "mainImageUrl": "https://source.unsplash.com/random/800x600",
-    "published": true
+    "published": true,
+    "status": "draft"
   }
 ]

@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { PostModel } from "@/types/post";
 import { notFound } from "next/navigation";
 
-export async function getAllPosts(
+export async function getAllPublishedPosts(
   take?: number
 ): Promise<Omit<PostModel, "categories">[]> {
   const posts = await prisma.post.findMany({
@@ -10,6 +10,26 @@ export async function getAllPosts(
     where: { published: true },
     orderBy: { createdAt: "desc" },
     include: { author: true },
+  });
+
+  return posts;
+}
+
+export async function getAllPosts() {
+  const posts = await prisma.post.findMany({
+    orderBy: { id: "asc" },
+    select: {
+      id: true,
+      title: true,
+      status: true,
+      summery: true,
+      published: true,
+      publishedAt: true,
+      readingTime: true,
+    },
+    cacheStrategy: {
+      swr: 60,
+    },
   });
 
   return posts;
