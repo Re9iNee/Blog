@@ -18,6 +18,11 @@ const nextConfig = {
         hostname: "placehold.co",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "cloudflare-ipfs.com",
+        pathname: "**",
+      },
     ],
     dangerouslyAllowSVG: true,
   },

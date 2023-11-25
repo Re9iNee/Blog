@@ -1,13 +1,26 @@
-import { Post, PrismaClient, User } from "@prisma/client";
 import { faker } from "@faker-js/faker";
+import { PrismaClient } from "@prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
 
 const prisma = new PrismaClient().$extends(withAccelerate());
 
 async function main() {
-  // await insertUsers();
-  // await insertPosts();
+  // await insertUsers(2);
+  // await insertPosts(3);
   // await getAllAuthors();
+  // await clearDB();
+}
+
+async function clearDB() {
+  console.log("Clearing DB...");
+
+  const deletePosts = prisma.post.deleteMany();
+  const deleteUsers = prisma.user.deleteMany();
+  const deleteCategories = prisma.category.deleteMany();
+
+  await prisma.$transaction([deletePosts, deleteUsers, deleteCategories]);
+
+  console.log("DB cleared!");
 }
 
 async function getAllAuthors() {
@@ -21,7 +34,7 @@ async function getAllAuthors() {
   return authors;
 }
 
-async function insertUsers() {
+async function insertUsers(limit: number = 3) {
   console.log(`inserting users...`);
 
   const users = [];
@@ -29,7 +42,7 @@ async function insertUsers() {
     const newUser = {
       name: faker.person.fullName(),
       email: faker.internet.email(),
-      avatarUrl: faker.image.avatar(),
+      avatarUrl: faker.image.avatarGitHub(),
     };
 
     users.push(newUser);
@@ -41,31 +54,34 @@ async function insertUsers() {
   return result;
 }
 
-async function insertPosts() {
+async function insertPosts(limit: number = 10) {
   console.log(`inserting posts...`);
 
   const users = await prisma.user.findMany();
+  if (users.length === 0) throw new Error("No users found");
 
   const posts = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < limit; i++) {
     const randomAuthor = users[Math.floor(Math.random() * users.length)];
 
-    const result = await prisma.post.create({
-      data: {
-        title: faker.lorem.sentence(),
-        summery: faker.lorem.paragraph(),
-        readingTime: faker.number.int({ max: 30 }),
-        body: faker.lorem.paragraphs(10),
-        mainImageUrl: faker.image.urlPicsumPhotos(),
-        published: faker.datatype.boolean(),
-        author: { connect: { id: randomAuthor.id } },
-      },
-    });
+    const newPost = {
+      title: faker.lorem.sentence(),
+      summery: faker.lorem.paragraph(),
+      readingTime: faker.number.int({ max: 30 }),
+      body: faker.lorem.paragraphs(10),
+      mainImageUrl: faker.image.urlPicsumPhotos(),
+      published: faker.datatype.boolean(),
+      authorId: randomAuthor.id,
+    };
 
-    posts.push(result);
+    posts.push(newPost);
   }
 
-  console.log(`inserted to DB: `, posts);
+  const result = await prisma.post.createMany({
+    data: posts.slice(),
+  });
+
+  console.log(`inserted to DB: `, result);
   return posts;
 }
 
