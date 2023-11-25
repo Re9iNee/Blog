@@ -7,10 +7,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { statuses } from "./data";
 
 import { DataTableColumnHeader } from "@/components/dashboard/table/data-table-column-header";
+import { PostModel } from "@/types/post";
 import { DataTableRowActions } from "./data-table-row-actions";
-import { Post } from "./post-schema";
 
-export const columns: ColumnDef<Post>[] = [
+export const columns: ColumnDef<PostModel>[] = [
   {
     id: "select",
     header: ({ table }) => (

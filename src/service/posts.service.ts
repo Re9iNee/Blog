@@ -16,16 +16,12 @@ export async function getAllPublishedPosts(
   return posts;
 }
 
-export async function getAllPosts() {
+export async function getAllPosts(): Promise<PostModel[]> {
   const posts = await prisma.post.findMany({
     orderBy: { id: "asc" },
-    select: {
-      id: true,
-      title: true,
-      status: true,
-      summery: true,
-      publishedAt: true,
-      readingTime: true,
+    include: {
+      author: true,
+      categories: true,
     },
     cacheStrategy: {
       swr: 60,
