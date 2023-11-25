@@ -5,9 +5,9 @@ import { withAccelerate } from "@prisma/extension-accelerate";
 const prisma = new PrismaClient().$extends(withAccelerate());
 
 async function main() {
-  await clearDB();
-  await insertUsers(2);
-  await insertPosts(3);
+  // await clearDB();
+  // await insertUsers(2);
+  // await insertPosts(10);
   // await getAllAuthors();
 }
 
