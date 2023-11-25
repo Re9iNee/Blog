@@ -1,14 +1,14 @@
 import { faker } from "@faker-js/faker";
-import { PrismaClient } from "@prisma/client";
+import { PostStatus, PrismaClient } from "@prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
 
 const prisma = new PrismaClient().$extends(withAccelerate());
 
 async function main() {
-  // await insertUsers(2);
-  // await insertPosts(3);
+  await clearDB();
+  await insertUsers(2);
+  await insertPosts(3);
   // await getAllAuthors();
-  // await clearDB();
 }
 
 async function clearDB() {
@@ -38,7 +38,7 @@ async function insertUsers(limit: number = 3) {
   console.log(`inserting users...`);
 
   const users = [];
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < limit; i++) {
     const newUser = {
       name: faker.person.fullName(),
       email: faker.internet.email(),
@@ -65,13 +65,14 @@ async function insertPosts(limit: number = 10) {
     const randomAuthor = users[Math.floor(Math.random() * users.length)];
 
     const newPost = {
+      authorId: randomAuthor.id,
+      status: PostStatus.published,
       title: faker.lorem.sentence(),
       summery: faker.lorem.paragraph(),
-      readingTime: faker.number.int({ max: 30 }),
       body: faker.lorem.paragraphs(10),
+      readingTime: faker.number.int({ max: 30 }),
+      publishedAt: faker.date.past({ years: 1 }),
       mainImageUrl: faker.image.urlPicsumPhotos(),
-      published: faker.datatype.boolean(),
-      authorId: randomAuthor.id,
     };
 
     posts.push(newPost);

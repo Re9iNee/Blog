@@ -23,6 +23,16 @@ const nextConfig = {
         hostname: "cloudflare-ipfs.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "**",
+        pathname: "**",
+      },
     ],
     dangerouslyAllowSVG: true,
   },

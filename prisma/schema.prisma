@@ -30,7 +30,6 @@ model Post {
   categories   Category[]
   updatedAt    DateTime   @updatedAt
   status       PostStatus @default(draft)
-  published    Boolean    @default(false)
   createdAt    DateTime   @default(now())
   author       User       @relation(fields: [authorId], references: [id])
 

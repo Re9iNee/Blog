@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { PostModel } from "@/types/post";
+import { PostStatus } from "@prisma/client";
 import { notFound } from "next/navigation";
 
 export async function getAllPublishedPosts(
@@ -7,9 +8,9 @@ export async function getAllPublishedPosts(
 ): Promise<Omit<PostModel, "categories">[]> {
   const posts = await prisma.post.findMany({
     take: take,
-    where: { published: true },
-    orderBy: { createdAt: "desc" },
     include: { author: true },
+    orderBy: { createdAt: "desc" },
+    where: { status: PostStatus.published },
   });
 
   return posts;
@@ -23,7 +24,6 @@ export async function getAllPosts() {
       title: true,
       status: true,
       summery: true,
-      published: true,
       publishedAt: true,
       readingTime: true,
     },
