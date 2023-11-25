@@ -5,8 +5,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// TODO: Enable acceleration
-// URL: https://console.prisma.io/clp6szjiz003tmr0g5sapq6xy/clp6szphd003wmr0go8uvw9t5/accelerate/insights?from=last24h
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
