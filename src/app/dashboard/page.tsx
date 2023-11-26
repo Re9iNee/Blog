@@ -1,8 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { isDateInCurrentMonth } from "@/lib/utils";
+import { getAllPosts } from "@/service/posts.service";
 import React from "react";
 
-function page() {
+async function page() {
+  const posts = await getAllPosts();
+
   return (
     <div className='flex-1 space-y-4 p-8 pt-6'>
       <div className='flex items-center justify-between space-y-2'>
@@ -42,8 +46,15 @@ function page() {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className='text-2xl font-bold'>25000</div>
-                <p className='text-xs text-muted-foreground'>35 this month</p>
+                <div className='text-2xl font-bold'>{posts.length}</div>
+                <p className='text-xs text-muted-foreground'>
+                  {
+                    posts.filter((post) =>
+                      isDateInCurrentMonth(post.publishedAt)
+                    ).length
+                  }{" "}
+                  posts published this month
+                </p>
               </CardContent>
             </Card>
           </div>

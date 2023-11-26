@@ -28,6 +28,8 @@ export async function getAllPosts(): Promise<PostModel[]> {
     },
   });
 
+  console.log(posts.length);
+
   return posts;
 }
 

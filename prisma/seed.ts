@@ -7,7 +7,7 @@ const prisma = new PrismaClient().$extends(withAccelerate());
 async function main() {
   // await clearDB();
   // await insertUsers(2);
-  // await insertPosts(10);
+  await insertPosts(1);
   // await getAllAuthors();
 }
 
