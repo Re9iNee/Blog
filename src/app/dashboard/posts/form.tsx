@@ -50,7 +50,9 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
     actionFn(values, initialValues?.id)
       .then(() => {
         toast({
-          description: "Your post has been created successfully.",
+          description: `Your post has been ${
+            initialValues ? "updated" : "created"
+          } successfully.`,
         });
         closeModal();
       })
