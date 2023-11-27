@@ -1,6 +1,9 @@
+"use server";
+
 import { prisma } from "@/lib/prisma";
 import { PostModel } from "@/types/post";
 import { PostStatus } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import { notFound } from "next/navigation";
 
 export async function getAllPublishedPosts(
@@ -28,8 +31,6 @@ export async function getAllPosts(): Promise<PostModel[]> {
     },
   });
 
-  console.log(posts.length);
-
   return posts;
 }
 
@@ -40,6 +41,28 @@ export async function getPost(id: number): Promise<PostModel> {
   });
 
   if (!post) notFound();
+
+  return post;
+}
+
+export async function updatePost(
+  id: number,
+  data: Partial<PostModel>
+): Promise<PostModel> {
+  const { author, categories, ...rest } = data;
+
+  const post = await prisma.post.update({
+    where: { id },
+    data: {
+      ...rest,
+    },
+    include: {
+      author: true,
+      categories: true,
+    },
+  });
+
+  revalidatePath("/dashboard/posts");
 
   return post;
 }

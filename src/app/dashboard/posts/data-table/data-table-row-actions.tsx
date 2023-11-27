@@ -16,6 +16,7 @@ import Modal from "@/components/ui/modal";
 import { useDisclosure } from "@nextui-org/react";
 import PostForm from "../form";
 import { postSchema } from "../post-schema";
+import { updatePost } from "@/service/posts.service";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -25,7 +26,7 @@ export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const post = postSchema.parse(row.original);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
   return (
     <>
@@ -66,7 +67,11 @@ export function DataTableRowActions<TData>({
       </DropdownMenu>
 
       <Modal isOpen={isOpen} header={`Edit Post`} onOpenChange={onOpenChange}>
-        <PostForm initialValues={post} />
+        <PostForm
+          closeModal={onClose}
+          initialValues={post}
+          actionFn={updatePost}
+        />
       </Modal>
     </>
   );

@@ -21,9 +21,11 @@ import { PostModel } from "@/types/post";
 import { postSchema } from "./post-schema";
 
 type Props = {
+  closeModal: () => void;
   initialValues: Partial<PostModel>;
+  actionFn: (id: number, data: Partial<PostModel>) => Promise<PostModel>;
 };
-function PostForm({ initialValues }: Props) {
+function PostForm({ initialValues, actionFn, closeModal }: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<PostModel>({
@@ -33,9 +35,19 @@ function PostForm({ initialValues }: Props) {
   });
 
   function onSubmit(values: PostModel) {
+    if (!initialValues.id) return "IT SHOULD CREATE";
+    setIsLoading(true);
+
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+
+    actionFn(initialValues.id, values)
+      .then(() => {
+        closeModal();
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   return (
@@ -114,7 +126,7 @@ function PostForm({ initialValues }: Props) {
                 <Textarea
                   {...field}
                   data-cy='body'
-                  className='resize-y 2xl:h-96'
+                  className='resize-y 2xl:h-80'
                   value={field.value ?? ""}
                   placeholder='Paste the content of post (Supports markdown)'
                 />
