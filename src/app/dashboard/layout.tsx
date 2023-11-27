@@ -1,6 +1,8 @@
 import DashboardHeader from "@/components/dashboard/header";
 import { Metadata } from "next";
 import React from "react";
+import { NextUIProvider } from "@nextui-org/react";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Mora Blog Dashboard",
@@ -10,8 +12,10 @@ export const metadata: Metadata = {
 function layout({ children }: { children: React.ReactNode }) {
   return (
     <div className='flex flex-col'>
-      <DashboardHeader />
-      {children}
+      <Providers>
+        <DashboardHeader />
+        {children}
+      </Providers>
     </div>
   );
 }

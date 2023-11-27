@@ -4,9 +4,9 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 import { Table } from "@tanstack/react-table";
 
 import { statuses } from "./data";
-import { DataTableFacetedFilter } from "../../../components/dashboard/table/data-table-faceted-filter";
+import { DataTableFacetedFilter } from "../../../../components/dashboard/table/data-table-faceted-filter";
 import { Button } from "@/components/ui/button";
-import { DataTableViewOptions } from "../../../components/dashboard/table/data-table-view-options";
+import { DataTableViewOptions } from "../../../../components/dashboard/table/data-table-view-options";
 import { Input } from "@/components/ui/input";
 
 interface DataTableToolbarProps<TData> {
