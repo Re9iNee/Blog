@@ -51,12 +51,12 @@ function PostForm({ initialValues }: Props) {
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Enter post Name</FormLabel>
+              <FormLabel>Title</FormLabel>
               <FormControl>
                 <Input
                   required
                   data-cy='name'
-                  placeholder='Enter post Name'
+                  placeholder='Enter post title'
                   {...field}
                 />
               </FormControl>
@@ -69,7 +69,7 @@ function PostForm({ initialValues }: Props) {
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Enter post reading time</FormLabel>
+              <FormLabel>time to read</FormLabel>
               <FormControl>
                 <Input
                   required
@@ -79,6 +79,9 @@ function PostForm({ initialValues }: Props) {
                   {...field}
                 />
               </FormControl>
+              <FormDescription>
+                Time to read the whole post content (in minutes)
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -88,7 +91,7 @@ function PostForm({ initialValues }: Props) {
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Enter post summery</FormLabel>
+              <FormLabel>Summery</FormLabel>
               <FormControl>
                 <Input
                   required
@@ -106,20 +109,26 @@ function PostForm({ initialValues }: Props) {
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Body</FormLabel>
+              <FormLabel>Content</FormLabel>
               <FormControl>
                 <Textarea
                   {...field}
                   data-cy='body'
-                  className='resize-none'
+                  className='resize-y 2xl:h-96'
                   value={field.value ?? ""}
                   placeholder='Paste the content of post (Supports markdown)'
                 />
               </FormControl>
               <FormDescription>
                 You can use{" "}
-                <a href='https://stackedit.io/app#'>StackEdit website</a> to see
-                your markdown result in realtime.
+                <a
+                  target='_blank'
+                  href='https://stackedit.io/app#'
+                  className='underline text-blue-500'
+                >
+                  StackEdit website
+                </a>{" "}
+                to see your markdown result in realtime.
               </FormDescription>
               <FormMessage />
             </FormItem>

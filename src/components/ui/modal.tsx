@@ -12,7 +12,6 @@ type Props = {
   isOpen: boolean;
   header: ReactNode;
   children: ReactNode;
-  onClose: () => void;
   onOpenChange: () => void;
 };
 export default function Modal({
@@ -29,7 +28,7 @@ export default function Modal({
       placement='top-center'
     >
       <ModalContent>
-        {(onClose) => (
+        {() => (
           <>
             <ModalHeader className='flex flex-col gap-1'>{header}</ModalHeader>
             <ModalBody>{children}</ModalBody>

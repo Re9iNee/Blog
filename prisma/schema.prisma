@@ -13,7 +13,7 @@ datasource db {
 
 enum PostStatus {
   draft
-  removed
+  archived
   published
 }
 

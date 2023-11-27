@@ -16,8 +16,8 @@ export const statuses = [
     icon: CheckCircledIcon,
   },
   {
-    value: "removed",
-    label: "Removed",
+    value: "archived",
+    label: "Archived",
     icon: CrossCircledIcon,
   },
 ];
