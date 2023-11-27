@@ -9,7 +9,7 @@ export const postSchema = z.object({
   readingTime: z.coerce.number(),
   body: z.string().optional(),
   publishedAt: z.date().nullish(),
-  mainImageUrl: z.string().url().optional(),
+  mainImageUrl: z.string().url().nullish(),
   updatedAt: z.date().default(new Date()),
   createdAt: z.date().default(new Date()),
   status: z.enum(["draft", "published", "archived"]).default("draft"),
