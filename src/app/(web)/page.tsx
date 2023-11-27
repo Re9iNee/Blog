@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import HeroSection from "@/components/homepage/hero";
 import { getAllCategories as getRecentCategories } from "@/service/category.service";
-import { getAllPosts as getRecentPosts } from "@/service/posts.service";
+import { getAllPublishedPosts as getRecentPosts } from "@/service/posts.service";
 
 export default async function Home() {
   const recentPosts = await getRecentPosts(3);

@@ -1,3 +1,6 @@
+-- CreateEnum
+CREATE TYPE "PostStatus" AS ENUM ('draft', 'removed', 'published');
+
 -- CreateTable
 CREATE TABLE "posts" (
     "id" SERIAL NOT NULL,
@@ -6,8 +9,10 @@ CREATE TABLE "posts" (
     "title" TEXT NOT NULL,
     "summery" TEXT NOT NULL,
     "body" TEXT,
+    "mainImageUrl" TEXT,
     "publishedAt" TIMESTAMP(3),
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "status" "PostStatus" NOT NULL DEFAULT 'draft',
     "published" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -18,6 +23,7 @@ CREATE TABLE "posts" (
 CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "avatarUrl" TEXT,
     "email" TEXT NOT NULL,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
