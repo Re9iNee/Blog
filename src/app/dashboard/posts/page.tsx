@@ -1,7 +1,7 @@
 import { DataTable } from "@/components/dashboard/table/data-table";
 
 import { getAllPosts } from "@/service/posts.service";
-import { columns } from "./columns";
+import { columns } from "./data-table/columns";
 import { PostModel } from "@/types/post";
 
 async function DashboardPostPage() {

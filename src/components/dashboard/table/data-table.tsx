@@ -17,7 +17,7 @@ import {
 } from "@tanstack/react-table";
 
 import { DataTablePagination } from "./data-table-pagination";
-import { DataTableToolbar } from "../../../app/dashboard/posts/data-table-toolbar";
+import { DataTableToolbar } from "../../../app/dashboard/posts/data-table/data-table-toolbar";
 import {
   Table,
   TableBody,

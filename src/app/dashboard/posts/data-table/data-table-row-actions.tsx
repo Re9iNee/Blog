@@ -12,7 +12,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { postSchema } from "./post-schema";
+import { postSchema } from "../post-schema";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
