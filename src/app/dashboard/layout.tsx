@@ -1,7 +1,6 @@
 import DashboardHeader from "@/components/dashboard/header";
 import { Metadata } from "next";
 import React from "react";
-import { NextUIProvider } from "@nextui-org/react";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {

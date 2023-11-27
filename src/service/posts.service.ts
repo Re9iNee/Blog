@@ -21,7 +21,7 @@ export async function getAllPublishedPosts(
 
 export async function getAllPosts(): Promise<PostModel[]> {
   const posts = await prisma.post.findMany({
-    orderBy: { id: "asc" },
+    orderBy: { id: "desc" },
     include: {
       author: true,
       categories: true,
@@ -46,15 +46,42 @@ export async function getPost(id: number): Promise<PostModel> {
 }
 
 export async function updatePost(
-  id: number,
-  data: Partial<PostModel>
+  data: Partial<PostModel>,
+  id?: number
 ): Promise<PostModel> {
+  if (!id) throw new Error("id is required");
+
   const { author, categories, ...rest } = data;
 
   const post = await prisma.post.update({
     where: { id },
     data: {
       ...rest,
+    },
+    include: {
+      author: true,
+      categories: true,
+    },
+  });
+
+  revalidatePath("/dashboard/posts");
+
+  return post;
+}
+
+export async function createPost(data: PostModel): Promise<PostModel> {
+  const randomAuthor = await prisma.user.findFirst({
+    cacheStrategy: { swr: 60 * 60 * 24 },
+  });
+
+  if (!randomAuthor) throw new Error("No author found");
+
+  const { author, categories, ...rest } = data;
+
+  const post = await prisma.post.create({
+    data: {
+      ...rest,
+      authorId: randomAuthor.id,
     },
     include: {
       author: true,

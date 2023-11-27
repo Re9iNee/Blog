@@ -13,37 +13,63 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { Textarea } from "@/components/ui/textarea";
 import { PostModel } from "@/types/post";
 import { postSchema } from "./post-schema";
+import { FaMarkdown } from "react-icons/fa6";
+import { toast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 type Props = {
   closeModal: () => void;
-  initialValues: Partial<PostModel>;
-  actionFn: (id: number, data: Partial<PostModel>) => Promise<PostModel>;
+  initialValues?: Partial<PostModel>;
+  actionFn: (data: PostModel, id?: number) => Promise<PostModel>;
 };
+
+const defaultValues: Partial<PostModel> = {
+  authorId: 1,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+};
+
 function PostForm({ initialValues, actionFn, closeModal }: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<PostModel>({
-    defaultValues: { ...initialValues },
+    defaultValues: { ...defaultValues, ...initialValues },
     mode: "onChange",
     resolver: zodResolver(postSchema),
   });
 
   function onSubmit(values: PostModel) {
-    if (!initialValues.id) return "IT SHOULD CREATE";
     setIsLoading(true);
 
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-
-    actionFn(initialValues.id, values)
+    actionFn(values, initialValues?.id)
       .then(() => {
+        toast({
+          description: "Your post has been created successfully.",
+        });
         closeModal();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast({
+          type: "foreground",
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "There was a problem with your request.",
+          action: (
+            <ToastAction
+              altText='Try again'
+              onClick={() => form.handleSubmit(onSubmit)}
+            >
+              Try again
+            </ToastAction>
+          ),
+        });
       })
       .finally(() => {
         setIsLoading(false);
@@ -121,14 +147,16 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Content</FormLabel>
+              <FormLabel className='inline-flex gap-2'>
+                Content <FaMarkdown />
+              </FormLabel>
               <FormControl>
                 <Textarea
                   {...field}
                   data-cy='body'
                   className='resize-y 2xl:h-80'
                   value={field.value ?? ""}
-                  placeholder='Paste the content of post (Supports markdown)'
+                  placeholder='Paste the content of post'
                 />
               </FormControl>
               <FormDescription>
@@ -161,6 +189,7 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
         {process.env.NODE_ENV === "development" && (
           <Button
             className='m-8'
+            variant={"outline"}
             onClick={() => console.log(form.formState.errors)}
           >
             Log Error
