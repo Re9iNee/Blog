@@ -14,18 +14,31 @@ async function main() {
 }
 
 async function insertAdmin() {
+  console.log("Inserting Admin...");
+
   const hashedPassword = await hash("123", 12);
 
-  const admin = await prisma.user.create({
+  const admin = await prisma.user.findUnique({
+    where: { email: "a@a.com" },
+  });
+
+  if (admin) {
+    console.log("Already exists, ", admin);
+    return admin;
+  }
+
+  const newAdmin = await prisma.user.create({
     data: {
       name: "Admin",
       email: "a@a.com",
+      avatarUrl:
+        "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/509.jpg",
       password: hashedPassword,
     },
   });
 
-  console.log(admin);
-  return admin;
+  console.log("Inserted: ", newAdmin);
+  return newAdmin;
 }
 
 async function clearDB() {

@@ -37,11 +37,10 @@ const authOptions: AuthOptions = {
           return null;
         }
 
-        const { password, ...rest } = user;
-
         return {
           name: user.name,
           email: user.email,
+          image: user.avatarUrl,
           id: user.id.toString(),
         };
       },
