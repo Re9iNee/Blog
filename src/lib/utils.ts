@@ -33,3 +33,12 @@ export function isDateInCurrentMonth(inputDate: Date | null): boolean {
 
   return inputYear === currentYear && inputMonth === currentMonth;
 }
+
+export const createNameAbv = (name: string) => {
+  const nameArr = name.split(" ");
+
+  return nameArr
+    .map((name) => name[0])
+    .slice(0, 2)
+    .join("");
+};

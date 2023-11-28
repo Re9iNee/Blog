@@ -13,15 +13,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-
-const createNameAbv = (name: string) => {
-  const nameArr = name.split(" ");
-
-  return nameArr
-    .map((name) => name[0])
-    .slice(0, 2)
-    .join("");
-};
+import { createNameAbv } from "@/lib/utils";
 
 export function UserNav() {
   const { data: session } = useSession();
