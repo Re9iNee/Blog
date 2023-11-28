@@ -24,8 +24,9 @@ export default function Modal({
   return (
     <NextUiModal
       isOpen={isOpen}
-      onOpenChange={onOpenChange}
+      isDismissable={false}
       placement='top-center'
+      onOpenChange={onOpenChange}
     >
       <ModalContent>
         {() => (

@@ -13,15 +13,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { Textarea } from "@/components/ui/textarea";
-import { PostModel } from "@/types/post";
-import { postSchema } from "./post-schema";
-import { FaMarkdown } from "react-icons/fa6";
-import { toast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
+import { toast } from "@/components/ui/use-toast";
+import { PostModel } from "@/types/post";
+import { FaMarkdown } from "react-icons/fa6";
+import { postSchema } from "./post-schema";
 
 type Props = {
   closeModal: () => void;
