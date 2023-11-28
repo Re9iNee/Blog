@@ -8,8 +8,8 @@ const prisma = new PrismaClient().$extends(withAccelerate());
 async function main() {
   // await clearDB();
   await insertAdmin();
-  // await insertUsers(2);
-  // await insertPosts(1);
+  await insertUsers(2);
+  await insertPosts(10);
   // await getAllAuthors();
 }
 
