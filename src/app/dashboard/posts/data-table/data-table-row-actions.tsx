@@ -42,8 +42,12 @@ export function DataTableRowActions<TData>({
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end' className='w-[160px]'>
           <DropdownMenuItem onClick={onOpen}>Edit</DropdownMenuItem>
-          <DropdownMenuItem>Make a copy</DropdownMenuItem>
-          <DropdownMenuItem>Favorite</DropdownMenuItem>
+          <DropdownMenuItem className='cursor-not-allowed'>
+            Make a copy
+          </DropdownMenuItem>
+          <DropdownMenuItem className='cursor-not-allowed'>
+            Favorite
+          </DropdownMenuItem>
           {/* TODO: fetch categories to show in labels */}
           {/* <DropdownMenuSeparator />
         <DropdownMenuSub>
@@ -59,7 +63,7 @@ export function DataTableRowActions<TData>({
           </DropdownMenuSubContent>
         </DropdownMenuSub> */}
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem className='cursor-not-allowed'>
             Delete
             <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
           </DropdownMenuItem>

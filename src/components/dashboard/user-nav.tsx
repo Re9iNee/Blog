@@ -27,8 +27,6 @@ export function UserNav() {
   const { data: session } = useSession();
   const nameAbv = createNameAbv(session?.user?.name || "");
 
-  console.log("session", session?.user);
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
