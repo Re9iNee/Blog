@@ -1,14 +1,31 @@
 import { faker } from "@faker-js/faker";
 import { PostStatus, PrismaClient } from "@prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
+import { hash } from "bcryptjs";
 
 const prisma = new PrismaClient().$extends(withAccelerate());
 
 async function main() {
   // await clearDB();
-  await insertUsers(2);
-  await insertPosts(1);
+  await insertAdmin();
+  // await insertUsers(2);
+  // await insertPosts(1);
   // await getAllAuthors();
+}
+
+async function insertAdmin() {
+  const hashedPassword = await hash("123", 12);
+
+  const admin = await prisma.user.create({
+    data: {
+      name: "Admin",
+      email: "a@a.com",
+      password: hashedPassword,
+    },
+  });
+
+  console.log(admin);
+  return admin;
 }
 
 async function clearDB() {
@@ -42,6 +59,7 @@ async function insertUsers(limit: number = 3) {
     const newUser = {
       name: faker.person.fullName(),
       email: faker.internet.email(),
+      password: faker.internet.password(),
       avatarUrl: faker.image.avatarGitHub(),
     };
 
