@@ -1,7 +1,7 @@
 import {
-  CheckCircledIcon,
-  CrossCircledIcon,
+  ArchiveIcon,
   StopwatchIcon,
+  CheckCircledIcon,
 } from "@radix-ui/react-icons";
 
 export const statuses = [
@@ -18,6 +18,6 @@ export const statuses = [
   {
     value: "archived",
     label: "Archived",
-    icon: CrossCircledIcon,
+    icon: ArchiveIcon,
   },
 ];
