@@ -1,4 +1,3 @@
-import React from "react";
 import { MainNav } from "./main-nav";
 import Search from "./search";
 import { UserNav } from "./user-nav";
@@ -10,6 +9,7 @@ function DashboardHeader() {
         <MainNav className='mx-6' />
         <div className='ml-auto flex items-center space-x-4'>
           <Search />
+
           <UserNav />
         </div>
       </div>

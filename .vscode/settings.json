@@ -1,8 +1,10 @@
 {
-    "cSpell.words": [
-        "hookform",
-        "lucide",
-        "nextui",
-        "Workmark"
-    ]
+  "cSpell.words": [
+    "Dismissable",
+    "hookform",
+    "lucide",
+    "nextui",
+    "Workmark"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -1,8 +1,7 @@
-export default interface Author {
-  id: string;
-  name: string;
-  email: string;
-  avatarUrl: string;
-  createdAt: string;
-  updatedAt: string;
+import { User as AuthUser } from "next-auth";
+
+interface UserProfile extends AuthUser {
+  avatarUrl: string | null;
 }
+
+export default UserProfile;

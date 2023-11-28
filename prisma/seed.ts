@@ -1,14 +1,44 @@
 import { faker } from "@faker-js/faker";
 import { PostStatus, PrismaClient } from "@prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
+import { hash } from "bcryptjs";
 
 const prisma = new PrismaClient().$extends(withAccelerate());
 
 async function main() {
   // await clearDB();
-  await insertUsers(2);
-  await insertPosts(1);
+  await insertAdmin();
+  // await insertUsers(2);
+  // await insertPosts(1);
   // await getAllAuthors();
+}
+
+async function insertAdmin() {
+  console.log("Inserting Admin...");
+
+  const hashedPassword = await hash("123", 12);
+
+  const admin = await prisma.user.findUnique({
+    where: { email: "a@a.com" },
+  });
+
+  if (admin) {
+    console.log("Already exists, ", admin);
+    return admin;
+  }
+
+  const newAdmin = await prisma.user.create({
+    data: {
+      name: "Admin",
+      email: "a@a.com",
+      avatarUrl:
+        "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/509.jpg",
+      password: hashedPassword,
+    },
+  });
+
+  console.log("Inserted: ", newAdmin);
+  return newAdmin;
 }
 
 async function clearDB() {
@@ -42,6 +72,7 @@ async function insertUsers(limit: number = 3) {
     const newUser = {
       name: faker.person.fullName(),
       email: faker.internet.email(),
+      password: faker.internet.password(),
       avatarUrl: faker.image.avatarGitHub(),
     };
 
