@@ -1,26 +1,23 @@
 "use client";
 
 import useDynamicHeight from "@/hooks/useDynamicHeight";
-import React from "react";
-import { Button } from "../ui/button";
+import RotatingTexts from "./dynamic-text";
 
 function HeroSection() {
   useDynamicHeight("hero-container", "header");
   return (
-    <section
-      id='hero-container'
-      className='bg-yellow-500 px-4 border-b border-black min-h-screen'
-    >
-      <h1 className='py-16 text-6xl text-black font-medium'>Stay curious.</h1>
-      <h3 className='text-2xl text-black py-4'>
-        Discover stories, thinking, and expertise from writers on any topic.
-      </h3>
-      <Button
-        variant={"outline"}
-        className='rounded-3xl font-light text-xl px-8 my-8'
-      >
-        Start reading
-      </Button>
+    <section id='hero-container' className='md:grid md:grid-cols-12'>
+      <div className='flex flex-col'>
+        <h1 className='z-10 text-3xl font-bold leading-10 bg-black'>
+          Read About New
+        </h1>
+        <RotatingTexts />
+        <h2 className='z-10 bg-black'>
+          {" "}
+          Join out MORA blog community to stay updated on the latest in
+          technology&apos;s frontiers
+        </h2>
+      </div>
     </section>
   );
 }
