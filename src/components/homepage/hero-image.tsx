@@ -25,7 +25,7 @@ function HeroImage({ activeIndex }: Props) {
   );
 
   return (
-    <div className='rounded-full bg-white z-10 col-start-1 col-end-1 row-start-1 row-end-1'>
+    <div className='rounded-full w-72 h-72 bg-white z-10 col-start-1 col-end-1 row-start-1 row-end-1'>
       <AnimatePresence mode='wait'>
         <motion.div
           key={activeIndex}
