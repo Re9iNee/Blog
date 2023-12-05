@@ -31,7 +31,7 @@ function EllipseGroup({ activeIndex }: Props) {
   };
 
   return (
-    <div className='w-72 h-72 relative'>
+    <div className='w-72 h-72 relative col-start-1 col-end-1 row-start-1 row-end-1'>
       {dynamicEllipses.map((ellipse, key) => (
         <motion.div
           key={key}

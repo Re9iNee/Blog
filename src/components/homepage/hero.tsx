@@ -4,6 +4,7 @@ import useDynamicHeight from "@/hooks/useDynamicHeight";
 import RotatingTexts from "./dynamic-text";
 import EllipseGroup from "./ellipse-group";
 import { useEffect, useState } from "react";
+import HeroImage from "./hero-mage";
 
 function HeroSection() {
   useDynamicHeight("hero-container", "header");
@@ -31,8 +32,9 @@ function HeroSection() {
       </div>
 
       {/* section VR Guy and hero image component */}
-      <div className='grid grid-cols-6'>
+      <div className='grid grid-cols-1 grid-rows-1 h-72 w-72'>
         <EllipseGroup activeIndex={activeIndex} />
+        <HeroImage activeIndex={activeIndex} />
       </div>
     </section>
   );
