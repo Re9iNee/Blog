@@ -8,19 +8,19 @@ type Props = {
 function EllipseGroup({ activeIndex }: Props) {
   const dynamicEllipses = useMemo(
     () => [
-      { classNames: "bg-indigo-600" },
-      { classNames: "bg-rose-400" },
       { classNames: "bg-gray-300" },
+      { classNames: "bg-rose-400" },
+      { classNames: "bg-indigo-600" },
     ],
     []
   );
 
   const variants: Variants = {
     active: {
-      width: 288,
-      height: 288,
-      left: 0,
-      top: 1,
+      width: 281,
+      height: 281,
+      left: -10,
+      top: 15,
     },
     inactive: {
       width: 256,
