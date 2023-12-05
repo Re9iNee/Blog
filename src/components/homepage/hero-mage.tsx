@@ -37,6 +37,7 @@ function HeroImage({ activeIndex }: Props) {
         >
           <Image
             fill
+            loading='eager'
             src={dynamicImages[activeIndex].src}
             alt={dynamicImages[activeIndex].alt}
           />
