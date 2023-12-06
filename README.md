@@ -1,2 +1,4 @@
 ### Blog for Mora
-need to write this documentation
+
+### Written in
+Typescript, NextJS, Postgresql.
