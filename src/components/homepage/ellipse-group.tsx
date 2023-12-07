@@ -31,15 +31,17 @@ function EllipseGroup({ activeIndex }: Props) {
   };
 
   return (
-    <div className='relative col-start-1 col-end-1 row-start-1 row-end-1'>
-      {dynamicEllipses.map((ellipse, key) => (
-        <motion.div
-          key={key}
-          variants={variants}
-          animate={activeIndex === key ? "active" : "inactive"}
-          className={cn("absolute rounded-full shadow", ellipse.classNames)}
-        />
-      ))}
+    <div className='w-72 h-72 col-start-1 col-end-1 row-start-1 row-end-1'>
+      <div className='relative'>
+        {dynamicEllipses.map((ellipse, key) => (
+          <motion.div
+            key={key}
+            variants={variants}
+            animate={activeIndex === key ? "active" : "inactive"}
+            className={cn("absolute rounded-full shadow", ellipse.classNames)}
+          />
+        ))}
+      </div>
     </div>
   );
 }

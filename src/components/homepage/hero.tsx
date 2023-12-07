@@ -19,8 +19,11 @@ function HeroSection() {
   }, []);
 
   return (
-    <section id='hero-container' className='flex px-6 pt-6 gap-20'>
-      <div className='flex flex-col'>
+    <section
+      id='hero-container'
+      className='flex justify-center items-center px-6 pt-6 gap-20 overflow-x-hidden'
+    >
+      <div className='flex flex-col flex-shrink max-w-[50%]'>
         <h1 className='z-10 text-3xl font-bold leading-10 bg-white dark:bg-black'>
           Read About New
         </h1>
@@ -32,7 +35,7 @@ function HeroSection() {
       </div>
 
       {/* section VR Guy and hero image component */}
-      <div className='grid grid-cols-1 grid-rows-1'>
+      <div className='grid grid-cols-1 grid-rows-1 place-items-center flex-grow'>
         <EllipseGroup activeIndex={activeIndex} />
         <HeroImage activeIndex={activeIndex} />
       </div>

@@ -1,9 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 function TestPage() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
