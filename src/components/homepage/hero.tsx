@@ -24,11 +24,11 @@ function HeroSection() {
       className='flex justify-center items-center px-6 pt-6 gap-20 overflow-x-hidden'
     >
       <div className='flex flex-col flex-shrink max-w-[50%]'>
-        <h1 className='z-10 text-3xl font-bold leading-10 bg-white dark:bg-black'>
+        <h1 className='z-10 text-3xl font-bold leading-10 bg-background'>
           Read About New
         </h1>
         <RotatingTexts activeIndex={activeIndex} />
-        <h2 className='z-10 bg-white dark:bg-black text-neutral-500 text-sm leading-tight'>
+        <h2 className='z-10 bg-background text-neutral-500 text-sm leading-tight'>
           Join out MORA blog community to stay updated on the latest in
           technology&apos;s frontiers
         </h2>
