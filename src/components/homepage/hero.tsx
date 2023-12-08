@@ -1,9 +1,9 @@
 "use client";
 
 import useDynamicHeight from "@/hooks/useDynamicHeight";
+import { useEffect, useState } from "react";
 import RotatingTexts from "./dynamic-text";
 import EllipseGroup from "./ellipse-group";
-import { useEffect, useState } from "react";
 import HeroImage from "./hero-image";
 
 function HeroSection() {
@@ -21,7 +21,7 @@ function HeroSection() {
   return (
     <section
       id='hero-container'
-      className='flex justify-center items-center px-6 pt-6 gap-20 overflow-x-hidden'
+      className='flex justify-center items-center px-6 pt-6 gap-20 overflow-x-hidden pointer-events-none'
     >
       <div className='flex flex-col flex-shrink max-w-[50%]'>
         <h1 className='z-10 text-3xl font-bold leading-10 bg-background'>
@@ -35,7 +35,7 @@ function HeroSection() {
       </div>
 
       {/* section VR Guy and hero image component */}
-      <div className='grid grid-cols-1 grid-rows-1 place-items-center flex-grow'>
+      <div className='grid grid-cols-1 grid-rows-1 place-items-end flex-grow'>
         <EllipseGroup activeIndex={activeIndex} />
         <HeroImage activeIndex={activeIndex} />
       </div>
