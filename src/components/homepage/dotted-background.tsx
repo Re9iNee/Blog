@@ -8,7 +8,7 @@ type Props = {
 };
 function DottedBackground({ position, top }: Props) {
   return (
-    <div className='relative xl:hidden'>
+    <div className='relative xl:hidden dark:hidden'>
       <Image
         src={"/HeroImages/Dot.svg"}
         className={cn(

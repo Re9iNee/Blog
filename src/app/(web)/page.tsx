@@ -8,6 +8,19 @@ import HeroSection from "@/components/homepage/hero";
 import { getAllCategories as getRecentCategories } from "@/service/category.service";
 import { getAllPublishedPosts as getRecentPosts } from "@/service/posts.service";
 import DottedBackground from "@/components/homepage/dotted-background";
+import { SlideShow, SlideShowCard } from "@/components/ui/slide-show";
+
+const SlideShowContents = [
+  {
+    postLink: "posts/1",
+    category: "Trending",
+    author: "Mobin Khani",
+    imageAlt: "Picture of a desk",
+    imageUrl: "https://placehold.co/768x400",
+    categoryImageUrl: "/slideshow/trending-hashtag.svg",
+    title: "How does your workspace affect the quality of your work?",
+  },
+];
 
 export default async function Home() {
   const recentPosts = await getRecentPosts(3);
@@ -18,6 +31,12 @@ export default async function Home() {
       <DottedBackground position='right' top={20} />
       <DottedBackground position='left' top={75} />
       <HeroSection />
+
+      <SlideShow className='px-4'>
+        {SlideShowContents.map((cntnt, key) => (
+          <SlideShowCard key={key} {...cntnt} />
+        ))}
+      </SlideShow>
 
       <div
         className='flex flex-col gap-8 p-4
