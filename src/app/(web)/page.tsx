@@ -20,6 +20,24 @@ const SlideShowContents = [
     categoryImageUrl: "/slideshow/trending-hashtag.svg",
     title: "How does your workspace affect the quality of your work?",
   },
+  {
+    postLink: "posts/2",
+    category: "Popular",
+    author: "Mobin Khani",
+    imageAlt: "Picture of a desk",
+    imageUrl: "https://placehold.co/768x400",
+    categoryImageUrl: "/slideshow/trending-hashtag.svg",
+    title: "Did you wash your ass today?",
+  },
+  {
+    postLink: "posts/3",
+    category: "Most Rated",
+    author: "Reza Attarzadeh",
+    imageAlt: "Picture of a desk",
+    imageUrl: "https://placehold.co/768x400",
+    categoryImageUrl: "/slideshow/trending-hashtag.svg",
+    title: "Mikhorish?",
+  },
 ];
 
 export default async function Home() {
@@ -32,11 +50,7 @@ export default async function Home() {
       <DottedBackground position='left' top={75} />
       <HeroSection />
 
-      <SlideShow className='px-4'>
-        {SlideShowContents.map((cntnt, key) => (
-          <SlideShowCard key={key} {...cntnt} />
-        ))}
-      </SlideShow>
+      <SlideShow className='px-4' cards={SlideShowContents} />
 
       <div
         className='flex flex-col gap-8 p-4
