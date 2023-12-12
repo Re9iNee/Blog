@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { ReactNode } from "react";
 import { IoChevronForward, IoChevronBack } from "react-icons/io5";
@@ -60,7 +62,7 @@ export function SlideShowCard({
         height={96}
         src={categoryImageUrl}
         alt='Category image icon'
-        className='absolute -top-8 left-0 z-10'
+        className='absolute -top-8 left-0 z-10 pointer-events-none'
       />
       <Image
         fill
@@ -80,15 +82,35 @@ export function SlideShowCard({
             By {author}
           </h6>
         </div>
-
-        <Button
-          className='group pl-8 pr-6 py-2 bg-neutral-800 bg-opacity-0 rounded-3xl border border-white text-white text-sm font-medium leading-tight'
-          variant={"outline"}
-        >
-          <span>Start Reading</span>
-          <IoChevronForward className='hidden group-hover:block' />
-        </Button>
+        <motion.button className='group inline-flex border whitespace-nowrap bg-neutral-800 bg-opacity-0 rounded-3xl py-2 pl-8 pr-6 items-center justify-center w-40 hover:bg-opacity-30 hover:px-6 transition-all'>
+          <span className='text-white text-sm font-medium group-active:scale-85 duration-500 origin-center'>
+            Start Reading
+          </span>
+          <ArrowIcon className='opacity-0 w-2 h-5 text-white group-hover:opacity-100 group-hover:ml-2 text-xl group-active:scale-75 duration-500 pt-0.5' />
+        </motion.button>
       </section>
     </section>
   );
 }
+
+//
+const ArrowIcon = ({ className }: { className: ClassValue }) => {
+  return (
+    <svg
+      width='8'
+      height='20'
+      fill='none'
+      viewBox='0 0 8 20'
+      className={cn(className)}
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <path
+        d='M1.5 4.1665L3.16667 6.11067M1.5 15.8332L6.5 9.99984L5.25 8.5415'
+        stroke='white'
+        stroke-width='1.2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+    </svg>
+  );
+};
