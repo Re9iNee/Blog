@@ -21,21 +21,23 @@ function HeroSection() {
   return (
     <section
       id='hero-container'
-      className='flex justify-center items-center px-6 pt-6 gap-20 overflow-x-hidden pointer-events-none'
+      className='mx-3 pt-12 pb-4 flex justify-center items-center overflow-x-hidden pointer-events-none 
+      md:px-6 md:pt-6 md:gap-20
+      '
     >
-      <div className='flex flex-col flex-shrink max-w-[50%]'>
+      <div className='flex flex-col flex-shrink md:max-w-[50%]'>
         <h1 className='z-10 text-3xl font-bold leading-10 bg-background'>
           Read About New
         </h1>
         <RotatingTexts activeIndex={activeIndex} />
-        <h2 className='z-10 bg-background text-neutral-500 text-sm leading-tight'>
+        <h2 className='pt-4 z-10 text-neutral-500 text-sm leading-tight'>
           Join out MORA blog community to stay updated on the latest in
           technology&apos;s frontiers
         </h2>
       </div>
 
       {/* section VR Guy and hero image component */}
-      <div className='grid grid-cols-1 grid-rows-1 place-items-end flex-grow'>
+      <div className='hidden md:grid grid-cols-1 grid-rows-1 place-items-end flex-grow'>
         <EllipseGroup activeIndex={activeIndex} />
         <HeroImage activeIndex={activeIndex} />
       </div>
