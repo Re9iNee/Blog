@@ -45,7 +45,7 @@ export default async function Home() {
 
   return (
     <main>
-      <DottedBackground position='right' top={20} />
+      <DottedBackground position='right' top={20} className='hidden md:block' />
       <DottedBackground position='left' top={75} />
       <HeroSection />
 
