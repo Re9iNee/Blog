@@ -1,11 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import { ReactNode, useEffect, useState } from "react";
-import { IoChevronForward, IoChevronBack } from "react-icons/io5";
-import { Button } from "./button";
 import { ClassValue } from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import { useMemo, useState } from "react";
+import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 import { cn } from "@/lib/utils";
 
@@ -14,36 +13,35 @@ type Props = {
   cards: CardProps[];
 };
 export function SlideShow({ className, cards }: Props) {
-  const [activeCard, setActiveCard] = useState<number>(0);
+  const [[page, direction], setPage] = useState([0, 0]);
+
+  const paginate = (newDirection: number) => {
+    let newPage;
+    if (page + newDirection < 0) newPage = cards.length - 1;
+    else if (page + newDirection >= cards.length) newPage = 0;
+    else newPage = page + newDirection;
+
+    setPage([newPage, newDirection]);
+  };
 
   return (
     // container
     <div className={cn("grid grid-cols-12 grid-rows-5 h-80", className)}>
       {/* left button */}
       <a
-        onClick={() =>
-          setActiveCard((prev) => {
-            if (prev === 0) return cards.length - 1;
-            return prev - 1;
-          })
-        }
+        onClick={() => paginate(-1)}
         className={`col-start-1 col-span-1 row-start-3 pr-0.5 slideshow-action z-20 place-self-center`}
       >
         <IoChevronBack />
       </a>
 
       <section className='col-start-1 col-span-full row-start-1 row-span-full'>
-        <SlideShowCard {...cards[activeCard]} />
+        <SlideShowCard {...cards[page]} direction={direction} page={page} />
       </section>
 
       {/* right button */}
       <a
-        onClick={() =>
-          setActiveCard((prev) => {
-            if (prev === cards.length - 1) return 0;
-            return prev + 1;
-          })
-        }
+        onClick={() => paginate(1)}
         className={`col-start-12 col-span-1 row-start-3 pl-0.5 slideshow-action z-20 place-self-center`}
       >
         <IoChevronForward />
@@ -58,38 +56,54 @@ type CardProps = {
   category: string;
   imageUrl: string;
   imageAlt: string;
-
   categoryImageUrl: string;
 };
 export function SlideShowCard({
+  page,
   title,
   author,
   category,
   imageUrl,
   imageAlt,
+  direction,
   categoryImageUrl,
-}: CardProps) {
+}: CardProps & { direction: number; page: number }) {
+  const variants = useMemo(
+    () => ({
+      enter: (direction: number) => {
+        return {
+          scale: 0.3,
+          opacity: 0,
+          translateX: direction < 0 ? "+100%" : "-100%",
+        };
+      },
+      center: {
+        scale: 1,
+        opacity: 1,
+        translateX: 0,
+        transformOrigin: "bottom left",
+      },
+      exit: (direction: number) => {
+        return {
+          scale: 0.3,
+          opacity: 0,
+          translateX: direction < 0 ? "-100%" : "+100%",
+        };
+      },
+    }),
+    []
+  );
+
   return (
-    <AnimatePresence mode='wait'>
+    <AnimatePresence initial={false} custom={direction} mode='wait'>
       <motion.section
-        key={title}
+        key={page}
+        exit='exit'
+        initial='enter'
+        animate='center'
+        custom={direction}
+        variants={variants}
         transition={{ duration: 0.4 }}
-        animate={{
-          scale: 1,
-          opacity: 1,
-          translateX: 0,
-          transformOrigin: "bottom left",
-        }}
-        exit={{
-          scale: 0.3,
-          opacity: 0,
-          translateX: "-100%",
-        }}
-        initial={{
-          scale: 0.3,
-          opacity: 0,
-          translateX: "+100%",
-        }}
         className={cn("relative grid grid-cols-12 grid-rows-6 h-full")}
       >
         <Image
@@ -129,7 +143,6 @@ export function SlideShowCard({
   );
 }
 
-//
 const ArrowIcon = ({ className }: { className: ClassValue }) => {
   return (
     <svg
@@ -141,11 +154,11 @@ const ArrowIcon = ({ className }: { className: ClassValue }) => {
       xmlns='http://www.w3.org/2000/svg'
     >
       <path
-        d='M1.5 4.1665L3.16667 6.11067M1.5 15.8332L6.5 9.99984L5.25 8.5415'
         stroke='white'
         stroke-width='1.2'
         stroke-linecap='round'
         stroke-linejoin='round'
+        d='M1.5 4.1665L3.16667 6.11067M1.5 15.8332L6.5 9.99984L5.25 8.5415'
       />
     </svg>
   );
