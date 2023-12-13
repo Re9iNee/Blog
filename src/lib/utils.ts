@@ -19,6 +19,15 @@ export function convertDateToMonthAndDay(date: Date | null): string {
 
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
+export function convertDateToDayMonthAndYear(date: Date | null): string {
+  if (!date) return "Unknown";
+
+  return date.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
 
 export function isDateInCurrentMonth(inputDate: Date | null): boolean {
   if (!inputDate) return false;

@@ -9,8 +9,8 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { cn } from "@/lib/utils";
 
 type Props = {
-  className?: ClassValue;
   cards: CardProps[];
+  className?: ClassValue;
 };
 export function SlideShow({ className, cards }: Props) {
   const [[page, direction], setPage] = useState([0, 0]);

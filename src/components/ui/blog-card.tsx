@@ -1,60 +1,66 @@
-import Chip from "@/components/ui/chips";
+"use client";
+
 import {
-  convertDateToMonthAndDay,
+  convertDateToDayMonthAndYear,
   getAvatarPlaceholderUrl,
   getMainImagePlaceholderUrl,
 } from "@/lib/utils";
 import { PostModel } from "@/types/post";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { RxDotFilled } from "react-icons/rx";
+
+const MotionImage = motion(Image);
 
 type Props = {
   data: Omit<PostModel, "categories">;
 };
 function BlogCard({ data }: Props) {
-  const { id, title, readingTime, author, mainImageUrl, publishedAt } = data;
+  const { id, title, readingTime, author, mainImageUrl, publishedAt, summery } =
+    data;
 
   return (
-    <article className='flex gap-4'>
-      <div className='flex-grow'>
-        <Link href={`/author/${author.name}`} className='flex gap-2'>
+    <article className='flex flex-col gap-2'>
+      <div className='group relative w-72 h-32 rounded-xl cursor-pointer'>
+        <Image
+          fill
+          alt={`${title} main image`}
+          className='object-cover rounded-xl'
+          src={mainImageUrl ?? getMainImagePlaceholderUrl()}
+        />
+        <div className='w-full h-full absolute opacity-0 group-hover:opacity-75 bg-gradient-to-l from-violet-500 to-violet-900 rounded-xl backdrop-blur-none group-active:opacity-100 duration-400 text-white font-bold grid place-items-center'>
+          Read More
+        </div>
+      </div>
+
+      <h3 className='text-neutral-950 font-bold leading-tight'>
+        <Link href={`/posts/${id}`}>{title}</Link>
+      </h3>
+      <summary
+        className='text-neutral-700 text-xs leading-none line-clamp-2
+          md:text-sm md:leading-normal
+          '
+      >
+        {summery}
+      </summary>
+
+      <section
+        aria-labelledby='post info'
+        className='flex justify-between text-neutral-500 text-xs leading-none items-center pt-2'
+      >
+        <div className='flex items-center gap-2'>
           <Image
             width={20}
             height={20}
             alt="Author's profile picture"
-            className='rounded-full object-cover'
+            className='rounded-full aspect-square object-cover'
             src={author.avatarUrl ?? getAvatarPlaceholderUrl()}
           />
           <p>{author.name}</p>
-        </Link>
-        <header>
-          <h3 className='text-lg font-semibold'>
-            <Link href={`/posts/${id}`}>{title}</Link>
-          </h3>
-        </header>
-        <h6 className='flex gap-1 items-center text-neutral-500'>
-          <time>{convertDateToMonthAndDay(publishedAt)}</time>
-          <RxDotFilled />
-          <span>{readingTime} min read</span>
-          <RxDotFilled className='hidden lg:block' />
-          <ul className='hidden lg:block'>
-            <Chip>Programming</Chip>
-          </ul>
-        </h6>
-      </div>
-      <div
-        className='relative h-24 w-24
-        lg:w-48 lg:h-32
-        '
-      >
-        <Image
-          fill
-          className='object-cover'
-          alt={`${title} main image`}
-          src={mainImageUrl ?? getMainImagePlaceholderUrl()}
-        />
-      </div>
+        </div>
+
+        <time>{convertDateToDayMonthAndYear(publishedAt)}</time>
+      </section>
     </article>
   );
 }
