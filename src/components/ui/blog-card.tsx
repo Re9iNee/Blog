@@ -21,7 +21,7 @@ function BlogCard({ data }: Props) {
 
   return (
     <article className='flex flex-col gap-2'>
-      <div className='group relative w-72 h-32 rounded-xl cursor-pointer'>
+      <div className='group relative w-full h-32 rounded-xl cursor-pointer'>
         <Image
           fill
           alt={`${title} main image`}

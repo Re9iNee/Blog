@@ -36,7 +36,7 @@ const SlideShowContents = [
 ];
 
 export default async function Home() {
-  const recentPosts = await getRecentPosts(3);
+  const recentPosts = await getRecentPosts(30);
 
   return (
     <main>
@@ -50,7 +50,11 @@ export default async function Home() {
       <h1 className='text-neutral-700 font-bold pt-4 px-3'>Published Posts</h1>
       <section
         aria-labelledby='published-posts'
-        className='flex p-4 flex-col gap-8 pb-14'
+        className='flex p-4 flex-col gap-8 pb-14
+        md:grid md:grid-cols-2
+        lg:grid-cols-3
+        xl:grid-cols-4
+        '
       >
         {recentPosts.map((post) => (
           <BlogCard key={post.id} data={post} />
