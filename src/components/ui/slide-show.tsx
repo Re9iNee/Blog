@@ -1,7 +1,7 @@
 "use client";
 
 import { ClassValue } from "clsx";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, DragHandlers, motion } from "framer-motion";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
@@ -13,6 +13,21 @@ type Props = {
   className?: ClassValue;
 };
 export function SlideShow({ className, cards }: Props) {
+  const swipeConfidenceThreshold = 2500;
+  const swipePower = (offset: number, velocity: number) => {
+    return Math.abs(offset) * velocity;
+  };
+
+  const onDragEnd: DragHandlers["onDragEnd"] = (e, { offset, velocity }) => {
+    const swipe = swipePower(offset.x, velocity.x);
+
+    if (swipe < -swipeConfidenceThreshold) {
+      paginate(-1);
+    } else if (swipe > swipeConfidenceThreshold) {
+      paginate(+1);
+    }
+  };
+
   const [[page, direction], setPage] = useState([0, 0]);
 
   const paginate = (newDirection: number) => {
@@ -25,30 +40,35 @@ export function SlideShow({ className, cards }: Props) {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div className='flex flex-col justify-center items-center overflow-x-hidden'>
       {/* container */}
       <div
         className={cn(
-          "grid grid-cols-6 md:grid-cols-12 grid-rows-5 h-80",
+          "grid grid-cols-6 md:grid-cols-12 grid-rows-5 h-80 self-stretch",
           className
         )}
       >
         {/* left button */}
         <a
           onClick={() => paginate(-1)}
-          className={`col-start-1 col-span-1 row-start-3 pr-0.5 slideshow-action z-20 place-self-center justify-self-center`}
+          className={`slideshow-action col-start-1 col-span-1 row-start-3 pr-0.5 z-20 place-self-center justify-self-center`}
         >
           <IoChevronBack />
         </a>
 
         <section className='col-start-1 col-span-12 row-start-1 row-span-full'>
-          <SlideShowCard {...cards[page]} direction={direction} page={page} />
+          <SlideShowCard
+            {...cards[page]}
+            page={page}
+            direction={direction}
+            onDragEndFn={onDragEnd}
+          />
         </section>
 
         {/* right button */}
         <a
           onClick={() => paginate(1)}
-          className={`col-start-6 md:col-start-12 col-span-1 row-start-3 pl-0.5 slideshow-action z-20 place-self-center justify-self-center`}
+          className={`hidden col-start-6 md:col-start-12 col-span-1 row-start-3 pl-0.5 slideshow-action z-20 place-self-center justify-self-center md:block`}
         >
           <IoChevronForward />
         </a>
@@ -88,8 +108,9 @@ export function SlideShowCard({
   imageUrl,
   imageAlt,
   direction,
+  onDragEndFn,
   categoryImageUrl,
-}: CardProps & { direction: number; page: number }) {
+}: CardProps & { direction: number; page: number; onDragEndFn: any }) {
   const variants = useMemo(
     () => ({
       enter: (direction: number) => {
@@ -120,12 +141,16 @@ export function SlideShowCard({
     <AnimatePresence initial={false} custom={direction} mode='wait'>
       <motion.section
         key={page}
+        drag='x'
         exit='exit'
         initial='enter'
+        dragElastic={1}
         animate='center'
         custom={direction}
         variants={variants}
+        onDragEnd={onDragEndFn}
         transition={{ duration: 0.4 }}
+        dragConstraints={{ left: 0, right: 0 }}
         className={cn(
           "relative grid grid-cols-6 md:grid-cols-12 grid-rows-6 min-h-full"
         )}

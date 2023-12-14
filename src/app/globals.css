@@ -76,7 +76,7 @@
 }
 
 .slideshow-action {
-  @apply rounded-full w-7 h-7 border inline-flex justify-center items-center text-white border-white hover:shadow-sm cursor-pointer hover:bg-white hover:text-black active:shadow active:bg-white active:text-black;
+  @apply hidden rounded-full w-7 h-7 border md:inline-flex justify-center items-center text-white border-white hover:shadow-sm cursor-pointer hover:bg-white hover:text-black active:shadow active:bg-white active:text-black;
 }
 
 .slideshow-action:active {
