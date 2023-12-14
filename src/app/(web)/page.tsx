@@ -1,14 +1,9 @@
 import BlogCard from "@/components/ui/blog-card";
-import { Button } from "@/components/ui/button";
-import Chip from "@/components/ui/chips";
-import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
 
-import HeroSection from "@/components/homepage/hero";
-import { getAllCategories as getRecentCategories } from "@/service/category.service";
-import { getAllPublishedPosts as getRecentPosts } from "@/service/posts.service";
 import DottedBackground from "@/components/homepage/dotted-background";
-import { SlideShow, SlideShowCard } from "@/components/ui/slide-show";
+import HeroSection from "@/components/homepage/hero";
+import { SlideShow } from "@/components/ui/slide-show";
+import { getAllPublishedPosts as getRecentPosts } from "@/service/posts.service";
 
 const SlideShowContents = [
   {
@@ -49,7 +44,7 @@ export default async function Home() {
       <DottedBackground position='left' top={75} />
       <HeroSection />
 
-      <SlideShow className='px-4' cards={SlideShowContents} />
+      <SlideShow className='px-4 mt-14' cards={SlideShowContents} />
 
       <h1 className='text-neutral-700 font-bold pt-4 px-3'>Published Posts</h1>
       <section

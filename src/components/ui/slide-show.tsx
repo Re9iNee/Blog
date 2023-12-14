@@ -25,32 +25,49 @@ export function SlideShow({ className, cards }: Props) {
   };
 
   return (
-    // container
-    <div
-      className={cn(
-        "grid grid-cols-6 md:grid-cols-12 grid-rows-5 h-80",
-        className
-      )}
-    >
-      {/* left button */}
-      <a
-        onClick={() => paginate(-1)}
-        className={`col-start-1 col-span-1 row-start-3 pr-0.5 slideshow-action z-20 place-self-center justify-self-center`}
+    <div className='flex flex-col justify-center items-center'>
+      {/* container */}
+      <div
+        className={cn(
+          "grid grid-cols-6 md:grid-cols-12 grid-rows-5 h-80",
+          className
+        )}
       >
-        <IoChevronBack />
-      </a>
+        {/* left button */}
+        <a
+          onClick={() => paginate(-1)}
+          className={`col-start-1 col-span-1 row-start-3 pr-0.5 slideshow-action z-20 place-self-center justify-self-center`}
+        >
+          <IoChevronBack />
+        </a>
 
-      <section className='col-start-1 col-span-12 row-start-1 row-span-full'>
-        <SlideShowCard {...cards[page]} direction={direction} page={page} />
-      </section>
+        <section className='col-start-1 col-span-12 row-start-1 row-span-full'>
+          <SlideShowCard {...cards[page]} direction={direction} page={page} />
+        </section>
 
-      {/* right button */}
-      <a
-        onClick={() => paginate(1)}
-        className={`col-start-6 md:col-start-12 col-span-1 row-start-3 pl-0.5 slideshow-action z-20 place-self-center justify-self-center`}
-      >
-        <IoChevronForward />
-      </a>
+        {/* right button */}
+        <a
+          onClick={() => paginate(1)}
+          className={`col-start-6 md:col-start-12 col-span-1 row-start-3 pl-0.5 slideshow-action z-20 place-self-center justify-self-center`}
+        >
+          <IoChevronForward />
+        </a>
+      </div>
+
+      {/* pagination */}
+      <div className='mt-4 mb-12 gap-2 inline-flex justify-center items-center z-10 md:hidden'>
+        {cards.map((card) => (
+          <div
+            key={card.title}
+            className={cn(
+              "rounded-full duration-400",
+              cards[page].title === card.title
+                ? "w-2.5 h-2.5 bg-purple-700"
+                : "w-2 h-2 bg-violet-200"
+            )}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -135,7 +152,7 @@ export function SlideShowCard({
 
         {/* only xs */}
         <section
-          className='col-span-full row-start-4 row-span-full z-10 flex flex-col gap-3 justify-end px-2
+          className='col-span-full row-start-4 row-span-full z-10 flex flex-col gap-1 justify-end px-2
           md:hidden
           '
         >
