@@ -41,7 +41,8 @@ export default async function Home() {
   return (
     <main>
       <DottedBackground position='right' top={20} className='hidden md:block' />
-      <DottedBackground position='left' top={75} />
+      <DottedBackground position='left' top={75} className='hidden md:block' />
+      <DottedBackground position='right' top={75} className='md:hidden' />
       <HeroSection />
 
       <SlideShow className='px-4 mt-14' cards={SlideShowContents} />

@@ -167,11 +167,11 @@ export function SlideShowCard({
           src={imageUrl}
           alt={imageAlt}
           objectFit='cover'
-          className='z-0 pointer-events-none rounded-3xl'
+          className='z-0 pointer-events-none rounded-2xl'
         />
 
         {/* only xs */}
-        <h5 className='bg-neutral-800 px-3 text-white py-1 rounded-xl bg-opacity-40 text-xs font-light leading-none col-start-5 col-span-2 z-10 max-h-6 grid place-items-center self-center justify-self-start md:hidden'>
+        <h5 className='bg-neutral-800 px-3 text-white py-1.5 rounded-xl bg-opacity-40 text-xs font-light leading-none col-start-5 col-span-2 z-10 max-h-6 grid place-items-center self-center justify-self-start md:hidden'>
           {category}
         </h5>
 
@@ -185,7 +185,7 @@ export function SlideShowCard({
           <h6 className='text-neutral-400 text-xs font-light leading-none'>
             By {author}
           </h6>
-          <button className='group inline-flex border whitespace-nowrap bg-neutral-800 bg-opacity-0 rounded-3xl py-2 pl-8 pr-6 items-center justify-center hover:bg-opacity-30 hover:px-6 transition-all mt-3 mb-2'>
+          <button className='group inline-flex border-1.5 border-white whitespace-nowrap bg-neutral-800 bg-opacity-0 rounded-lg py-2 pl-8 pr-6 items-center justify-center hover:bg-opacity-30 hover:px-6 transition-all mt-3 mb-2'>
             <span className='text-white text-sm font-medium group-active:scale-85 duration-500 origin-center'>
               Start Reading
             </span>
