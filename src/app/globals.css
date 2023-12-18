@@ -74,3 +74,19 @@
     @apply bg-background text-foreground;
   }
 }
+
+.slideshow-action {
+  @apply hidden rounded-full w-7 h-7 border md:inline-flex justify-center items-center text-white border-white hover:shadow-sm cursor-pointer hover:bg-white hover:text-black active:shadow active:bg-white active:text-black;
+}
+
+.slideshow-action:active {
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.18) inset;
+}
+
+.custom-gradient {
+  @apply bg-gradient-to-tr from-purple-600 via-purple-700 to-blue-800;
+}
+
+.text-gradient {
+  @apply text-transparent bg-clip-text custom-gradient;
+}

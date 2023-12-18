@@ -21,6 +21,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
+        anurati: ["var(--font-anurati)"],
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       colors: {

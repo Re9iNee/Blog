@@ -1,26 +1,46 @@
 "use client";
 
 import useDynamicHeight from "@/hooks/useDynamicHeight";
-import React from "react";
-import { Button } from "../ui/button";
+import { useEffect, useState } from "react";
+import RotatingTexts from "./dynamic-text";
+import EllipseGroup from "./ellipse-group";
+import HeroImage from "./hero-image";
 
 function HeroSection() {
   useDynamicHeight("hero-container", "header");
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % 3); // cause we have 3 types dynamic (ellipses and texts)
+    }, 4000); // Change text every 4 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section
       id='hero-container'
-      className='bg-yellow-500 px-4 border-b border-black min-h-screen'
+      className='mx-3 pt-12 pb-4 flex justify-center items-center overflow-x-hidden pointer-events-none 
+      md:px-6 md:pt-6 md:gap-20
+      '
     >
-      <h1 className='py-16 text-6xl text-black font-medium'>Stay curious.</h1>
-      <h3 className='text-2xl text-black py-4'>
-        Discover stories, thinking, and expertise from writers on any topic.
-      </h3>
-      <Button
-        variant={"outline"}
-        className='rounded-3xl font-light text-xl px-8 my-8'
-      >
-        Start reading
-      </Button>
+      <div className='flex flex-col flex-shrink md:max-w-[50%]'>
+        <h1 className='z-10 text-3xl font-bold leading-10 bg-background'>
+          Read About New
+        </h1>
+        <RotatingTexts activeIndex={activeIndex} />
+        <h2 className='pt-4 z-10 text-neutral-500 text-sm leading-tight'>
+          Join out MORA blog community to stay updated on the latest in
+          technology&apos;s frontiers
+        </h2>
+      </div>
+
+      {/* section VR Guy and hero image component */}
+      <div className='hidden md:grid grid-cols-1 grid-rows-1 place-items-end flex-grow'>
+        <EllipseGroup activeIndex={activeIndex} />
+        <HeroImage activeIndex={activeIndex} />
+      </div>
     </section>
   );
 }

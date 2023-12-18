@@ -1,48 +1,54 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { AiOutlineMediumWorkmark } from "react-icons/ai";
-import { FaMedium } from "react-icons/fa6";
-import { Button } from "../ui/button";
-import { Separator } from "../ui/separator";
+import { RxHamburgerMenu } from "react-icons/rx";
 
-function Header() {
-  const pathname = usePathname();
-  const headerBg = pathname.startsWith("/posts/")
-    ? "bg-white"
-    : "bg-yellow-500";
-
+const Header = () => {
   return (
-    <header className={`${headerBg}`} id='header'>
-      <nav className='inline-flex p-4 gap-2 items-center justify-between w-full text-black'>
-        <Link href={"/"} className='inline-flex gap-2 text-6xl'>
-          <FaMedium />
-          <AiOutlineMediumWorkmark />
+    <header
+      className='px-2 py-4 flex justify-between max-w-screen-xl mx-auto border-b border-slate-100 dark:border-slate-800
+      md:p-4
+      '
+    >
+      <div className='inline-flex items-center gap-2'>
+        <h1 className='p-2 flex gap-1 items-center'>
+          <span
+            className='text-gradient font-anurati gradient-logo text-cyan-500 text-2xl font-normal uppercase tracking-wide sm:text-2xl
+            '
+          >
+            MORA
+          </span>
+
+          <span className='text-indigo-600 text-sm font-semibold italic leading-3'>
+            BLOGS
+          </span>
+        </h1>
+        <Link
+          className='p-2 text-xs hidden 
+                    sm:block
+                    '
+          href={"/contact-us"}
+        >
+          Contact Us
         </Link>
+        <Link
+          className='p-2 text-xs hidden 
+                    sm:block
+                    '
+          href={"#"}
+        >
+          Mora Website
+        </Link>
+      </div>
 
-        <div className='inline-flex gap-8 items-center'>
-          <Link href={"/about"} className='hidden md:block hover:text-gray-300'>
-            About
-          </Link>
-          <Link
-            href={"/contact"}
-            className='hidden md:block hover:text-gray-300'
-          >
-            Contact
-          </Link>
-
-          <Button
-            variant={"outline"}
-            className='rounded-3xl dark:text-gray-200'
-          >
-            Get Started
-          </Button>
-        </div>
-      </nav>
-      <Separator />
+      <div className='flex gap-4 items-center'>
+        <button className='whitespace-nowrap px-3 py-2 h-8 text-white bg-gradient-to-l from-violet-500 to-violet-700 rounded-3xl leading-none text-xs font-bold cursor-pointer'>
+          Join Community
+        </button>
+        <RxHamburgerMenu className='cursor-pointer sm:hidden' />
+      </div>
     </header>
   );
-}
+};
 
 export default Header;
