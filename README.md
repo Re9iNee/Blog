@@ -1,6 +1,6 @@
 ### Blog for Mora
 
-### Written in
+### Technologies
 
 Typescript, NextJS, Postgresql
 
