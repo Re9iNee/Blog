@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { convertDateToDayMonthAndYear } from "@/lib/utils";
 import { getPost } from "@/service/posts.service";
+import { Metadata } from "next";
 
 import Image from "next/image";
 import BackArrowIcon from "public/icons/BackArrow.svg";
@@ -19,6 +20,9 @@ async function PostPage({ params }: Props) {
 
   return (
     <div className='pt-8 flex flex-col gap-4 px-4 mb-8 max-w-screen-md mx-auto'>
+      {/* metadata */}
+      <title>{data.title}</title>
+
       {/* NavigationGroup */}
       <div className='flex justify-between'>
         <Button

@@ -16,12 +16,14 @@ type Props = {
   data: Omit<PostModel, "categories">;
 };
 function BlogCard({ data }: Props) {
-  const { id, title, readingTime, author, mainImageUrl, publishedAt, summery } =
-    data;
+  const { id, title, author, mainImageUrl, publishedAt, summery } = data;
 
   return (
     <article className='flex flex-col gap-2'>
-      <div className='group relative w-full h-32 rounded-xl cursor-pointer'>
+      <Link
+        href={`/posts/${id}`}
+        className='group relative w-full h-32 rounded-xl cursor-pointer'
+      >
         <Image
           fill
           alt={`${title} main image`}
@@ -31,7 +33,7 @@ function BlogCard({ data }: Props) {
         <div className='w-full h-full absolute opacity-0 group-hover:opacity-75 bg-gradient-to-l from-violet-500 to-violet-900 rounded-xl backdrop-blur-none group-active:opacity-100 duration-400 text-white font-bold grid place-items-center'>
           Read More
         </div>
-      </div>
+      </Link>
 
       <h3 className='text-neutral-950 font-bold leading-tight'>
         <Link href={`/posts/${id}`}>{title}</Link>

@@ -8,7 +8,7 @@ const Footer = () => {
       className='max-w-screen-xl px-4 py-6 flex flex-col gap-6 text-left  bg-neutral-100 rounded-t-largest footer-shadow-mobile dark:bg-neutral-950
       md:px-8 md:gap-8
       lg:px-16 lg:gap-10 lg:pt-12
-      xl:mx-auto xl:px-20
+      xl:px-20
       '
     >
       {/* Brand info */}

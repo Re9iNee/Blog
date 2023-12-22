@@ -11,7 +11,7 @@ const Header = () => {
       '
     >
       <div className='inline-flex items-center gap-2'>
-        <h1 className='p-2 flex gap-1 items-center'>
+        <Link href={"/"} className='p-2 flex gap-1 items-center cursor-pointer'>
           <span
             className='text-gradient font-anurati gradient-logo text-cyan-500 text-2xl font-normal uppercase tracking-wide sm:text-2xl
             '
@@ -22,9 +22,9 @@ const Header = () => {
           <span className='text-indigo-600 text-sm font-semibold italic leading-3'>
             BLOGS
           </span>
-        </h1>
+        </Link>
         <Link
-          className='p-2 text-xs hidden 
+          className='p-2 text-xs cursor-pointer hidden 
                     sm:block
                     '
           href={"/contact-us"}
@@ -32,10 +32,11 @@ const Header = () => {
           Contact Us
         </Link>
         <Link
-          className='p-2 text-xs hidden 
+          target='_blank'
+          href={"https://mora-website.vercel.app/"}
+          className='p-2 text-xs hidden cursor-pointer
                     sm:block
                     '
-          href={"#"}
         >
           Mora Website
         </Link>
