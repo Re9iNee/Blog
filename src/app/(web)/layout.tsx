@@ -11,9 +11,11 @@ const logoFont = AnuratiRegular({
 
 function layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`max-w-screen-xl mx-auto ${logoFont.variable}`}>
+    <div
+      className={`max-w-screen-xl min-h-screen mx-auto flex flex-col ${logoFont.variable}`}
+    >
       <Header />
-      {children}
+      <div className='flex-grow'>{children}</div>
       <Footer />
     </div>
   );

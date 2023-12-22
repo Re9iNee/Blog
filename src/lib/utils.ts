@@ -25,7 +25,9 @@ export function convertDateToDayMonthAndYear(date: Date | null): string {
   return date.toLocaleDateString("en-US", {
     day: "numeric",
     month: "short",
-    year: "numeric",
+    // if its the same year, don't show the year
+    year:
+      date.getFullYear() !== new Date().getFullYear() ? "numeric" : undefined,
   });
 }
 
