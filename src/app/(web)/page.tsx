@@ -36,7 +36,7 @@ const SlideShowContents = [
 ];
 
 export default async function Home() {
-  const recentPosts = await getRecentPosts(24);
+  const recentPosts = await getRecentPosts(12);
 
   return (
     <main>
