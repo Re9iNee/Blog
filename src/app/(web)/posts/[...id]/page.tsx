@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { convertDateToDayMonthAndYear } from "@/lib/utils";
 import { getPost } from "@/service/posts.service";
-import { Metadata } from "next";
 
 import Image from "next/image";
 import BackArrowIcon from "public/icons/BackArrow.svg";

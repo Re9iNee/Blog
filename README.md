@@ -2,6 +2,7 @@
 
 ### Technologies
 
+
 Typescript, NextJS, Postgresql.
 
 ### Lighthouse Scores

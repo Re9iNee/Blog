@@ -2,24 +2,42 @@ import { faker } from "@faker-js/faker";
 import { PostStatus, PrismaClient } from "@prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { hash } from "bcryptjs";
+import * as dotenv from "dotenv";
+dotenv.config(); // Load the environment variables
 
 const prisma = new PrismaClient().$extends(withAccelerate());
 
 async function main() {
-  // await clearDB();
+  await clearDB();
   await insertAdmin();
-  await insertUsers(2);
-  await insertPosts(10);
+  // await insertUsers(2);
+  // await insertPosts(10);
   // await getAllAuthors();
+  // await getAllDB();
+}
+
+async function getAllDB() {
+  console.log("Fetching all db data...");
+
+  const users = await prisma.user.findMany();
+  const posts = await prisma.post.findMany();
+  const categories = await prisma.category.findMany();
+
+  console.log({ users, posts, categories });
+
+  return { users, posts, categories };
 }
 
 async function insertAdmin() {
   console.log("Inserting Admin...");
 
-  const hashedPassword = await hash("123", 12);
+  if (!process.env.ADMIN_PASSWORD || !process.env.ADMIN_EMAIL)
+    throw new Error("No admin password/email found in env file");
+
+  const hashedPassword = await hash(process.env.ADMIN_PASSWORD, 12);
 
   const admin = await prisma.user.findUnique({
-    where: { email: "a@a.com" },
+    where: { email: process.env.ADMIN_EMAIL },
   });
 
   if (admin) {
@@ -30,7 +48,7 @@ async function insertAdmin() {
   const newAdmin = await prisma.user.create({
     data: {
       name: "Admin",
-      email: "a@a.com",
+      email: process.env.ADMIN_EMAIL,
       avatarUrl:
         "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/509.jpg",
       password: hashedPassword,
