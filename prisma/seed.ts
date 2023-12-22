@@ -8,7 +8,7 @@ dotenv.config(); // Load the environment variables
 const prisma = new PrismaClient().$extends(withAccelerate());
 
 async function main() {
-  // await clearDB();
+  await clearDB();
   await insertAdmin();
   // await insertUsers(2);
   // await insertPosts(10);
