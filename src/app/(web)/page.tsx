@@ -45,13 +45,19 @@ export default async function Home() {
       <DottedBackground
         top={35}
         position='right'
-        className='md:hidden scale-150'
+        className='md:hidden scale-110'
       />
       <HeroSection />
 
-      <SlideShow className='px-4 mt-14' cards={SlideShowContents} />
+      <SlideShow className='px-4 mt-14 mb-3' cards={SlideShowContents} />
 
-      <h1 className='text-neutral-700 font-bold pt-4 px-3'>Published Posts</h1>
+      <h1
+        className='text-neutral-700 font-bold pt-4 px-4
+        md:pt-8
+        '
+      >
+        Published Posts
+      </h1>
       <section
         aria-labelledby='published-posts'
         className='flex p-4 flex-col gap-8 pb-14
