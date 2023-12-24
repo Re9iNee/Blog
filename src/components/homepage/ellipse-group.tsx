@@ -25,8 +25,8 @@ function EllipseGroup({ activeIndex }: Props) {
     inactive: {
       width: 256,
       height: 256,
-      left: 31,
-      top: 0,
+      left: 0,
+      top: 15,
     },
   };
 
