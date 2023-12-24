@@ -23,7 +23,11 @@ function HeroSection() {
       md:px-6 md:pt-6 md:gap-20
       '
     >
-      <div className='flex flex-col flex-shrink md:max-w-[50%]'>
+      <div
+        className='flex flex-col flex-shrink 
+        md:max-w-[50%]
+        '
+      >
         <h1 className='z-10 text-3xl font-bold leading-10 bg-background font-poppins'>
           Read About New
         </h1>
