@@ -1,13 +1,11 @@
 "use client";
 
-import useDynamicHeight from "@/hooks/useDynamicHeight";
 import { useEffect, useState } from "react";
 import RotatingTexts from "./dynamic-text";
 import EllipseGroup from "./ellipse-group";
 import HeroImage from "./hero-image";
 
 function HeroSection() {
-  useDynamicHeight("hero-container", "header");
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -25,12 +23,16 @@ function HeroSection() {
       md:px-6 md:pt-6 md:gap-20
       '
     >
-      <div className='flex flex-col flex-shrink md:max-w-[50%]'>
-        <h1 className='z-10 text-3xl font-bold leading-10 bg-background'>
+      <div
+        className='flex flex-col flex-shrink 
+        md:max-w-[50%]
+        '
+      >
+        <h1 className='z-10 text-3xl font-bold leading-10 bg-background font-poppins'>
           Read About New
         </h1>
         <RotatingTexts activeIndex={activeIndex} />
-        <h2 className='pt-4 z-10 text-neutral-500 text-sm leading-tight'>
+        <h2 className='z-10 text-neutral-500 text-sm leading-tight max-w-sm'>
           Join out MORA blog community to stay updated on the latest in
           technology&apos;s frontiers
         </h2>
