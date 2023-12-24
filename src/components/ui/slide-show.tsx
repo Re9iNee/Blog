@@ -167,7 +167,7 @@ export function SlideShowCard({
           src={imageUrl}
           alt={imageAlt}
           objectFit='cover'
-          className='z-0 pointer-events-none rounded-2xl'
+          className='z-0 pointer-events-none rounded-2xl aspect-video'
         />
 
         {/* only xs */}
