@@ -1,4 +1,4 @@
-import { type ClassValue, clsx } from "clsx";
+import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -53,3 +53,11 @@ export const createNameAbv = (name: string) => {
     .slice(0, 2)
     .join("");
 };
+
+export function getS3ObjectURLFromKey(key: string) {
+  const url = new URL(
+    `https://s3.${process.env.S3_REGION}.amazonaws.com/${process.env.S3_BUCKET}/${key}`
+  );
+
+  return url.toString();
+}
