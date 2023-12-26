@@ -14,6 +14,15 @@ const links = [
     href: "/dashboard/posts",
     text: "Posts",
   },
+  {
+    href: "/dashboard/upload",
+    text: "Upload",
+  },
+  {
+    href: "/",
+    text: "Visit Site",
+    target: "_blank",
+  },
 ];
 
 export function MainNav({
@@ -27,11 +36,12 @@ export function MainNav({
       className={cn("flex items-center space-x-4 lg:space-x-6", className)}
       {...props}
     >
-      {links.map(({ href, text }) => {
+      {links.map(({ href, text, target }) => {
         return (
           <Link
             key={href}
             href={href}
+            target={target ?? undefined}
             className={`text-sm font-medium transition-colors hover:text-primary text-muted-foreground ${
               pathname === href && "text-primary"
             }`}
