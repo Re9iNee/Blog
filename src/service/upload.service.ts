@@ -19,8 +19,8 @@ export async function uploadToS3(data: FormData): Promise<string> {
     new PutObjectCommand({
       Body: body,
       ACL: "public-read",
-      Key: `download/${file.name}`,
       Bucket: process.env.S3_BUCKET,
+      Key: `download/${file.name}-${Date.now()}`,
     })
   );
 
