@@ -22,6 +22,14 @@ import { toast } from "@/components/ui/use-toast";
 import { PostModel } from "@/types/post";
 import { FaMarkdown } from "react-icons/fa6";
 import { postSchema } from "./post-schema";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { PostStatus } from "@prisma/client";
 
 type Props = {
   closeModal: () => void;
@@ -172,6 +180,35 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
                 </a>{" "}
                 to see your markdown result in realtime.
               </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name='status'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Complexity Level</FormLabel>
+              <Select defaultValue={field.value} onValueChange={field.onChange}>
+                <FormControl>
+                  <SelectTrigger data-cy='status'>
+                    <SelectValue placeholder='Select a Status' />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {Object.keys(PostStatus).map((status) => (
+                    <SelectItem
+                      key={status}
+                      value={status}
+                      data-cy={`status_${status}`}
+                    >
+                      {status}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}

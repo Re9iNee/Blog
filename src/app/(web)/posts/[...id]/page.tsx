@@ -56,9 +56,8 @@ async function PostPage({ params }: Props) {
           <Image
             width={32}
             height={32}
-            objectFit='cover'
             alt='Author Avatar'
-            className='rounded-full aspect-square'
+            className='rounded-full aspect-square object-cover'
             src={data.author.avatarUrl ?? "/images/main-image-placeholder.png"}
           />
           <span className='text-neutral-600 text-sm leading-tight'>
