@@ -20,18 +20,19 @@ enum PostStatus {
 model Post {
   id Int @id @default(autoincrement())
 
-  readingTime  Int
-  authorId     Int
-  title        String
-  summery      String
   body         String?
-  mainImageUrl String?
-  publishedAt  DateTime?
-  categories   Category[]
-  updatedAt    DateTime   @updatedAt
+  title        String
   status       PostStatus @default(draft)
+  summary      String
+  authorId     Int
+  updatedAt    DateTime   @updatedAt
   createdAt    DateTime   @default(now())
-  author       User       @relation(fields: [authorId], references: [id])
+  categories   Category[]
+  publishedAt  DateTime?
+  readingTime  Int
+  mainImageUrl String?
+
+  author User @relation(fields: [authorId], references: [id])
 
   @@map("posts")
 }

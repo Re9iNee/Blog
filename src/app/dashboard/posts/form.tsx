@@ -16,12 +16,6 @@ import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { Textarea } from "@/components/ui/textarea";
-import { ToastAction } from "@/components/ui/toast";
-import { toast } from "@/components/ui/use-toast";
-import { PostModel } from "@/types/post";
-import { FaMarkdown } from "react-icons/fa6";
-import { postSchema } from "./post-schema";
 import {
   Select,
   SelectContent,
@@ -29,7 +23,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { ToastAction } from "@/components/ui/toast";
+import { toast } from "@/components/ui/use-toast";
+import { PostModel } from "@/types/post";
 import { PostStatus } from "@prisma/client";
+import { FaMarkdown } from "react-icons/fa6";
+import { postSchema } from "./post-schema";
 
 type Props = {
   closeModal: () => void;
@@ -135,16 +135,16 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
           )}
         />
         <FormField
-          name='summery'
+          name='summary'
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Summery</FormLabel>
+              <FormLabel>Summary</FormLabel>
               <FormControl>
                 <Input
                   required
-                  data-cy='summery'
-                  placeholder='Enter post summery'
+                  data-cy='summary'
+                  placeholder='Enter post summary'
                   {...field}
                 />
               </FormControl>
@@ -190,7 +190,7 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
           name='status'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Complexity Level</FormLabel>
+              <FormLabel>Status</FormLabel>
               <Select defaultValue={field.value} onValueChange={field.onChange}>
                 <FormControl>
                   <SelectTrigger data-cy='status'>
