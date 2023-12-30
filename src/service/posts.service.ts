@@ -19,7 +19,12 @@ export async function getAllPublishedPosts(
   return posts;
 }
 
-export async function getAllPosts(): Promise<PostModel[]> {
+type getAllPostsParams = {
+  caching: boolean;
+};
+export async function getAllPosts({
+  caching,
+}: getAllPostsParams): Promise<PostModel[]> {
   const posts = await prisma.post.findMany({
     orderBy: { id: "desc" },
     include: {
@@ -27,7 +32,7 @@ export async function getAllPosts(): Promise<PostModel[]> {
       categories: true,
     },
     cacheStrategy: {
-      swr: 60,
+      swr: caching ? 60 : undefined,
     },
   });
 

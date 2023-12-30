@@ -5,7 +5,7 @@ import { getAllPosts } from "@/service/posts.service";
 import React from "react";
 
 async function page() {
-  const posts = await getAllPosts();
+  const posts = await getAllPosts({ caching: false });
 
   return (
     <div className='flex-1 space-y-4 p-8 pt-6'>
