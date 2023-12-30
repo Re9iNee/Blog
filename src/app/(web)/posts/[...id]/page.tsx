@@ -49,7 +49,7 @@ async function PostPage({ params }: Props) {
         alt={data.title + " " + "main image"}
         src={data.mainImageUrl ?? "/images/placeholder.png"}
       />
-      <h3 className='text-lg leading-6 text-neutral-500'>{data.summery}</h3>
+      <h3 className='text-lg leading-6 text-neutral-500'>{data.summary}</h3>
 
       <div className='flex flex-wrap gap-2 justify-between'>
         <section aria-labelledby='author' className='flex items-center gap-2'>

@@ -16,7 +16,7 @@ type Props = {
   data: Omit<PostModel, "categories">;
 };
 function BlogCard({ data }: Props) {
-  const { id, title, author, mainImageUrl, publishedAt, summery } = data;
+  const { id, title, author, mainImageUrl, publishedAt, summary } = data;
 
   return (
     <article className='flex flex-col gap-2'>
@@ -43,7 +43,7 @@ function BlogCard({ data }: Props) {
           md:text-sm md:leading-normal
           '
       >
-        {summery}
+        {summary}
       </summary>
 
       <section
