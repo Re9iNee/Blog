@@ -141,11 +141,12 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
             <FormItem>
               <FormLabel>Summary</FormLabel>
               <FormControl>
-                <Input
-                  required
-                  data-cy='summary'
-                  placeholder='Enter post summary'
+                <Textarea
                   {...field}
+                  data-cy='summary'
+                  className='resize-y h-2'
+                  value={field.value ?? ""}
+                  placeholder='Paste the summary of post'
                 />
               </FormControl>
               <FormMessage />
