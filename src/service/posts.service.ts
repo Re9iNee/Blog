@@ -1,8 +1,10 @@
 "use server";
 
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { prisma } from "@/lib/prisma";
 import { PostModel } from "@/types/post";
 import { PostStatus } from "@prisma/client";
+import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { notFound } from "next/navigation";
 
@@ -75,18 +77,11 @@ export async function updatePost(
 }
 
 export async function createPost(data: PostModel): Promise<PostModel> {
-  const randomAuthor = await prisma.user.findFirst({
-    cacheStrategy: { swr: 60 * 60 * 24 },
-  });
-
-  if (!randomAuthor) throw new Error("No author found");
-
-  const { author, categories, ...rest } = data;
+  const { categories, author, ...rest } = data;
 
   const post = await prisma.post.create({
     data: {
       ...rest,
-      authorId: randomAuthor.id,
     },
     include: {
       author: true,
