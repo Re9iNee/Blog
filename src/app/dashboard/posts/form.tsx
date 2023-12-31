@@ -30,6 +30,7 @@ import { PostModel } from "@/types/post";
 import { PostStatus } from "@prisma/client";
 import { FaMarkdown } from "react-icons/fa6";
 import { postSchema } from "./post-schema";
+import { useSession } from "next-auth/react";
 
 type Props = {
   closeModal: () => void;
@@ -38,16 +39,17 @@ type Props = {
 };
 
 const defaultValues: Partial<PostModel> = {
-  authorId: 153,
   createdAt: new Date(),
   updatedAt: new Date(),
 };
 
 function PostForm({ initialValues, actionFn, closeModal }: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { data: session } = useSession();
+  const authorId = session?.user?.id;
 
   const form = useForm<PostModel>({
-    defaultValues: { ...defaultValues, ...initialValues },
+    defaultValues: { authorId: authorId, ...defaultValues, ...initialValues },
     mode: "onChange",
     resolver: zodResolver(postSchema),
   });
@@ -94,6 +96,7 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
         className='space-y-8'
         onSubmit={form.handleSubmit(onSubmit)}
       >
+        <pre>Author: {initialValues?.author?.email ?? session?.user.email}</pre>
         <FormField
           name='title'
           control={form.control}
