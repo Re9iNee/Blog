@@ -28,7 +28,7 @@ export default function Modal({
       placement='top-center'
       onOpenChange={onOpenChange}
     >
-      <ModalContent>
+      <ModalContent className='max-h-[90vh] overflow-scroll'>
         {() => (
           <>
             <ModalHeader className='flex flex-col gap-1'>{header}</ModalHeader>
