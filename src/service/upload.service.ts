@@ -15,16 +15,19 @@ export async function uploadToS3(data: FormData): Promise<string> {
   const file = data.get("file") as File;
   const body = (await file.arrayBuffer()) as Buffer;
 
+  // create a unique file name
+  const fileName = `${Date.now()}-${file.name}`;
+
   await s3.send(
     new PutObjectCommand({
       Body: body,
       ACL: "public-read",
+      Key: `download/${fileName}`,
       Bucket: process.env.S3_BUCKET,
-      Key: `download/${file.name}-${Date.now()}`,
     })
   );
 
-  const url = getS3ObjectURLFromKey(`download/${file.name}`);
+  const url = getS3ObjectURLFromKey(`download/${fileName}`);
 
   return url;
 }
