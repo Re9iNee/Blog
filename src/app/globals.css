@@ -86,7 +86,3 @@
 .custom-gradient {
   @apply bg-gradient-to-tr from-purple-600 via-purple-700 to-blue-800;
 }
-
-.text-gradient {
-  @apply text-transparent bg-clip-text custom-gradient;
-}
