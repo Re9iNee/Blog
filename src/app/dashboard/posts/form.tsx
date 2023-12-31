@@ -38,7 +38,7 @@ type Props = {
 };
 
 const defaultValues: Partial<PostModel> = {
-  authorId: 1,
+  authorId: 153,
   createdAt: new Date(),
   updatedAt: new Date(),
 };
