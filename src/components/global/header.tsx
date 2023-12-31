@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
+import MoraLogo from "/public/logos/logo-small.svg";
 
 const Header = () => {
   return (
@@ -12,12 +13,7 @@ const Header = () => {
     >
       <div className='inline-flex items-center gap-2'>
         <Link href={"/"} className='p-2 flex gap-1 items-center cursor-pointer'>
-          <span
-            className='text-gradient font-anurati gradient-logo text-cyan-500 text-2xl font-normal uppercase tracking-wide sm:text-2xl
-            '
-          >
-            MORA
-          </span>
+          <MoraLogo />
 
           <span className='text-indigo-600 text-sm font-semibold italic leading-3'>
             BLOGS

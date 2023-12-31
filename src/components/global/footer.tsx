@@ -1,6 +1,7 @@
 import { FiInstagram, FiLinkedin } from "react-icons/fi";
 import { FaXTwitter } from "react-icons/fa6";
 import EmailSignUpInput from "../homepage/email-signup-input";
+import FullLogo from "/public/logos/full-logo.svg";
 
 const Footer = () => {
   return (
@@ -17,22 +18,8 @@ const Footer = () => {
         lg:flex-row lg:justify-between lg:gap-24
         '
       >
-        <section className='flex flex-col gap-2'>
-          <h2
-            className='gradient-logo font-anurati text-4xl font-black
-            sm:text-5xl sm:drop-shadow-lg
-            '
-          >
-            MORA
-          </h2>
-          <h4
-            className='text-sm gradient-logo font-extralight tracking-widest 
-            sm:text-xl sm:drop-shadow-lg
-            '
-          >
-            Do More with Less Work
-          </h4>
-        </section>
+        <FullLogo />
+
         <section className='lg:w-96 lg:h-28'>
           <h3 className='font-bold text-neutral-800 text-base dark:text-neutral-200'>
             What is Mora?
@@ -55,9 +42,9 @@ const Footer = () => {
           </h3>
           {/* footer links */}
           <section className='flex gap-2'>
-            <FiLinkedin className='text-sky-700 w-8 h-8 dark:text-sky-500' />
-            <FiInstagram className='text-pink-600 w-8 h-8 dark:text-pink-400' />
-            <FaXTwitter className='w-8 h-8 dark:text-neutral-50' />
+            <FiLinkedin className='text-sky-700 w-8 h-8 dark:text-sky-500 cursor-pointer' />
+            <FiInstagram className='text-pink-600 w-8 h-8 dark:text-pink-400 cursor-pointer' />
+            <FaXTwitter className='w-8 h-8 dark:text-neutral-50 cursor-pointer' />
           </section>
         </section>
 
@@ -70,11 +57,11 @@ const Footer = () => {
             Subscribe to get updates
           </h3>
           <button
-            className='h-11 self-stretch  bg-purple-600 font-bold text-white text-sm px-10 py-3 rounded-2xl
+            className='h-11 self-stretch font-bold text-white text-sm px-10 py-3 rounded-2xl bg-gradient-to-l from-violet-500 to-violet-700
             sm:hidden
             '
           >
-            Sign-up
+            Join Community
           </button>
           <EmailSignUpInput />
         </section>

@@ -17,7 +17,7 @@ const EmailSignUpInput = ({ maxLength }: ComponentProps<"input">) => {
       />
       <div className='absolute inset-y-0 right-2 flex items-center'>
         <button className='custom-gradient text-white text-sm font-semibold px-4 py-3 rounded-3xl'>
-          Sign-up for Updates
+          Join Community
         </button>
       </div>
     </div>
