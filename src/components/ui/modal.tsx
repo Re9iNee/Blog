@@ -6,7 +6,7 @@ import {
   Modal as NextUiModal,
   useDisclosure,
 } from "@nextui-org/react";
-import { ReactNode } from "react";
+import { ReactNode, memo } from "react";
 
 type Props = {
   isOpen: boolean;
@@ -14,12 +14,7 @@ type Props = {
   children: ReactNode;
   onOpenChange: () => void;
 };
-export default function Modal({
-  isOpen,
-  children,
-  onOpenChange,
-  header,
-}: Props) {
+function Modal({ isOpen, children, onOpenChange, header }: Props) {
   useDisclosure;
   return (
     <NextUiModal
@@ -40,3 +35,5 @@ export default function Modal({
     </NextUiModal>
   );
 }
+
+export default memo(Modal);
