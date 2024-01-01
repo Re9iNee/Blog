@@ -1,10 +1,8 @@
 "use server";
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { prisma } from "@/lib/prisma";
 import { PostModel } from "@/types/post";
 import { PostStatus } from "@prisma/client";
-import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { notFound } from "next/navigation";
 
@@ -16,6 +14,7 @@ export async function getAllPublishedPosts(
     include: { author: true },
     orderBy: { createdAt: "desc" },
     where: { status: PostStatus.published },
+    cacheStrategy: { swr: 60 },
   });
 
   return posts;
