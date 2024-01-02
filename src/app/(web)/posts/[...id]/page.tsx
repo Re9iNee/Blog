@@ -45,9 +45,9 @@ async function PostPage({ params }: Props) {
       <Image
         width={"288"}
         height={"160"}
-        className='rounded-lg self-center'
         alt={data.title + " " + "main image"}
         src={data.mainImageUrl ?? "/images/placeholder.png"}
+        className='rounded-lg self-center w-full object-contain'
       />
       <h3 className='text-lg leading-6 text-neutral-500'>{data.summary}</h3>
 
