@@ -31,6 +31,9 @@ import { PostStatus } from "@prisma/client";
 import { FaMarkdown } from "react-icons/fa6";
 import { postSchema } from "./post-schema";
 import { useSession } from "next-auth/react";
+import { Uploader } from "@/components/ui/uploader";
+import Link from "next/link";
+import Image from "next/image";
 
 type Props = {
   closeModal: () => void;
@@ -53,6 +56,27 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
     mode: "onChange",
     resolver: zodResolver(postSchema),
   });
+
+  const onUploadFinished = (url: string) => {
+    form.setValue("mainImageUrl", url, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+
+    toast({
+      title: "File uploaded",
+      description: (
+        <Link
+          href={url}
+          target='_blank'
+          className='font-medium text-blue-600 dark:text-blue-500 hover:underline'
+        >
+          Link
+        </Link>
+      ),
+    });
+  };
 
   function onSubmit(values: PostModel) {
     setIsLoading(true);
@@ -115,6 +139,32 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
             </FormItem>
           )}
         />
+
+        {form.getValues("mainImageUrl") && (
+          <Image
+            width={"288"}
+            height={"160"}
+            src={form.getValues("mainImageUrl")!}
+            alt={form.getValues("title") + " " + "main image"}
+            className='rounded-lg self-center mx-auto border-2 border-gray-200 dark:border-gray-800 aspect-video object-contain'
+          />
+        )}
+        <FormField
+          name='mainImageUrl'
+          control={form.control}
+          render={() => {
+            return (
+              <FormItem>
+                <FormLabel>Main Image</FormLabel>
+                <FormControl>
+                  <Uploader onUploadFinished={onUploadFinished} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+
         <FormField
           name='readingTime'
           control={form.control}
