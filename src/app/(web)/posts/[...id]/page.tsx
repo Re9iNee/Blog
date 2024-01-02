@@ -2,10 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { convertDateToDayMonthAndYear } from "@/lib/utils";
 import { getPost } from "@/service/posts.service";
+import { Spinner } from "@nextui-org/react";
+import { MDXRemote } from "next-mdx-remote/rsc";
 
 import Image from "next/image";
 import BackArrowIcon from "public/icons/BackArrow.svg";
 import ShareIcon from "public/icons/Share.svg";
+import { Suspense } from "react";
 
 import { RxDotFilled } from "react-icons/rx";
 
@@ -16,6 +19,8 @@ async function PostPage({ params }: Props) {
   const id = params.id;
 
   const data = await getPost(+id);
+
+  const postContent = await MDXRemote(data.body as any);
 
   return (
     <div className='pt-8 flex flex-col gap-4 px-4 mb-8 max-w-screen-md mx-auto'>
@@ -45,9 +50,9 @@ async function PostPage({ params }: Props) {
       <Image
         width={"288"}
         height={"160"}
-        className='rounded-lg self-center'
         alt={data.title + " " + "main image"}
         src={data.mainImageUrl ?? "/images/placeholder.png"}
+        className='rounded-lg self-center w-full object-contain'
       />
       <h3 className='text-lg leading-6 text-neutral-500'>{data.summary}</h3>
 
@@ -75,7 +80,10 @@ async function PostPage({ params }: Props) {
       <Separator />
 
       <article>
-        <p>{data.body ?? "NO CONTENT"}</p>
+        <Suspense fallback={<Spinner />}>
+          {/* @ts-expect-error Async Server Component */}
+          <MDXRemote source={data.body} />
+        </Suspense>
       </article>
     </div>
   );
