@@ -1,3 +1,4 @@
+import { CustomMDX } from "@/components/mdx-remote";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { convertDateToDayMonthAndYear } from "@/lib/utils";
@@ -19,8 +20,6 @@ async function PostPage({ params }: Props) {
   const id = params.id;
 
   const data = await getPost(+id);
-
-  const postContent = await MDXRemote(data.body as any);
 
   return (
     <div className='pt-8 flex flex-col gap-4 px-4 mb-8 max-w-screen-md mx-auto'>
@@ -79,11 +78,8 @@ async function PostPage({ params }: Props) {
 
       <Separator />
 
-      <article>
-        <Suspense fallback={<Spinner />}>
-          {/* @ts-expect-error Async Server Component */}
-          <MDXRemote source={data.body} />
-        </Suspense>
+      <article className='prose md:prose-lg lg:prose-xl dark:prose-invert prose-img:rounded-xl prose-a:text-blue-600 max-w-full'>
+        <CustomMDX source={data.body ?? "# No Content"} />
       </article>
     </div>
   );
