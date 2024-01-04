@@ -78,7 +78,7 @@ async function PostPage({ params }: Props) {
 
       <Separator />
 
-      <article className='prose'>
+      <article className='prose md:prose-lg lg:prose-xl dark:prose-invert prose-img:rounded-xl prose-a:text-blue-600 max-w-full'>
         <CustomMDX source={data.body ?? "# No Content"} />
       </article>
     </div>
