@@ -1,15 +1,12 @@
-import { CustomMDX } from "@/components/mdx-remote";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { markdownToHTML } from "@/lib/markdownToHTML";
 import { convertDateToDayMonthAndYear } from "@/lib/utils";
 import { getPost } from "@/service/posts.service";
-import { Spinner } from "@nextui-org/react";
-import { MDXRemote } from "next-mdx-remote/rsc";
 
 import Image from "next/image";
 import BackArrowIcon from "public/icons/BackArrow.svg";
 import ShareIcon from "public/icons/Share.svg";
-import { Suspense } from "react";
 
 import { RxDotFilled } from "react-icons/rx";
 
@@ -20,6 +17,7 @@ async function PostPage({ params }: Props) {
   const id = params.id;
 
   const data = await getPost(+id);
+  const htmlContent = await markdownToHTML(data.body ?? "");
 
   return (
     <div className='pt-8 flex flex-col gap-4 px-4 mb-8 max-w-screen-md mx-auto'>
@@ -79,7 +77,7 @@ async function PostPage({ params }: Props) {
       <Separator />
 
       <article className='prose md:prose-lg lg:prose-xl dark:prose-invert prose-img:rounded-xl prose-a:text-blue-600 max-w-full'>
-        <CustomMDX source={data.body ?? "# No Content"} />
+        <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
       </article>
     </div>
   );
