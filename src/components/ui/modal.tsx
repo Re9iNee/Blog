@@ -15,7 +15,6 @@ type Props = {
   onOpenChange: () => void;
 };
 function Modal({ isOpen, children, onOpenChange, header }: Props) {
-  useDisclosure;
   return (
     <NextUiModal
       isOpen={isOpen}

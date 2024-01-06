@@ -22,6 +22,7 @@ import {
 } from "@/service/posts.service";
 import { useCallback } from "react";
 import { toast } from "@/components/ui/use-toast";
+import Link from "next/link";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -62,6 +63,9 @@ export function DataTableRowActions<TData>({
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end' className='w-[160px]'>
           <DropdownMenuItem onClick={onOpen}>Edit</DropdownMenuItem>
+          <Link href={`/posts/${post.id}`} target='_blank'>
+            <DropdownMenuItem>Visit post</DropdownMenuItem>
+          </Link>
           <DropdownMenuItem className='cursor-not-allowed'>
             Make a copy
           </DropdownMenuItem>
