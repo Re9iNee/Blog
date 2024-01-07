@@ -1,7 +1,8 @@
 "use client";
 
 import { DataTable } from "@/components/dashboard/table/data-table";
-import { useHotkeys } from "react-hotkeys-hook";
+import { toast } from "@/components/ui/use-toast";
+import { deleteManyPosts } from "@/service/posts.service";
 import { PostModel } from "@/types/post";
 import {
   ColumnDef,
@@ -16,9 +17,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import React, { useEffect } from "react";
-import { deleteManyPosts } from "@/service/posts.service";
-import { toast } from "@/components/ui/use-toast";
+import React from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 
 type Props = {
   posts: PostModel[];
