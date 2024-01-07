@@ -104,3 +104,15 @@ export async function deletePost(
 
   return post;
 }
+
+export async function deleteManyPosts(
+  ids: number[]
+): Promise<{ count: number }> {
+  const deleteCount = await prisma.post.deleteMany({
+    where: { id: { in: ids } },
+  });
+
+  revalidatePath("/dashboard/posts");
+
+  return deleteCount;
+}
