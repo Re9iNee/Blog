@@ -1,8 +1,7 @@
-import { DataTable } from "@/components/dashboard/table/data-table";
-
 import { getAllPosts } from "@/service/posts.service";
-import { columns } from "./data-table/columns";
 import { PostModel } from "@/types/post";
+import { columns } from "./data-table/columns";
+import PostTable from "./post-table";
 
 async function DashboardPostPage() {
   const posts: PostModel[] = await getAllPosts({ caching: true });
@@ -18,7 +17,7 @@ async function DashboardPostPage() {
         </div>
       </div>
 
-      <DataTable data={posts} columns={columns} />
+      <PostTable posts={posts} columns={columns} />
     </div>
   );
 }
