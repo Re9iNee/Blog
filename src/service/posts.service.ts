@@ -92,3 +92,15 @@ export async function createPost(data: PostModel): Promise<PostModel> {
 
   return post;
 }
+
+export async function deletePost(
+  id: number
+): Promise<Omit<PostModel, "author" | "categories">> {
+  const post = await prisma.post.delete({
+    where: { id },
+  });
+
+  revalidatePath("/dashboard/posts");
+
+  return post;
+}
