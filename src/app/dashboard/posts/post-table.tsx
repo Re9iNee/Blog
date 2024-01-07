@@ -1,6 +1,8 @@
 "use client";
 
 import { DataTable } from "@/components/dashboard/table/data-table";
+import { useHotkeys } from "react-hotkeys-hook";
+import { PostModel } from "@/types/post";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -14,13 +16,15 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import React from "react";
+import React, { useEffect } from "react";
+import { deleteManyPosts } from "@/service/posts.service";
+import { toast } from "@/components/ui/use-toast";
 
-type Props<TData, TValue> = {
-  posts: TData[];
-  columns: ColumnDef<TData, TValue>[];
+type Props = {
+  posts: PostModel[];
+  columns: ColumnDef<PostModel, PostModel>[];
 };
-function PostTable<TData, TValue>({ posts, columns }: Props<TData, TValue>) {
+function PostTable({ posts, columns }: Props) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -50,6 +54,29 @@ function PostTable<TData, TValue>({ posts, columns }: Props<TData, TValue>) {
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
+
+  table.getSelectedRowModel().rows.map((row) => row.original.id);
+
+  useHotkeys(
+    "meta+backspace",
+    async () => {
+      const selectedRowIDs = table
+        .getFilteredSelectedRowModel()
+        .rows.map((row) => row.original.id);
+
+      if (!selectedRowIDs.length) return;
+
+      try {
+        toast({ variant: "default", title: "Deleting posts..." });
+        const { count } = await deleteManyPosts(selectedRowIDs);
+        toast({ variant: "default", title: `${count} Posts deleted!` });
+      } catch (e) {
+        console.error(e);
+        toast({ variant: "destructive", title: "Error deleting posts!" });
+      }
+    },
+    [table]
+  );
 
   return <DataTable table={table} columns={columns} />;
 }
