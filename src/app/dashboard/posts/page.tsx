@@ -4,7 +4,7 @@ import { columns } from "./data-table/columns";
 import PostTable from "./post-table";
 
 async function DashboardPostPage() {
-  const posts: PostModel[] = await getAllPosts({ caching: true });
+  const posts: PostModel[] = await getAllPosts();
 
   return (
     <div className='h-full flex-1 flex-col space-y-8 p-8 md:flex'>
