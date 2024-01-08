@@ -6,11 +6,8 @@ import {
   getMainImagePlaceholderUrl,
 } from "@/lib/utils";
 import { PostModel } from "@/types/post";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-
-const MotionImage = motion(Image);
 
 type Props = {
   data: Omit<PostModel, "categories">;
@@ -35,11 +32,11 @@ function BlogCard({ data }: Props) {
         </div>
       </Link>
 
-      <h3 className='text-neutral-950 font-bold leading-tight'>
+      <h3 className='text-neutral-950 flex-grow font-bold leading-tight'>
         <Link href={`/posts/${id}`}>{title}</Link>
       </h3>
       <summary
-        className='text-neutral-700 text-xs leading-none line-clamp-2
+        className='text-neutral-700 flex-grow text-xs leading-none line-clamp-2
           md:text-sm md:leading-normal
           '
       >
