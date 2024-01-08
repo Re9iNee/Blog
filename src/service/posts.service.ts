@@ -62,6 +62,7 @@ export async function updatePost(
   });
 
   revalidatePath("/dashboard/posts");
+  revalidatePath(`/`);
 
   return post;
 }
@@ -80,6 +81,7 @@ export async function createPost(data: PostModel): Promise<PostModel> {
   });
 
   revalidatePath("/dashboard/posts");
+  revalidatePath(`/`);
 
   return post;
 }
@@ -92,6 +94,7 @@ export async function deletePost(
   });
 
   revalidatePath("/dashboard/posts");
+  revalidatePath(`/`);
 
   return post;
 }
@@ -104,6 +107,7 @@ export async function deleteManyPosts(
   });
 
   revalidatePath("/dashboard/posts");
+  revalidatePath(`/`);
 
   return deleteCount;
 }
