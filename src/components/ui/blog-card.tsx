@@ -23,6 +23,7 @@ function BlogCard({ data }: Props) {
       >
         <Image
           fill
+          loading='lazy'
           alt={`${title} main image`}
           className='object-cover rounded-xl'
           src={mainImageUrl ?? getMainImagePlaceholderUrl()}
@@ -51,6 +52,7 @@ function BlogCard({ data }: Props) {
           <Image
             width={20}
             height={20}
+            loading='lazy'
             alt="Author's profile picture"
             className='rounded-full aspect-square object-cover'
             src={author.avatarUrl ?? getAvatarPlaceholderUrl()}

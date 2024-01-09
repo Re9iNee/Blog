@@ -47,6 +47,7 @@ async function PostPage({ params }: Props) {
       <Image
         width={"288"}
         height={"160"}
+        loading='lazy'
         alt={data.title + " " + "main image"}
         src={data.mainImageUrl ?? "/images/placeholder.png"}
         className='rounded-lg self-center w-full object-contain'
