@@ -62,6 +62,7 @@ export async function updatePost(
   });
 
   revalidatePath("/dashboard/posts");
+  revalidatePath(`/posts/${post.id}`);
   revalidatePath(`/`);
 
   return post;
