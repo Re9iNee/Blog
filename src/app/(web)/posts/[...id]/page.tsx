@@ -9,6 +9,7 @@ import BackArrowIcon from "public/icons/BackArrow.svg";
 import ShareIcon from "public/icons/Share.svg";
 
 import { RxDotFilled } from "react-icons/rx";
+import Claps from "../claps";
 
 type Props = {
   params: { id: string };
@@ -69,6 +70,7 @@ async function PostPage({ params }: Props) {
         </section>
 
         <section className='flex gap-1 items-center text-neutral-600 text-sm'>
+          <Claps />
           <time>{convertDateToDayMonthAndYear(data.publishedAt)}</time>
           <RxDotFilled />
           <span>{data.readingTime} min read</span>
