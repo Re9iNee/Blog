@@ -323,6 +323,7 @@ const Container = styled.div<{ defaultClapColor: string }>`
       top: 132px;
       background-color: ${(props) => props.defaultClapColor};
       border-radius: 50%;
+      opacity: 0;
       z-index: 1;
 
       .counter {
