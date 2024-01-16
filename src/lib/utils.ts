@@ -61,3 +61,7 @@ export function getS3ObjectURLFromKey(key: string) {
 
   return url.toString();
 }
+
+export function getRandomInt(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
