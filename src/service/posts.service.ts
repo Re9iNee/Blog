@@ -112,3 +112,9 @@ export async function deleteManyPosts(
 
   return deleteCount;
 }
+
+export async function clapToPost(id: number, count: number) {
+  await setTimeout(() => {
+    console.log("Success");
+  }, 2000);
+}

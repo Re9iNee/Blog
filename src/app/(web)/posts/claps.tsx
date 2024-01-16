@@ -1,15 +1,23 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import ClapsFilled from "./icons/claps-fill.svg";
 import ClapsOutlined from "./icons/claps-outline.svg";
+import { ClassValue } from "clsx";
+import { cn } from "@/lib/utils";
+import { toast } from "@/components/ui/use-toast";
+import debounce from "lodash.debounce";
 
 const MIN_DEG = 1;
 const MAX_DEG = 72;
 const TOTAL_COUNT = 111;
 
-function Claps() {
+type ClapsProps = {
+  onClapChange: Function;
+  className?: ClassValue;
+};
+function Claps({ className, onClapChange }: ClapsProps) {
   const [accCounter, setAccCounter] = useState<number>(0);
   const particlesClasses = useMemo(
     () => [
@@ -31,6 +39,23 @@ function Claps() {
     ],
     []
   );
+
+  const debouncedToast = useCallback(
+    debounce((count: number) => {
+      onClapChange(count);
+    }, 1000),
+    []
+  );
+
+  useEffect(() => {
+    if (accCounter === 0) return;
+
+    debouncedToast(accCounter);
+
+    return () => {
+      debouncedToast.cancel();
+    };
+  });
 
   const clapRef = useRef<HTMLDivElement>(null);
   const sonarClapRef = useRef<HTMLDivElement>(null);
@@ -63,7 +88,9 @@ function Claps() {
   }, []);
 
   const upClickCounter = useCallback(function () {
-    setAccCounter((prev) => prev + 1);
+    setAccCounter((prev) => {
+      return prev === 20 ? 20 : prev + 1;
+    });
 
     if (clickerCounterRef.current?.classList.contains("first-active")) {
       runAnimationCycle(clickerCounterRef.current, "active");
@@ -144,7 +171,7 @@ function Claps() {
   []);
 
   return (
-    <Container>
+    <Container defaultClapColor='#6c5ce7' className={cn(className)}>
       <div className='canvas'>
         <div
           id='clap'
@@ -236,9 +263,7 @@ function Claps() {
   );
 }
 
-const Container = styled.div`
-  $default-clap-color: #6c5ce7;
-
+const Container = styled.div<{ defaultClapColor: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -277,13 +302,13 @@ const Container = styled.div`
       cursor: pointer;
       .clap-icon {
         font-size: 30px;
-        color: $default-clap-color;
+        color: ${(props) => props.defaultClapColor};
         width: 30px;
         height: 30px;
       }
     }
     .clap-container:hover {
-      border: 1px solid $default-clap-color;
+      border: 1px solid ${(props) => props.defaultClapColor};
     }
     .clap-container.scale {
       animation: scaleAndBack 700ms forwards;
@@ -296,9 +321,10 @@ const Container = styled.div`
       height: 35px;
       position: absolute;
       top: 132px;
-      background-color: $default-clap-color;
+      background-color: ${(props) => props.defaultClapColor};
       border-radius: 50%;
       z-index: 1;
+
       .counter {
         font-family: sans-serif;
         font-size: 14px;
@@ -314,7 +340,7 @@ const Container = styled.div`
     .clap-container-sonar {
       width: 60px;
       height: 60px;
-      background: $default-clap-color;
+      background: ${(props) => props.defaultClapColor};
       border-radius: 50%;
       position: absolute;
       opacity: 0;
@@ -330,8 +356,8 @@ const Container = styled.div`
       width: 60px;
       height: 60px;
       position: absolute;
-      /* border: 1px solid gray; */
-      /* z-index: 3; */
+      /* border: 1px solid gray;
+      z-index: 3; */
       .triangle {
         border-left: 4px solid transparent;
         border-right: 4px solid transparent;
@@ -341,7 +367,7 @@ const Container = styled.div`
         .square {
           width: 5px;
           height: 5px;
-          background: $default-clap-color;
+          background: ${(props) => props.defaultClapColor};
           position: absolute;
           left: -15px;
           top: 0;

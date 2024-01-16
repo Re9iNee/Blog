@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { markdownToHTML } from "@/lib/markdownToHTML";
 import { convertDateToDayMonthAndYear } from "@/lib/utils";
-import { getPost } from "@/service/posts.service";
+import { clapToPost, getPost } from "@/service/posts.service";
 
 import Image from "next/image";
 import BackArrowIcon from "public/icons/BackArrow.svg";
@@ -70,10 +70,11 @@ async function PostPage({ params }: Props) {
         </section>
 
         <section className='flex gap-1 items-center text-neutral-600 text-sm'>
-          <Claps />
           <time>{convertDateToDayMonthAndYear(data.publishedAt)}</time>
           <RxDotFilled />
           <span>{data.readingTime} min read</span>
+
+          <Claps className='pb-1' onClapChange={clapToPost} />
         </section>
       </div>
 
