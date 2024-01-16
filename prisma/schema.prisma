@@ -22,6 +22,7 @@ model Post {
 
   body         String?
   title        String
+  claps        Int        @default(0)
   status       PostStatus @default(draft)
   summary      String
   authorId     Int

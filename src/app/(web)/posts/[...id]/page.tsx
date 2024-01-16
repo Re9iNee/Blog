@@ -2,13 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { markdownToHTML } from "@/lib/markdownToHTML";
 import { convertDateToDayMonthAndYear } from "@/lib/utils";
-import { getPost } from "@/service/posts.service";
+import { clapToPost, getPost } from "@/service/posts.service";
 
 import Image from "next/image";
 import BackArrowIcon from "public/icons/BackArrow.svg";
 import ShareIcon from "public/icons/Share.svg";
 
 import { RxDotFilled } from "react-icons/rx";
+import Claps from "../claps";
 
 type Props = {
   params: { id: string };
@@ -72,6 +73,12 @@ async function PostPage({ params }: Props) {
           <time>{convertDateToDayMonthAndYear(data.publishedAt)}</time>
           <RxDotFilled />
           <span>{data.readingTime} min read</span>
+
+          <Claps
+            className='pb-1'
+            total={data.claps}
+            onClapChange={clapToPost.bind(null, +id, data.claps)}
+          />
         </section>
       </div>
 
