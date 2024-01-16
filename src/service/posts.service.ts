@@ -113,8 +113,19 @@ export async function deleteManyPosts(
   return deleteCount;
 }
 
-export async function clapToPost(id: number, count: number) {
-  await setTimeout(() => {
-    console.log("Success");
-  }, 2000);
+export async function clapToPost(
+  id: number,
+  total: number,
+  count: number
+): Promise<void> {
+  if (!id) throw new Error("post ID is required");
+
+  await prisma.post.update({
+    where: { id },
+    data: {
+      claps: total + count,
+    },
+  });
+
+  console.log("Clap Submitted Successfully", total + count);
 }

@@ -10,13 +10,13 @@ import ClapsOutlined from "./icons/claps-outline.svg";
 
 const MIN_DEG = 1;
 const MAX_DEG = 72;
-const TOTAL_COUNT = 111;
 
 type ClapsProps = {
+  total: number;
   onClapChange: Function;
   className?: ClassValue;
 };
-function Claps({ className, onClapChange }: ClapsProps) {
+function Claps({ className, onClapChange, total }: ClapsProps) {
   const [accCounter, setAccCounter] = useState<number>(0);
   const particlesClasses = useMemo(
     () => [
@@ -171,95 +171,102 @@ function Claps({ className, onClapChange }: ClapsProps) {
   );
 
   return (
-    <Container defaultClapColor='#6c5ce7' className={cn(className)}>
-      <div className='canvas'>
-        <div
-          id='clap'
-          ref={clapRef}
-          className='clap-container'
-          onClick={onClapClick}
-          onMouseOver={onClapHover}
-        >
-          {accCounter === 0 ? <ClapsOutlined /> : <ClapsFilled />}
-        </div>
+    <>
+      <Container defaultClapColor='#6c5ce7' className={cn(className)}>
+        <div className='canvas'>
+          <div
+            id='clap'
+            ref={clapRef}
+            className='clap-container'
+            onClick={onClapClick}
+            onMouseOver={onClapHover}
+          >
+            {accCounter === 0 ? <ClapsOutlined /> : <ClapsFilled />}
+          </div>
 
-        <div
-          ref={clickerCounterRef}
-          id='clicker'
-          className='click-counter select-none'
-        >
-          <span className='counter'>{"+" + " " + accCounter}</span>
-        </div>
+          <div
+            ref={clickerCounterRef}
+            id='clicker'
+            className='click-counter select-none'
+          >
+            <span className='counter'>{"+" + " " + accCounter}</span>
+          </div>
 
-        <div
-          ref={sonarClapRef}
-          id='sonar-clap'
-          className='clap-container-sonar'
-        ></div>
+          <div
+            ref={sonarClapRef}
+            id='sonar-clap'
+            className='clap-container-sonar'
+          ></div>
 
-        <div ref={particlesRef} id='particles' className='particles-container'>
-          <div className='triangle'>
-            <div className='square'></div>
+          <div
+            ref={particlesRef}
+            id='particles'
+            className='particles-container'
+          >
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
           </div>
-          <div className='triangle'>
-            <div className='square'></div>
+
+          <div
+            ref={particles2Ref}
+            id='particles-2'
+            className='particles-container'
+          >
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
           </div>
-          <div className='triangle'>
-            <div className='square'></div>
-          </div>
-          <div className='triangle'>
-            <div className='square'></div>
-          </div>
-          <div className='triangle'>
-            <div className='square'></div>
+
+          <div
+            ref={particles3Ref}
+            id='particles-3'
+            className='particles-container'
+          >
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
+            <div className='triangle'>
+              <div className='square'></div>
+            </div>
           </div>
         </div>
-
-        <div
-          ref={particles2Ref}
-          id='particles-2'
-          className='particles-container'
-        >
-          <div className='triangle'>
-            <div className='square'></div>
-          </div>
-          <div className='triangle'>
-            <div className='square'></div>
-          </div>
-          <div className='triangle'>
-            <div className='square'></div>
-          </div>
-          <div className='triangle'>
-            <div className='square'></div>
-          </div>
-          <div className='triangle'>
-            <div className='square'></div>
-          </div>
-        </div>
-
-        <div
-          ref={particles3Ref}
-          id='particles-3'
-          className='particles-container'
-        >
-          <div className='triangle'>
-            <div className='square'></div>
-          </div>
-          <div className='triangle'>
-            <div className='square'></div>
-          </div>
-          <div className='triangle'>
-            <div className='square'></div>
-          </div>
-          <div className='triangle'>
-            <div className='square'></div>
-          </div>
-          <div className='triangle'>
-            <div className='square'></div>
-          </div>
-        </div>
-      </div>
-    </Container>
+      </Container>
+      <span>{total + accCounter}</span>
+    </>
   );
 }
 
