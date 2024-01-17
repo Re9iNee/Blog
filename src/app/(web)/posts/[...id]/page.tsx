@@ -9,8 +9,10 @@ import BackArrowIcon from "public/icons/BackArrow.svg";
 import ShareIcon from "public/icons/Share.svg";
 
 import { RxDotFilled } from "react-icons/rx";
-import Claps from "../claps";
+
 import { unstable_noStore as noStore } from "next/cache";
+import Claps from "@/components/posts/claps/claps";
+import ClapContainer from "@/components/posts/claps/clap-container";
 
 type Props = {
   params: { id: string };
@@ -76,7 +78,8 @@ async function PostPage({ params }: Props) {
           <RxDotFilled />
           <span>{data.readingTime} min read</span>
 
-          <Claps
+          <ClapContainer
+            postId={id}
             className='pb-1'
             total={data.claps}
             onClapChange={clapToPost.bind(null, +id, data.claps)}

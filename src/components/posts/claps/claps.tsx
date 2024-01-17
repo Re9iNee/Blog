@@ -11,13 +11,14 @@ import ClapsOutlined from "./icons/claps-outline.svg";
 const MIN_DEG = 1;
 const MAX_DEG = 72;
 
-type ClapsProps = {
+export type ClapsProps = {
   total: number;
+  currentClaps: number;
   onClapChange: Function;
   className?: ClassValue;
 };
-function Claps({ className, onClapChange, total }: ClapsProps) {
-  const [accCounter, setAccCounter] = useState<number>(0);
+function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
+  const [accCounter, setAccCounter] = useState<number>(currentClaps);
   const particlesClasses = useMemo(
     () => [
       {
@@ -47,7 +48,7 @@ function Claps({ className, onClapChange, total }: ClapsProps) {
   );
 
   useEffect(() => {
-    if (accCounter === 0) return;
+    if (accCounter === currentClaps) return;
 
     debouncedToast(accCounter);
 
