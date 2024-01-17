@@ -7,7 +7,6 @@ const components = {};
 export function CustomMDX(props: MDXRemoteProps) {
   return (
     <Suspense fallback={<Spinner />}>
-      {/* @ts-expect-error Server Component */}
       <MDXRemote
         {...props}
         components={{ ...components, ...(props.components || {}) }}

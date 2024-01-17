@@ -10,13 +10,13 @@ import ShareIcon from "public/icons/Share.svg";
 
 import { RxDotFilled } from "react-icons/rx";
 import Claps from "../claps";
-import { unstable_noStore } from "next/cache";
+import { unstable_noStore as noStore } from "next/cache";
 
 type Props = {
   params: { id: string };
 };
 async function PostPage({ params }: Props) {
-  unstable_noStore();
+  noStore();
   const id = params.id;
 
   const data = await getPost(+id);
