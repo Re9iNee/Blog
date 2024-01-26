@@ -6,6 +6,15 @@ import { PostStatus } from "@prisma/client";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { notFound } from "next/navigation";
 
+export async function getSlideshowContents(): Promise<PostModel[]> {
+  const posts = await prisma.post.findMany({
+    where: { isSlideshow: true },
+    include: { author: true, categories: true },
+  });
+
+  return posts;
+}
+
 export async function getAllPublishedPosts(
   take?: number
 ): Promise<Omit<PostModel, "categories">[]> {
