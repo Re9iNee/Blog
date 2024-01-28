@@ -44,20 +44,16 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
     []
   );
 
-  const debouncedToast = useCallback(
-    debounce((count: number) => {
-      onClapChange(count);
-    }, 1000),
-    []
-  );
-
   useEffect(() => {
     if (localClaps === currentClaps) return;
 
-    debouncedToast(localClaps);
+    const debounceFn = debounce(() => {
+      onClapChange(localClaps);
+    }, 1000);
+    debounceFn();
 
     return () => {
-      debouncedToast.cancel();
+      debounceFn.cancel();
     };
   });
 
