@@ -94,7 +94,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
   const upClickCounter = useCallback(
     function () {
       setUnRegisteredClaps((prev) => {
-        if (prev + localClaps >= MAX_CLAPS) {
+        if (localClaps >= MAX_CLAPS) {
           return prev;
         } else return prev + 1;
       });
