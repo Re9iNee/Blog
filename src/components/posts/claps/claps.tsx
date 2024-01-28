@@ -7,9 +7,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import ClapsFilled from "./icons/claps-fill.svg";
 import ClapsOutlined from "./icons/claps-outline.svg";
+import { getPostsClaps } from "@/service/posts.service";
 
 const MIN_DEG = 1;
 const MAX_DEG = 72;
+const MAX_CLAPS = 20;
 
 export type ClapsProps = {
   total: number;
@@ -18,7 +20,9 @@ export type ClapsProps = {
   className?: ClassValue;
 };
 function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
-  const [accCounter, setAccCounter] = useState<number>(currentClaps);
+  const [localClaps, setLocalClaps] = useState<number>(currentClaps);
+  const [unRegisteredClaps, setUnRegisteredClaps] = useState<number>(0);
+
   const particlesClasses = useMemo(
     () => [
       {
@@ -48,9 +52,9 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
   );
 
   useEffect(() => {
-    if (accCounter === currentClaps) return;
+    if (localClaps === currentClaps) return;
 
-    debouncedToast(accCounter);
+    debouncedToast(localClaps);
 
     return () => {
       debouncedToast.cancel();
@@ -93,8 +97,13 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
 
   const upClickCounter = useCallback(
     function () {
-      setAccCounter((prev) => {
-        return prev === 20 ? 20 : prev + 1;
+      setUnRegisteredClaps((prev) => {
+        if (prev + localClaps >= MAX_CLAPS) {
+          return prev;
+        } else return prev + 1;
+      });
+      setLocalClaps((prev) => {
+        return prev === MAX_CLAPS ? MAX_CLAPS : prev + 1;
       });
 
       if (clickerCounterRef.current?.classList.contains("first-active")) {
@@ -104,7 +113,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
       }
       runAnimationCycle(totalCounterRef.current, "fader");
     },
-    [runAnimationCycle]
+    [runAnimationCycle, setUnRegisteredClaps, setLocalClaps, localClaps]
   );
 
   const runParticleAnimationCycle = useCallback(function (
@@ -182,7 +191,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
             onClick={onClapClick}
             onMouseOver={onClapHover}
           >
-            {accCounter === 0 ? <ClapsOutlined /> : <ClapsFilled />}
+            {localClaps === 0 ? <ClapsOutlined /> : <ClapsFilled />}
           </div>
 
           <div
@@ -190,7 +199,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
             id='clicker'
             className='click-counter select-none'
           >
-            <span className='counter'>{"+" + " " + accCounter}</span>
+            <span className='counter'>{"+" + " " + localClaps}</span>
           </div>
 
           <div
@@ -266,7 +275,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
           </div>
         </div>
       </Container>
-      <span>{total + accCounter}</span>
+      <span>{total + unRegisteredClaps}</span>
     </>
   );
 }

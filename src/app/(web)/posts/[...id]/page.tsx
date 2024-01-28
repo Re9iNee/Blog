@@ -82,7 +82,7 @@ async function PostPage({ params }: Props) {
             postId={id}
             className='pb-1'
             total={data.claps}
-            onClapChange={clapToPost.bind(null, +id, data.claps)}
+            onClapChange={clapToPost.bind(null, +id)}
           />
         </section>
       </div>

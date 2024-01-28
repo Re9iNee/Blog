@@ -113,19 +113,34 @@ export async function deleteManyPosts(
   return deleteCount;
 }
 
-export async function clapToPost(
-  id: number,
-  total: number,
-  count: number
-): Promise<void> {
+export async function clapToPost(id: number, count: number): Promise<void> {
   if (!id) throw new Error("post ID is required");
 
-  await prisma.post.update({
+  const prevClaps = await getPostsClaps({ id });
+
+  console.log({ prevClaps, count, id });
+
+  const updatedPost = await prisma.post.update({
     where: { id },
     data: {
-      claps: total + count,
+      claps: prevClaps + count,
     },
   });
 
-  console.log("Clap Submitted Successfully", total + count);
+  console.log("Clap Submitted Successfully", updatedPost.claps);
+}
+
+export async function getPostsClaps({ id }: { id: number }): Promise<number> {
+  if (!id) throw new Error("post ID is required");
+
+  const post = await prisma.post.findUnique({
+    where: { id },
+    select: { claps: true },
+  });
+
+  if (!post) throw new Error("post not found");
+
+  console.log("getPostsClaps, ", post.claps);
+
+  return post.claps;
 }
