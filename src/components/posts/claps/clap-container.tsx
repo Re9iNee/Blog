@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import Claps, { ClapsProps } from "./claps";
 import { ClassValue } from "clsx";
+import { unstable_noStore as noStore } from "next/cache";
 
 function getClapsFromLocalStorage(postId: string): number {
   return Number(localStorage.getItem(`clap-${postId}`)) ?? 0;
@@ -22,6 +23,7 @@ function ClapContainer({
   total,
   ...rest
 }: ClapContainerProps) {
+  noStore();
   if (typeof window === "undefined") notFound();
 
   const [totalClaps, setTotalClaps] = useState<number>(total);
