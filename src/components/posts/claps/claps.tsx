@@ -16,8 +16,8 @@ const MAX_CLAPS = 20;
 export type ClapsProps = {
   total: number;
   currentClaps: number;
-  onClapChange: Function;
   className?: ClassValue;
+  onClapChange: (userClaps: number) => Promise<void>;
 };
 function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
   const [localClaps, setLocalClaps] = useState<number>(currentClaps);
@@ -48,14 +48,14 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
     if (localClaps === currentClaps) return;
 
     const debounceFn = debounce(() => {
-      onClapChange(localClaps);
+      onClapChange(localClaps).then(() => setUnRegisteredClaps(0));
     }, 1000);
     debounceFn();
 
     return () => {
       debounceFn.cancel();
     };
-  });
+  }, [currentClaps, localClaps, onClapChange]);
 
   const clapRef = useRef<HTMLDivElement>(null);
   const sonarClapRef = useRef<HTMLDivElement>(null);

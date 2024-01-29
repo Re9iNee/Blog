@@ -113,7 +113,7 @@ export async function deleteManyPosts(
   return deleteCount;
 }
 
-export async function clapToPost(id: number, count: number): Promise<void> {
+export async function clapToPost(id: number, count: number): Promise<number> {
   if (!id) throw new Error("post ID is required");
 
   const prevClaps = await getPostsClaps({ id });
@@ -125,9 +125,13 @@ export async function clapToPost(id: number, count: number): Promise<void> {
     data: {
       claps: prevClaps + count,
     },
+    select: {
+      claps: true,
+    },
   });
 
   console.log("Clap Submitted Successfully", updatedPost.claps);
+  return updatedPost.claps;
 }
 
 export async function getPostsClaps({ id }: { id: number }): Promise<number> {
