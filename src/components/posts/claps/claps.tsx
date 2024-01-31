@@ -21,6 +21,7 @@ export type ClapsProps = {
 };
 function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
   const [localClaps, setLocalClaps] = useState<number>(currentClaps);
+
   const [unRegisteredClaps, setUnRegisteredClaps] = useState<number>(0);
 
   const particlesClasses = useMemo(
@@ -178,7 +179,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
 
   return (
     <>
-      <Container defaultClapColor='#6c5ce7' className={cn(className)}>
+      <Container color='#6c5ce7' className={cn(className)}>
         <div className='canvas'>
           <div
             id='clap'
@@ -276,7 +277,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
   );
 }
 
-const Container = styled.div<{ defaultClapColor: string }>`
+const Container = styled.div<{ color: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -315,13 +316,13 @@ const Container = styled.div<{ defaultClapColor: string }>`
       cursor: pointer;
       .clap-icon {
         font-size: 30px;
-        color: ${(props) => props.defaultClapColor};
+        color: ${(props) => props.color};
         width: 30px;
         height: 30px;
       }
     }
     .clap-container:hover {
-      border: 1px solid ${(props) => props.defaultClapColor};
+      border: 1px solid ${(props) => props.color};
     }
     .clap-container.scale {
       animation: scaleAndBack 700ms forwards;
@@ -334,7 +335,7 @@ const Container = styled.div<{ defaultClapColor: string }>`
       height: 35px;
       position: absolute;
       top: 132px;
-      background-color: ${(props) => props.defaultClapColor};
+      background-color: ${(props) => props.color};
       border-radius: 50%;
       opacity: 0;
       z-index: 1;
@@ -354,7 +355,7 @@ const Container = styled.div<{ defaultClapColor: string }>`
     .clap-container-sonar {
       width: 60px;
       height: 60px;
-      background: ${(props) => props.defaultClapColor};
+      background: ${(props) => props.color};
       border-radius: 50%;
       position: absolute;
       opacity: 0;
@@ -381,7 +382,7 @@ const Container = styled.div<{ defaultClapColor: string }>`
         .square {
           width: 5px;
           height: 5px;
-          background: ${(props) => props.defaultClapColor};
+          background: ${(props) => props.color};
           position: absolute;
           left: -15px;
           top: 0;
