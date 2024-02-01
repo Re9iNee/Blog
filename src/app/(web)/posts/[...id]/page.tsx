@@ -17,11 +17,13 @@ import ClapContainer from "@/components/posts/claps/clap-container";
 type Props = {
   params: { id: string };
 };
+
 async function PostPage({ params }: Props) {
   noStore();
   const id = params.id;
 
   const data = await getPost(+id);
+
   const htmlContent = await markdownToHTML(data.body ?? "");
 
   return (
@@ -78,12 +80,7 @@ async function PostPage({ params }: Props) {
           <RxDotFilled />
           <span>{data.readingTime} min read</span>
 
-          <ClapContainer
-            postId={id}
-            className='pb-1'
-            total={data.claps}
-            onClapChange={clapToPost.bind(null, +id)}
-          />
+          <ClapContainer postId={id} className='pb-1' total={data.claps} />
         </section>
       </div>
 

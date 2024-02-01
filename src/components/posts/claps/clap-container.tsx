@@ -1,11 +1,11 @@
 "use client";
 
-import { getPostsClaps } from "@/service/posts.service";
-import { notFound } from "next/navigation";
-import { useCallback, useMemo, useState } from "react";
-import Claps, { ClapsProps } from "./claps";
 import { ClassValue } from "clsx";
 import { unstable_noStore as noStore } from "next/cache";
+import { notFound } from "next/navigation";
+import { useCallback, useMemo, useState } from "react";
+import Claps from "./claps";
+import { clapToPost } from "@/service/posts.service";
 
 function getClapsFromLocalStorage(postId: string): number {
   return Number(localStorage.getItem(`clap-${postId}`)) ?? 0;
@@ -15,18 +15,10 @@ interface ClapContainerProps {
   postId: string;
   total: number;
   className: ClassValue;
-  onClapChange: (addedClaps: number) => Promise<number>;
 }
-function ClapContainer({
-  postId,
-  onClapChange,
-  total,
-  ...rest
-}: ClapContainerProps) {
+function ClapContainer({ total, postId, ...rest }: ClapContainerProps) {
   noStore();
   if (typeof window === "undefined") notFound();
-
-  const [totalClaps, setTotalClaps] = useState<number>(total);
 
   const currentClaps = useMemo(
     () => getClapsFromLocalStorage(postId),
@@ -39,17 +31,16 @@ function ClapContainer({
       const savedLocalClaps = getClapsFromLocalStorage(postId);
 
       const addedClaps = totalUserClaps - savedLocalClaps;
-      const updatedTotalClaps = await onClapChange(addedClaps);
+      await clapToPost(+postId, addedClaps);
       localStorage.setItem(`clap-${postId}`, String(totalUserClaps));
-      setTotalClaps(updatedTotalClaps);
     },
-    [postId, onClapChange, setTotalClaps]
+    [postId]
   );
 
   return (
     <Claps
       {...rest}
-      total={totalClaps}
+      total={total}
       onClapChange={onClap}
       currentClaps={currentClaps}
     />

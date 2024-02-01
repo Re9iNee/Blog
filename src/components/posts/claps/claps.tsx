@@ -7,7 +7,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import ClapsFilled from "./icons/claps-fill.svg";
 import ClapsOutlined from "./icons/claps-outline.svg";
-import { getPostsClaps } from "@/service/posts.service";
 
 const MIN_DEG = 1;
 const MAX_DEG = 72;
@@ -21,7 +20,6 @@ export type ClapsProps = {
 };
 function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
   const [localClaps, setLocalClaps] = useState<number>(currentClaps);
-
   const [unRegisteredClaps, setUnRegisteredClaps] = useState<number>(0);
 
   const particlesClasses = useMemo(
@@ -49,7 +47,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
     if (localClaps === currentClaps) return;
 
     const debounceFn = debounce(() => {
-      onClapChange(localClaps).then(() => setUnRegisteredClaps(0));
+      onClapChange(localClaps);
     }, 1000);
     debounceFn();
 

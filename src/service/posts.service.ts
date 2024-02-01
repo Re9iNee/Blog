@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { PostModel } from "@/types/post";
 import { PostStatus } from "@prisma/client";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore as noStore } from "next/cache";
 import { notFound } from "next/navigation";
 
 export async function getAllPublishedPosts(
@@ -113,17 +113,18 @@ export async function deleteManyPosts(
   return deleteCount;
 }
 
-export async function clapToPost(id: number, count: number): Promise<number> {
+export async function clapToPost(id: number, amount: number): Promise<number> {
+  noStore();
   if (!id) throw new Error("post ID is required");
 
-  const prevClaps = await getPostsClaps({ id });
-
-  console.log({ prevClaps, count, id });
+  console.log({ id, amount });
 
   const updatedPost = await prisma.post.update({
     where: { id },
     data: {
-      claps: prevClaps + count,
+      claps: {
+        increment: amount,
+      },
     },
     select: {
       claps: true,
@@ -132,19 +133,4 @@ export async function clapToPost(id: number, count: number): Promise<number> {
 
   console.log("Clap Submitted Successfully", updatedPost.claps);
   return updatedPost.claps;
-}
-
-export async function getPostsClaps({ id }: { id: number }): Promise<number> {
-  if (!id) throw new Error("post ID is required");
-
-  const post = await prisma.post.findUnique({
-    where: { id },
-    select: { claps: true },
-  });
-
-  if (!post) throw new Error("post not found");
-
-  console.log("getPostsClaps, ", post.claps);
-
-  return post.claps;
 }
