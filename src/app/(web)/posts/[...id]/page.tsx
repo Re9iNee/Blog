@@ -11,14 +11,12 @@ import ShareIcon from "public/icons/Share.svg";
 import { RxDotFilled } from "react-icons/rx";
 
 import ClapContainer from "@/components/posts/claps/clap-container";
-import { unstable_noStore as noStore } from "next/cache";
 
 type Props = {
   params: { id: string };
 };
 
 async function PostPage({ params }: Props) {
-  noStore();
   const id = params.id;
 
   const data = await getPost(+id);
