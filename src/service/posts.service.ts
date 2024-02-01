@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { PostModel } from "@/types/post";
 import { PostStatus } from "@prisma/client";
-import { revalidatePath, unstable_noStore as noStore } from "next/cache";
+import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { notFound } from "next/navigation";
 
 export async function getAllPublishedPosts(

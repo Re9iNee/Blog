@@ -1,11 +1,10 @@
 "use client";
 
-import { ClassValue } from "clsx";
-import { unstable_noStore as noStore } from "next/cache";
-import { notFound } from "next/navigation";
-import { useCallback, useMemo, useState } from "react";
-import Claps from "./claps";
 import { clapToPost } from "@/service/posts.service";
+import { ClassValue } from "clsx";
+import { notFound } from "next/navigation";
+import { useCallback, useMemo } from "react";
+import Claps from "./claps";
 
 function getClapsFromLocalStorage(postId: string): number {
   return Number(localStorage.getItem(`clap-${postId}`)) ?? 0;
@@ -17,7 +16,6 @@ interface ClapContainerProps {
   className: ClassValue;
 }
 function ClapContainer({ total, postId, ...rest }: ClapContainerProps) {
-  noStore();
   if (typeof window === "undefined") notFound();
 
   const currentClaps = useMemo(
