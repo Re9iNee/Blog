@@ -10,15 +10,18 @@ import ClapsOutlined from "./icons/claps-outline.svg";
 
 const MIN_DEG = 1;
 const MAX_DEG = 72;
+const MAX_CLAPS = 20;
 
 export type ClapsProps = {
   total: number;
   currentClaps: number;
-  onClapChange: Function;
   className?: ClassValue;
+  onClapChange: (userClaps: number) => Promise<void>;
 };
 function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
-  const [accCounter, setAccCounter] = useState<number>(currentClaps);
+  const [localClaps, setLocalClaps] = useState<number>(currentClaps);
+  const [unRegisteredClaps, setUnRegisteredClaps] = useState<number>(0);
+
   const particlesClasses = useMemo(
     () => [
       {
@@ -40,22 +43,18 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
     []
   );
 
-  const debouncedToast = useCallback(
-    debounce((count: number) => {
-      onClapChange(count);
-    }, 1000),
-    []
-  );
-
   useEffect(() => {
-    if (accCounter === currentClaps) return;
+    if (localClaps === currentClaps) return;
 
-    debouncedToast(accCounter);
+    const debounceFn = debounce(() => {
+      onClapChange(localClaps);
+    }, 1000);
+    debounceFn();
 
     return () => {
-      debouncedToast.cancel();
+      debounceFn.cancel();
     };
-  });
+  }, [currentClaps, localClaps, onClapChange]);
 
   const clapRef = useRef<HTMLDivElement>(null);
   const sonarClapRef = useRef<HTMLDivElement>(null);
@@ -93,8 +92,13 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
 
   const upClickCounter = useCallback(
     function () {
-      setAccCounter((prev) => {
-        return prev === 20 ? 20 : prev + 1;
+      setUnRegisteredClaps((prev) => {
+        if (localClaps >= MAX_CLAPS) {
+          return prev;
+        } else return prev + 1;
+      });
+      setLocalClaps((prev) => {
+        return prev === MAX_CLAPS ? MAX_CLAPS : prev + 1;
       });
 
       if (clickerCounterRef.current?.classList.contains("first-active")) {
@@ -104,7 +108,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
       }
       runAnimationCycle(totalCounterRef.current, "fader");
     },
-    [runAnimationCycle]
+    [runAnimationCycle, setUnRegisteredClaps, setLocalClaps, localClaps]
   );
 
   const runParticleAnimationCycle = useCallback(function (
@@ -173,7 +177,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
 
   return (
     <>
-      <Container defaultClapColor='#6c5ce7' className={cn(className)}>
+      <Container color='#6c5ce7' className={cn(className)}>
         <div className='canvas'>
           <div
             id='clap'
@@ -182,7 +186,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
             onClick={onClapClick}
             onMouseOver={onClapHover}
           >
-            {accCounter === 0 ? <ClapsOutlined /> : <ClapsFilled />}
+            {localClaps === 0 ? <ClapsOutlined /> : <ClapsFilled />}
           </div>
 
           <div
@@ -190,7 +194,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
             id='clicker'
             className='click-counter select-none'
           >
-            <span className='counter'>{"+" + " " + accCounter}</span>
+            <span className='counter'>{"+" + " " + localClaps}</span>
           </div>
 
           <div
@@ -266,12 +270,12 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
           </div>
         </div>
       </Container>
-      <span>{total + accCounter}</span>
+      <span>{total + unRegisteredClaps}</span>
     </>
   );
 }
 
-const Container = styled.div<{ defaultClapColor: string }>`
+const Container = styled.div<{ color: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -310,13 +314,13 @@ const Container = styled.div<{ defaultClapColor: string }>`
       cursor: pointer;
       .clap-icon {
         font-size: 30px;
-        color: ${(props) => props.defaultClapColor};
+        color: ${(props) => props.color};
         width: 30px;
         height: 30px;
       }
     }
     .clap-container:hover {
-      border: 1px solid ${(props) => props.defaultClapColor};
+      border: 1px solid ${(props) => props.color};
     }
     .clap-container.scale {
       animation: scaleAndBack 700ms forwards;
@@ -329,7 +333,7 @@ const Container = styled.div<{ defaultClapColor: string }>`
       height: 35px;
       position: absolute;
       top: 132px;
-      background-color: ${(props) => props.defaultClapColor};
+      background-color: ${(props) => props.color};
       border-radius: 50%;
       opacity: 0;
       z-index: 1;
@@ -349,7 +353,7 @@ const Container = styled.div<{ defaultClapColor: string }>`
     .clap-container-sonar {
       width: 60px;
       height: 60px;
-      background: ${(props) => props.defaultClapColor};
+      background: ${(props) => props.color};
       border-radius: 50%;
       position: absolute;
       opacity: 0;
@@ -376,7 +380,7 @@ const Container = styled.div<{ defaultClapColor: string }>`
         .square {
           width: 5px;
           height: 5px;
-          background: ${(props) => props.defaultClapColor};
+          background: ${(props) => props.color};
           position: absolute;
           left: -15px;
           top: 0;

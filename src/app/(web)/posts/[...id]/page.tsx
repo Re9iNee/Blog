@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { markdownToHTML } from "@/lib/markdownToHTML";
 import { convertDateToDayMonthAndYear } from "@/lib/utils";
-import { clapToPost, getPost } from "@/service/posts.service";
+import { getPost } from "@/service/posts.service";
 
 import Image from "next/image";
 import BackArrowIcon from "public/icons/BackArrow.svg";
@@ -10,15 +10,13 @@ import ShareIcon from "public/icons/Share.svg";
 
 import { RxDotFilled } from "react-icons/rx";
 
-import { unstable_noStore as noStore } from "next/cache";
-import Claps from "@/components/posts/claps/claps";
 import ClapContainer from "@/components/posts/claps/clap-container";
 
 type Props = {
   params: { id: string };
 };
+
 async function PostPage({ params }: Props) {
-  noStore();
   const id = params.id;
 
   const data = await getPost(+id);
@@ -78,12 +76,7 @@ async function PostPage({ params }: Props) {
           <RxDotFilled />
           <span>{data.readingTime} min read</span>
 
-          <ClapContainer
-            postId={id}
-            className='pb-1'
-            total={data.claps}
-            onClapChange={clapToPost.bind(null, +id, data.claps)}
-          />
+          <ClapContainer postId={id} className='pb-1' total={data.claps} />
         </section>
       </div>
 

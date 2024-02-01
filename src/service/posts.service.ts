@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { PostModel } from "@/types/post";
 import { PostStatus } from "@prisma/client";
-import { revalidatePath } from "next/cache";
+import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { notFound } from "next/navigation";
 
 export async function getAllPublishedPosts(
@@ -113,19 +113,24 @@ export async function deleteManyPosts(
   return deleteCount;
 }
 
-export async function clapToPost(
-  id: number,
-  total: number,
-  count: number
-): Promise<void> {
+export async function clapToPost(id: number, amount: number): Promise<number> {
+  noStore();
   if (!id) throw new Error("post ID is required");
 
-  await prisma.post.update({
+  console.log({ id, amount });
+
+  const updatedPost = await prisma.post.update({
     where: { id },
     data: {
-      claps: total + count,
+      claps: {
+        increment: amount,
+      },
+    },
+    select: {
+      claps: true,
     },
   });
 
-  console.log("Clap Submitted Successfully", total + count);
+  console.log("Clap Submitted Successfully", updatedPost.claps);
+  return updatedPost.claps;
 }
