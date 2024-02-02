@@ -29,6 +29,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@tanstack/react-table": "^8.10.7",
     "@vercel/postgres": "^0.5.1",
+    "aws-amplify": "^6.0.13",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
@@ -55,6 +56,8 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@aws-amplify/backend": "^0.10.3",
+    "@aws-amplify/backend-cli": "^0.10.0",
     "@faker-js/faker": "^8.3.1",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/typography": "^0.5.10",
@@ -64,6 +67,9 @@
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "aws-cdk": "^2.126.0",
+    "aws-cdk-lib": "^2.126.0",
+    "constructs": "^10.3.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",
     "postcss": "^8",
