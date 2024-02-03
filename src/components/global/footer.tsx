@@ -2,6 +2,7 @@ import { FiInstagram, FiLinkedin } from "react-icons/fi";
 import { FaXTwitter } from "react-icons/fa6";
 import EmailSignUpInput from "../homepage/email-signup-input";
 import FullLogo from "/public/logos/full-logo.svg";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -42,7 +43,13 @@ const Footer = () => {
           </h3>
           {/* footer links */}
           <section className='flex gap-2'>
-            <FiLinkedin className='text-sky-700 w-8 h-8 dark:text-sky-500 cursor-pointer' />
+            <Link
+              target='_blank'
+              prefetch={false}
+              href='https://www.linkedin.com/company/nuwa-holding/'
+            >
+              <FiLinkedin className='text-sky-700 w-8 h-8 dark:text-sky-500 cursor-pointer' />
+            </Link>
             <FiInstagram className='text-pink-600 w-8 h-8 dark:text-pink-400 cursor-pointer' />
             <FaXTwitter className='w-8 h-8 dark:text-neutral-50 cursor-pointer' />
           </section>
