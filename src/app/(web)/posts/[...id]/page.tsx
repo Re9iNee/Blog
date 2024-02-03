@@ -5,13 +5,12 @@ import { convertDateToDayMonthAndYear } from "@/lib/utils";
 import { getPost } from "@/service/posts.service";
 
 import Image from "next/image";
-import BackArrowIcon from "public/icons/BackArrow.svg";
-import ShareIcon from "public/icons/Share.svg";
 
 import { RxDotFilled } from "react-icons/rx";
 
 import ClapContainer from "@/components/posts/claps/clap-container";
 import { unstable_noStore as noStore } from "next/cache";
+import PostNavigationGroup from "./nav";
 
 type Props = {
   params: { id: string };
@@ -29,24 +28,7 @@ async function PostPage({ params }: Props) {
       {/* metadata */}
       <title>{data.title}</title>
 
-      {/* NavigationGroup */}
-      <div className='flex justify-between'>
-        <Button
-          variant={"link"}
-          className='gap-1 inline-flex items-center cursor-pointer py-1.5 pl-0 text-gray-500 leading-tight'
-        >
-          <BackArrowIcon />
-          Back
-        </Button>
-
-        <Button
-          variant={"link"}
-          className='inline-flex gap-1 items-center py-1.5 cursor-pointer pr-0 text-gray-500 leading-tight'
-        >
-          <ShareIcon />
-          Share
-        </Button>
-      </div>
+      <PostNavigationGroup />
 
       <h1 className='text-3xl font-extrabold leading-9 pt-2'>{data.title}</h1>
       <Image
