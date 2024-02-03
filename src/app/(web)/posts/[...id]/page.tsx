@@ -56,7 +56,9 @@ async function PostPage({ params }: Props) {
         </section>
 
         <section className='flex gap-1 items-center text-neutral-600 text-sm'>
-          <time>{convertDateToDayMonthAndYear(data.publishedAt)}</time>
+          <time>
+            {convertDateToDayMonthAndYear(data.publishedAt ?? data.createdAt)}
+          </time>
           <RxDotFilled />
           <span>{data.readingTime} min read</span>
 

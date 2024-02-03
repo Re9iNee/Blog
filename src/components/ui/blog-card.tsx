@@ -13,7 +13,8 @@ type Props = {
   data: Omit<PostModel, "categories">;
 };
 function BlogCard({ data }: Props) {
-  const { id, title, author, mainImageUrl, publishedAt, summary } = data;
+  const { id, title, author, mainImageUrl, publishedAt, summary, createdAt } =
+    data;
 
   return (
     <article className='flex flex-col gap-2'>
@@ -60,7 +61,7 @@ function BlogCard({ data }: Props) {
           <p>{author.name}</p>
         </div>
 
-        <time>{convertDateToDayMonthAndYear(publishedAt)}</time>
+        <time>{convertDateToDayMonthAndYear(publishedAt ?? createdAt)}</time>
       </section>
     </article>
   );
