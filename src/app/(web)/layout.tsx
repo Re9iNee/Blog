@@ -20,7 +20,7 @@ function layout({ children }: { children: React.ReactNode }) {
       className={`max-w-screen-xl min-h-screen mx-auto flex flex-col ${NotoSansFont.className} ${PoppinsFont.variable}`}
     >
       <Header />
-      <div className='flex-grow'>{children}</div>
+      <div className='flex-grow relative'>{children}</div>
       <Footer />
     </div>
   );
