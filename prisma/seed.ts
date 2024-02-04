@@ -8,7 +8,7 @@ dotenv.config(); // Load the environment variables
 const prisma = new PrismaClient().$extends(withAccelerate());
 
 async function main() {
-  await clearDB();
+  // await clearDB();
   await insertAdmin();
   // await insertUsers(2);
   // await insertPosts(10);
@@ -117,7 +117,7 @@ async function insertPosts(limit: number = 10) {
       authorId: randomAuthor.id,
       status: PostStatus.published,
       title: faker.lorem.sentence(),
-      summery: faker.lorem.paragraph(),
+      summary: faker.lorem.paragraph(),
       body: faker.lorem.paragraphs(10),
       readingTime: faker.number.int({ max: 30 }),
       publishedAt: faker.date.past({ years: 1 }),

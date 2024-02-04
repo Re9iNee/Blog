@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { PostModel } from "@/types/post";
 import { PostStatus } from "@prisma/client";
-import { revalidatePath } from "next/cache";
+import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { notFound } from "next/navigation";
 
 export async function getAllPublishedPosts(
@@ -25,9 +25,6 @@ export async function getAllPosts(): Promise<PostModel[]> {
     include: {
       author: true,
       categories: true,
-    },
-    cacheStrategy: {
-      swr: 60,
     },
   });
 
@@ -65,23 +62,18 @@ export async function updatePost(
   });
 
   revalidatePath("/dashboard/posts");
+  revalidatePath(`/posts/${post.id}`);
+  revalidatePath(`/`);
 
   return post;
 }
 
 export async function createPost(data: PostModel): Promise<PostModel> {
-  const randomAuthor = await prisma.user.findFirst({
-    cacheStrategy: { swr: 60 * 60 * 24 },
-  });
-
-  if (!randomAuthor) throw new Error("No author found");
-
-  const { author, categories, ...rest } = data;
+  const { categories, author, ...rest } = data;
 
   const post = await prisma.post.create({
     data: {
       ...rest,
-      authorId: randomAuthor.id,
     },
     include: {
       author: true,
@@ -90,6 +82,55 @@ export async function createPost(data: PostModel): Promise<PostModel> {
   });
 
   revalidatePath("/dashboard/posts");
+  revalidatePath(`/`);
 
   return post;
+}
+
+export async function deletePost(
+  id: number
+): Promise<Omit<PostModel, "author" | "categories">> {
+  const post = await prisma.post.delete({
+    where: { id },
+  });
+
+  revalidatePath("/dashboard/posts");
+  revalidatePath(`/`);
+
+  return post;
+}
+
+export async function deleteManyPosts(
+  ids: number[]
+): Promise<{ count: number }> {
+  const deleteCount = await prisma.post.deleteMany({
+    where: { id: { in: ids } },
+  });
+
+  revalidatePath("/dashboard/posts");
+  revalidatePath(`/`);
+
+  return deleteCount;
+}
+
+export async function clapToPost(id: number, amount: number): Promise<number> {
+  noStore();
+  if (!id) throw new Error("post ID is required");
+
+  console.log({ id, amount });
+
+  const updatedPost = await prisma.post.update({
+    where: { id },
+    data: {
+      claps: {
+        increment: amount,
+      },
+    },
+    select: {
+      claps: true,
+    },
+  });
+
+  console.log("Clap Submitted Successfully", updatedPost.claps);
+  return updatedPost.claps;
 }

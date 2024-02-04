@@ -30,9 +30,9 @@ function HeroImage({ activeIndex }: Props) {
         <motion.div
           key={activeIndex}
           className='w-72 h-72 relative'
-          exit={{ opacity: 0, translateX: -288, translateY: 288, scale: 0 }}
+          exit={{ opacity: 0, translateX: -288, translateY: 140, scale: 0 }}
           animate={{ opacity: 1, translateX: 0, translateY: 0, scale: 1 }}
-          initial={{ opacity: 0, translateX: 288, translateY: 288, scale: 0 }}
+          initial={{ opacity: 0, translateX: 288, translateY: 140, scale: 0 }}
           transition={{ duration: 0.4 }}
         >
           <Image

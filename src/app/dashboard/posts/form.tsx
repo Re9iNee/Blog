@@ -13,15 +13,27 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useForm } from "react-hook-form";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { ToastAction } from "@/components/ui/toast";
 import { toast } from "@/components/ui/use-toast";
 import { PostModel } from "@/types/post";
+import { PostStatus } from "@prisma/client";
 import { FaMarkdown } from "react-icons/fa6";
 import { postSchema } from "./post-schema";
+import { useSession } from "next-auth/react";
+import { Uploader } from "@/components/ui/uploader";
+import Link from "next/link";
+import Image from "next/image";
 
 type Props = {
   closeModal: () => void;
@@ -30,19 +42,41 @@ type Props = {
 };
 
 const defaultValues: Partial<PostModel> = {
-  authorId: 1,
   createdAt: new Date(),
   updatedAt: new Date(),
 };
 
 function PostForm({ initialValues, actionFn, closeModal }: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { data: session } = useSession();
+  const authorId = session?.user?.id;
 
   const form = useForm<PostModel>({
-    defaultValues: { ...defaultValues, ...initialValues },
+    defaultValues: { authorId: authorId, ...defaultValues, ...initialValues },
     mode: "onChange",
     resolver: zodResolver(postSchema),
   });
+
+  const onUploadFinished = (url: string) => {
+    form.setValue("mainImageUrl", url, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+
+    toast({
+      title: "File uploaded",
+      description: (
+        <Link
+          href={url}
+          target='_blank'
+          className='font-medium text-blue-600 dark:text-blue-500 hover:underline'
+        >
+          Link
+        </Link>
+      ),
+    });
+  };
 
   function onSubmit(values: PostModel) {
     setIsLoading(true);
@@ -86,6 +120,7 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
         className='space-y-8'
         onSubmit={form.handleSubmit(onSubmit)}
       >
+        <pre>Author: {initialValues?.author?.email ?? session?.user.email}</pre>
         <FormField
           name='title'
           control={form.control}
@@ -104,6 +139,32 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
             </FormItem>
           )}
         />
+
+        {form.getValues("mainImageUrl") && (
+          <Image
+            width={"288"}
+            height={"160"}
+            src={form.getValues("mainImageUrl")!}
+            alt={form.getValues("title") + " " + "main image"}
+            className='rounded-lg self-center mx-auto border-2 border-gray-200 dark:border-gray-800 aspect-video object-contain'
+          />
+        )}
+        <FormField
+          name='mainImageUrl'
+          control={form.control}
+          render={() => {
+            return (
+              <FormItem>
+                <FormLabel>Main Image</FormLabel>
+                <FormControl>
+                  <Uploader onUploadFinished={onUploadFinished} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+
         <FormField
           name='readingTime'
           control={form.control}
@@ -127,17 +188,18 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
           )}
         />
         <FormField
-          name='summery'
+          name='summary'
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Summery</FormLabel>
+              <FormLabel>Summary</FormLabel>
               <FormControl>
-                <Input
-                  required
-                  data-cy='summery'
-                  placeholder='Enter post summery'
+                <Textarea
                   {...field}
+                  data-cy='summary'
+                  className='resize-y h-2'
+                  value={field.value ?? ""}
+                  placeholder='Paste the summary of post'
                 />
               </FormControl>
               <FormMessage />
@@ -177,6 +239,35 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
           )}
         />
 
+        <FormField
+          control={form.control}
+          name='status'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Status</FormLabel>
+              <Select defaultValue={field.value} onValueChange={field.onChange}>
+                <FormControl>
+                  <SelectTrigger data-cy='status'>
+                    <SelectValue placeholder='Select a Status' />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {Object.keys(PostStatus).map((status) => (
+                    <SelectItem
+                      key={status}
+                      value={status}
+                      data-cy={`status_${status}`}
+                    >
+                      {status}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <Button
           type='submit'
           data-cy='submit-btn'
@@ -202,4 +293,4 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
   );
 }
 
-export default PostForm;
+export default memo(PostForm);

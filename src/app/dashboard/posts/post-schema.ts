@@ -4,7 +4,7 @@ export const postSchema = z.object({
   id: z.number().optional(),
 
   title: z.string(),
-  summery: z.string(),
+  summary: z.string(),
   authorId: z.number(),
   readingTime: z.coerce.number(),
   body: z.string().optional(),

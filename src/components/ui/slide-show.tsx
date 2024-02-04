@@ -166,8 +166,7 @@ export function SlideShowCard({
           fill
           src={imageUrl}
           alt={imageAlt}
-          objectFit='cover'
-          className='z-0 pointer-events-none rounded-2xl'
+          className='z-0 pointer-events-none rounded-2xl aspect-video object-cover'
         />
 
         {/* only xs */}
@@ -227,9 +226,9 @@ const ArrowIcon = ({ className }: { className: ClassValue }) => {
     >
       <path
         stroke='white'
-        stroke-width='1.2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
         d='M1.5 4.1665L3.16667 6.11067M1.5 15.8332L6.5 9.99984L5.25 8.5415'
       />
     </svg>

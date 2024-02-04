@@ -6,17 +6,15 @@ import {
   getMainImagePlaceholderUrl,
 } from "@/lib/utils";
 import { PostModel } from "@/types/post";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-
-const MotionImage = motion(Image);
 
 type Props = {
   data: Omit<PostModel, "categories">;
 };
 function BlogCard({ data }: Props) {
-  const { id, title, author, mainImageUrl, publishedAt, summery } = data;
+  const { id, title, author, mainImageUrl, publishedAt, summary, createdAt } =
+    data;
 
   return (
     <article className='flex flex-col gap-2'>
@@ -26,6 +24,7 @@ function BlogCard({ data }: Props) {
       >
         <Image
           fill
+          loading='lazy'
           alt={`${title} main image`}
           className='object-cover rounded-xl'
           src={mainImageUrl ?? getMainImagePlaceholderUrl()}
@@ -35,15 +34,15 @@ function BlogCard({ data }: Props) {
         </div>
       </Link>
 
-      <h3 className='text-neutral-950 font-bold leading-tight'>
+      <h3 className='text-neutral-950 flex-grow font-bold leading-tight'>
         <Link href={`/posts/${id}`}>{title}</Link>
       </h3>
       <summary
-        className='text-neutral-700 text-xs leading-none line-clamp-2
+        className='text-neutral-700 flex-grow text-xs leading-none line-clamp-2
           md:text-sm md:leading-normal
           '
       >
-        {summery}
+        {summary}
       </summary>
 
       <section
@@ -54,6 +53,7 @@ function BlogCard({ data }: Props) {
           <Image
             width={20}
             height={20}
+            loading='lazy'
             alt="Author's profile picture"
             className='rounded-full aspect-square object-cover'
             src={author.avatarUrl ?? getAvatarPlaceholderUrl()}
@@ -61,7 +61,7 @@ function BlogCard({ data }: Props) {
           <p>{author.name}</p>
         </div>
 
-        <time>{convertDateToDayMonthAndYear(publishedAt)}</time>
+        <time>{convertDateToDayMonthAndYear(publishedAt ?? createdAt)}</time>
       </section>
     </article>
   );

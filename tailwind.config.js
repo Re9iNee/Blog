@@ -22,6 +22,7 @@ module.exports = {
     extend: {
       fontFamily: {
         anurati: ["var(--font-anurati)"],
+        poppins: ["var(--font-poppins)"],
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       colors: {
@@ -80,5 +81,9 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), nextui()],
+  plugins: [
+    require("tailwindcss-animate"),
+    nextui(),
+    require("@tailwindcss/typography"),
+  ],
 };

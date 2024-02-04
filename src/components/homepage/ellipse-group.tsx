@@ -8,9 +8,9 @@ type Props = {
 function EllipseGroup({ activeIndex }: Props) {
   const dynamicEllipses = useMemo(
     () => [
-      { classNames: "bg-gray-300" },
-      { classNames: "bg-rose-400" },
       { classNames: "bg-indigo-600" },
+      { classNames: "bg-rose-400" },
+      { classNames: "bg-gray-300" },
     ],
     []
   );
@@ -25,13 +25,13 @@ function EllipseGroup({ activeIndex }: Props) {
     inactive: {
       width: 256,
       height: 256,
-      left: 31,
-      top: 0,
+      left: 0,
+      top: 15,
     },
   };
 
   return (
-    <div className='w-72 h-72 col-start-1 col-end-1 row-start-1 row-end-1'>
+    <div className='w-72 h-72 col-start-1 col-end-1 row-start-1 row-end-1 scrollbar-hide'>
       <div className='relative'>
         {dynamicEllipses.map((ellipse, key) => (
           <motion.div

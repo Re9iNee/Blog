@@ -16,7 +16,13 @@ import Modal from "@/components/ui/modal";
 import { useDisclosure } from "@nextui-org/react";
 import PostForm from "../form";
 import { postSchema } from "../post-schema";
-import { updatePost } from "@/service/posts.service";
+import {
+  deletePost as deletePostService,
+  updatePost,
+} from "@/service/posts.service";
+import { useCallback } from "react";
+import { toast } from "@/components/ui/use-toast";
+import Link from "next/link";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -27,6 +33,21 @@ export function DataTableRowActions<TData>({
 }: DataTableRowActionsProps<TData>) {
   const post = postSchema.parse(row.original);
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+
+  const deletePost = useCallback(async (id: number) => {
+    try {
+      const deletedPost = await deletePostService(id);
+      toast({
+        variant: "default",
+        title: `Post ${deletedPost.title} deleted successfully`,
+      });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: `Couldn't remove post, error ${error}`,
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -42,6 +63,9 @@ export function DataTableRowActions<TData>({
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end' className='w-[160px]'>
           <DropdownMenuItem onClick={onOpen}>Edit</DropdownMenuItem>
+          <Link href={`/posts/${post.id}`} target='_blank'>
+            <DropdownMenuItem>Visit post</DropdownMenuItem>
+          </Link>
           <DropdownMenuItem className='cursor-not-allowed'>
             Make a copy
           </DropdownMenuItem>
@@ -63,7 +87,10 @@ export function DataTableRowActions<TData>({
           </DropdownMenuSubContent>
         </DropdownMenuSub> */}
           <DropdownMenuSeparator />
-          <DropdownMenuItem className='cursor-not-allowed'>
+          <DropdownMenuItem
+            className='cursor-pointer'
+            onClick={() => deletePost(post.id!)}
+          >
             Delete
             <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
           </DropdownMenuItem>
