@@ -6,9 +6,10 @@ import { toast } from "../ui/use-toast";
 type Props = {
   id: number;
   checked: boolean;
+  disabled: boolean;
   onChange: (id: number, value: boolean) => Promise<boolean>;
 };
-function SpinnerCheckbox({ id, checked, onChange }: Props) {
+function SpinnerCheckbox({ id, checked, onChange, disabled = false }: Props) {
   const [isLoading, setLoading] = useState(false);
   const [isChecked, setChecked] = useState(checked);
 
@@ -37,7 +38,11 @@ function SpinnerCheckbox({ id, checked, onChange }: Props) {
       {isLoading ? (
         <Loader2 className='animate-spin' />
       ) : (
-        <Checkbox checked={isChecked} onCheckedChange={onCheckedChange} />
+        <Checkbox
+          checked={isChecked}
+          disabled={disabled}
+          onCheckedChange={onCheckedChange}
+        />
       )}
     </>
   );

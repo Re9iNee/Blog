@@ -100,12 +100,15 @@ export const columns: ColumnDef<PostModel>[] = [
         return;
       }
 
+      const status = row.getValue("status");
+      const disabled = status === "draft" || status === "archived";
       const postId: number = row.getValue("id");
 
       return (
         <div className='flex w-[100px] items-center'>
           <SpinnerCheckbox
             id={postId}
+            disabled={disabled}
             checked={isSlideshow}
             onChange={slideshowTogglePostVisibility}
           />
