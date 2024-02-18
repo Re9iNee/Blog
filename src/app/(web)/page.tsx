@@ -3,40 +3,17 @@ import BlogCard from "@/components/ui/blog-card";
 import DottedBackground from "@/components/homepage/dotted-background";
 import HeroSection from "@/components/homepage/hero";
 import { SlideShow } from "@/components/ui/slide-show";
-import { getAllPublishedPosts as getRecentPosts } from "@/service/posts.service";
-
-const SlideShowContents = [
-  {
-    postLink: "posts/1",
-    category: "Trending",
-    author: "Mobin Khani",
-    imageAlt: "Picture of a desk",
-    imageUrl: "https://placehold.co/768x400",
-    categoryImageUrl: "/slideshow/trending-hashtag.svg",
-    title: "How does your workspace affect the quality of your work?",
-  },
-  {
-    postLink: "posts/2",
-    category: "Popular",
-    author: "Mobin Khani",
-    imageAlt: "Picture of a desk",
-    imageUrl: "https://placehold.co/768x400",
-    categoryImageUrl: "/slideshow/trending-hashtag.svg",
-    title: "Did you wash your ass today?",
-  },
-  {
-    postLink: "posts/3",
-    category: "Most Rated",
-    author: "Reza Attarzadeh",
-    imageAlt: "Picture of a desk",
-    imageUrl: "https://placehold.co/768x400",
-    categoryImageUrl: "/slideshow/trending-hashtag.svg",
-    title: "Mikhorish?",
-  },
-];
+import {
+  getAllPublishedPosts as getRecentPosts,
+  getSlideshowContents,
+} from "@/service/posts.service";
+import { unstable_noStore as noStore } from "next/cache";
 
 export default async function Home() {
+  noStore();
+
   const recentPosts = await getRecentPosts(12);
+  const slideshowPosts = await getSlideshowContents();
 
   return (
     <main>
@@ -49,7 +26,7 @@ export default async function Home() {
       />
       <HeroSection />
 
-      <SlideShow className='px-4 mt-14 mb-3' cards={SlideShowContents} />
+      <SlideShow className='px-4 mt-14 mb-3' cards={slideshowPosts} />
 
       <h1
         className='text-neutral-700 font-bold pt-4 px-4

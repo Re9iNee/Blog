@@ -6,12 +6,13 @@ export const postSchema = z.object({
   title: z.string(),
   summary: z.string(),
   authorId: z.number(),
-  readingTime: z.coerce.number(),
   body: z.string().optional(),
+  readingTime: z.coerce.number(),
   publishedAt: z.date().nullish(),
-  mainImageUrl: z.string().url().nullish(),
   updatedAt: z.date().default(new Date()),
   createdAt: z.date().default(new Date()),
+  isSlideshow: z.boolean().default(false),
+  mainImageUrl: z.string().url().nullish(),
   status: z.enum(["draft", "published", "archived"]).default("draft"),
 
   // TODO

@@ -31,6 +31,7 @@ model Post {
   categories   Category[]
   publishedAt  DateTime?
   readingTime  Int
+  isSlideshow  Boolean    @default(false)
   mainImageUrl String?
 
   author User @relation(fields: [authorId], references: [id])

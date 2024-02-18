@@ -7,9 +7,10 @@ import { useMemo, useState } from "react";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 import { cn } from "@/lib/utils";
+import { PostModel } from "@/types/post";
 
 type Props = {
-  cards: CardProps[];
+  cards: PostModel[];
   className?: ClassValue;
 };
 export function SlideShow({ className, cards }: Props) {
@@ -92,25 +93,14 @@ export function SlideShow({ className, cards }: Props) {
   );
 }
 
-type CardProps = {
-  title: string;
-  author: string;
-  category: string;
-  imageUrl: string;
-  imageAlt: string;
-  categoryImageUrl: string;
-};
 export function SlideShowCard({
   page,
   title,
   author,
-  category,
-  imageUrl,
-  imageAlt,
   direction,
   onDragEndFn,
-  categoryImageUrl,
-}: CardProps & { direction: number; page: number; onDragEndFn: any }) {
+  mainImageUrl,
+}: PostModel & { direction: number; page: number; onDragEndFn: any }) {
   const variants = useMemo(
     () => ({
       enter: (direction: number) => {
@@ -155,24 +145,24 @@ export function SlideShowCard({
           "relative grid grid-cols-6 md:grid-cols-12 grid-rows-6 min-h-full"
         )}
       >
-        <Image
+        {/* <Image
           width={96}
           height={96}
           src={categoryImageUrl}
           alt='Category image icon'
           className='absolute -top-8 left-0 z-10 pointer-events-none'
-        />
+        /> */}
         <Image
           fill
-          src={imageUrl}
-          alt={imageAlt}
+          src={mainImageUrl ?? "/slideshow/mainImagePlaceholder.svg"}
+          alt={`main image of post: ${title}`}
           className='z-0 pointer-events-none rounded-2xl aspect-video object-cover'
         />
 
         {/* only xs */}
-        <h5 className='bg-neutral-800 px-3 text-white py-1.5 rounded-xl bg-opacity-40 text-xs font-light leading-none col-start-5 col-span-2 z-10 max-h-6 grid place-items-center self-center justify-self-start md:hidden'>
+        {/* <h5 className='bg-neutral-800 px-3 text-white py-1.5 rounded-xl bg-opacity-40 text-xs font-light leading-none col-start-5 col-span-2 z-10 max-h-6 grid place-items-center self-center justify-self-start md:hidden'>
           {category}
-        </h5>
+        </h5> */}
 
         {/* only xs */}
         <section
@@ -182,7 +172,7 @@ export function SlideShowCard({
         >
           <h3 className='text-white font-bold'>{title}</h3>
           <h6 className='text-neutral-400 text-xs font-light leading-none'>
-            By {author}
+            By {author.name}
           </h6>
           <button className='group inline-flex border-1.5 border-white whitespace-nowrap bg-neutral-800 bg-opacity-0 rounded-lg py-2 pl-8 pr-6 items-center justify-center hover:bg-opacity-30 hover:px-6 transition-all mt-3 mb-2'>
             <span className='text-white text-sm font-medium group-active:scale-85 duration-500 origin-center'>
@@ -194,12 +184,12 @@ export function SlideShowCard({
 
         <section className='hidden col-span-full row-start-4 row-span-full z-10 md:flex justify-between gap-11 items-end px-4 pb-4'>
           <div className='flex flex-col justify-end items-start gap-2 text-white'>
-            <h5 className='bg-neutral-800 px-3 py-1 rounded-xl bg-opacity-40 text-xs font-light leading-none'>
+            {/* <h5 className='bg-neutral-800 px-3 py-1 rounded-xl bg-opacity-40 text-xs font-light leading-none'>
               {category}
-            </h5>
+            </h5> */}
             <h3 className='text-white text-2xl font-bold'>{title}</h3>
             <h6 className='text-neutral-400 text-xs font-light leading-none'>
-              By {author}
+              By {author.name}
             </h6>
           </div>
           <button className='group inline-flex border whitespace-nowrap bg-neutral-800 bg-opacity-0 rounded-3xl py-2 pl-8 pr-6 items-center justify-center w-40 hover:bg-opacity-30 hover:px-6 transition-all'>

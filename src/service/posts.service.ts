@@ -6,6 +6,15 @@ import { PostStatus } from "@prisma/client";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { notFound } from "next/navigation";
 
+export async function getSlideshowContents(): Promise<PostModel[]> {
+  const posts = await prisma.post.findMany({
+    where: { isSlideshow: true },
+    include: { author: true, categories: true },
+  });
+
+  return posts;
+}
+
 export async function getAllPublishedPosts(
   take?: number
 ): Promise<Omit<PostModel, "categories">[]> {
@@ -20,6 +29,8 @@ export async function getAllPublishedPosts(
 }
 
 export async function getAllPosts(): Promise<PostModel[]> {
+  noStore();
+
   const posts = await prisma.post.findMany({
     orderBy: { id: "desc" },
     include: {
@@ -133,4 +144,27 @@ export async function clapToPost(id: number, amount: number): Promise<number> {
 
   console.log("Clap Submitted Successfully", updatedPost.claps);
   return updatedPost.claps;
+}
+
+// change the visibility of a post in the slideshow
+export async function slideshowTogglePostVisibility(
+  id: number,
+  show: boolean
+): Promise<boolean> {
+  noStore();
+
+  const updatedPost = await prisma.post.update({
+    where: { id },
+    data: {
+      isSlideshow: { set: show },
+    },
+    select: {
+      isSlideshow: true,
+    },
+  });
+
+  revalidatePath("/dashboard/posts");
+
+  const updatedPostVisibility = updatedPost.isSlideshow;
+  return updatedPostVisibility;
 }

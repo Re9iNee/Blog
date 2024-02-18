@@ -34,6 +34,7 @@ import { useSession } from "next-auth/react";
 import { Uploader } from "@/components/ui/uploader";
 import Link from "next/link";
 import Image from "next/image";
+import { Switch } from "@/components/ui/switch";
 
 type Props = {
   closeModal: () => void;
@@ -171,7 +172,19 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Status</FormLabel>
-              <Select defaultValue={field.value} onValueChange={field.onChange}>
+              <Select
+                defaultValue={field.value}
+                onValueChange={(val) => {
+                  // switch isSlideshow value based on status of post
+                  // if the post goes to draft or archived, isSlideshow will be false
+                  form.setValue(
+                    "isSlideshow",
+                    val !== PostStatus.draft && val !== PostStatus.archived
+                  );
+
+                  return field.onChange(val);
+                }}
+              >
                 <FormControl>
                   <SelectTrigger data-cy='status'>
                     <SelectValue placeholder='Select a Status' />
@@ -267,6 +280,36 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
             </FormItem>
           )}
         />
+
+        <div>
+          <h3 className='mb-4 text-lg font-medium'>Post Settings</h3>
+          <div className='space-y-4'>
+            <FormField
+              control={form.control}
+              name='isSlideshow'
+              render={({ field }) => (
+                <FormItem className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm'>
+                  <div className='space-y-0.5'>
+                    <FormLabel>Show in Slideshow</FormLabel>
+                    <FormDescription>
+                      published posts can be shown in the slideshow
+                    </FormDescription>
+                  </div>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      disabled={
+                        form.getValues("status") === PostStatus.draft ||
+                        form.getValues("status") === PostStatus.archived
+                      }
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
 
         <Button
           type='submit'
