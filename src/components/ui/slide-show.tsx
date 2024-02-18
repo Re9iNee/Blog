@@ -154,7 +154,7 @@ export function SlideShowCard({
         /> */}
         <Image
           fill
-          src={mainImageUrl}
+          src={mainImageUrl ?? "/slideshow/mainImagePlaceholder.svg"}
           alt={`main image of post: ${title}`}
           className='z-0 pointer-events-none rounded-2xl aspect-video object-cover'
         />
