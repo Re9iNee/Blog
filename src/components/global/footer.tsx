@@ -50,8 +50,14 @@ const Footer = () => {
             >
               <FiLinkedin className='text-sky-700 w-8 h-8 dark:text-sky-500 cursor-pointer' />
             </Link>
-            <FiInstagram className='text-pink-600 w-8 h-8 dark:text-pink-400 cursor-pointer' />
-            <FaXTwitter className='w-8 h-8 dark:text-neutral-50 cursor-pointer' />
+            {/* <FiInstagram className='text-pink-600 w-8 h-8 dark:text-pink-400 cursor-pointer' /> */}
+            <Link
+              target='_blank'
+              prefetch={false}
+              href={"https://twitter.com/nuwa_company"}
+            >
+              <FaXTwitter className='w-8 h-8 dark:text-neutral-50 cursor-pointer' />
+            </Link>
           </section>
         </section>
 
