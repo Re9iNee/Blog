@@ -1,8 +1,9 @@
-import { FiInstagram, FiLinkedin } from "react-icons/fi";
+import Image from "next/image";
+import Link from "next/link";
 import { FaXTwitter } from "react-icons/fa6";
+import { FiLinkedin } from "react-icons/fi";
 import EmailSignUpInput from "../homepage/email-signup-input";
 import FullLogo from "/public/logos/full-logo.svg";
-import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -50,6 +51,15 @@ const Footer = () => {
             >
               <FiLinkedin className='text-sky-700 w-8 h-8 dark:text-sky-500 cursor-pointer' />
             </Link>
+            <Link
+              target='_blank'
+              prefetch={false}
+              className='w-8 h-8 relative'
+              href={"https://sites.google.com/view/nuwa-company/home"}
+            >
+              <Image fill src={"/favicon.svg"} alt='Nuwa website' />
+            </Link>
+
             {/* <FiInstagram className='text-pink-600 w-8 h-8 dark:text-pink-400 cursor-pointer' /> */}
             <Link
               target='_blank'
