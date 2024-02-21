@@ -8,6 +8,7 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 import { cn } from "@/lib/utils";
 import { PostModel } from "@/types/post";
+import Link from "next/link";
 
 type Props = {
   cards: PostModel[];
@@ -94,6 +95,7 @@ export function SlideShow({ className, cards }: Props) {
 }
 
 export function SlideShowCard({
+  id,
   page,
   title,
   author,
@@ -174,12 +176,15 @@ export function SlideShowCard({
           <h6 className='text-neutral-400 text-xs font-light leading-none'>
             By {author.name}
           </h6>
-          <button className='group inline-flex border-1.5 border-white whitespace-nowrap bg-neutral-800 bg-opacity-0 rounded-lg py-2 pl-8 pr-6 items-center justify-center hover:bg-opacity-30 hover:px-6 transition-all mt-3 mb-2'>
+          <Link
+            href={`/posts/${id}`}
+            className='group inline-flex border-1.5 border-white whitespace-nowrap bg-neutral-800 bg-opacity-0 rounded-lg py-2 pl-8 pr-6 items-center justify-center hover:bg-opacity-30 hover:px-6 transition-all mt-3 mb-2'
+          >
             <span className='text-white text-sm font-medium group-active:scale-85 duration-500 origin-center'>
               Start Reading
             </span>
             <ArrowIcon className='opacity-0 w-2 h-5 text-white group-hover:opacity-100 group-hover:ml-2 text-xl group-active:scale-75 duration-500 pt-0.5' />
-          </button>
+          </Link>
         </section>
 
         <section className='hidden col-span-full row-start-4 row-span-full z-10 md:flex justify-between gap-11 items-end px-4 pb-4'>
@@ -192,12 +197,15 @@ export function SlideShowCard({
               By {author.name}
             </h6>
           </div>
-          <button className='group inline-flex border whitespace-nowrap bg-neutral-800 bg-opacity-0 rounded-3xl py-2 pl-8 pr-6 items-center justify-center w-40 hover:bg-opacity-30 hover:px-6 transition-all'>
+          <Link
+            href={`/posts/${id}`}
+            className='group inline-flex border whitespace-nowrap bg-neutral-800 bg-opacity-0 rounded-3xl py-2 pl-8 pr-6 items-center justify-center w-40 hover:bg-opacity-30 hover:px-6 transition-all'
+          >
             <span className='text-white text-sm font-medium group-active:scale-85 duration-500 origin-center'>
               Start Reading
             </span>
             <ArrowIcon className='opacity-0 w-2 h-5 text-white group-hover:opacity-100 group-hover:ml-2 text-xl group-active:scale-75 duration-500 pt-0.5' />
-          </button>
+          </Link>
         </section>
       </motion.section>
     </AnimatePresence>
