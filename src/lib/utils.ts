@@ -55,7 +55,10 @@ export const createNameAbv = (name: string) => {
 };
 
 export function getS3ObjectURLFromKey(key: string) {
-  const url = new URL(`${process.env.S3_CLOUDFRONT_DOMAIN_URL}/${key}`);
+  const cdnUrl = process.env.S3_CLOUDFRONT_DOMAIN_URL;
+  if (!cdnUrl) throw new Error("S3_CLOUDFRONT_DOMAIN_URL variable is not set");
+
+  const url = new URL(`${cdnUrl}/${key}`);
 
   return url.toString();
 }
