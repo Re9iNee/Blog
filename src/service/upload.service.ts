@@ -17,17 +17,18 @@ export async function uploadToS3(data: FormData): Promise<string> {
 
   // create a unique file name
   const fileName = `${Date.now()}-${file.name}`;
+  const fileKey = `mora-blog-files/${fileName}`;
 
   await s3.send(
     new PutObjectCommand({
       Body: body,
-      ACL: "public-read",
-      Key: `download/${fileName}`,
+      Key: fileKey,
       Bucket: process.env.S3_BUCKET,
+      ACL: "bucket-owner-full-control",
     })
   );
 
-  const url = getS3ObjectURLFromKey(`download/${fileName}`);
+  const url = getS3ObjectURLFromKey(fileKey);
 
   return url;
 }

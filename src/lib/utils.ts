@@ -55,9 +55,7 @@ export const createNameAbv = (name: string) => {
 };
 
 export function getS3ObjectURLFromKey(key: string) {
-  const url = new URL(
-    `https://s3.${process.env.S3_REGION}.amazonaws.com/${process.env.S3_BUCKET}/${key}`
-  );
+  const url = new URL(`${process.env.S3_CLOUDFRONT_DOMAIN_URL}/${key}`);
 
   return url.toString();
 }
