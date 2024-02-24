@@ -7,8 +7,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { statuses } from "./data";
 
 import { DataTableColumnHeader } from "@/components/dashboard/table/data-table-column-header";
+import { Switch } from "@/components/ui/switch";
+import { slideshowTogglePostVisibility } from "@/service/posts.service";
 import { PostModel } from "@/types/post";
 import { DataTableRowActions } from "./data-table-row-actions";
+import { useState } from "react";
+import SpinnerCheckbox from "@/components/dashboard/spinner-checkbox";
 
 export const columns: ColumnDef<PostModel>[] = [
   {
@@ -77,6 +81,37 @@ export const columns: ColumnDef<PostModel>[] = [
             <status.icon className='mr-2 h-4 w-4 text-muted-foreground' />
           )}
           <span>{status.label}</span>
+        </div>
+      );
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
+  },
+  {
+    accessorKey: "isSlideshow",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Show in slideshow' />
+    ),
+    cell: ({ row }) => {
+      const isSlideshow: boolean = row.getValue("isSlideshow");
+
+      if (typeof isSlideshow === "undefined") {
+        return;
+      }
+
+      const status = row.getValue("status");
+      const disabled = status === "draft" || status === "archived";
+      const postId: number = row.getValue("id");
+
+      return (
+        <div className='flex w-[100px] items-center'>
+          <SpinnerCheckbox
+            id={postId}
+            disabled={disabled}
+            checked={isSlideshow}
+            onChange={slideshowTogglePostVisibility}
+          />
         </div>
       );
     },

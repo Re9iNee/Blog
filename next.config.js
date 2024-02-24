@@ -10,6 +10,11 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "d1ntfq67otjmwh.cloudfront.net",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "api.dicebear.com",
         pathname: "**",
       },

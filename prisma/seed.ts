@@ -11,7 +11,7 @@ async function main() {
   // await clearDB();
   await insertAdmin();
   // await insertUsers(2);
-  // await insertPosts(10);
+  // await insertPosts(1);
   // await getAllAuthors();
   // await getAllDB();
 }

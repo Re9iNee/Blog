@@ -13,16 +13,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Modal from "@/components/ui/modal";
-import { useDisclosure } from "@nextui-org/react";
-import PostForm from "../form";
-import { postSchema } from "../post-schema";
+import { toast } from "@/components/ui/use-toast";
 import {
   deletePost as deletePostService,
   updatePost,
 } from "@/service/posts.service";
-import { useCallback } from "react";
-import { toast } from "@/components/ui/use-toast";
+import { useDisclosure } from "@nextui-org/react";
 import Link from "next/link";
+import { useCallback } from "react";
+import PostForm from "../form";
+import { postSchema } from "../post-schema";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;

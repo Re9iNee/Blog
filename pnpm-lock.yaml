@@ -15,11 +15,11 @@ dependencies:
     specifier: ^2.2.9
     version: 2.2.9(@types/react@18.2.48)(framer-motion@10.16.5)(react-dom@18.0.0)(react@18.0.0)(tailwind-variants@0.1.20)(tailwindcss@3.3.0)
   '@prisma/client':
-    specifier: ^5.6.0
-    version: 5.6.0(prisma@5.6.0)
+    specifier: ^5.9.1
+    version: 5.9.1(prisma@5.9.1)
   '@prisma/extension-accelerate':
     specifier: ^0.6.2
-    version: 0.6.2(@prisma/client@5.6.0)
+    version: 0.6.2(@prisma/client@5.9.1)
   '@radix-ui/react-avatar':
     specifier: ^1.0.4
     version: 1.0.4(@types/react-dom@18.0.0)(@types/react@18.2.48)(react-dom@18.0.0)(react@18.0.0)
@@ -50,12 +50,18 @@ dependencies:
   '@radix-ui/react-slot':
     specifier: ^1.0.2
     version: 1.0.2(@types/react@18.2.48)(react@18.0.0)
+  '@radix-ui/react-switch':
+    specifier: ^1.0.3
+    version: 1.0.3(@types/react-dom@18.0.0)(@types/react@18.2.48)(react-dom@18.0.0)(react@18.0.0)
   '@radix-ui/react-tabs':
     specifier: ^1.0.4
     version: 1.0.4(@types/react-dom@18.0.0)(@types/react@18.2.48)(react-dom@18.0.0)(react@18.0.0)
   '@radix-ui/react-toast':
     specifier: ^1.1.5
     version: 1.1.5(@types/react-dom@18.0.0)(@types/react@18.2.48)(react-dom@18.0.0)(react@18.0.0)
+  '@radix-ui/react-toggle':
+    specifier: ^1.0.3
+    version: 1.0.3(@types/react-dom@18.0.0)(@types/react@18.2.48)(react-dom@18.0.0)(react@18.0.0)
   '@tanstack/react-table':
     specifier: ^8.10.7
     version: 8.10.7(react-dom@18.0.0)(react@18.0.0)
@@ -176,8 +182,8 @@ devDependencies:
     specifier: ^8
     version: 8.0.0
   prisma:
-    specifier: ^5.6.0
-    version: 5.6.0
+    specifier: ^5.9.1
+    version: 5.9.1
   tailwindcss:
     specifier: ^3.3.0
     version: 3.3.0(postcss@8.0.0)(ts-node@10.9.1)
@@ -3686,8 +3692,8 @@ packages:
     resolution: {integrity: sha512-dhPeilub1NuIG0X5Kvhh9lH4iW3ZsHlnzwgwbOlgwQ2wG1IqFzsgHqmKPk3WzsdWAeaxKJxgM0+W433RmN45GA==}
     dev: false
 
-  /@prisma/client@5.6.0(prisma@5.6.0):
-    resolution: {integrity: sha512-mUDefQFa1wWqk4+JhKPYq8BdVoFk9NFMBXUI8jAkBfQTtgx8WPx02U2HB/XbAz3GSUJpeJOKJQtNvaAIDs6sug==}
+  /@prisma/client@5.9.1(prisma@5.9.1):
+    resolution: {integrity: sha512-caSOnG4kxcSkhqC/2ShV7rEoWwd3XrftokxJqOCMVvia4NYV/TPtJlS9C2os3Igxw/Qyxumj9GBQzcStzECvtQ==}
     engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:
@@ -3696,26 +3702,44 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': 5.6.0-32.e95e739751f42d8ca026f6b910f5a2dc5adeaeee
-      prisma: 5.6.0
+      prisma: 5.9.1
     dev: false
 
-  /@prisma/engines-version@5.6.0-32.e95e739751f42d8ca026f6b910f5a2dc5adeaeee:
-    resolution: {integrity: sha512-UoFgbV1awGL/3wXuUK3GDaX2SolqczeeJ5b4FVec9tzeGbSWJboPSbT0psSrmgYAKiKnkOPFSLlH6+b+IyOwAw==}
-    dev: false
+  /@prisma/debug@5.9.1:
+    resolution: {integrity: sha512-yAHFSFCg8KVoL0oRUno3m60GAjsUKYUDkQ+9BA2X2JfVR3kRVSJFc/GpQ2fSORi4pSHZR9orfM4UC9OVXIFFTA==}
 
-  /@prisma/engines@5.6.0:
-    resolution: {integrity: sha512-Mt2q+GNJpU2vFn6kif24oRSBQv1KOkYaterQsi0k2/lA+dLvhRX6Lm26gon6PYHwUM8/h8KRgXIUMU0PCLB6bw==}
+  /@prisma/engines-version@5.9.0-32.23fdc5965b1e05fc54e5f26ed3de66776b93de64:
+    resolution: {integrity: sha512-HFl7275yF0FWbdcNvcSRbbu9JCBSLMcurYwvWc8WGDnpu7APxQo2ONtZrUggU3WxLxUJ2uBX+0GOFIcJeVeOOQ==}
+
+  /@prisma/engines@5.9.1:
+    resolution: {integrity: sha512-gkdXmjxQ5jktxWNdDA5aZZ6R8rH74JkoKq6LD5mACSvxd2vbqWeWIOV0Py5wFC8vofOYShbt6XUeCIUmrOzOnQ==}
     requiresBuild: true
+    dependencies:
+      '@prisma/debug': 5.9.1
+      '@prisma/engines-version': 5.9.0-32.23fdc5965b1e05fc54e5f26ed3de66776b93de64
+      '@prisma/fetch-engine': 5.9.1
+      '@prisma/get-platform': 5.9.1
 
-  /@prisma/extension-accelerate@0.6.2(@prisma/client@5.6.0):
+  /@prisma/extension-accelerate@0.6.2(@prisma/client@5.9.1):
     resolution: {integrity: sha512-KIBVPeWt8qaSg7wQ+TXmCVeUDoW75whtXcdS9dbHxRoO2OWFH5I9+qbkHBhx5Wj/h1wQpS8usuxGnsZqiBjUpQ==}
     engines: {node: '>=16'}
     peerDependencies:
       '@prisma/client': '>=4.16.1'
     dependencies:
-      '@prisma/client': 5.6.0(prisma@5.6.0)
+      '@prisma/client': 5.9.1(prisma@5.9.1)
     dev: false
+
+  /@prisma/fetch-engine@5.9.1:
+    resolution: {integrity: sha512-l0goQOMcNVOJs1kAcwqpKq3ylvkD9F04Ioe1oJoCqmz05mw22bNAKKGWuDd3zTUoUZr97va0c/UfLNru+PDmNA==}
+    dependencies:
+      '@prisma/debug': 5.9.1
+      '@prisma/engines-version': 5.9.0-32.23fdc5965b1e05fc54e5f26ed3de66776b93de64
+      '@prisma/get-platform': 5.9.1
+
+  /@prisma/get-platform@5.9.1:
+    resolution: {integrity: sha512-6OQsNxTyhvG+T2Ksr8FPFpuPeL4r9u0JF0OZHUBI/Uy9SS43sPyAIutt4ZEAyqWQt104ERh70EZedkHZKsnNbg==}
+    dependencies:
+      '@prisma/debug': 5.9.1
 
   /@radix-ui/number@1.0.1:
     resolution: {integrity: sha512-T5gIdVO2mmPW3NNhjNgEP3cqMXjXL9UbO0BzWcXfvdBs+BohbQxvd/K5hSVKmn9/lbTdsQVKbUcP5WLCwvUbBg==}
@@ -4455,6 +4479,33 @@ packages:
       react: 18.0.0
     dev: false
 
+  /@radix-ui/react-switch@1.0.3(@types/react-dom@18.0.0)(@types/react@18.2.48)(react-dom@18.0.0)(react@18.0.0):
+    resolution: {integrity: sha512-mxm87F88HyHztsI7N+ZUmEoARGkC22YVW5CaC+Byc+HRpuvCrOBPTAnXgf+tZ/7i0Sg/eOePGdMhUKhPaQEqow==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.2
+      '@radix-ui/primitive': 1.0.1
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.48)(react@18.0.0)
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.48)(react@18.0.0)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.0.0)(@types/react@18.2.48)(react-dom@18.0.0)(react@18.0.0)
+      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.48)(react@18.0.0)
+      '@radix-ui/react-use-previous': 1.0.1(@types/react@18.2.48)(react@18.0.0)
+      '@radix-ui/react-use-size': 1.0.1(@types/react@18.2.48)(react@18.0.0)
+      '@types/react': 18.2.48
+      '@types/react-dom': 18.0.0
+      react: 18.0.0
+      react-dom: 18.0.0(react@18.0.0)
+    dev: false
+
   /@radix-ui/react-tabs@1.0.4(@types/react-dom@18.0.0)(@types/react@18.2.48)(react-dom@18.0.0)(react@18.0.0):
     resolution: {integrity: sha512-egZfYY/+wRNCflXNHx+dePvnz9FbmssDTJBtgRfDY7e8SE5oIo3Py2eCB1ckAbh1Q7cQ/6yJZThJ++sgbxibog==}
     peerDependencies:
@@ -4509,6 +4560,29 @@ packages:
       '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.48)(react@18.0.0)
       '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.48)(react@18.0.0)
       '@radix-ui/react-visually-hidden': 1.0.3(@types/react-dom@18.0.0)(@types/react@18.2.48)(react-dom@18.0.0)(react@18.0.0)
+      '@types/react': 18.2.48
+      '@types/react-dom': 18.0.0
+      react: 18.0.0
+      react-dom: 18.0.0(react@18.0.0)
+    dev: false
+
+  /@radix-ui/react-toggle@1.0.3(@types/react-dom@18.0.0)(@types/react@18.2.48)(react-dom@18.0.0)(react@18.0.0):
+    resolution: {integrity: sha512-Pkqg3+Bc98ftZGsl60CLANXQBBQ4W3mTFS9EJvNxKMZ7magklKV69/id1mlAlOFDDfHvlCms0fx8fA4CMKDJHg==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.2
+      '@radix-ui/primitive': 1.0.1
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.0.0)(@types/react@18.2.48)(react-dom@18.0.0)(react@18.0.0)
+      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.48)(react@18.0.0)
       '@types/react': 18.2.48
       '@types/react-dom': 18.0.0
       react: 18.0.0
@@ -9563,13 +9637,13 @@ packages:
     resolution: {integrity: sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==}
     dev: false
 
-  /prisma@5.6.0:
-    resolution: {integrity: sha512-EEaccku4ZGshdr2cthYHhf7iyvCcXqwJDvnoQRAJg5ge2Tzpv0e2BaMCp+CbbDUwoVTzwgOap9Zp+d4jFa2O9A==}
+  /prisma@5.9.1:
+    resolution: {integrity: sha512-Hy/8KJZz0ELtkw4FnG9MS9rNWlXcJhf98Z2QMqi0QiVMoS8PzsBkpla0/Y5hTlob8F3HeECYphBjqmBxrluUrQ==}
     engines: {node: '>=16.13'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 5.6.0
+      '@prisma/engines': 5.9.1
 
   /progress@2.0.3:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
