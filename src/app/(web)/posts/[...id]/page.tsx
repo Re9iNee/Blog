@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { markdownToHTML } from "@/lib/markdownToHTML";
-import { convertDateToDayMonthAndYear } from "@/lib/utils";
+import { convertDateToDayMonthAndYear, wait } from "@/lib/utils";
 import { getPost } from "@/service/posts.service";
 
 import Image from "next/image";
@@ -10,7 +10,7 @@ import { RxDotFilled } from "react-icons/rx";
 
 import ClapContainer from "@/components/posts/claps/clap-container";
 import { unstable_noStore as noStore } from "next/cache";
-import PostNavigationGroup from "./nav";
+import PostNavigationGroup from "../nav";
 
 type Props = {
   params: { id: string };
