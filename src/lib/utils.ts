@@ -58,7 +58,7 @@ export function getS3ObjectURLFromKey(key: string) {
   const cdnUrl = process.env.S3_CLOUDFRONT_DOMAIN_URL;
   if (!cdnUrl) throw new Error("S3_CLOUDFRONT_DOMAIN_URL variable is not set");
 
-  const url = new URL(`${cdnUrl}/${key}`);
+  const url = new URL(`${cdnUrl}${key}`);
 
   return url.toString();
 }
