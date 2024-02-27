@@ -26,7 +26,9 @@ export default async function Home() {
       />
       <HeroSection />
 
-      <SlideShow className='px-4 mt-14 mb-3' cards={slideshowPosts} />
+      {slideshowPosts.length > 0 && (
+        <SlideShow className='px-4 mt-14 mb-3' cards={slideshowPosts} />
+      )}
 
       <h1
         className='text-neutral-700 font-bold pt-4 px-4
