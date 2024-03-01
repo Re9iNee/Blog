@@ -8,7 +8,7 @@ const NotoSansFont = Noto_Sans({
 });
 
 const PoppinsFont = Poppins({
-  weight: "700",
+  weight: ["700"],
   style: "normal",
   subsets: ["latin"],
   variable: "--font-poppins",
