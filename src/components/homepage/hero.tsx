@@ -32,7 +32,7 @@ function HeroSection() {
           Read About New
         </h1>
         <RotatingTexts activeIndex={activeIndex} />
-        <h2 className='z-10 text-neutral-500 text-sm leading-tight max-w-sm'>
+        <h2 className='z-10 text-neutral-500 text-sm leading-6 max-w-sm'>
           Join out MORA blog community to stay updated on the latest in
           technology&apos;s frontiers
         </h2>
