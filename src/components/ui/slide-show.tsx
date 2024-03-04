@@ -46,7 +46,7 @@ export function SlideShow({ className, cards }: Props) {
       {/* container */}
       <div
         className={cn(
-          "grid grid-cols-6 md:grid-cols-12 grid-rows-5 h-80 self-stretch",
+          "grid grid-cols-6 md:grid-cols-12 grid-rows-5 h-[432px] self-stretch",
           className
         )}
       >
