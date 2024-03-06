@@ -22,11 +22,11 @@ const Footer = () => {
       >
         <FullLogo />
 
-        <section className='lg:w-96 lg:h-28'>
+        <section className='flex flex-col gap-2 lg:w-96 lg:h-28'>
           <h3 className='font-bold text-neutral-800 text-base dark:text-neutral-200'>
             What is Mora?
           </h3>
-          <p className='text-neutral-500 text-sm leading-tight dark:text-neutral-400'>
+          <p className='text-neutral-500 text-sm leading-5 sm:max-w-xs dark:text-neutral-400'>
             Mora is a library of AI tools and courses on how to use them to
             their fullest and like a master. Our mission is to help you take the
             most out of upcoming AI tools.
@@ -43,7 +43,7 @@ const Footer = () => {
             Find us on
           </h3>
           {/* footer links */}
-          <section className='flex gap-2'>
+          <section className='flex gap-4'>
             <Link
               target='_blank'
               prefetch={false}
