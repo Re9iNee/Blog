@@ -197,8 +197,8 @@ export function SlideShowCard({
             {/* <h5 className='bg-neutral-800 px-3 py-1 rounded-xl bg-opacity-40 text-xs font-light leading-none'>
               {category}
             </h5> */}
-            <h3 className='text-white text-2xl font-bold'>{title}</h3>
-            <h6 className='text-neutral-400 text-xs font-light leading-none'>
+            <h3 className='text-white text-2xl font-bold max-w-lg'>{title}</h3>
+            <h6 className='text-neutral-100 text-xs font-light leading-none'>
               By {author.name}
             </h6>
           </div>
