@@ -10,10 +10,15 @@ const prisma = new PrismaClient().$extends(withAccelerate());
 async function main() {
   // await clearDB();
   await insertAdmin();
+  console.log(await getHash("examplePassword"));
   // await insertUsers(2);
   // await insertPosts(1);
   // await getAllAuthors();
   // await getAllDB();
+}
+
+async function getHash(pwd: string) {
+  return await hash(pwd, 12);
 }
 
 async function getAllDB() {

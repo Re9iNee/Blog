@@ -3,10 +3,10 @@ import { z } from "zod";
 export const postSchema = z.object({
   id: z.number().optional(),
 
+  body: z.string(),
   title: z.string(),
   summary: z.string(),
   authorId: z.number(),
-  body: z.string().optional(),
   readingTime: z.coerce.number(),
   publishedAt: z.date().nullish(),
   updatedAt: z.date().default(new Date()),
