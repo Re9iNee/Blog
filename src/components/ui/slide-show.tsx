@@ -46,7 +46,7 @@ export function SlideShow({ className, cards }: Props) {
       {/* container */}
       <div
         className={cn(
-          "grid grid-cols-6 md:grid-cols-12 grid-rows-5 h-80 self-stretch",
+          "grid grid-cols-6 md:grid-cols-12 grid-rows-5 h-[432px] self-stretch",
           className
         )}
       >
@@ -154,12 +154,17 @@ export function SlideShowCard({
           alt='Category image icon'
           className='absolute -top-8 left-0 z-10 pointer-events-none'
         /> */}
-        <Image
-          fill
-          src={mainImageUrl ?? "/slideshow/mainImagePlaceholder.svg"}
-          alt={`main image of post: ${title}`}
-          className='z-0 pointer-events-none rounded-2xl aspect-video object-cover'
-        />
+
+        {/* overlay and main image */}
+        <div className='z-0 col-span-full row-span-full'>
+          <Image
+            fill
+            alt={`main image of post: ${title}`}
+            src={mainImageUrl ?? "/slideshow/mainImagePlaceholder.svg"}
+            className='pointer-events-none rounded-2xl aspect-video object-cover -z-10'
+          />
+          <div className='w-full h-full bg-gradient-to-t from-black/80 rounded-2xl' />
+        </div>
 
         {/* only xs */}
         {/* <h5 className='bg-neutral-800 px-3 text-white py-1.5 rounded-xl bg-opacity-40 text-xs font-light leading-none col-start-5 col-span-2 z-10 max-h-6 grid place-items-center self-center justify-self-start md:hidden'>
@@ -192,8 +197,8 @@ export function SlideShowCard({
             {/* <h5 className='bg-neutral-800 px-3 py-1 rounded-xl bg-opacity-40 text-xs font-light leading-none'>
               {category}
             </h5> */}
-            <h3 className='text-white text-2xl font-bold'>{title}</h3>
-            <h6 className='text-neutral-400 text-xs font-light leading-none'>
+            <h3 className='text-white text-2xl font-bold max-w-lg'>{title}</h3>
+            <h6 className='text-neutral-100 text-xs font-light leading-none'>
               By {author.name}
             </h6>
           </div>
