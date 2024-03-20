@@ -38,7 +38,7 @@ function BlogCard({ data }: Props) {
         <Link href={`/posts/${id}`}>{title}</Link>
       </h3>
       <summary
-        className='text-neutral-700 flex-grow text-xs leading-none line-clamp-2
+        className='text-neutral-700 flex-grow text-xs leading-none max-h-max line-clamp-2
           md:text-sm md:leading-normal
           '
       >
