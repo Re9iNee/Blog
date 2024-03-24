@@ -54,13 +54,13 @@ export const createNameAbv = (name: string) => {
     .join("");
 };
 
-export function getS3ObjectURLFromKey(key: string) {
+export function getS3ObjectURLFromKey(key: string[]): string[] {
   const cdnUrl = process.env.S3_CLOUDFRONT_DOMAIN_URL;
   if (!cdnUrl) throw new Error("S3_CLOUDFRONT_DOMAIN_URL variable is not set");
 
-  const url = new URL(`${cdnUrl}${key}`);
+  const url = key.map((k) => new URL(`${cdnUrl}${k}`)).map((u) => u.toString());
 
-  return url.toString();
+  return url;
 }
 
 export function getRandomInt(min: number, max: number): number {
@@ -70,3 +70,7 @@ export function getRandomInt(min: number, max: number): number {
 export function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export const copyTextToClipboard = (text: string) => {
+  navigator.clipboard.writeText(text);
+};

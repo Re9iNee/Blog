@@ -1,7 +1,7 @@
 "use server";
 
 import { getS3ObjectURLFromKey } from "@/lib/utils";
-import { PutObjectCommand, S3 } from "@aws-sdk/client-s3";
+import { ListObjectsV2Command, PutObjectCommand, S3 } from "@aws-sdk/client-s3";
 
 const s3 = new S3({
   region: process.env.S3_REGION,
@@ -11,7 +11,7 @@ const s3 = new S3({
   },
 });
 
-export async function uploadToS3(data: FormData): Promise<string> {
+export async function uploadToS3(data: FormData): Promise<string | string[]> {
   const file = data.get("file") as File;
   const body = (await file.arrayBuffer()) as Buffer;
 
@@ -28,7 +28,25 @@ export async function uploadToS3(data: FormData): Promise<string> {
     })
   );
 
-  const url = getS3ObjectURLFromKey(fileKey);
+  const url = getS3ObjectURLFromKey([fileKey]);
 
   return url;
+}
+
+export async function getUploadedFiles() {
+  // get all files from /mora-blog-files directory in s3 and use pagination to get all files
+  const params = {
+    Bucket: process.env.S3_BUCKET,
+    Prefix: "mora-blog-files",
+  };
+
+  const command = new ListObjectsV2Command(params);
+  const response = await s3.send(command);
+
+  const fileKeys = response.Contents?.map((file) => file.Key).filter(
+    (key) => key
+  ) as string[];
+  const fileLinks = getS3ObjectURLFromKey([...fileKeys]);
+
+  return fileLinks;
 }
