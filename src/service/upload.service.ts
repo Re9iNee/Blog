@@ -11,7 +11,7 @@ const s3 = new S3({
   },
 });
 
-export async function uploadToS3(data: FormData): Promise<string | string[]> {
+export async function uploadToS3(data: FormData): Promise<string> {
   const file = data.get("file") as File;
   const body = (await file.arrayBuffer()) as Buffer;
 
@@ -28,7 +28,7 @@ export async function uploadToS3(data: FormData): Promise<string | string[]> {
     })
   );
 
-  const url = getS3ObjectURLFromKey([fileKey]);
+  const url = getS3ObjectURLFromKey(fileKey);
 
   return url;
 }
@@ -46,7 +46,8 @@ export async function getUploadedFiles() {
   const fileKeys = response.Contents?.map((file) => file.Key).filter(
     (key) => key
   ) as string[];
-  const fileLinks = getS3ObjectURLFromKey([...fileKeys]);
+
+  const fileLinks = fileKeys.map((k) => getS3ObjectURLFromKey(k));
 
   return fileLinks;
 }

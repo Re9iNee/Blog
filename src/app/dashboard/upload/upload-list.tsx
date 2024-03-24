@@ -12,8 +12,6 @@ import ImageCard from "./image-card";
 async function UploadList() {
   const list = await getUploadedFiles();
 
-  console.log(list);
-
   return (
     <Card>
       <CardHeader>
