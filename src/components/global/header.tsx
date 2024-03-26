@@ -20,28 +20,23 @@ const Header = () => {
           </span>
         </Link>
         <Link
-          className='p-2 text-xs cursor-pointer hidden 
+          className='p-2 text-xs cursor-pointer  hidden 
                     sm:block
                     '
-          href={"/contact-us"}
+          href={"/about-us"}
         >
-          Contact Us
-        </Link>
-        <Link
-          target='_blank'
-          href={"https://mora-website.vercel.app/"}
-          className='p-2 text-xs hidden cursor-pointer
-                    sm:block
-                    '
-        >
-          Mora Website
+          About Us
         </Link>
       </div>
 
       <div className='flex gap-4 items-center'>
-        <button className='whitespace-nowrap px-3 py-2 h-8 text-white bg-gradient-to-l from-violet-500 to-violet-700 rounded-3xl leading-none text-xs font-bold cursor-pointer'>
+        <Link
+          target='_blank'
+          href={"https://discord.gg/5TFMVKsgfK"}
+          className='whitespace-nowrap px-5 py-2 h-8 text-white bg-gradient-to-l from-violet-500 to-violet-700 rounded-3xl leading-none text-xs font-bold cursor-pointer'
+        >
           Join Community
-        </button>
+        </Link>
         <RxHamburgerMenu className='cursor-pointer sm:hidden' />
       </div>
     </header>
