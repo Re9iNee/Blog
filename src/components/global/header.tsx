@@ -7,7 +7,7 @@ import MoraLogo from "/public/logos/logo-small.svg";
 const Header = () => {
   return (
     <header
-      className='px-2 py-4 flex justify-between max-w-screen-xl border-b border-slate-100 dark:border-slate-800
+      className='px-2 py-4 flex justify-between max-w-screen-xl border-b sticky top-0 bg-background z-50 border-slate-100 dark:border-slate-800
       md:p-4
       '
     >
