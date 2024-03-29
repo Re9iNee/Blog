@@ -68,7 +68,7 @@ async function PostPage({ params }: Props) {
 
       <Separator />
 
-      <article className='prose md:prose-lg lg:prose-xl dark:prose-invert prose-img:rounded-xl prose-a:text-blue-600 max-w-full'>
+      <article className='prose dark:prose-invert prose-pre:bg-gray-100 dark:prose-pre:bg-gray-900 prose-pre:font-normal dark:prose-pre:text-white prose-img:rounded-xl prose-a:text-blue-600 max-w-full'>
         <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
       </article>
     </div>
