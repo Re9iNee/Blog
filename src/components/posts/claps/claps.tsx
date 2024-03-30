@@ -5,8 +5,7 @@ import { ClassValue } from "clsx";
 import debounce from "lodash.debounce";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
-import ClapsFilled from "./icons/claps-fill.svg";
-import ClapsOutlined from "./icons/claps-outline.svg";
+import { FaHandsClapping } from "react-icons/fa6";
 
 const MIN_DEG = 1;
 const MAX_DEG = 72;
@@ -182,11 +181,12 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
           <div
             id='clap'
             ref={clapRef}
-            className='clap-container'
+            className='clap-container bg-background text-lg'
             onClick={onClapClick}
             onMouseOver={onClapHover}
           >
-            {localClaps === 0 ? <ClapsOutlined /> : <ClapsFilled />}
+            {/* prev version: one was for outline and was for filled */}
+            {localClaps === 0 ? <FaHandsClapping /> : <FaHandsClapping />}
           </div>
 
           <div
@@ -310,7 +310,6 @@ const Container = styled.div<{ color: string }>`
       height: 60px;
       border-radius: 50%;
       z-index: 2;
-      background: #fff;
       cursor: pointer;
       .clap-icon {
         font-size: 30px;
