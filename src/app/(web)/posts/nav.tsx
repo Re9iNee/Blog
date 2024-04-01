@@ -1,9 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import React, { useEffect } from "react";
-import BackArrowIcon from "public/icons/BackArrow.svg";
-import ShareIcon from "public/icons/Share.svg";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { FaRegShareFromSquare } from "react-icons/fa6";
+import { HiOutlineChevronLeft } from "react-icons/hi";
 
 import { toast } from "sonner";
 
@@ -26,18 +25,18 @@ function PostNavigationGroup() {
       <Button
         variant={"link"}
         onClick={handleBack}
-        className='gap-1 inline-flex items-center cursor-pointer py-1.5 pl-0 text-gray-500 leading-tight'
+        className='gap-1 inline-flex items-center cursor-pointer py-1.5 pl-0 text-gray-500 leading-tight dark:text-gray-400'
       >
-        <BackArrowIcon />
+        <HiOutlineChevronLeft />
         Back
       </Button>
 
       <Button
         variant={"link"}
         onClick={handleShare}
-        className='inline-flex gap-1 items-center py-1.5 cursor-pointer pr-0 text-gray-500 leading-tight'
+        className='inline-flex gap-1 items-center py-1.5 cursor-pointer pr-0 text-gray-500 leading-tight dark:text-gray-400'
       >
-        <ShareIcon />
+        <FaRegShareFromSquare />
         Share
       </Button>
     </div>
