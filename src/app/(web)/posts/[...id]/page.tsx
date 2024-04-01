@@ -39,7 +39,9 @@ async function PostPage({ params }: Props) {
         src={data.mainImageUrl ?? "/images/placeholder.png"}
         className='rounded-lg self-center w-full object-contain'
       />
-      <h3 className='text-lg leading-6 text-neutral-500'>{data.summary}</h3>
+      <h3 className='text-lg leading-6 text-neutral-500 dark:text-neutral-400'>
+        {data.summary}
+      </h3>
 
       <div className='flex flex-wrap gap-2 justify-between'>
         <section aria-labelledby='author' className='flex items-center gap-2'>
@@ -50,12 +52,12 @@ async function PostPage({ params }: Props) {
             className='rounded-full aspect-square object-cover'
             src={data.author.avatarUrl ?? "/images/main-image-placeholder.png"}
           />
-          <span className='text-neutral-600 text-sm leading-tight'>
+          <span className='text-neutral-500 text-sm leading-tight'>
             {data.author.name}
           </span>
         </section>
 
-        <section className='flex gap-1 items-center text-neutral-600 text-sm'>
+        <section className='flex gap-1 items-center text-neutral-500 text-sm'>
           <time>
             {convertDateToDayMonthAndYear(data.publishedAt ?? data.createdAt)}
           </time>
@@ -68,7 +70,7 @@ async function PostPage({ params }: Props) {
 
       <Separator />
 
-      <article className='prose md:prose-lg lg:prose-xl dark:prose-invert prose-img:rounded-xl prose-a:text-blue-600 max-w-full'>
+      <article className='prose dark:prose-invert prose-pre:bg-gray-100 dark:prose-pre:bg-gray-900 prose-pre:font-normal dark:prose-pre:text-white prose-img:rounded-xl prose-a:text-blue-600 max-w-full'>
         <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
       </article>
     </div>

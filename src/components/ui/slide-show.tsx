@@ -52,7 +52,7 @@ export function SlideShow({ className, cards }: Props) {
       >
         {/* left button */}
         <a
-          onClick={() => paginate(-1)}
+          onClick={() => paginate(1)}
           className={`slideshow-action col-start-1 col-span-1 row-start-3 pr-0.5 z-20 place-self-center justify-self-center`}
         >
           <IoChevronBack />
@@ -69,7 +69,7 @@ export function SlideShow({ className, cards }: Props) {
 
         {/* right button */}
         <a
-          onClick={() => paginate(1)}
+          onClick={() => paginate(-1)}
           className={`slideshow-action col-start-6 md:col-start-12 col-span-1 row-start-3 pl-0.5 z-20 place-self-center justify-self-center`}
         >
           <IoChevronForward />

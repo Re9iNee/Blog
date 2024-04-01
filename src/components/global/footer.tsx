@@ -8,7 +8,7 @@ import FullLogo from "/public/logos/full-logo.svg";
 const Footer = () => {
   return (
     <footer
-      className='max-w-screen-xl px-4 py-6 flex flex-col gap-6 text-left  bg-neutral-100 rounded-tr-3xl rounded-tl-3xl footer-shadow-mobile dark:bg-neutral-950
+      className='max-w-screen-xl px-4 py-6 flex flex-col gap-6 text-left  bg-neutral-100 rounded-tr-3xl rounded-tl-3xl footer-shadow-mobile dark:bg-neutral-900
       md:px-8 md:gap-8
       lg:px-16 lg:gap-10 lg:pt-12
       xl:px-20
@@ -23,7 +23,7 @@ const Footer = () => {
         <FullLogo />
 
         <section className='flex flex-col gap-2 lg:w-96 lg:h-28'>
-          <h3 className='font-bold text-neutral-800 text-base dark:text-neutral-200'>
+          <h3 className='font-bold text-neutral-800 text-base dark:text-neutral-300'>
             What is Mora?
           </h3>
           <p className='text-neutral-500 text-sm leading-5 sm:max-w-xs dark:text-neutral-400'>
@@ -39,7 +39,7 @@ const Footer = () => {
         md:flex-row md:justify-between md:gap-24'
       >
         <section className='flex flex-col gap-2'>
-          <h3 className='text-neutral-800 font-bold text-lg dark:text-neutral-200'>
+          <h3 className='text-neutral-800 font-bold text-lg dark:text-neutral-300'>
             Find us on
           </h3>
           {/* footer links */}

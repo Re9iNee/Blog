@@ -11,7 +11,7 @@ const EmailSignUpInput = ({ maxLength }: ComponentProps<"input">) => {
         type='email'
         maxLength={maxLength}
         name='subscribe-email'
-        className='block w-full text-sm p-4 pr-48 shadow-2xl shadow-slate-200 border border-slate-200 text-gray-900 rounded-3xl bg-neutral-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-none outline-none 
+        className='block w-full text-sm p-4 pr-48 shadow-2xl shadow-slate-200 border border-slate-200 text-gray-900 rounded-3xl bg-neutral-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-background dark:border-gray-800 dark:placeholder-neutral-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-none outline-none 
                 sm:text-sm sm:leading-6'
         placeholder='example@gmail.com'
       />
