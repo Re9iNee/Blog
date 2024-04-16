@@ -1,15 +1,16 @@
 import { Input } from "@/components/ui/input";
 import { uploadToS3 } from "@/service/upload.service";
-import { MouseEventHandler, useRef } from "react";
+import { Loader2 } from "lucide-react";
+import { MouseEventHandler, useRef, useState } from "react";
 import { Button } from "./button";
 import { toast } from "./use-toast";
 
-// TODO: Progress bar
 type Props = {
   onUploadFinished: (url: string) => void;
 };
 export function Uploader({ onUploadFinished, ...props }: Props) {
   const ref = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleImageChange: MouseEventHandler<HTMLButtonElement> = async (
     ev
@@ -22,6 +23,8 @@ export function Uploader({ onUploadFinished, ...props }: Props) {
       return;
     }
 
+    setIsLoading(true);
+
     const formData = new FormData();
     formData.append("file", files[0]);
 
@@ -31,6 +34,9 @@ export function Uploader({ onUploadFinished, ...props }: Props) {
         toast({
           title: "Error uploading",
         });
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -44,11 +50,19 @@ export function Uploader({ onUploadFinished, ...props }: Props) {
         {...props}
       />
       <Button
+        disabled={isLoading}
         className='self-end'
         variant={"secondary"}
         onClick={handleImageChange}
       >
-        Upload
+        {isLoading ? (
+          <>
+            <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+            Uploading...
+          </>
+        ) : (
+          "Upload"
+        )}
       </Button>
     </div>
   );
