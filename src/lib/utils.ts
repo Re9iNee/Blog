@@ -82,3 +82,11 @@ export function paginate<T>(
   // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
   return array.slice((page_number - 1) * page_size, page_number * page_size);
 }
+
+export function getFilenamesFromAmazonS3Url(url: string): string {
+  const regexp = /https:\/\/.+\/\d+\-(.+)/g;
+  const array = [...url.matchAll(regexp)];
+
+  const decodedName = decodeURI(array[0][1]);
+  return decodedName;
+}

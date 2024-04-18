@@ -1,5 +1,7 @@
 "use client";
 
+import { TypographyMuted } from "@/components/typography/muted";
+import { Button } from "@/components/ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -9,7 +11,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { copyTextToClipboard, paginate } from "@/lib/utils";
+import { FaTrash, FaRegCopy } from "react-icons/fa6";
+import {
+  copyTextToClipboard,
+  getFilenamesFromAmazonS3Url,
+  paginate,
+} from "@/lib/utils";
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
@@ -36,25 +43,39 @@ function ImageCard({ files }: Props) {
         {paginate(files, OFFSET, page).map((file) => (
           <div
             key={file}
-            onClick={() => onImageContainerClick(file)}
-            className='group relative w-32 h-32 rounded-xl cursor-pointer'
+            className='border w-full rounded-sm flex relative justify-between p-4'
           >
-            <Image
-              fill
-              key={file}
-              src={file}
-              alt={file}
-              loading='lazy'
-              className='rounded-lg object-cover hover:shadow-lg transition-shadow duration-300 ease-in-out'
-            />
-            <div className='w-full h-full absolute opacity-0 group-hover:opacity-75 bg-gradient-to-l from-violet-500 to-violet-900 rounded-xl backdrop-blur-none group-active:opacity-100 duration-400 text-white font-bold grid place-items-center'>
-              Copy URL
+            <div className='flex gap-2 items-center'>
+              <Image
+                width={150}
+                height={50}
+                key={file}
+                src={file}
+                alt={file}
+                loading='lazy'
+                className='rounded-lg object-cover aspect-square hover:shadow-lg transition-shadow duration-300 ease-in-out'
+              />
+              <TypographyMuted>
+                {getFilenamesFromAmazonS3Url(file)}
+              </TypographyMuted>
+            </div>
+            <div className='flex items-center gap-4'>
+              <Button disabled variant={"outline"} size={"icon"}>
+                <FaTrash className='w-4 h-4' />
+              </Button>
+              <Button
+                size={"icon"}
+                variant={"outline"}
+                onClick={() => onImageContainerClick(file)}
+              >
+                <FaRegCopy className='w-4 h-4' />
+              </Button>
             </div>
           </div>
         ))}
       </div>
 
-      <Pagination>
+      <Pagination className='mt-6'>
         <PaginationContent>
           {page > 1 && (
             <PaginationItem>
