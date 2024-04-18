@@ -11,21 +11,19 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { FaTrash, FaRegCopy } from "react-icons/fa6";
-import {
-  copyTextToClipboard,
-  getFilenamesFromAmazonS3Url,
-  paginate,
-} from "@/lib/utils";
+import { copyTextToClipboard, paginate } from "@/lib/utils";
+import { FaRegCopy, FaTrash } from "react-icons/fa6";
 
+import { deleteFileFromS3 } from "@/service/upload.service";
+import { S3File } from "@/types/s3file";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
-const OFFSET = 10;
+const OFFSET = 200;
 
 type Props = {
-  files: string[];
+  files: S3File[];
 };
 function ImageCard({ files }: Props) {
   const [page, setPage] = useState(1);
@@ -37,42 +35,57 @@ function ImageCard({ files }: Props) {
     toast.success("Copied to clipboard");
   };
 
+  const onDelete = (key: string) => {
+    // delete the file from s3
+    deleteFileFromS3(key)
+      .then(() => {
+        toast.success("File deleted successfully");
+      })
+      .catch((error) => {
+        toast.error(error);
+      });
+  };
+
   return (
     <div>
       <div className='flex gap-4 flex-wrap'>
-        {paginate(files, OFFSET, page).map((file) => (
-          <div
-            key={file}
-            className='border w-full rounded-sm flex relative justify-between p-4'
-          >
-            <div className='flex gap-2 items-center'>
-              <Image
-                width={150}
-                height={50}
-                key={file}
-                src={file}
-                alt={file}
-                loading='lazy'
-                className='rounded-lg object-cover aspect-square hover:shadow-lg transition-shadow duration-300 ease-in-out'
-              />
-              <TypographyMuted>
-                {getFilenamesFromAmazonS3Url(file)}
-              </TypographyMuted>
+        {paginate(files, OFFSET, page).map((file) => {
+          return (
+            <div
+              key={file.id}
+              className='border w-full rounded-sm flex relative justify-between p-4'
+            >
+              <div className='flex gap-2 items-center'>
+                <Image
+                  width={150}
+                  height={50}
+                  key={file.key}
+                  src={file.url}
+                  alt={file.name}
+                  loading='lazy'
+                  className='rounded-lg object-cover aspect-square hover:shadow-lg transition-shadow duration-300 ease-in-out'
+                />
+                <TypographyMuted>{file.name}</TypographyMuted>
+              </div>
+              <div className='flex items-center gap-4'>
+                <Button
+                  size={"icon"}
+                  variant={"outline"}
+                  onClick={() => onDelete(file.key)}
+                >
+                  <FaTrash className='w-4 h-4' />
+                </Button>
+                <Button
+                  size={"icon"}
+                  variant={"outline"}
+                  onClick={() => onImageContainerClick(file.url)}
+                >
+                  <FaRegCopy className='w-4 h-4' />
+                </Button>
+              </div>
             </div>
-            <div className='flex items-center gap-4'>
-              <Button disabled variant={"outline"} size={"icon"}>
-                <FaTrash className='w-4 h-4' />
-              </Button>
-              <Button
-                size={"icon"}
-                variant={"outline"}
-                onClick={() => onImageContainerClick(file)}
-              >
-                <FaRegCopy className='w-4 h-4' />
-              </Button>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <Pagination className='mt-6'>

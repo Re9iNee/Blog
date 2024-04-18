@@ -62,6 +62,14 @@ export function getS3ObjectURLFromKey(key: string): string {
   return url;
 }
 
+export function getS3ObjectKeyFromURL(url: string): string {
+  const cdnUrl = process.env.S3_CLOUDFRONT_DOMAIN_URL;
+  if (!cdnUrl) throw new Error("S3_CLOUDFRONT_DOMAIN_URL variable is not set");
+
+  const key = url.replace(cdnUrl, "");
+  return key;
+}
+
 export function getRandomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -84,9 +92,12 @@ export function paginate<T>(
 }
 
 export function getFilenamesFromAmazonS3Url(url: string): string {
+  // gives the file name from the url
+  // input: https://d1ntfq67otjmwh.cloudfront.net/mora-blog-files/1709133016570-Social%20Proofing%20-%20Section%201%20-%20Beneath%20the%20Surface.webp
+  // output: Social Proofing - Section 1 - Beneath the Surface.webp
   const regexp = /https:\/\/.+\/\d+\-(.+)/g;
-  const array = [...url.matchAll(regexp)];
+  const matchedArray = [...url.matchAll(regexp)];
 
-  const decodedName = decodeURI(array[0][1]);
+  const decodedName = decodeURI(matchedArray[0][1]);
   return decodedName;
 }
