@@ -79,7 +79,8 @@ export async function getUploadedFiles(): Promise<S3File[]> {
     //  filter out the undefined values after mapping
     .filter((file): file is S3File => file !== undefined);
 
-  return files;
+  // get the latest files first
+  return files.reverse();
 }
 
 export async function deleteFileFromS3(key: string) {

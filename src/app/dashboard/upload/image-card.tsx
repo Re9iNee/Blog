@@ -92,12 +92,18 @@ function ImageCard({ files }: Props) {
         <PaginationContent>
           {page > 1 && (
             <PaginationItem>
-              <PaginationPrevious onClick={() => setPage((prev) => prev - 1)} />
+              <PaginationPrevious
+                className='cursor-pointer'
+                onClick={() => setPage((prev) => prev - 1)}
+              />
             </PaginationItem>
           )}
           {page > 1 && (
             <PaginationItem>
-              <PaginationLink onClick={() => setPage((prev) => prev - 1)}>
+              <PaginationLink
+                className='cursor-pointer'
+                onClick={() => setPage((prev) => prev - 1)}
+              >
                 {page - 1}
               </PaginationLink>
             </PaginationItem>
@@ -108,7 +114,10 @@ function ImageCard({ files }: Props) {
           {hasMore && (
             <>
               <PaginationItem>
-                <PaginationLink onClick={() => setPage((prev) => prev + 1)}>
+                <PaginationLink
+                  className='cursor-pointer'
+                  onClick={() => setPage((prev) => prev + 1)}
+                >
                   {page + 1}
                 </PaginationLink>
               </PaginationItem>
@@ -116,7 +125,10 @@ function ImageCard({ files }: Props) {
                 <PaginationEllipsis />
               </PaginationItem>
               <PaginationItem>
-                <PaginationNext onClick={() => setPage((prev) => prev + 1)} />
+                <PaginationNext
+                  className='cursor-pointer'
+                  onClick={() => setPage((prev) => prev + 1)}
+                />
               </PaginationItem>
             </>
           )}
