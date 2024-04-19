@@ -6,7 +6,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getUploadedFiles } from "@/service/upload.service";
-import Image from "next/image";
 import ImageCard from "./image-card";
 
 async function UploadList() {
