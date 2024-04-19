@@ -1,10 +1,6 @@
 "use server";
 
-import {
-  getFilenamesFromAmazonS3Url,
-  getS3ObjectKeyFromURL,
-  getS3ObjectURLFromKey,
-} from "@/lib/utils";
+import { getS3ObjectURLFromKey } from "@/lib/utils";
 import { S3File } from "@/types/s3file";
 import {
   DeleteObjectCommand,
@@ -50,6 +46,7 @@ export async function uploadToS3(data: FormData): Promise<string> {
 export async function getUploadedFiles(): Promise<S3File[]> {
   if (process.env.S3_UPLOAD_DIR === undefined)
     throw new Error("S3_UPLOAD_DIR is not set");
+
   // get all files from /mora-blog-files directory in s3 and use pagination to get all files
   const params = {
     Bucket: process.env.S3_BUCKET,

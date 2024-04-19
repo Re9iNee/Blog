@@ -20,7 +20,7 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
-const OFFSET = 200;
+const OFFSET = 5;
 
 type Props = {
   files: S3File[];
@@ -97,7 +97,9 @@ function ImageCard({ files }: Props) {
           )}
           {page > 1 && (
             <PaginationItem>
-              <PaginationLink href='#'>{page - 1}</PaginationLink>
+              <PaginationLink onClick={() => setPage((prev) => prev - 1)}>
+                {page - 1}
+              </PaginationLink>
             </PaginationItem>
           )}
           <PaginationItem>
