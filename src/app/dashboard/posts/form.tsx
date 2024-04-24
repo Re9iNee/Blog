@@ -195,7 +195,7 @@ function PostForm({ initialValues, actionFn, closeModal }: Props) {
                     <SelectItem
                       key={status}
                       value={status}
-                      data-cy={`status_${status}`}
+                      data-cy={`status-${status}`}
                     >
                       {status}
                     </SelectItem>

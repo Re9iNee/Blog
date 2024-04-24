@@ -27,7 +27,7 @@ export function DataTableToolbar<TData>({
   return (
     <div className='flex items-center justify-between'>
       <div className='flex flex-1 items-center space-x-2'>
-        <Button size='sm' onClick={onOpen}>
+        <Button size='sm' onClick={onOpen} data-cy='create'>
           <FaPlus className='mr-2 h-4 w-4' />
           Create a post
         </Button>

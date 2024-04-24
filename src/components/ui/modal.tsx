@@ -18,7 +18,7 @@ function Modal({ isOpen, children, onOpenChange, header }: Props) {
   return (
     <NextUiModal
       isOpen={isOpen}
-      isDismissable={true}
+      isDismissable={false}
       placement='top-center'
       onOpenChange={onOpenChange}
     >

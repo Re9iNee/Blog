@@ -51,6 +51,7 @@ export function Uploader({ onUploadFinished, ...props }: Props) {
       />
       <Button
         disabled={isLoading}
+        data-cy='upload-btn'
         className='self-end'
         variant={"secondary"}
         onClick={handleImageChange}

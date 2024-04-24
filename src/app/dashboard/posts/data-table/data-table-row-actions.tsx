@@ -55,6 +55,7 @@ export function DataTableRowActions<TData>({
         <DropdownMenuTrigger asChild>
           <Button
             variant='ghost'
+            data-cy='action-menu'
             className='flex h-8 w-8 p-0 data-[state=open]:bg-muted'
           >
             <DotsHorizontalIcon className='h-4 w-4' />
@@ -62,7 +63,9 @@ export function DataTableRowActions<TData>({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end' className='w-[160px]'>
-          <DropdownMenuItem onClick={onOpen}>Edit</DropdownMenuItem>
+          <DropdownMenuItem data-cy='edit-post' onClick={onOpen}>
+            Edit
+          </DropdownMenuItem>
           <Link href={`/posts/${post.id}`} target='_blank'>
             <DropdownMenuItem>Visit post</DropdownMenuItem>
           </Link>
