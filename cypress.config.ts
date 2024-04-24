@@ -8,10 +8,8 @@ export default defineConfig({
       bundler: "webpack",
     },
   },
-  fixturesFolder: false,
   e2e: {
     baseUrl: "http://localhost:3000",
-    supportFile: false,
     setupNodeEvents(on, config) {
       config.env = config.env || {};
       config.env.email = process.env.ADMIN_EMAIL;
