@@ -128,8 +128,6 @@ export async function clapToPost(id: number, amount: number): Promise<number> {
   noStore();
   if (!id) throw new Error("post ID is required");
 
-  console.log({ id, amount });
-
   const updatedPost = await prisma.post.update({
     where: { id },
     data: {
@@ -142,7 +140,6 @@ export async function clapToPost(id: number, amount: number): Promise<number> {
     },
   });
 
-  console.log("Clap Submitted Successfully", updatedPost.claps);
   return updatedPost.claps;
 }
 

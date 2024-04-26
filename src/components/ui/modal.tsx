@@ -4,7 +4,6 @@ import {
   ModalFooter,
   ModalHeader,
   Modal as NextUiModal,
-  useDisclosure,
 } from "@nextui-org/react";
 import { ReactNode, memo } from "react";
 

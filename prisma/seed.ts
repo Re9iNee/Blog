@@ -12,7 +12,7 @@ async function main() {
   await insertAdmin();
   console.log(await getHash("examplePassword"));
   // await insertUsers(2);
-  // await insertPosts(1);
+  // await insertPosts(40);
   // await getAllAuthors();
   // await getAllDB();
 }
@@ -122,7 +122,7 @@ async function insertPosts(limit: number = 10) {
       authorId: randomAuthor.id,
       status: PostStatus.published,
       title: faker.lorem.sentence(),
-      summary: faker.lorem.paragraph(),
+      summary: faker.lorem.sentence(),
       body: faker.lorem.paragraphs(10),
       readingTime: faker.number.int({ max: 30 }),
       publishedAt: faker.date.past({ years: 1 }),
