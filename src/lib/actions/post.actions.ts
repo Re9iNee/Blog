@@ -7,7 +7,7 @@ import { prisma } from "../prisma";
 
 const CreatePost = postSchema.omit({ id: true });
 
-export async function createPost(formData: FormData) {
+export async function createPost(prevState: unknown, formData: FormData) {
   // Validate form using Zod
   const validatedFields = CreatePost.safeParse({
     body: formData.get("body"),

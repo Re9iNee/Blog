@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 
 import {
@@ -31,13 +31,11 @@ import { FaMarkdown } from "react-icons/fa6";
 
 import { Switch } from "@/components/ui/switch";
 import { Uploader } from "@/components/ui/uploader";
-import { postSchema } from "@/types/schemas/post-schema";
-import { useSession } from "next-auth/react";
-import Image from "next/image";
-import Link from "next/link";
 import { createPost } from "@/lib/actions/post.actions";
 import { AuthorField } from "@/types/author";
-import { notFound } from "next/navigation";
+import { postSchema } from "@/types/schemas/post-schema";
+import Image from "next/image";
+import Link from "next/link";
 
 function CreatePostForm({
   authors,
@@ -46,7 +44,7 @@ function CreatePostForm({
   authorId: number;
   authors: AuthorField[];
 }) {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [, formAction] = useFormState(createPost, undefined);
 
   const form = useForm<PostModel>({
     mode: "onChange",
@@ -78,7 +76,7 @@ function CreatePostForm({
   return (
     <Form {...form}>
       <form
-        action={createPost}
+        action={formAction}
         className='space-y-8'
         name='create-post-form'
         data-cy='create-post-form'
@@ -300,15 +298,7 @@ function CreatePostForm({
           </div>
         </div>
 
-        <Button
-          type='submit'
-          data-cy='submit-btn'
-          disabled={isLoading}
-          aria-disabled={isLoading}
-        >
-          {isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
-          Create Post
-        </Button>
+        <Submit />
 
         {/* hide on production */}
         {process.env.NODE_ENV === "development" && (
@@ -322,6 +312,17 @@ function CreatePostForm({
         )}
       </form>
     </Form>
+  );
+}
+
+function Submit() {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button type='submit' data-cy='submit-btn' aria-disabled={pending}>
+      {pending && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
+      Create Post
+    </Button>
   );
 }
 
