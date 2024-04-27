@@ -79,7 +79,10 @@ function UploadInput() {
                   <FormItem>
                     <FormLabel>File</FormLabel>
                     <FormControl>
-                      <Uploader onUploadFinished={onUploadFinished} />
+                      <Uploader
+                        name='file'
+                        onUploadFinished={onUploadFinished}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
