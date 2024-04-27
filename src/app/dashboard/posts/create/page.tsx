@@ -14,8 +14,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export default async function CreatePostPage() {
-  const authors = await fetchAuthors();
-  const session = await getServerSession(authOptions);
+  const [authors, session] = await Promise.all([
+    fetchAuthors(),
+    getServerSession(authOptions),
+  ]);
+
   const authorId = session?.user.id;
 
   if (!authorId) notFound();
