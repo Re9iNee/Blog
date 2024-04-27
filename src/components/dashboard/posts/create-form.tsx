@@ -129,8 +129,8 @@ function CreatePostForm({
         />
 
         <FormField
-          control={form.control}
           name='status'
+          control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Status</FormLabel>
@@ -148,7 +148,7 @@ function CreatePostForm({
                 }}
               >
                 <FormControl>
-                  <SelectTrigger data-cy='status'>
+                  <SelectTrigger data-cy='status-select-trigger'>
                     <SelectValue placeholder='Select a Status' />
                   </SelectTrigger>
                 </FormControl>
