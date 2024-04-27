@@ -31,25 +31,29 @@ import { FaMarkdown } from "react-icons/fa6";
 
 import { Switch } from "@/components/ui/switch";
 import { Uploader } from "@/components/ui/uploader";
-import { createPost } from "@/lib/actions/post.actions";
+import { updatePost } from "@/lib/actions/post.actions";
 import { AuthorField } from "@/types/author";
 import { postSchema } from "@/types/schemas/post-schema";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 
-function CreatePostForm({
+function EditPostForm({
+  postId,
   authors,
-  authorId,
+  initialValues,
 }: {
-  authorId: number;
+  postId: number;
   authors: AuthorField[];
+  initialValues: PostModel;
 }) {
-  const [, formAction] = useFormState(createPost, undefined);
+  const updatePostWithId = updatePost.bind(null, postId);
+  const [, formAction] = useFormState(updatePostWithId, undefined);
 
   const form = useForm<PostModel>({
     mode: "onChange",
-    defaultValues: { authorId },
     resolver: zodResolver(postSchema),
+    defaultValues: { ...initialValues },
   });
 
   const onUploadFinished = (url: string) => {
@@ -118,6 +122,7 @@ function CreatePostForm({
                 <FormLabel>Main Image</FormLabel>
                 <FormControl>
                   <Uploader
+                    defaultValue={form.getValues("mainImageUrl") ?? ""}
                     name='mainImageUrl'
                     onUploadFinished={onUploadFinished}
                   />
@@ -129,12 +134,13 @@ function CreatePostForm({
         />
 
         <FormField
-          control={form.control}
           name='status'
+          control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Status</FormLabel>
               <Select
+                name='status'
                 defaultValue={field.value}
                 onValueChange={(val) => {
                   // switch isSlideshow value based on status of post
@@ -324,9 +330,9 @@ function Submit() {
   return (
     <Button type='submit' data-cy='submit-btn' aria-disabled={pending}>
       {pending && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
-      Create Post
+      Update Post
     </Button>
   );
 }
 
-export default CreatePostForm;
+export default EditPostForm;

@@ -12,6 +12,7 @@ export async function createPost(prevState: unknown, formData: FormData) {
   const validatedFields = CreatePost.safeParse({
     body: formData.get("body"),
     title: formData.get("title"),
+    status: formData.get("status"),
     summary: formData.get("summary"),
     authorId: formData.get("authorId"),
     readingTime: formData.get("readingTime"),
@@ -27,6 +28,43 @@ export async function createPost(prevState: unknown, formData: FormData) {
 
   try {
     await prisma.post.create({
+      data: validatedFields.data,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+
+  revalidatePath("/dashboard/posts");
+  redirect("/dashboard/posts");
+}
+
+const UpdatePost = postSchema.omit({ id: true });
+
+export async function updatePost(
+  id: number,
+  prevState: unknown,
+  formData: FormData
+) {
+  const validatedFields = UpdatePost.safeParse({
+    body: formData.get("body"),
+    title: formData.get("title"),
+    status: formData.get("status"),
+    summary: formData.get("summary"),
+    authorId: formData.get("authorId"),
+    readingTime: formData.get("readingTime"),
+    mainImageUrl: formData.get("mainImageUrl"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Missing Fields. Failed to Update Post.",
+    };
+  }
+
+  try {
+    await prisma.post.update({
+      where: { id },
       data: validatedFields.data,
     });
   } catch (e) {

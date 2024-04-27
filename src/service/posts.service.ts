@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma";
 import { PostModel } from "@/types/post";
 import { PostStatus } from "@prisma/client";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
-import { notFound } from "next/navigation";
 
 export async function getSlideshowContents(): Promise<PostModel[]> {
   const posts = await prisma.post.findMany({
@@ -42,15 +41,20 @@ export async function getAllPosts(): Promise<PostModel[]> {
   return posts;
 }
 
-export async function getPost(id: number): Promise<PostModel> {
-  const post = await prisma.post.findUnique({
-    where: { id },
-    include: { author: true, categories: true },
-  });
+export async function getPost(id: number): Promise<PostModel | null> {
+  noStore();
 
-  if (!post) notFound();
+  try {
+    const post = await prisma.post.findUnique({
+      where: { id },
+      include: { author: true, categories: true },
+    });
 
-  return post;
+    return post;
+  } catch (e) {
+    console.error(e);
+    throw new Error("Post not found");
+  }
 }
 
 export async function updatePost(

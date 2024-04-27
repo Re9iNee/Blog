@@ -18,7 +18,7 @@ export const postSchema = z.object({
   createdAt: z.date().default(new Date()),
   isSlideshow: z.boolean().default(false),
   mainImageUrl: z.string().url().nullish(),
-  status: z.enum(["draft", "published", "archived"]).default("draft"),
+  status: z.enum(["published", "draft", "archived"]).default("draft"),
 
   // TODO
   // author: z.any().optional(),
