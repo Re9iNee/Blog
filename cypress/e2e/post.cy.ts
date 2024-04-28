@@ -10,10 +10,13 @@ describe("Post", () => {
   it("Creates a new Blog Post", () => {
     cy.get('[data-cy="create"]').should("be.visible").click();
 
-    cy.url().should("be", "/dashboard/posts/create");
+    cy.url().should("contain", "/dashboard/posts/create");
 
-    cy.get('[data-cy="name"]').type(faker.lorem.slug(20));
-    cy.get('[data-cy="status"]').select(PostStatus.published);
+    cy.get('[data-cy="name"]').type(faker.lorem.sentence());
+
+    cy.get('[data-cy="status-select-trigger"]').click();
+    cy.get('[data-cy="status-published"]').click();
+
     cy.get('[data-cy="reading-time"]').type(
       faker.number.int({ min: 1, max: 20 }).toString()
     );
@@ -22,11 +25,9 @@ describe("Post", () => {
     );
     cy.get('[data-cy="body"]').type(faker.lorem.paragraphs(1));
 
-    cy.get('[data-cy="submit-btn"]').click();
+    cy.get('[data-cy="create-post-form"]').submit();
 
-    cy.url().should("be", "/dashboard/posts");
-
-    cy.get('[data-cy="toast"]').should("be.visible");
+    cy.url().should("not.contain", "create");
   });
 
   it("Views a Blog Post", () => {

@@ -18,11 +18,9 @@ import {
   deletePost as deletePostService,
   updatePost,
 } from "@/service/posts.service";
-import { useDisclosure } from "@nextui-org/react";
 import Link from "next/link";
 import { useCallback } from "react";
-import PostForm from "../form";
-import { postSchema } from "../post-schema";
+import { postSchema } from "@/types/schemas/post-schema";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -32,7 +30,6 @@ export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const post = postSchema.parse(row.original);
-  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
   const deletePost = useCallback(async (id: number) => {
     try {
@@ -50,33 +47,32 @@ export function DataTableRowActions<TData>({
   }, []);
 
   return (
-    <>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            variant='ghost'
-            data-cy='action-menu'
-            className='flex h-8 w-8 p-0 data-[state=open]:bg-muted'
-          >
-            <DotsHorizontalIcon className='h-4 w-4' />
-            <span className='sr-only'>Open menu</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align='end' className='w-[160px]'>
-          <DropdownMenuItem data-cy='edit-post' onClick={onOpen}>
-            Edit
-          </DropdownMenuItem>
-          <Link href={`/posts/${post.id}`} target='_blank'>
-            <DropdownMenuItem>Visit post</DropdownMenuItem>
-          </Link>
-          <DropdownMenuItem className='cursor-not-allowed'>
-            Make a copy
-          </DropdownMenuItem>
-          <DropdownMenuItem className='cursor-not-allowed'>
-            Favorite
-          </DropdownMenuItem>
-          {/* TODO: fetch categories to show in labels */}
-          {/* <DropdownMenuSeparator />
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant='ghost'
+          data-cy='action-menu'
+          className='flex h-8 w-8 p-0 data-[state=open]:bg-muted'
+        >
+          <DotsHorizontalIcon className='h-4 w-4' />
+          <span className='sr-only'>Open menu</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align='end' className='w-[160px]'>
+        <DropdownMenuItem data-cy='edit-post' asChild>
+          <Link href={`/dashboard/posts/${post.id}/edit`}>Edit</Link>
+        </DropdownMenuItem>
+        <Link href={`/posts/${post.id}`} target='_blank'>
+          <DropdownMenuItem>Visit post</DropdownMenuItem>
+        </Link>
+        <DropdownMenuItem className='cursor-not-allowed'>
+          Make a copy
+        </DropdownMenuItem>
+        <DropdownMenuItem className='cursor-not-allowed'>
+          Favorite
+        </DropdownMenuItem>
+        {/* TODO: fetch categories to show in labels */}
+        {/* <DropdownMenuSeparator />
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
@@ -89,24 +85,15 @@ export function DataTableRowActions<TData>({
             </DropdownMenuRadioGroup>
           </DropdownMenuSubContent>
         </DropdownMenuSub> */}
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            className='cursor-pointer'
-            onClick={() => deletePost(post.id!)}
-          >
-            Delete
-            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-
-      <Modal isOpen={isOpen} header={`Edit Post`} onOpenChange={onOpenChange}>
-        <PostForm
-          closeModal={onClose}
-          initialValues={post}
-          actionFn={updatePost}
-        />
-      </Modal>
-    </>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          className='cursor-pointer'
+          onClick={() => deletePost(post.id!)}
+        >
+          Delete
+          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

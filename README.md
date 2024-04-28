@@ -2,9 +2,9 @@
 
 ### Technologies
 
-
 Typescript, NextJS, Postgresql.
 
 ### Lighthouse Scores
 
 1. [18 Dec.](https://pagespeed.web.dev/analysis/https-blog-fawn-zeta-56-vercel-app/dcoepd9epi?form_factor=mobile)
+2. [19 Apr.](https://pagespeed.web.dev/analysis/https-mora-ed-com/m3gbutq7x6?form_factor=desktop)

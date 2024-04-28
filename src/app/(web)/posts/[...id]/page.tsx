@@ -11,16 +11,18 @@ import { RxDotFilled } from "react-icons/rx";
 import ClapContainer from "@/components/posts/claps/clap-container";
 import { unstable_noStore as noStore } from "next/cache";
 import PostNavigationGroup from "../nav";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: { id: string };
 };
 
 async function PostPage({ params }: Props) {
-  noStore();
   const id = params.id;
 
   const data = await getPost(+id);
+  if (!data) notFound();
+
   const htmlContent = await markdownToHTML(data.body ?? "");
 
   return (
