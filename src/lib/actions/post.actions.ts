@@ -1,22 +1,17 @@
 "use server";
 
-import { postSchema } from "@/types/schemas/post-schema";
+import { PostModel } from "@/types/post";
+import {
+  CreatePostSchema,
+  UpdatePostSchema,
+} from "@/types/schemas/post-schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "../prisma";
 
-const CreatePost = postSchema.omit({ id: true });
-
-export async function createPost(prevState: unknown, formData: FormData) {
+export async function createPost(data: PostModel) {
   // Validate form using Zod
-  const validatedFields = CreatePost.safeParse({
-    body: formData.get("body"),
-    title: formData.get("title"),
-    status: formData.get("status"),
-    summary: formData.get("summary"),
-    authorId: formData.get("authorId"),
-    readingTime: formData.get("readingTime"),
-  });
+  const validatedFields = CreatePostSchema.safeParse(data);
 
   // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
@@ -31,21 +26,20 @@ export async function createPost(prevState: unknown, formData: FormData) {
       data: validatedFields.data,
     });
   } catch (e) {
-    console.log(e);
+    console.error(e);
+    throw new Error("Failed to create post.");
   }
 
   revalidatePath("/dashboard/posts");
   redirect("/dashboard/posts");
 }
 
-const UpdatePost = postSchema.omit({ id: true });
-
 export async function updatePost(
   id: number,
   prevState: unknown,
   formData: FormData
 ) {
-  const validatedFields = UpdatePost.safeParse({
+  const validatedFields = UpdatePostSchema.safeParse({
     body: formData.get("body"),
     title: formData.get("title"),
     status: formData.get("status"),
