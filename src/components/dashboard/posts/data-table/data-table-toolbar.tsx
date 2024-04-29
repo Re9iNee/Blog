@@ -5,8 +5,8 @@ import { FaPlus } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { DataTableFacetedFilter } from "../../../../components/dashboard/table/data-table-faceted-filter";
-import { DataTableViewOptions } from "../../../../components/dashboard/table/data-table-view-options";
+import { DataTableFacetedFilter } from "../../../ui/table/data-table-faceted-filter";
+import { DataTableViewOptions } from "../../../ui/table/data-table-view-options";
 import { statuses } from "./data";
 
 interface DataTableToolbarProps<TData> {

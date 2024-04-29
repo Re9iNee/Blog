@@ -1,6 +1,6 @@
 "use client";
 
-import { DataTable } from "@/components/dashboard/table/data-table";
+import { DataTable } from "@/components/ui/table/data-table";
 import { toast } from "@/components/ui/use-toast";
 import { deleteManyPosts } from "@/service/posts.service";
 import { PostModel } from "@/types/post";

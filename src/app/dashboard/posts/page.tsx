@@ -1,7 +1,7 @@
 import { getAllPosts } from "@/service/posts.service";
 import { PostModel } from "@/types/post";
-import { columns } from "./data-table/columns";
-import PostTable from "./post-table";
+import { columns } from "../../../components/dashboard/posts/data-table/columns";
+import PostTable from "../../../components/dashboard/posts/post-table";
 
 async function DashboardPostPage() {
   const posts: PostModel[] = await getAllPosts();

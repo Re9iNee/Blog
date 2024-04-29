@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DataTableToolbar } from "../../../app/dashboard/posts/data-table/data-table-toolbar";
+import { DataTableToolbar } from "../../dashboard/posts/data-table/data-table-toolbar";
 import { DataTablePagination } from "./data-table-pagination";
 
 interface DataTableProps<TData, TValue> {

@@ -6,7 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 import { statuses } from "./data";
 
-import { DataTableColumnHeader } from "@/components/dashboard/table/data-table-column-header";
+import { DataTableColumnHeader } from "@/components/ui/table/data-table-column-header";
 import { Switch } from "@/components/ui/switch";
 import { slideshowTogglePostVisibility } from "@/service/posts.service";
 import { PostModel } from "@/types/post";
