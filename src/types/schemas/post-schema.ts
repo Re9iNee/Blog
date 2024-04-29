@@ -24,3 +24,6 @@ export const postSchema = z.object({
   // author: z.any().optional(),
   // categories: z.array(z.any()).optional(),
 });
+
+export const CreatePostSchema = postSchema.omit({ id: true });
+export const UpdatePostSchema = postSchema.omit({ id: true });

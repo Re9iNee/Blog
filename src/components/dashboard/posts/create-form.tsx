@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 
 import {
@@ -33,9 +33,10 @@ import { Switch } from "@/components/ui/switch";
 import { Uploader } from "@/components/ui/uploader";
 import { createPost } from "@/lib/actions/post.actions";
 import { AuthorField } from "@/types/author";
-import { postSchema } from "@/types/schemas/post-schema";
+import { CreatePostSchema, postSchema } from "@/types/schemas/post-schema";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 function CreatePostForm({
   authors,
@@ -44,12 +45,14 @@ function CreatePostForm({
   authorId: number;
   authors: AuthorField[];
 }) {
-  const [, formAction] = useFormState(createPost, undefined);
+  const [isPending, setIsPending] = useState<boolean>(false);
 
   const form = useForm<PostModel>({
     mode: "onChange",
-    defaultValues: { authorId },
-    resolver: zodResolver(postSchema),
+    defaultValues: {
+      authorId,
+    },
+    resolver: zodResolver(CreatePostSchema),
   });
 
   const onUploadFinished = (url: string) => {
@@ -72,14 +75,20 @@ function CreatePostForm({
       ),
     });
   };
+  const onSubmit = async (values: PostModel) => {
+    setIsPending(true);
+
+    // if its successful it would redirect to posts page, so no need to update isPending state
+    await createPost(values).catch(() => setIsPending(false));
+  };
 
   return (
     <Form {...form}>
       <form
-        action={formAction}
         className='space-y-8'
         name='create-post-form'
         data-cy='create-post-form'
+        onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
           name='title'
@@ -89,7 +98,6 @@ function CreatePostForm({
               <FormLabel>Title</FormLabel>
               <FormControl>
                 <Input
-                  required
                   data-cy='name'
                   placeholder='Enter post title'
                   {...field}
@@ -205,7 +213,6 @@ function CreatePostForm({
               <FormLabel>time to read</FormLabel>
               <FormControl>
                 <Input
-                  required
                   type='number'
                   data-cy='reading-time'
                   placeholder='Enter post reading time'
@@ -301,7 +308,10 @@ function CreatePostForm({
           </div>
         </div>
 
-        <Submit />
+        <Button type='submit' data-cy='submit-btn' aria-disabled={isPending}>
+          {isPending && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
+          Create Post
+        </Button>
 
         {/* hide on production */}
         {process.env.NODE_ENV === "development" && (
@@ -315,17 +325,6 @@ function CreatePostForm({
         )}
       </form>
     </Form>
-  );
-}
-
-function Submit() {
-  const { pending } = useFormStatus();
-
-  return (
-    <Button type='submit' data-cy='submit-btn' aria-disabled={pending}>
-      {pending && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
-      Create Post
-    </Button>
   );
 }
 
