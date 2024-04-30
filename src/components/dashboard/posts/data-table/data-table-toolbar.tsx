@@ -5,6 +5,8 @@ import { FaPlus } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 import { DataTableFacetedFilter } from "../../../ui/table/data-table-faceted-filter";
 import { DataTableViewOptions } from "../../../ui/table/data-table-view-options";
 import { statuses } from "./data";
@@ -16,7 +18,33 @@ interface DataTableToolbarProps<TData> {
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
-  const isFiltered = table.getState().columnFilters.length > 0;
+  const { replace } = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const isFiltered = searchParams.has("query");
+
+  const handleSearch = useDebouncedCallback((term: string) => {
+    table.getColumn("title")?.setFilterValue(term);
+
+    const params = new URLSearchParams(searchParams);
+    params.set("page", "1");
+
+    if (term) {
+      params.set("query", term);
+    } else {
+      params.delete("query");
+    }
+
+    replace(`${pathname}?${params.toString()}`);
+  }, 500);
+
+  const handleReset = () => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", "1");
+    params.delete("query");
+    replace(`${pathname}?${params.toString()}`);
+  };
 
   return (
     <div className='flex items-center justify-between'>
@@ -29,10 +57,8 @@ export function DataTableToolbar<TData>({
         </Button>
         <Input
           placeholder='Filter posts...'
-          value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("title")?.setFilterValue(event.target.value)
-          }
+          defaultValue={searchParams.get("query")?.toString()}
+          onChange={(event) => handleSearch(event.target.value)}
           className='h-8 w-[150px] lg:w-[250px]'
         />
         {table.getColumn("status") && (
@@ -45,7 +71,7 @@ export function DataTableToolbar<TData>({
         {isFiltered && (
           <Button
             variant='ghost'
-            onClick={() => table.resetColumnFilters()}
+            onClick={() => handleReset()}
             className='h-8 px-2 lg:px-3'
           >
             Reset

@@ -21,16 +21,18 @@ import React from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
 type Props = {
+  query?: string;
   posts: PostModel[];
   columns: ColumnDef<PostModel, PostModel>[];
 };
-function PostTable({ posts, columns }: Props) {
+function PostTable({ posts, columns, query }: Props) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([
+    { id: "title", value: query ?? "" },
+  ]);
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const table = useReactTable({
