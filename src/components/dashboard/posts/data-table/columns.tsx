@@ -6,13 +6,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 import { statuses } from "./data";
 
+import SpinnerCheckbox from "@/components/dashboard/spinner-checkbox";
 import { DataTableColumnHeader } from "@/components/ui/table/data-table-column-header";
-import { Switch } from "@/components/ui/switch";
 import { slideshowTogglePostVisibility } from "@/service/posts.service";
 import { PostModel } from "@/types/post";
 import { DataTableRowActions } from "./data-table-row-actions";
-import { useState } from "react";
-import SpinnerCheckbox from "@/components/dashboard/spinner-checkbox";
 
 export const columns: ColumnDef<PostModel>[] = [
   {

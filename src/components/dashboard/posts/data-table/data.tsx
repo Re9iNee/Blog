@@ -1,7 +1,7 @@
 import {
   ArchiveIcon,
-  StopwatchIcon,
   CheckCircledIcon,
+  StopwatchIcon,
 } from "@radix-ui/react-icons";
 
 export const statuses = [
