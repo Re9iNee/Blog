@@ -27,15 +27,28 @@ export async function getAllPublishedPosts(
   return posts;
 }
 
-export async function getAllPosts(): Promise<PostModel[]> {
+const ITEMS_PER_PAGE = 10;
+type getAllPosts = {
+  page: number;
+  query?: string;
+};
+export async function getAllPosts({
+  page,
+  query,
+}: getAllPosts): Promise<PostModel[]> {
   noStore();
 
   const posts = await prisma.post.findMany({
+    where: {
+      title: { contains: query, mode: "insensitive" },
+    },
     orderBy: { id: "desc" },
     include: {
       author: true,
       categories: true,
     },
+    take: ITEMS_PER_PAGE,
+    skip: (page - 1) * ITEMS_PER_PAGE,
   });
 
   return posts;
