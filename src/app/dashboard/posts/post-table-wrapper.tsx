@@ -13,7 +13,7 @@ export default async function PostTableWrapper({
   perPage,
 }: Props) {
   const [totalPosts, posts] = await Promise.all([
-    await fetchTotalPostsCount({ query }),
+    await fetchTotalPostsCount(query),
     await getAllPosts({
       page,
       query,

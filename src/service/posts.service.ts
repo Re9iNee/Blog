@@ -28,13 +28,13 @@ export async function getAllPublishedPosts(
 }
 
 type getAllPosts = {
-  page: number;
-  perPage: number;
+  page?: number;
+  perPage?: number;
   query?: string;
 };
 export async function getAllPosts({
-  page,
-  perPage,
+  page = 1,
+  perPage = 10,
   query,
 }: getAllPosts): Promise<PostModel[]> {
   noStore();
@@ -55,11 +55,7 @@ export async function getAllPosts({
   return posts;
 }
 
-export async function fetchTotalPostsCount({
-  query,
-}: {
-  query?: string;
-}): Promise<number> {
+export async function fetchTotalPostsCount(query?: string): Promise<number> {
   noStore();
 
   const count = await prisma.post.count({

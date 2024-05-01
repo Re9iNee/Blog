@@ -1,11 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { isDateInCurrentMonth } from "@/lib/utils";
-import { getAllPosts } from "@/service/posts.service";
-import React from "react";
+import { fetchTotalPostsCount } from "@/service/posts.service";
 
 async function page() {
-  const posts = await getAllPosts();
+  const postsCount = await fetchTotalPostsCount();
 
   return (
     <div className='flex-1 space-y-4 p-8 pt-6'>
@@ -46,15 +45,7 @@ async function page() {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className='text-2xl font-bold'>{posts.length}</div>
-                <p className='text-xs text-muted-foreground'>
-                  {
-                    posts.filter((post) =>
-                      isDateInCurrentMonth(post.publishedAt)
-                    ).length
-                  }{" "}
-                  posts published this month
-                </p>
+                <div className='text-2xl font-bold'>{postsCount}</div>
               </CardContent>
             </Card>
           </div>
