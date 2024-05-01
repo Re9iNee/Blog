@@ -19,17 +19,18 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import path from "path";
 import React, { useCallback, useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
 type Props = {
+  page: number;
   query?: string;
   perPage: number;
+  rowCount: number;
   posts: PostModel[];
   columns: ColumnDef<PostModel, PostModel>[];
 };
-function PostTable({ perPage, posts, columns, query }: Props) {
+function PostTable({ perPage, rowCount, posts, columns, page, query }: Props) {
   const { replace } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -41,8 +42,8 @@ function PostTable({ perPage, posts, columns, query }: Props) {
     { id: "title", value: query ?? "" },
   ]);
   const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
     pageSize: perPage,
+    pageIndex: page - 1,
   });
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -57,6 +58,7 @@ function PostTable({ perPage, posts, columns, query }: Props) {
       rowSelection,
       columnFilters,
     },
+    rowCount,
     manualPagination: true,
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
@@ -74,8 +76,8 @@ function PostTable({ perPage, posts, columns, query }: Props) {
 
   table.getSelectedRowModel().rows.map((row) => row.original.id);
 
-  const changePagination = useCallback(
-    ({ perPage }: { perPage: number }) => {
+  const setPerPageToURL = useCallback(
+    (perPage: number) => {
       const params = new URLSearchParams(searchParams);
       params.set("page", "1");
 
@@ -90,11 +92,29 @@ function PostTable({ perPage, posts, columns, query }: Props) {
     [pathname, searchParams, replace]
   );
 
+  const setCurrentPageToURL = useCallback(
+    (pageIndex: number) => {
+      const params = new URLSearchParams(searchParams);
+
+      if (pageIndex !== 0) {
+        params.set("page", (pageIndex + 1).toString());
+      } else {
+        params.delete("page");
+      }
+      replace(`${pathname}?${params.toString()}`);
+    },
+    [pathname, searchParams, replace]
+  );
+
   useEffect(() => {
-    // on pagination change
-    console.log("pagination", pagination);
-    changePagination({ perPage: pagination.pageSize });
-  }, [pagination, changePagination]);
+    // triggered when pageSize changes
+    setPerPageToURL(pagination.pageSize);
+  }, [pagination.pageSize, setPerPageToURL]);
+
+  useEffect(() => {
+    // triggered when pageIndex changes
+    setCurrentPageToURL(pagination.pageIndex);
+  }, [pagination.pageIndex, setCurrentPageToURL]);
 
   useHotkeys(
     "meta+backspace",

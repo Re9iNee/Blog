@@ -55,6 +55,22 @@ export async function getAllPosts({
   return posts;
 }
 
+export async function fetchTotalPostsCount({
+  query,
+}: {
+  query?: string;
+}): Promise<number> {
+  noStore();
+
+  const count = await prisma.post.count({
+    where: {
+      title: { contains: query, mode: "insensitive" },
+    },
+  });
+
+  return count;
+}
+
 export async function getPost(id: number): Promise<PostModel | null> {
   noStore();
 
