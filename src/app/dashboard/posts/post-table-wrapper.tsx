@@ -6,9 +6,25 @@ import { PostModel } from "@/types/post";
 type Props = {
   page: number;
   query?: string;
+  perPage: number;
 };
-export default async function PostTableWrapper({ query, page }: Props) {
-  const posts: PostModel[] = await getAllPosts({ query, page });
+export default async function PostTableWrapper({
+  query,
+  page,
+  perPage,
+}: Props) {
+  const posts: PostModel[] = await getAllPosts({
+    page,
+    query,
+    perPage,
+  });
 
-  return <PostTable posts={posts} columns={columns} query={query} />;
+  return (
+    <PostTable
+      posts={posts}
+      query={query}
+      columns={columns}
+      perPage={perPage}
+    />
+  );
 }

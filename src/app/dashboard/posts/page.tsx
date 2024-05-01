@@ -6,12 +6,14 @@ async function DashboardPostPage({
   searchParams,
 }: {
   searchParams?: {
-    query?: string;
     page?: string;
+    query?: string;
+    per_page?: string;
   };
 }) {
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
+  const perPage = Number(searchParams?.per_page) || 10;
 
   return (
     <div className='h-full flex-1 flex-col space-y-8 p-8 md:flex'>
@@ -24,8 +26,8 @@ async function DashboardPostPage({
         </div>
       </div>
 
-      <Suspense key={query + currentPage} fallback={<Loader />}>
-        <PostTableWrapper query={query} page={currentPage} />
+      <Suspense key={query + currentPage + perPage} fallback={<Loader />}>
+        <PostTableWrapper perPage={perPage} query={query} page={currentPage} />
       </Suspense>
     </div>
   );

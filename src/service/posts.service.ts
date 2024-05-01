@@ -27,13 +27,14 @@ export async function getAllPublishedPosts(
   return posts;
 }
 
-const ITEMS_PER_PAGE = 10;
 type getAllPosts = {
   page: number;
+  perPage: number;
   query?: string;
 };
 export async function getAllPosts({
   page,
+  perPage,
   query,
 }: getAllPosts): Promise<PostModel[]> {
   noStore();
@@ -47,8 +48,8 @@ export async function getAllPosts({
       author: true,
       categories: true,
     },
-    take: ITEMS_PER_PAGE,
-    skip: (page - 1) * ITEMS_PER_PAGE,
+    take: perPage,
+    skip: (page - 1) * perPage,
   });
 
   return posts;

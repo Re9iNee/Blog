@@ -7,6 +7,7 @@ import { PostModel } from "@/types/post";
 import {
   ColumnDef,
   ColumnFiltersState,
+  PaginationState,
   SortingState,
   VisibilityState,
   getCoreRowModel,
@@ -17,21 +18,32 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import React from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import path from "path";
+import React, { useCallback, useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
 type Props = {
   query?: string;
+  perPage: number;
   posts: PostModel[];
   columns: ColumnDef<PostModel, PostModel>[];
 };
-function PostTable({ posts, columns, query }: Props) {
+function PostTable({ perPage, posts, columns, query }: Props) {
+  const { replace } = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([
     { id: "title", value: query ?? "" },
   ]);
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: perPage,
+  });
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
@@ -40,13 +52,16 @@ function PostTable({ posts, columns, query }: Props) {
     columns,
     state: {
       sorting,
+      pagination,
       columnVisibility,
       rowSelection,
       columnFilters,
     },
+    manualPagination: true,
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
+    onPaginationChange: setPagination,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
@@ -58,6 +73,28 @@ function PostTable({ posts, columns, query }: Props) {
   });
 
   table.getSelectedRowModel().rows.map((row) => row.original.id);
+
+  const changePagination = useCallback(
+    ({ perPage }: { perPage: number }) => {
+      const params = new URLSearchParams(searchParams);
+      params.set("page", "1");
+
+      if (perPage !== 10) {
+        params.set("per_page", perPage.toString());
+      } else {
+        params.delete("per_page");
+      }
+
+      replace(`${pathname}?${params.toString()}`);
+    },
+    [pathname, searchParams, replace]
+  );
+
+  useEffect(() => {
+    // on pagination change
+    console.log("pagination", pagination);
+    changePagination({ perPage: pagination.pageSize });
+  }, [pagination, changePagination]);
 
   useHotkeys(
     "meta+backspace",
