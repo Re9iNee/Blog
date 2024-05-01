@@ -12,15 +12,11 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Modal from "@/components/ui/modal";
 import { toast } from "@/components/ui/use-toast";
-import {
-  deletePost as deletePostService,
-  updatePost,
-} from "@/service/posts.service";
+import { deletePost as deletePostService } from "@/service/posts.service";
+import { postSchema } from "@/types/schemas/post-schema";
 import Link from "next/link";
 import { useCallback } from "react";
-import { postSchema } from "@/types/schemas/post-schema";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -29,7 +25,8 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const post = postSchema.parse(row.original);
+  const parsed = postSchema.safeParse(row.original);
+  const post = parsed.data;
 
   const deletePost = useCallback(async (id: number) => {
     try {
@@ -46,6 +43,11 @@ export function DataTableRowActions<TData>({
     }
   }, []);
 
+  if (!parsed.success) {
+    console.error(parsed.error);
+    return <></>;
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -60,9 +62,9 @@ export function DataTableRowActions<TData>({
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='w-[160px]'>
         <DropdownMenuItem data-cy='edit-post' asChild>
-          <Link href={`/dashboard/posts/${post.id}/edit`}>Edit</Link>
+          <Link href={`/dashboard/posts/${post?.id}/edit`}>Edit</Link>
         </DropdownMenuItem>
-        <Link href={`/posts/${post.id}`} target='_blank'>
+        <Link href={`/posts/${post?.id}`} target='_blank'>
           <DropdownMenuItem>Visit post</DropdownMenuItem>
         </Link>
         <DropdownMenuItem className='cursor-not-allowed'>
@@ -88,7 +90,7 @@ export function DataTableRowActions<TData>({
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className='cursor-pointer'
-          onClick={() => deletePost(post.id!)}
+          onClick={() => deletePost(post?.id!)}
         >
           Delete
           <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>

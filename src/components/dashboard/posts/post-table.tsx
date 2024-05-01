@@ -1,12 +1,13 @@
 "use client";
 
-import { DataTable } from "@/components/dashboard/table/data-table";
+import { DataTable } from "@/components/ui/table/data-table";
 import { toast } from "@/components/ui/use-toast";
 import { deleteManyPosts } from "@/service/posts.service";
 import { PostModel } from "@/types/post";
 import {
   ColumnDef,
   ColumnFiltersState,
+  PaginationState,
   SortingState,
   VisibilityState,
   getCoreRowModel,
@@ -17,20 +18,34 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import React from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useCallback, useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
 type Props = {
+  page: number;
+  query?: string;
+  perPage: number;
+  rowCount: number;
   posts: PostModel[];
   columns: ColumnDef<PostModel, PostModel>[];
 };
-function PostTable({ posts, columns }: Props) {
+function PostTable({ perPage, rowCount, posts, columns, page, query }: Props) {
+  const { replace } = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([
+    { id: "title", value: query ?? "" },
+  ]);
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageSize: perPage,
+    pageIndex: page - 1,
+  });
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const table = useReactTable({
@@ -38,13 +53,17 @@ function PostTable({ posts, columns }: Props) {
     columns,
     state: {
       sorting,
+      pagination,
       columnVisibility,
       rowSelection,
       columnFilters,
     },
+    rowCount,
+    manualPagination: true,
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
+    onPaginationChange: setPagination,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
@@ -56,6 +75,46 @@ function PostTable({ posts, columns }: Props) {
   });
 
   table.getSelectedRowModel().rows.map((row) => row.original.id);
+
+  const setPerPageToURL = useCallback(
+    (perPage: number) => {
+      const params = new URLSearchParams(searchParams);
+      params.set("page", "1");
+
+      if (perPage !== 10) {
+        params.set("per_page", perPage.toString());
+      } else {
+        params.delete("per_page");
+      }
+
+      replace(`${pathname}?${params.toString()}`);
+    },
+    [pathname, searchParams, replace]
+  );
+
+  const setCurrentPageToURL = useCallback(
+    (pageIndex: number) => {
+      const params = new URLSearchParams(searchParams);
+
+      if (pageIndex !== 0) {
+        params.set("page", (pageIndex + 1).toString());
+      } else {
+        params.delete("page");
+      }
+      replace(`${pathname}?${params.toString()}`);
+    },
+    [pathname, searchParams, replace]
+  );
+
+  useEffect(() => {
+    // triggered when pageSize changes
+    setPerPageToURL(pagination.pageSize);
+  }, [pagination.pageSize, setPerPageToURL]);
+
+  useEffect(() => {
+    // triggered when pageIndex changes
+    setCurrentPageToURL(pagination.pageIndex);
+  }, [pagination.pageIndex, setCurrentPageToURL]);
 
   useHotkeys(
     "meta+backspace",
