@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { isDateInCurrentMonth } from "@/lib/utils";
 import { fetchTotalPostsCount } from "@/service/posts.service";
 
 async function page() {
