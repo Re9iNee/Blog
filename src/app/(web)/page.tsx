@@ -1,18 +1,13 @@
-import BlogCard from "@/components/ui/blog-card";
-
 import DottedBackground from "@/components/homepage/dotted-background";
 import HeroSection from "@/components/homepage/hero";
+
+import { BlogCardsSkeleton } from "@/components/homepage/skeletons";
 import { SlideShow } from "@/components/ui/slide-show";
-import {
-  getAllPublishedPosts as getRecentPosts,
-  getSlideshowContents,
-} from "@/service/posts.service";
-import { unstable_noStore as noStore } from "next/cache";
+import { getSlideshowContents } from "@/service/posts.service";
+import { Suspense } from "react";
+import PublishedPostsWrapper from "./published-posts-wrapper";
 
 export default async function Home() {
-  noStore();
-
-  const recentPosts = await getRecentPosts(12);
   const slideshowPosts = await getSlideshowContents();
 
   return (
@@ -45,9 +40,9 @@ export default async function Home() {
         xl:grid-cols-4
         '
       >
-        {recentPosts.map((post) => (
-          <BlogCard key={post.id} data={post} />
-        ))}
+        <Suspense fallback={<BlogCardsSkeleton />}>
+          <PublishedPostsWrapper />
+        </Suspense>
       </section>
     </main>
   );
