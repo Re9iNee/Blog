@@ -9,6 +9,7 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { cn } from "@/lib/utils";
 import { PostModel } from "@/types/post";
 import Link from "next/link";
+import { Button } from "./button";
 
 type Props = {
   cards: PostModel[];
@@ -51,12 +52,13 @@ export function SlideShow({ className, cards }: Props) {
         )}
       >
         {/* left button */}
-        <a
+        <button
+          aria-label='Previous slide'
           onClick={() => paginate(1)}
           className={`slideshow-action col-start-1 col-span-1 row-start-3 pr-0.5 z-20 place-self-center justify-self-center`}
         >
           <IoChevronBack />
-        </a>
+        </button>
 
         <section className='col-start-1 col-span-12 row-start-1 row-span-full'>
           <SlideShowCard
@@ -68,12 +70,13 @@ export function SlideShow({ className, cards }: Props) {
         </section>
 
         {/* right button */}
-        <a
+        <button
+          aria-label='Next slide'
           onClick={() => paginate(-1)}
           className={`slideshow-action col-start-6 md:col-start-12 col-span-1 row-start-3 pl-0.5 z-20 place-self-center justify-self-center`}
         >
           <IoChevronForward />
-        </a>
+        </button>
       </div>
 
       {/* pagination */}
@@ -159,6 +162,7 @@ function SlideShowCard({
         <div className='z-0 col-span-full row-span-full'>
           <Image
             fill
+            loading='eager'
             alt={`main image of post: ${title}`}
             src={mainImageUrl ?? "/slideshow/mainImagePlaceholder.svg"}
             className='pointer-events-none rounded-2xl aspect-video object-cover -z-10'

@@ -1,7 +1,6 @@
 import { SlideShow } from "@/components/ui/slide-show";
 import { getSlideshowContents } from "@/service/posts.service";
 
-export const revalidate = 60;
 export default async function SlideShowWrapper() {
   const slideshowPosts = await getSlideshowContents();
 
