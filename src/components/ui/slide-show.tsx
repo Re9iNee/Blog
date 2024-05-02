@@ -94,7 +94,7 @@ export function SlideShow({ className, cards }: Props) {
   );
 }
 
-export function SlideShowCard({
+function SlideShowCard({
   id,
   page,
   title,
