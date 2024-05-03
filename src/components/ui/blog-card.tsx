@@ -31,12 +31,13 @@ function BlogCard({ data }: Props) {
         />
         <div className='w-full h-full absolute opacity-0 group-hover:opacity-75 bg-gradient-to-l from-violet-500 to-violet-900 rounded-xl backdrop-blur-none group-active:opacity-100 duration-400 text-white font-bold grid place-items-center'>
           Read More
+          <span className='sr-only'>read more about {title}</span>
         </div>
       </Link>
 
-      <h3 className='text-neutral-950 flex-grow font-bold leading-tight dark:text-neutral-300'>
+      <h2 className='text-neutral-950 flex-grow font-bold leading-tight dark:text-neutral-300'>
         <Link href={`/posts/${id}`}>{title}</Link>
-      </h3>
+      </h2>
       <summary
         className='text-neutral-700 dark:text-neutral-500 flex-grow text-xs leading-none max-h-max line-clamp-2
           md:text-sm md:leading-normal

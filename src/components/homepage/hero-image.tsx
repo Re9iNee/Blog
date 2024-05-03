@@ -36,8 +36,11 @@ function HeroImage({ activeIndex }: Props) {
           transition={{ duration: 0.4 }}
         >
           <Image
-            fill
-            loading='eager'
+            width={312}
+            height={375}
+            quality={100}
+            loading='lazy'
+            aria-hidden='true'
             src={dynamicImages[activeIndex].src}
             alt={dynamicImages[activeIndex].alt}
           />

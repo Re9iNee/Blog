@@ -9,6 +9,7 @@ import { Suspense } from "react";
 import PublishedPostsWrapper from "./published-posts-wrapper";
 import SlideShowWrapper from "./slide-show-wrapper";
 
+export const revalidate = 60;
 export default async function Home() {
   return (
     <main>
@@ -19,6 +20,7 @@ export default async function Home() {
         position='right'
         className='md:hidden scale-110'
       />
+
       <HeroSection />
 
       <Suspense
