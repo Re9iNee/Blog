@@ -19,8 +19,8 @@ function DottedBackground({ position, top, className }: Props) {
           position === "right" ? "right-0" : "left-0 rotate-180"
         )}
         style={{ top: `${top}vh` }}
-        width={288}
-        height={288}
+        width={337}
+        height={429}
         alt='bg'
         loading='lazy'
       />
