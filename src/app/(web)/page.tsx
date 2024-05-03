@@ -20,6 +20,7 @@ export default async function Home() {
         position='right'
         className='md:hidden scale-110'
       />
+
       <HeroSection />
 
       <Suspense

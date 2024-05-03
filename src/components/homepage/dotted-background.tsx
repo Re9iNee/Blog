@@ -12,7 +12,7 @@ function DottedBackground({ position, top, className }: Props) {
   return (
     <div className='relative xl:hidden dark:hidden'>
       <Image
-        src={"/HeroImages/Dot.svg"}
+        src={"/HeroImages/Dot.png"}
         className={cn(
           "absolute pointer-events-none",
           className,

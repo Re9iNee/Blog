@@ -10,15 +10,15 @@ function HeroImage({ activeIndex }: Props) {
     () => [
       {
         alt: "Floating Guy",
-        src: "/HeroImages/Floating-Guy.svg",
+        src: "/HeroImages/Floating-Guy.png",
       },
       {
         alt: "Rocket Girl",
-        src: "/HeroImages/Rocket-Girl.svg",
+        src: "/HeroImages/Rocket-Girl.png",
       },
       {
         alt: "VR Guy",
-        src: "/HeroImages/VR-Guy.svg",
+        src: "/HeroImages/VR-Guy.png",
       },
     ],
     []
@@ -39,7 +39,8 @@ function HeroImage({ activeIndex }: Props) {
             width={312}
             height={375}
             quality={100}
-            loading='eager'
+            loading='lazy'
+            aria-hidden='true'
             src={dynamicImages[activeIndex].src}
             alt={dynamicImages[activeIndex].alt}
           />

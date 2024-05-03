@@ -39,7 +39,10 @@ function HeroSection() {
       </div>
 
       {/* section VR Guy and hero image component */}
-      <div className='hidden md:grid grid-cols-1 grid-rows-1 place-items-end flex-grow'>
+      <div
+        className='hidden md:grid grid-cols-1 grid-rows-1 place-items-end flex-grow'
+        aria-hidden='true'
+      >
         <EllipseGroup activeIndex={activeIndex} />
         <HeroImage activeIndex={activeIndex} />
       </div>
