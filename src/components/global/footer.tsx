@@ -23,10 +23,10 @@ const Footer = () => {
         <FullLogo />
 
         <section className='flex flex-col gap-2 lg:w-96 lg:h-28'>
-          <h3 className='font-bold text-neutral-800 text-base dark:text-neutral-300'>
+          <h3 className='font-bold text-neutral-900 text-base dark:text-neutral-300'>
             What is Mora?
           </h3>
-          <p className='text-neutral-500 text-sm leading-5 sm:max-w-xs dark:text-neutral-400'>
+          <p className='text-neutral-600 text-sm leading-5 sm:max-w-xs dark:text-neutral-400'>
             Mora is a library of AI tools and courses on how to use them to
             their fullest and like a master. Our mission is to help you take the
             most out of upcoming AI tools.
@@ -47,6 +47,7 @@ const Footer = () => {
             <Link
               target='_blank'
               prefetch={false}
+              aria-label="Nuwa's LinkedIn page"
               href='https://www.linkedin.com/company/nuwa-holding/'
             >
               <FiLinkedin className='text-sky-700 w-8 h-8 dark:text-sky-500 cursor-pointer' />
@@ -55,6 +56,7 @@ const Footer = () => {
               target='_blank'
               prefetch={false}
               className='w-8 h-8 relative'
+              aria-label="About Nuwa's website-google websites"
               href={"https://sites.google.com/view/nuwa-company/home"}
             >
               <Image fill src={"/favicon.svg"} alt='Nuwa website' />
@@ -64,6 +66,7 @@ const Footer = () => {
             <Link
               target='_blank'
               prefetch={false}
+              aria-label="Nuwa's Twitter page"
               href={"https://twitter.com/nuwa_company"}
             >
               <FaXTwitter className='w-8 h-8 dark:text-neutral-50 cursor-pointer' />
@@ -90,7 +93,7 @@ const Footer = () => {
         </section>
       </section>
 
-      <p className='text-center text-neutral-500 text-sm font-normal leading-tight dark:text-neutral-400'>
+      <p className='text-center text-neutral-600 text-sm font-normal leading-tight dark:text-neutral-400'>
         ©️Copyright. All rights reserved.
       </p>
     </footer>

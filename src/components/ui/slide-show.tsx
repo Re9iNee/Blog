@@ -182,9 +182,9 @@ function SlideShowCard({
           '
         >
           <h3 className='text-white font-bold'>{title}</h3>
-          <h6 className='text-neutral-400 text-xs font-light leading-none'>
+          <span className='text-neutral-400 text-xs font-light leading-none'>
             By {author.name}
-          </h6>
+          </span>
           <Link
             href={`/posts/${id}`}
             className='group inline-flex border-1.5 border-white whitespace-nowrap bg-neutral-800 bg-opacity-0 rounded-lg py-2 pl-8 pr-6 items-center justify-center hover:bg-opacity-30 hover:px-6 transition-all mt-3 mb-2'
@@ -202,9 +202,9 @@ function SlideShowCard({
               {category}
             </h5> */}
             <h3 className='text-white text-2xl font-bold max-w-lg'>{title}</h3>
-            <h6 className='text-neutral-100 text-xs font-light leading-none'>
+            <span className='text-neutral-100 text-xs font-light leading-none'>
               By {author.name}
-            </h6>
+            </span>
           </div>
           <Link
             href={`/posts/${id}`}
