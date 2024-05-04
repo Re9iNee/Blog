@@ -4,8 +4,11 @@ import React from "react";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  title: "Mora Blog Dashboard",
-  description: "Mora blog dashboard to manage weblog",
+  title: {
+    template: "%s | Dashboard",
+    default: "Overview",
+  },
+  description: "Dashboard for managing the Mora Blog",
 };
 
 function layout({ children }: { children: React.ReactNode }) {

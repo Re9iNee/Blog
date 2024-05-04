@@ -1,5 +1,6 @@
 import Footer from "@/components/global/footer";
 import Header from "@/components/global/header";
+import { Metadata } from "next";
 import { Noto_Sans, Poppins } from "next/font/google";
 
 const NotoSansFont = Noto_Sans({
@@ -13,6 +14,14 @@ const PoppinsFont = Poppins({
   subsets: ["latin"],
   variable: "--font-poppins",
 });
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | Mora Blog",
+    default: "Homepage | Mora Blog",
+  },
+  description: "The official blog of Mora",
+};
 
 function layout({ children }: { children: React.ReactNode }) {
   return (
