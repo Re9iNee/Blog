@@ -10,6 +10,35 @@ import { RxDotFilled } from "react-icons/rx";
 import ClapContainer from "@/components/posts/claps/clap-container";
 import { notFound } from "next/navigation";
 import PostNavigationGroup from "../nav";
+import { Metadata, ResolvingMetadata } from "next";
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const id = params.id;
+  const data = await getPost(+id);
+  if (!data) notFound();
+
+  const previousImage = (await parent).openGraph?.images || [];
+
+  const openGraphImage = data.mainImageUrl ?? "/images/placeholder.png";
+
+  const metadata: Metadata = {
+    title: data.title,
+    openGraph: {
+      type: "article",
+      authors: data.author.name,
+      description: data.summary,
+      title: `${data.title} | Mora Blog`,
+      url: `https://mora-ed.com/posts/${id}`,
+      images: [openGraphImage, ...previousImage],
+      publishedTime: data?.publishedAt?.toUTCString(),
+    },
+  };
+
+  return metadata;
+}
 
 type Props = {
   params: { id: string };
