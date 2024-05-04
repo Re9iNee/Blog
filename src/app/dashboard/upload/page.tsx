@@ -1,5 +1,10 @@
+import { Metadata } from "next";
 import UploadInput from "./upload-input";
 import UploadList from "./upload-list";
+
+export const metadata: Metadata = {
+  title: "Upload",
+};
 
 function UploadPage() {
   return (

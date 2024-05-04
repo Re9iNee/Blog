@@ -9,9 +9,14 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { fetchAuthors } from "@/service/user.service";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Create Post",
+};
 
 export default async function CreatePostPage() {
   const [authors, session] = await Promise.all([

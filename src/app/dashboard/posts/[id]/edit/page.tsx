@@ -9,8 +9,13 @@ import {
 } from "@/components/ui/breadcrumb";
 import { getPost } from "@/service/posts.service";
 import { fetchAuthors } from "@/service/user.service";
+import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Edit Post",
+};
 
 export default async function EditPostPage({
   params,

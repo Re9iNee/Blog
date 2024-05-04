@@ -1,6 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { fetchTotalPostsCount } from "@/service/posts.service";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Overview",
+};
 
 async function page() {
   const postsCount = await fetchTotalPostsCount();

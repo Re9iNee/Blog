@@ -1,6 +1,11 @@
 import Loader from "@/app/(web)/loading";
 import { Suspense } from "react";
 import PostTableWrapper from "./post-table-wrapper";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Posts List",
+};
 
 async function DashboardPostPage({
   searchParams,
