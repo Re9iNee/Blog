@@ -1,7 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { markdownToHTML } from "@/lib/markdownToHTML";
-import { convertDateToDayMonthAndYear, wait } from "@/lib/utils";
+
 import { getPost } from "@/service/posts.service";
 
 import Image from "next/image";
@@ -9,18 +8,49 @@ import Image from "next/image";
 import { RxDotFilled } from "react-icons/rx";
 
 import ClapContainer from "@/components/posts/claps/clap-container";
-import { unstable_noStore as noStore } from "next/cache";
+import { notFound } from "next/navigation";
 import PostNavigationGroup from "../nav";
+import { Metadata, ResolvingMetadata } from "next";
+import { convertDateToDayMonthAndYear } from "@/lib/utils";
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const id = params.id;
+  const data = await getPost(+id);
+  if (!data) notFound();
+
+  const previousImage = (await parent).openGraph?.images || [];
+
+  const openGraphImage = data.mainImageUrl ?? "/images/placeholder.png";
+
+  const metadata: Metadata = {
+    title: data.title,
+    openGraph: {
+      type: "article",
+      authors: data.author.name,
+      description: data.summary,
+      title: `${data.title} | Mora Blog`,
+      url: `https://mora-ed.com/posts/${id}`,
+      images: [openGraphImage, ...previousImage],
+      publishedTime: data?.publishedAt?.toUTCString(),
+    },
+  };
+
+  return metadata;
+}
 
 type Props = {
   params: { id: string };
 };
 
 async function PostPage({ params }: Props) {
-  noStore();
   const id = params.id;
 
   const data = await getPost(+id);
+  if (!data) notFound();
+
   const htmlContent = await markdownToHTML(data.body ?? "");
 
   return (

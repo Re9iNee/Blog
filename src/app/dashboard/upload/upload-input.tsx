@@ -79,7 +79,10 @@ function UploadInput() {
                   <FormItem>
                     <FormLabel>File</FormLabel>
                     <FormControl>
-                      <Uploader onUploadFinished={onUploadFinished} />
+                      <Uploader
+                        name='file'
+                        onUploadFinished={onUploadFinished}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -92,10 +95,14 @@ function UploadInput() {
       <CardFooter className='flex-col items-start gap-4'>
         {links.map((link) => (
           <div key={link} className='inline-flex gap-4 items-center'>
-            <Link href={link} className='text-blue-500'>
+            <Link href={link} data-cy='uploaded-file' className='text-blue-500'>
               {link}
             </Link>
-            <Button variant='outline' onClick={() => copyClickHandler(link)}>
+            <Button
+              variant='outline'
+              data-cy='uploaded-link-copy-btn'
+              onClick={() => copyClickHandler(link)}
+            >
               {copied === link ? <FaCheck /> : <FaRegCopy />}
             </Button>
           </div>

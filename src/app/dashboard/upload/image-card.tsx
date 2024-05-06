@@ -69,6 +69,7 @@ function ImageCard({ files }: Props) {
               </div>
               <div className='flex items-center gap-4'>
                 <Button
+                  data-cy='delete-btn'
                   size={"icon"}
                   variant={"outline"}
                   onClick={() => onDelete(file.key)}

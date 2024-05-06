@@ -19,7 +19,7 @@ function HeroSection() {
   return (
     <section
       id='hero-container'
-      className='mx-3 pt-12 pb-4 flex justify-center items-center overflow-x-hidden pointer-events-none 
+      className='mx-3 pt-12 pb-4 flex justify-center items-center overflow-hidden pointer-events-none 
       md:px-6 md:pt-6 md:gap-20
       '
     >
@@ -39,7 +39,10 @@ function HeroSection() {
       </div>
 
       {/* section VR Guy and hero image component */}
-      <div className='hidden md:grid grid-cols-1 grid-rows-1 place-items-end flex-grow'>
+      <div
+        className='hidden md:grid grid-cols-1 grid-rows-1 place-items-end flex-grow'
+        aria-hidden='true'
+      >
         <EllipseGroup activeIndex={activeIndex} />
         <HeroImage activeIndex={activeIndex} />
       </div>

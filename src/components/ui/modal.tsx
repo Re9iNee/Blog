@@ -4,7 +4,6 @@ import {
   ModalFooter,
   ModalHeader,
   Modal as NextUiModal,
-  useDisclosure,
 } from "@nextui-org/react";
 import { ReactNode, memo } from "react";
 
@@ -18,7 +17,7 @@ function Modal({ isOpen, children, onOpenChange, header }: Props) {
   return (
     <NextUiModal
       isOpen={isOpen}
-      isDismissable={true}
+      isDismissable={false}
       placement='top-center'
       onOpenChange={onOpenChange}
     >

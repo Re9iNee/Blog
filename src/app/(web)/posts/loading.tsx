@@ -37,7 +37,15 @@ function PostLoading() {
       >
         <Skeleton className='w-40 h-7' />
         <Skeleton className='w-24 h-3' />
-        <Skeleton className='w-full h-20' />
+        <Skeleton className='w-full h-40' />
+
+        <Skeleton className='w-60 h-7' />
+        <Skeleton className='w-40 h-3' />
+        <Skeleton className='w-full h-80' />
+
+        <Skeleton className='w-40 h-7' />
+        <Skeleton className='w-24 h-3' />
+        <Skeleton className='w-full h-40' />
       </section>
     </div>
   );

@@ -1,10 +1,24 @@
-import { getAllPosts } from "@/service/posts.service";
-import { PostModel } from "@/types/post";
-import { columns } from "./data-table/columns";
-import PostTable from "./post-table";
+import Loader from "@/app/(web)/loading";
+import { Suspense } from "react";
+import PostTableWrapper from "./post-table-wrapper";
+import { Metadata } from "next";
 
-async function DashboardPostPage() {
-  const posts: PostModel[] = await getAllPosts();
+export const metadata: Metadata = {
+  title: "Posts List",
+};
+
+async function DashboardPostPage({
+  searchParams,
+}: {
+  searchParams?: {
+    page?: string;
+    query?: string;
+    per_page?: string;
+  };
+}) {
+  const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
+  const perPage = Number(searchParams?.per_page) || 10;
 
   return (
     <div className='h-full flex-1 flex-col space-y-8 p-8 md:flex'>
@@ -17,7 +31,9 @@ async function DashboardPostPage() {
         </div>
       </div>
 
-      <PostTable posts={posts} columns={columns} />
+      <Suspense key={query + currentPage + perPage} fallback={<Loader />}>
+        <PostTableWrapper perPage={perPage} query={query} page={currentPage} />
+      </Suspense>
     </div>
   );
 }

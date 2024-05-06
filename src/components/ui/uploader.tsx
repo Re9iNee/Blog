@@ -6,9 +6,16 @@ import { Button } from "./button";
 import { toast } from "./use-toast";
 
 type Props = {
+  name: string;
+  defaultValue?: string;
   onUploadFinished: (url: string) => void;
 };
-export function Uploader({ onUploadFinished, ...props }: Props) {
+export function Uploader({
+  name,
+  defaultValue,
+  onUploadFinished,
+  ...props
+}: Props) {
   const ref = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -42,6 +49,7 @@ export function Uploader({ onUploadFinished, ...props }: Props) {
 
   return (
     <div className='flex flex-col gap-4'>
+      <input type='hidden' name={name} defaultValue={defaultValue} />
       <Input
         ref={ref}
         type='file'
@@ -51,6 +59,7 @@ export function Uploader({ onUploadFinished, ...props }: Props) {
       />
       <Button
         disabled={isLoading}
+        data-cy='upload-btn'
         className='self-end'
         variant={"secondary"}
         onClick={handleImageChange}

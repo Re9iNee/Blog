@@ -10,7 +10,7 @@ function RotatingTexts({ activeIndex }: Props) {
   const dynamicTexts = useMemo(
     () => [
       { text: "AI Stuff 🔥", classNames: "text-blue-500" },
-      { text: "Productivity Hacks 🚀", classNames: "text-rose-400" },
+      { text: "Productivity Hacks 🚀", classNames: "text-rose-500" },
       { text: "Industry Updates 📰", classNames: "text-blue-800" },
     ],
     []
