@@ -1,6 +1,6 @@
 import { Separator } from "@/components/ui/separator";
 import { markdownToHTML } from "@/lib/markdownToHTML";
-import { convertDateToDayMonthAndYear } from "@/lib/utils";
+
 import { getPost } from "@/service/posts.service";
 
 import Image from "next/image";
@@ -11,6 +11,7 @@ import ClapContainer from "@/components/posts/claps/clap-container";
 import { notFound } from "next/navigation";
 import PostNavigationGroup from "../nav";
 import { Metadata, ResolvingMetadata } from "next";
+import { convertDateToDayMonthAndYear } from "@/lib/utils";
 
 export async function generateMetadata(
   { params }: Props,
