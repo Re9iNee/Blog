@@ -1,5 +1,6 @@
 import Footer from "@/components/global/footer";
 import Header from "@/components/global/header";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { Metadata } from "next";
 import { Noto_Sans, Poppins } from "next/font/google";
 
@@ -28,6 +29,7 @@ function layout({ children }: { children: React.ReactNode }) {
     <div
       className={`max-w-screen-xl min-h-screen mx-auto flex flex-col ${NotoSansFont.className} ${PoppinsFont.variable}`}
     >
+      <GoogleTagManager gtmId='GTM-PNRN4Z2P' />
       <Header />
       <div className='flex-grow relative'>{children}</div>
       <Footer />
