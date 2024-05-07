@@ -66,8 +66,9 @@ export default function NotFound() {
         >
           <GoBackButton
             className={cn(
-              "rounded-2xl bg-gray-100 font-bold border-none",
-              notoSans.className
+              "rounded-2xl bg-neutral-100 text-neutral-950 font-bold border-none",
+              notoSans.className,
+              "dark:bg-neutral-800 dark:text-neutral-50"
             )}
           >
             Go Back
@@ -76,8 +77,9 @@ export default function NotFound() {
             asChild
             variant={"outline"}
             className={cn(
-              "rounded-2xl bg-gray-100 font-bold border-none",
-              notoSans.className
+              "rounded-2xl bg-neutral-100 text-neutral-950 font-bold border-none",
+              notoSans.className,
+              "dark:bg-neutral-800 dark:text-neutral-50"
             )}
           >
             <Link href='/'>Return Home</Link>
