@@ -1,3 +1,4 @@
+import GoBackButton from "@/components/global/GoBackButton";
 import { Button } from "@/components/ui/button";
 import { notoSans, outfit } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
@@ -63,15 +64,14 @@ export default function NotFound() {
           sm:flex-row
           '
         >
-          <Button
-            variant={"outline"}
+          <GoBackButton
             className={cn(
               "rounded-2xl bg-gray-100 font-bold border-none",
               notoSans.className
             )}
           >
             Go Back
-          </Button>
+          </GoBackButton>
           <Button
             asChild
             variant={"outline"}
