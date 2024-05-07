@@ -5,21 +5,41 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen p-4'>
+    <div
+      className='flex flex-col items-center justify-center min-h-screen p-4
+      lg:flex-row lg:gap-8
+      '
+    >
       <div className='flex items-center'>
         <FourIcon />
         <PlanetIcon />
         <FourIcon />
       </div>
-      <section className='flex flex-col justify-center'>
-        <section aria-label='info' className='text-center mb-14'>
-          <h1 className={"font-bold text-purple-600 text-xl font-poppins"}>
+      <div
+        className='flex flex-col justify-center
+        lg:max-w-96 lg:items-start
+        '
+      >
+        <section
+          aria-label='info'
+          className='flex flex-col text-center gap-4 mb-14
+          md:gap-6
+          lg:text-left lg:mb-14
+          '
+        >
+          <h1
+            className='font-bold text-purple-600 text-xl font-poppins
+            sm:text-2xl
+            md:text-4xl
+            '
+          >
             Oops, We didn&apos;t find the planet
           </h1>
           <h3
             className={cn(
-              "text-gray-500 text-center text-sm",
-              outfit.className
+              "text-gray-500 text-sm",
+              outfit.className,
+              "md:text-lg"
             )}
           >
             Check if you have typed the correct link or the link isn&apos;t
@@ -28,7 +48,9 @@ export default function NotFound() {
         </section>
         <section
           aria-label='actions'
-          className='flex flex-col gap-4 justify-center'
+          className='flex flex-col gap-4 justify-center
+          sm:flex-row
+          '
         >
           <Button
             variant={"outline"}
@@ -50,17 +72,18 @@ export default function NotFound() {
             <Link href='/'>Return Home</Link>
           </Button>
         </section>
-      </section>
+      </div>
     </div>
   );
 }
 function FourIcon() {
   return (
     <svg
-      width='63'
-      height='82'
-      viewBox='0 0 63 82'
       fill='none'
+      viewBox='0 0 63 82'
+      className='w-16 h-20
+      md:w-20 md:h-28
+      '
       xmlns='http://www.w3.org/2000/svg'
     >
       <path
