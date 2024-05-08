@@ -2,8 +2,14 @@ import GoBackButton from "@/components/global/GoBackButton";
 import { Button } from "@/components/ui/button";
 import { notoSans, outfit } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "404 Not Found",
+  description: "The page you are looking for is not found.",
+};
 
 export default function NotFound() {
   return (
