@@ -9,6 +9,9 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "404 Not Found",
   description: "The page you are looking for is not found.",
+  openGraph: {
+    images: ["/404/og.png", { url: "/404/og.png", alt: "404 Not Found" }],
+  },
 };
 
 export default function NotFound() {
