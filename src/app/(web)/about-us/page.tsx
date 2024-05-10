@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import HeroImage from "@/../public/about-us/hero.jpg";
+import { CiCircleChevDown } from "react-icons/ci";
 
 export const metadata: Metadata = {
   title: "About us",
@@ -11,7 +12,7 @@ export default function AboutUsPage() {
     <section className=''>
       <div
         aria-label='hero-section'
-        className='relative h-screen flex justify-center items-center'
+        className='relative flex justify-center items-center h-[432px]'
       >
         <Image
           fill
@@ -36,6 +37,12 @@ export default function AboutUsPage() {
           </span>
         </h2>
       </div>
+      <button
+        aria-label='continue'
+        className='rounded-full border-1 w-12 h-12 flex justify-center items-center relative -top-5 bg-white left-1/2 -translate-x-1/2'
+      >
+        <CiCircleChevDown className='text-6xl text-violet-700' />
+      </button>
     </section>
   );
 }
