@@ -12,6 +12,7 @@ import MoriImage from "@/../public/about-us/team-pfp/mori.avif";
 import RezaImage from "@/../public/about-us/team-pfp/reza.avif";
 
 import TeamCard from "@/components/about-us/team-card";
+import Uploader from "@/components/about-us/uploader";
 import { CiCircleChevDown } from "react-icons/ci";
 
 export const metadata: Metadata = {
@@ -198,6 +199,30 @@ export default function AboutUsPage() {
               </>
             }
           />
+        </section>
+      </section>
+
+      <section
+        aria-label='we are expanding our team'
+        className='flex flex-col items-center mx-4 pb-12'
+      >
+        <h2 className='font-poppins text-neutral-600 p-16 pb-4'>
+          We&apos;re Expanding our Team
+        </h2>
+
+        <section
+          aria-label='upload cv section'
+          className='flex rounded-2xl bg-neutral-50 gap-4'
+        >
+          <Uploader />
+          <div className='flex flex-col justify-center'>
+            <h3 className='font-bold text-lg text-neutral-950'>
+              Want to join Mora?
+            </h3>
+            <h4 className='text-neutral-600 text-xs'>
+              We&apos;re alway open to acquiring talents
+            </h4>
+          </div>
         </section>
       </section>
     </section>
