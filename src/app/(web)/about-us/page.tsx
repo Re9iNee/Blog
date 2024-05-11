@@ -1,9 +1,17 @@
+import HeroImage from "@/../public/about-us/hero.jpg";
 import { Metadata } from "next";
 import Image from "next/image";
-import HeroImage from "@/../public/about-us/hero.jpg";
-import illustrationOneImage from "@/../public/about-us/illustration-1.png";
+
+import illustrationOneImage from "@/../public/about-us/illustration-1.avif";
 import illustrationTwoImage from "@/../public/about-us/Illustration-2.png";
 import illustrationThreeImage from "@/../public/about-us/Illustration-3.png";
+
+import ArefehImage from "@/../public/about-us/team-pfp/arefeh.avif";
+import MobinImage from "@/../public/about-us/team-pfp/mobin.avif";
+import MoriImage from "@/../public/about-us/team-pfp/mori.avif";
+import RezaImage from "@/../public/about-us/team-pfp/reza.avif";
+
+import TeamCard from "@/components/about-us/team-card";
 import { CiCircleChevDown } from "react-icons/ci";
 
 export const metadata: Metadata = {
@@ -125,6 +133,71 @@ export default function AboutUsPage() {
             distinctio culpa explicabo quos, esse officia? Nulla quidem
             quibusdam sit at perspiciatis tenetur?
           </p>
+        </section>
+      </section>
+
+      <section aria-label='meet the team' className='mx-4'>
+        <h2 className='flex flex-col gap-2 py-12 items-center'>
+          <span className='text-neutral-600 text-sm'>Meet the</span>
+          <span className='text-purple-500 font-bold text-2xl'>Mora Team</span>
+        </h2>
+
+        <section
+          aria-label="team's info"
+          className='flex flex-col items-center gap-10'
+        >
+          <TeamCard
+            image={MoriImage}
+            name='Morteza Ajidanpour'
+            role='Founder & Product Designer'
+            description={
+              <>
+                I create digital products that meet user&apos;s needs and are
+                accessible to everyone. I am{" "}
+                <span>passionate about creating intuitive interfaces</span> that
+                people enjoy using on a daily basis.
+              </>
+            }
+          />
+          <TeamCard
+            image={MobinImage}
+            name='Mobin Khani'
+            role='Co-Founder & Financial Analyst'
+            description={
+              <>
+                I create digital products that meet user&apos;s needs and are
+                accessible to everyone. I am{" "}
+                <span>passionate about creating intuitive interfaces</span> that
+                people enjoy using on a daily basis.
+              </>
+            }
+          />
+          <TeamCard
+            image={RezaImage}
+            name='Reza Attarzadeh'
+            role='Co-Founder & Full Stack Developer'
+            description={
+              <>
+                I create digital products that meet user&apos;s needs and are
+                accessible to everyone. I am{" "}
+                <span>passionate about creating intuitive interfaces</span> that
+                people enjoy using on a daily basis.
+              </>
+            }
+          />
+          <TeamCard
+            image={ArefehImage}
+            name='Arefeh Kazemi'
+            role='Co-Founder & Digital Marketing'
+            description={
+              <>
+                I create digital products that meet user&apos;s needs and are
+                accessible to everyone. I am{" "}
+                <span>passionate about creating intuitive interfaces</span> that
+                people enjoy using on a daily basis.
+              </>
+            }
+          />
         </section>
       </section>
     </section>
