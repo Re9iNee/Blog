@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function AboutUsPage() {
   return (
     <section className=''>
-      <div
+      <section
         aria-label='hero-section'
         className='relative flex justify-center items-center h-[432px]'
       >
@@ -48,7 +48,7 @@ export default function AboutUsPage() {
             Educational Experience
           </span>
         </h2>
-      </div>
+      </section>
       <button
         aria-hidden='true'
         className='rounded-full border-1 w-12 h-12 flex justify-center items-center relative -top-5 bg-white left-1/2 -translate-x-1/2'
@@ -56,9 +56,10 @@ export default function AboutUsPage() {
         <CiCircleChevDown className='text-6xl text-violet-700' />
       </button>
 
+      {/* How section */}
       <section
         aria-label='infos'
-        className='flex flex-col items-center text-center font-poppins mb-24'
+        className='flex flex-col items-center text-center font-poppins mb-24 mx-4'
       >
         <h2 className='flex flex-col gap-2 py-12'>
           <span className='text-neutral-600 text-sm'>How We</span>
@@ -79,10 +80,10 @@ export default function AboutUsPage() {
             src={illustrationOneImage}
             alt='illustration of a desktop image'
           />
-          <h3 className='text-neutral-800 flex flex-col font-poppins font-bold text-xl'>
+          <h3 className='text-neutral-800 p-2 flex flex-col font-poppins font-bold text-xl'>
             <span>Better Control &</span> Easier Management
           </h3>
-          <p className='text-neutral-500'>
+          <p className='text-neutral-500 p-2'>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex libero
             dolores deleniti labore culpa at minima necessitatibus quae repellat
             praesentium nemo, hic tenetur odit quasi, distinctio aspernatur!
@@ -137,7 +138,8 @@ export default function AboutUsPage() {
         </section>
       </section>
 
-      <section aria-label='meet the team' className='mx-4'>
+      {/* Team section */}
+      <section aria-label='meet the team' className='mx-4 pb-12 mb-4'>
         <h2 className='flex flex-col gap-2 py-12 items-center'>
           <span className='text-neutral-600 text-sm'>Meet the</span>
           <span className='text-purple-500 font-bold text-2xl'>Mora Team</span>
@@ -200,29 +202,29 @@ export default function AboutUsPage() {
             }
           />
         </section>
-      </section>
-
-      <section
-        aria-label='we are expanding our team'
-        className='flex flex-col items-center mx-4 pb-12'
-      >
-        <h2 className='font-poppins text-neutral-600 pt-16 pb-4'>
-          We&apos;re Expanding our Team
-        </h2>
 
         <section
-          aria-label='upload cv section'
-          className='flex rounded-2xl bg-neutral-50 gap-4'
+          aria-label='we are expanding our team'
+          className='flex flex-col items-center pb-12'
         >
-          <Uploader />
-          <div className='flex flex-col justify-center'>
-            <h3 className='font-bold text-lg text-neutral-950'>
-              Want to join Mora?
-            </h3>
-            <h4 className='text-neutral-600 text-xs'>
-              We&apos;re alway open to acquiring talents
-            </h4>
-          </div>
+          <h2 className='font-poppins text-neutral-600 pt-16 pb-4'>
+            We&apos;re Expanding our Team
+          </h2>
+
+          <section
+            aria-label='upload cv section'
+            className='flex rounded-2xl bg-neutral-50 gap-4'
+          >
+            <Uploader />
+            <div className='flex flex-col justify-center'>
+              <h3 className='font-bold text-lg text-neutral-950'>
+                Want to join Mora?
+              </h3>
+              <h4 className='text-neutral-600 text-xs'>
+                We&apos;re alway open to acquiring talents
+              </h4>
+            </div>
+          </section>
         </section>
       </section>
     </section>

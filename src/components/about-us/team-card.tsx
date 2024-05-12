@@ -19,7 +19,7 @@ export default function TeamCard({ name, role, image, description }: Props) {
         className='-translate-y-2 rounded-2xl'
       />
       <section aria-label='about founder'>
-        <h3 className='text-lg text-neutral-950'>{name}</h3>
+        <h3 className='text-lg text-neutral-950 font-bold'>{name}</h3>
         <h4 className='text-blue-500 text-sm'>{role}</h4>
       </section>
       <p className='text-neutral-600 [&>span]:text-neutral-950 [&>span]:font-bold text-center'>
