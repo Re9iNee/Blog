@@ -206,7 +206,7 @@ export default function AboutUsPage() {
         aria-label='we are expanding our team'
         className='flex flex-col items-center mx-4 pb-12'
       >
-        <h2 className='font-poppins text-neutral-600 p-16 pb-4'>
+        <h2 className='font-poppins text-neutral-600 pt-16 pb-4'>
           We&apos;re Expanding our Team
         </h2>
 
