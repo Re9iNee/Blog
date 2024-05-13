@@ -6,6 +6,9 @@ import illustrationOneImage from "@/../public/about-us/illustration-1.avif";
 import illustrationTwoImage from "@/../public/about-us/Illustration-2.png";
 import illustrationThreeImage from "@/../public/about-us/Illustration-3.png";
 
+import patternOne from "@/../public/about-us/pattern-1.avif";
+import patternTwo from "@/../public/about-us/pattern-2.avif";
+
 import ArefehImage from "@/../public/about-us/team-pfp/arefeh.avif";
 import MobinImage from "@/../public/about-us/team-pfp/mobin.avif";
 import MoriImage from "@/../public/about-us/team-pfp/mori.avif";
@@ -21,10 +24,12 @@ export const metadata: Metadata = {
 
 export default function AboutUsPage() {
   return (
-    <section className=''>
+    <section>
       <section
         aria-label='hero-section'
-        className='relative flex justify-center items-center h-[432px]'
+        className='relative flex justify-center items-center h-[432px]
+        sm:justify-start
+        '
       >
         <Image
           fill
@@ -37,14 +42,26 @@ export default function AboutUsPage() {
           placeholder='blur'
           aria-hidden='true'
         />
-        <h2 className='text-center font-poppins z-0 flex flex-col'>
+        <h2
+          className='text-center font-poppins z-0 flex flex-col
+          sm:text-left sm:p-4 sm:ml-4
+          '
+        >
           <span className='uppercase text-neutral-300 font-bold text-sm'>
             at mora
           </span>
-          <span className='font-bold text-2xl text-neutral-50'>
+          <span
+            className='font-bold text-2xl text-neutral-50
+            sm:text-3xl
+            '
+          >
             We aim to elevate the
           </span>
-          <span className='font-bold text-2xl text-purple-500'>
+          <span
+            className='font-bold text-2xl text-purple-500
+            sm:text-3xl
+            '
+          >
             Educational Experience
           </span>
         </h2>
@@ -62,60 +79,113 @@ export default function AboutUsPage() {
         className='flex flex-col items-center text-center font-poppins mb-24 mx-4'
       >
         <h2 className='flex flex-col gap-2 py-12'>
-          <span className='text-neutral-600 text-sm'>How We</span>
-          <span className='font-bold text-2xl'>
+          <span
+            className='text-neutral-600 text-sm
+            sm:text-base
+            '
+          >
+            How We
+          </span>
+          <span
+            className='font-bold text-2xl
+            sm:text-3xl
+            '
+          >
             <span className='text-purple-500'>Envision</span>{" "}
             <span className='text-neutral-800'>the Education</span>
           </span>
         </h2>
         <section
-          className='flex flex-col items-center gap-4'
+          className='flex flex-col items-center gap-4
+          sm:pb-32 sm:flex-row-reverse sm:relative sm:max-h-[416px] sm:px-4
+          '
           aria-label='better control and easier management section'
         >
+          <Image
+            aria-hidden
+            width={630}
+            height={337}
+            src={patternOne}
+            objectFit='cover'
+            placeholder='blur'
+            alt='image of the pattern'
+            className='hidden sm:block absolute -right-24 scale-75'
+          />
           <Image
             aria-hidden
             width={220}
             height={260}
             placeholder='blur'
             src={illustrationOneImage}
+            // applies z-10 to be the upper layer of the pattern behind it.
+            className='sm:z-10 sm:w-72 sm:h-72'
             alt='illustration of a desktop image'
           />
-          <h3 className='text-neutral-800 p-2 flex flex-col font-poppins font-bold text-xl'>
-            <span>Better Control &</span> Easier Management
-          </h3>
-          <p className='text-neutral-500 p-2'>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex libero
-            dolores deleniti labore culpa at minima necessitatibus quae repellat
-            praesentium nemo, hic tenetur odit quasi, distinctio aspernatur!
-            Itaque, esse nesciunt.
-          </p>
+          {/* section text */}
+          <section aria-label='section text' className='sm:text-left'>
+            <h3
+              className='text-neutral-800 p-2 flex flex-col font-poppins font-bold text-xl
+              sm:text-2xl
+              '
+            >
+              <span>Better Control &</span> Easier Management
+            </h3>
+            <p className='text-neutral-500 p-2'>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex
+              libero dolores deleniti labore culpa at minima necessitatibus quae
+              repellat praesentium nemo, hic tenetur odit quasi, distinctio
+              aspernatur! Itaque, esse nesciunt.
+            </p>
+          </section>
         </section>
 
         <section
-          className='flex flex-col items-center gap-4'
+          className='flex flex-col items-center gap-4
+          sm:pb-32 sm:flex-row-reverse sm:relative sm:max-h-[416px] sm:px-4
+          '
           aria-label='improved insights & reporting systems section'
         >
+          <Image
+            aria-hidden
+            width={630}
+            height={337}
+            src={patternTwo}
+            objectFit='cover'
+            placeholder='blur'
+            alt='image of the pattern'
+            className='hidden sm:block absolute -right-24 scale-75'
+          />
           <Image
             aria-hidden
             width={220}
             height={260}
             placeholder='blur'
             src={illustrationTwoImage}
+            // applies z-10 to be the upper layer of the pattern behind it.
+            className='sm:z-10 sm:w-72 sm:h-72'
             alt='illustration of a dashboard image'
           />
-          <h3 className='text-neutral-800 flex flex-col font-poppins font-bold text-xl'>
-            <span>Improved Insights &</span> Reporting Systems
-          </h3>
-          <p className='text-neutral-500'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
-            error delectus expedita cumque dolor sapiente. Veniam aliquam dolore
-            est, laborum autem facere quia? Perspiciatis vel nesciunt
-            dignissimos, excepturi aspernatur suscipit?
-          </p>
+          <section aria-label='section text' className='sm:text-left'>
+            <h3
+              className='text-neutral-800 flex flex-col font-poppins font-bold text-xl
+              sm:text-2xl
+              '
+            >
+              <span>Improved Insights &</span> Reporting Systems
+            </h3>
+            <p className='text-neutral-500'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Blanditiis error delectus expedita cumque dolor sapiente. Veniam
+              aliquam dolore est, laborum autem facere quia? Perspiciatis vel
+              nesciunt dignissimos, excepturi aspernatur suscipit?
+            </p>
+          </section>
         </section>
 
         <section
-          className='flex flex-col items-center gap-4'
+          className='flex flex-col items-center gap-4
+          sm:pb-32
+          '
           aria-label='online presence and audience growth section'
         >
           <Image
@@ -126,7 +196,11 @@ export default function AboutUsPage() {
             src={illustrationThreeImage}
             alt='illustration of diagrams'
           />
-          <h3 className='text-neutral-800 flex flex-col font-poppins font-bold text-xl'>
+          <h3
+            className='text-neutral-800 flex flex-col font-poppins font-bold text-xl
+            sm:text-2xl
+            '
+          >
             <span>Online Presence &</span> Audience Growth
           </h3>
           <p className='text-neutral-500'>
