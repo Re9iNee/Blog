@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function AboutUsPage() {
   return (
-    <section>
+    <section className='overflow-hidden'>
       <section
         aria-label='hero-section'
         className='relative flex justify-center items-center h-[432px]

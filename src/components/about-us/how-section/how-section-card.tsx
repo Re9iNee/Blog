@@ -34,7 +34,6 @@ export default function HowSectionCard({
         // applies z-10 to be the upper layer of the pattern behind it.
         className='sm:z-10 sm:w-72 sm:h-72'
       />
-      {/* section text */}
       <section aria-label='section text' className='sm:text-left'>
         <h3
           className='text-neutral-800 p-2 flex flex-col font-poppins font-bold text-xl
