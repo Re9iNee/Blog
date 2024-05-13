@@ -1,13 +1,18 @@
 import Image, { StaticImageData } from "next/image";
 import { ReactNode } from "react";
 
-type Props = {
+export type TeamCardProps = {
   name: string;
   role: string;
   image: StaticImageData;
   description: ReactNode;
 };
-export default function TeamCard({ name, role, image, description }: Props) {
+export default function TeamCard({
+  name,
+  role,
+  image,
+  description,
+}: TeamCardProps) {
   return (
     <div className='bg-neutral-100 rounded-2xl flex flex-col text-center items-center gap-3 px-4 pb-4'>
       <Image
