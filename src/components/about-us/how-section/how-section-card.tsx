@@ -39,10 +39,11 @@ export default function HowSectionCard({
         <h3
           className='text-neutral-800 p-2 flex flex-col font-poppins font-bold text-xl
               sm:text-2xl
+              lg:text-3xl
               '
           dangerouslySetInnerHTML={{ __html: header ?? "" }}
         />
-        <p className='text-neutral-500 p-2'>{paragraph}</p>
+        <p className='text-neutral-500 p-2 lg:text-lg'>{paragraph}</p>
       </section>
     </section>
   );

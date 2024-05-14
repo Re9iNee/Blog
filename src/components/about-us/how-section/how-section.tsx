@@ -61,6 +61,7 @@ export default function HowSection({ className }: Props) {
         <span
           className='text-neutral-600 text-sm
             sm:text-base
+            lg:text-lg
             '
         >
           How We
@@ -68,6 +69,7 @@ export default function HowSection({ className }: Props) {
         <span
           className='font-bold text-2xl
             sm:text-3xl
+            lg:text-4xl
             '
         >
           <span className='text-purple-500'>Envision</span>{" "}

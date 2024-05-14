@@ -70,8 +70,18 @@ export default function TeamSection({ className }: Props) {
   return (
     <section aria-label='meet the team' className={cn(className)}>
       <h2 className='flex flex-col gap-2 py-12 items-center'>
-        <span className='text-neutral-600 text-sm sm:text-base'>Meet the</span>
-        <span className='text-purple-500 font-bold text-2xl sm:text-3xl'>
+        <span
+          className='text-neutral-600 text-sm
+          sm:text-base lg:text-lg
+          '
+        >
+          Meet the
+        </span>
+        <span
+          className='text-purple-500 font-bold text-2xl
+          sm:text-3xl lg:text-4xl
+          '
+        >
           Mora Team
         </span>
       </h2>
@@ -79,7 +89,8 @@ export default function TeamSection({ className }: Props) {
       <section
         aria-label="team's info"
         className='flex flex-col items-center gap-10 
-        md:grid md:grid-cols-2 md:gap-6'
+        md:grid md:grid-cols-2 md:gap-6
+        lg:gap-8'
       >
         {TeamData.map((member) => (
           <TeamCard
