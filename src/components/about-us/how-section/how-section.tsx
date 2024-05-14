@@ -6,6 +6,8 @@ import patternOne from "@/../public/about-us/pattern-1.avif";
 import patternTwo from "@/../public/about-us/pattern-2.avif";
 import patternThree from "@/../public/about-us/pattern-3.avif";
 import HowSectionCard, { HowSectionProps } from "./how-section-card";
+import { ClassValue } from "clsx";
+import { cn } from "@/lib/utils";
 
 const HowSectionData: HowSectionProps[] = [
   {
@@ -43,11 +45,17 @@ const HowSectionData: HowSectionProps[] = [
   },
 ];
 
-export default function HowSection() {
+type Props = {
+  className?: ClassValue;
+};
+export default function HowSection({ className }: Props) {
   return (
     <section
       aria-label='infos'
-      className='flex flex-col items-center text-center font-poppins mb-24 mx-4'
+      className={cn(
+        className,
+        "flex flex-col items-center text-center font-poppins"
+      )}
     >
       <h2 className='flex flex-col gap-2 py-12'>
         <span
