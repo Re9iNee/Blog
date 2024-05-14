@@ -19,14 +19,14 @@ const Header = () => {
             BLOGS
           </span>
         </Link>
-        {/* <Link
+        <Link
           className='p-2 text-xs cursor-pointer  hidden 
                     sm:block
                     '
           href={"/about-us"}
         >
           About Us
-        </Link> */}
+        </Link>
       </div>
 
       <div className='flex gap-4 items-center'>
