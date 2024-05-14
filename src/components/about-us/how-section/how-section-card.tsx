@@ -20,6 +20,7 @@ export default function HowSectionCard({
     <section
       className='flex flex-col items-center gap-4
           sm:pb-32 sm:flex-row-reverse sm:relative sm:max-h-[416px] sm:px-4
+          md:pb-40
           '
       aria-label={ariaLabel}
     >

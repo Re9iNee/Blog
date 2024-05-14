@@ -12,7 +12,7 @@ export default function AboutUsPage() {
   return (
     <section className='overflow-hidden'>
       <HeroSection />
-      <HowSection className='mb-24 mx-4' />
+      <HowSection className='mb-24 mx-4 md:pb-32' />
       <TeamSection
         className='mx-4 pb-12 mb-4
         sm:pb-16'
