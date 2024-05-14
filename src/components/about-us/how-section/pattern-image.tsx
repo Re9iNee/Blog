@@ -9,7 +9,7 @@ export default function PatternImage({ src }: { src: StaticImageData }) {
       height={300}
       placeholder='blur'
       alt='image of the pattern'
-      className='hidden sm:block absolute -right-24 scale-75 object-cover'
+      className='hidden pointer-events-none sm:block absolute -right-24 scale-75 object-cover'
     />
   );
 }

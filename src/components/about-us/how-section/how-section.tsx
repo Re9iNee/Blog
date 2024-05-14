@@ -1,6 +1,6 @@
 import illustrationOneImage from "@/../public/about-us/illustration-1.avif";
-import illustrationTwoImage from "@/../public/about-us/Illustration-2.png";
-import illustrationThreeImage from "@/../public/about-us/Illustration-3.png";
+import illustrationTwoImage from "@/../public/about-us/illustration-2.avif";
+import illustrationThreeImage from "@/../public/about-us/illustration-3.avif";
 
 import patternOne from "@/../public/about-us/pattern-1.avif";
 import patternTwo from "@/../public/about-us/pattern-2.avif";

@@ -1,4 +1,4 @@
-import HeroImage from "@/../public/about-us/hero.jpg";
+import HeroImage from "@/../public/about-us/hero.avif";
 import Image from "next/image";
 import { CiCircleChevDown } from "react-icons/ci";
 
