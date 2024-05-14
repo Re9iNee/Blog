@@ -15,7 +15,8 @@ export default function TeamCard({
 }: TeamCardProps) {
   return (
     <div
-      className='bg-neutral-100 rounded-2xl flex flex-col text-center items-center gap-3 group/card
+      // applying z index to the card - to prevent shifting of the description when hovered.
+      className='bg-neutral-100 rounded-2xl flex flex-col text-center items-center gap-3 group/card z-0
       sm:flex-row sm:w-full
       md:items-stretch
       '
@@ -26,7 +27,7 @@ export default function TeamCard({
         height={180}
         placeholder='blur'
         alt="Founder's Image"
-        className='-translate-y-2 rounded-2xl transition-all
+        className='-translate-y-2 group rounded-2xl transition-all
         sm:translate-y-0 sm:group-hover/card:scale-110
         md:object-cover'
       />
@@ -42,7 +43,7 @@ export default function TeamCard({
         </section>
         <p
           className='text-neutral-600 [&>span]:text-neutral-950 [&>span]:font-bold text-center
-            sm:opacity-0 sm:absolute sm:group-hover/card:opacity-100 sm:group-hover/card:relative sm:text-left sm:transition-all'
+            sm:opacity-0 sm:max-w-[30%]  sm:absolute  sm:group-hover/card:max-w-none sm:group-hover/card:opacity-100 sm:group-hover/card:relative sm:text-left sm:transition-all sm:delay-75'
         >
           {description}
         </p>
