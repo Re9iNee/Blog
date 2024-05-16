@@ -33,7 +33,7 @@ const Header = () => {
         <Link
           target='_blank'
           href={"https://discord.gg/5TFMVKsgfK"}
-          className='whitespace-nowrap px-5 py-2 h-8 text-white bg-gradient-to-l from-violet-500 to-violet-700 rounded-3xl leading-none text-xs font-bold cursor-pointer'
+          className='whitespace-nowrap px-5 py-2 text-white bg-gradient-to-l from-violet-500 to-violet-700 rounded-3xl leading-none text-xs font-bold cursor-pointer'
         >
           Join Community
         </Link>

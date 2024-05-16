@@ -8,7 +8,7 @@ export default function HeroSection() {
       {" "}
       <section
         aria-label='hero-section'
-        className='relative flex justify-center items-center h-[432px]
+        className='relative flex justify-center items-center h-[60vh]
         sm:justify-start
         '
       >
@@ -21,7 +21,7 @@ export default function HeroSection() {
           alt='Hero Image'
           placeholder='blur'
           aria-hidden='true'
-          className='object-cover'
+          className='object-cover rounded-b-2xl'
         />
         <h2
           className='text-center font-poppins z-0 flex flex-col
