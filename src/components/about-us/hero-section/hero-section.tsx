@@ -47,7 +47,7 @@ export default function HeroSection() {
           </span>
         </h2>
       </section>
-      <a href='#how-we-envision-header'>
+      <a href='#how-we-envision-section'>
         <button
           aria-hidden='true'
           className='rounded-full border-1 w-12 h-12 flex justify-center items-center relative -top-5 bg-white left-1/2 -translate-x-1/2
