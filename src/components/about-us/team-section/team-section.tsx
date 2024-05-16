@@ -89,8 +89,8 @@ export default function TeamSection({ className }: Props) {
       <section
         aria-label="team's info"
         className='flex flex-col items-center gap-10 
-        md:grid md:grid-cols-2 md:gap-6
-        lg:gap-8'
+        md:grid md:grid-cols-1 md:gap-6
+        lg:gap-8 lg:grid-cols-2'
       >
         {TeamData.map((member) => (
           <TeamCard

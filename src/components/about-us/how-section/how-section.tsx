@@ -57,7 +57,7 @@ export default function HowSection({ className }: Props) {
         "flex flex-col items-center text-center font-poppins"
       )}
     >
-      <h2 className='flex flex-col gap-2 py-12'>
+      <h2 id='how-we-envision-header' className='flex flex-col gap-2 py-12'>
         <span
           className='text-neutral-600 text-sm
             sm:text-base

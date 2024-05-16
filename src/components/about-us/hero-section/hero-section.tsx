@@ -8,7 +8,7 @@ export default function HeroSection() {
       {" "}
       <section
         aria-label='hero-section'
-        className='relative flex justify-center items-center h-[432px]
+        className='relative flex justify-center items-center h-[60vh]
         sm:justify-start
         '
       >
@@ -19,9 +19,9 @@ export default function HeroSection() {
           priority={true}
           src={HeroImage}
           alt='Hero Image'
-          objectFit='cover'
           placeholder='blur'
           aria-hidden='true'
+          className='object-cover rounded-b-2xl'
         />
         <h2
           className='text-center font-poppins z-0 flex flex-col
@@ -47,13 +47,15 @@ export default function HeroSection() {
           </span>
         </h2>
       </section>
-      <button
-        aria-hidden='true'
-        className='rounded-full border-1 w-12 h-12 flex justify-center items-center relative -top-5 bg-white left-1/2 -translate-x-1/2
+      <a href='#how-we-envision-header'>
+        <button
+          aria-hidden='true'
+          className='rounded-full border-1 w-12 h-12 flex justify-center items-center relative -top-5 bg-white left-1/2 -translate-x-1/2
         md:w-16 md:h-16'
-      >
-        <CiCircleChevDown className='text-6xl text-violet-700' />
-      </button>
+        >
+          <CiCircleChevDown className='text-6xl text-violet-700' />
+        </button>
+      </a>
     </>
   );
 }
