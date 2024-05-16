@@ -33,11 +33,11 @@ export default function TeamCard({
       />
       {/* Card text */}
       <section
-        className='px-4 pb-4 
+        className='px-4 pb-4 flex flex-col gap-3 
         sm:text-left
         md:self-center'
       >
-        <section aria-label='about member'>
+        <section aria-label='about member' className='flex flex-col gap-0.5'>
           <h3 className='text-lg text-neutral-950 font-bold'>{name}</h3>
           <h4 className='text-blue-500 text-sm'>{role}</h4>
         </section>

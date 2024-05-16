@@ -19,9 +19,9 @@ export default function HeroSection() {
           priority={true}
           src={HeroImage}
           alt='Hero Image'
-          objectFit='cover'
           placeholder='blur'
           aria-hidden='true'
+          className='object-cover'
         />
         <h2
           className='text-center font-poppins z-0 flex flex-col
