@@ -51,7 +51,8 @@ export default function HeroSection() {
         <button
           aria-hidden='true'
           className='rounded-full border-1 w-12 h-12 flex justify-center items-center relative -top-5 bg-white left-1/2 -translate-x-1/2
-        md:w-16 md:h-16'
+          md:w-16 md:h-16
+          '
         >
           <CiCircleChevDown className='text-6xl text-violet-700' />
         </button>

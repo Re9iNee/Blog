@@ -15,11 +15,14 @@ export async function getSlideshowContents(): Promise<PostModel[]> {
   return posts;
 }
 
-export async function getAllPublishedPosts(
-  take?: number
-): Promise<Omit<PostModel, "categories">[]> {
+type getAllPublishedPosts = {
+  perPage: number;
+};
+export async function getAllPublishedPosts({
+  perPage,
+}: getAllPublishedPosts): Promise<Omit<PostModel, "categories">[]> {
   const posts = await prisma.post.findMany({
-    take: take,
+    take: perPage,
     include: { author: true },
     orderBy: { createdAt: "desc" },
     where: { status: PostStatus.published },

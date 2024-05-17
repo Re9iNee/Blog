@@ -6,11 +6,19 @@ import {
   SlideshowSkeleton,
 } from "@/components/homepage/skeletons";
 import { Suspense } from "react";
+import LoadMoreWrapper from "./load-more-wrapper";
 import PublishedPostsWrapper from "./published-posts-wrapper";
 import SlideShowWrapper from "./slide-show-wrapper";
 
 export const revalidate = 60;
-export default async function Home() {
+type Props = {
+  searchParams: {
+    per_page?: string;
+  };
+};
+export default async function Home({ searchParams }: Props) {
+  const perPage = Number(searchParams.per_page) || 12;
+
   return (
     <main>
       <DottedBackground position='right' top={2} className='hidden md:block' />
@@ -45,8 +53,9 @@ export default async function Home() {
         '
       >
         <Suspense fallback={<BlogCardsSkeleton />}>
-          <PublishedPostsWrapper />
+          <PublishedPostsWrapper perPage={perPage} />
         </Suspense>
+        <LoadMoreWrapper className='col-span-full' perPage={perPage} />
       </section>
     </main>
   );
