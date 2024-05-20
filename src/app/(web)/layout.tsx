@@ -17,7 +17,7 @@ function layout({ children }: { children: React.ReactNode }) {
     <div
       className={`max-w-screen-xl min-h-screen mx-auto flex flex-col ${notoSans.className} ${poppins.variable}`}
     >
-      <GoogleTagManager gtmId='GTM-PNRN4Z2P' />
+      <GoogleTagManager gtmId='GTM-PNRN4Z2P' preview='' />
       <Header />
       <div className='flex-grow relative'>{children}</div>
       <Footer />

@@ -6,18 +6,17 @@ import {
   SlideshowSkeleton,
 } from "@/components/homepage/skeletons";
 import { Suspense } from "react";
-import LoadMoreWrapper from "./load-more-wrapper";
 import PublishedPostsWrapper from "./published-posts-wrapper";
 import SlideShowWrapper from "./slide-show-wrapper";
 
 export const revalidate = 60;
 type Props = {
   searchParams: {
-    per_page?: string;
+    page?: string;
   };
 };
 export default async function Home({ searchParams }: Props) {
-  const perPage = Number(searchParams.per_page) || 12;
+  const page = Number(searchParams.page) || 1;
 
   return (
     <main>
@@ -53,9 +52,8 @@ export default async function Home({ searchParams }: Props) {
         '
       >
         <Suspense fallback={<BlogCardsSkeleton />}>
-          <PublishedPostsWrapper perPage={perPage} />
+          <PublishedPostsWrapper page={page} />
         </Suspense>
-        <LoadMoreWrapper className='col-span-full' perPage={perPage} />
       </section>
     </main>
   );

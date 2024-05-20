@@ -1,19 +1,35 @@
+import { MyPagination as Pagination } from "@/components/homepage/pagination";
 import BlogCard from "@/components/ui/blog-card";
-import { getAllPublishedPosts } from "@/service/posts.service";
+import {
+  getAllPublishedPosts,
+  getPublishedPostsCount,
+} from "@/service/posts.service";
 
+const PER_PAGE = 12;
 type Props = {
-  perPage: number;
+  page: number;
 };
-export default async function PublishedPostsWrapper({ perPage }: Props) {
+export default async function PublishedPostsWrapper({ page }: Props) {
   const recentPosts = await getAllPublishedPosts({
-    perPage,
+    page,
+    perPage: PER_PAGE,
   });
+  const postsCount = await getPublishedPostsCount();
+  const totalPages = Math.ceil(postsCount / PER_PAGE);
 
   return (
     <>
       {recentPosts.map((post) => (
         <BlogCard key={post.id} data={post} />
       ))}
+
+      {postsCount > 0 && (
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          className='col-span-full'
+        />
+      )}
     </>
   );
 }
