@@ -94,6 +94,7 @@ function ImageCard({ files }: Props) {
           {page > 1 && (
             <PaginationItem>
               <PaginationPrevious
+                href={{}}
                 className='cursor-pointer'
                 onClick={() => setPage((prev) => prev - 1)}
               />
@@ -102,6 +103,7 @@ function ImageCard({ files }: Props) {
           {page > 1 && (
             <PaginationItem>
               <PaginationLink
+                href='#'
                 className='cursor-pointer'
                 onClick={() => setPage((prev) => prev - 1)}
               >
@@ -110,12 +112,15 @@ function ImageCard({ files }: Props) {
             </PaginationItem>
           )}
           <PaginationItem>
-            <PaginationLink isActive>{page}</PaginationLink>
+            <PaginationLink href='#' isActive>
+              {page}
+            </PaginationLink>
           </PaginationItem>
           {hasMore && (
             <>
               <PaginationItem>
                 <PaginationLink
+                  href='#'
                   className='cursor-pointer'
                   onClick={() => setPage((prev) => prev + 1)}
                 >
@@ -127,6 +132,7 @@ function ImageCard({ files }: Props) {
               </PaginationItem>
               <PaginationItem>
                 <PaginationNext
+                  href='#'
                   className='cursor-pointer'
                   onClick={() => setPage((prev) => prev + 1)}
                 />
