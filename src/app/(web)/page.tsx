@@ -10,7 +10,14 @@ import PublishedPostsWrapper from "./published-posts-wrapper";
 import SlideShowWrapper from "./slide-show-wrapper";
 
 export const revalidate = 60;
-export default async function Home() {
+type Props = {
+  searchParams: {
+    page?: string;
+  };
+};
+export default async function Home({ searchParams }: Props) {
+  const page = Number(searchParams.page) || 1;
+
   return (
     <main>
       <DottedBackground position='right' top={2} className='hidden md:block' />
@@ -45,7 +52,7 @@ export default async function Home() {
         '
       >
         <Suspense fallback={<BlogCardsSkeleton />}>
-          <PublishedPostsWrapper />
+          <PublishedPostsWrapper page={page} />
         </Suspense>
       </section>
     </main>

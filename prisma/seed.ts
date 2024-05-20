@@ -10,9 +10,9 @@ const prisma = new PrismaClient().$extends(withAccelerate());
 async function main() {
   // await clearDB();
   await insertAdmin();
-  console.log(await getHash("examplePassword"));
+  // console.log(await getHash("examplePassword"));
   // await insertUsers(2);
-  // await insertPosts(40);
+  // await insertPosts(60);
   // await getAllAuthors();
   // await getAllDB();
 }
