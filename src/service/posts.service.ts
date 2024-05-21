@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { wait } from "@/lib/utils";
 import { PostModel } from "@/types/post";
 import { PostStatus } from "@prisma/client";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
@@ -15,17 +14,31 @@ export async function getSlideshowContents(): Promise<PostModel[]> {
   return posts;
 }
 
-export async function getAllPublishedPosts(
-  take?: number
-): Promise<Omit<PostModel, "categories">[]> {
+type getAllPublishedPosts = {
+  page: number;
+  perPage: number;
+};
+export async function getAllPublishedPosts({
+  page,
+  perPage,
+}: getAllPublishedPosts): Promise<Omit<PostModel, "categories">[]> {
   const posts = await prisma.post.findMany({
-    take: take,
+    take: perPage,
     include: { author: true },
+    skip: (page - 1) * perPage,
     orderBy: { createdAt: "desc" },
     where: { status: PostStatus.published },
   });
 
   return posts;
+}
+
+export async function getPublishedPostsCount(): Promise<number> {
+  const count = await prisma.post.count({
+    where: { status: PostStatus.published },
+  });
+
+  return count;
 }
 
 type getAllPosts = {
