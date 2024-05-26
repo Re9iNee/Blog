@@ -1,15 +1,29 @@
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Chip from "../ui/chips";
 import { Input } from "../ui/input";
+import StarImage from "public/icons/star.avif";
+import StarIcon from "public/icons/star.svg";
+import Image from "next/image";
 
 export default function Search() {
   return (
     <section
       aria-label='search'
-      className='hidden md:flex flex-col items-center justify-center min-h-80 relative bg-yellow-500'
+      className='hidden md:flex flex-col items-center justify-center min-h-80 relative bg-yellow-500 gap-6'
     >
+      <div className='absolute w-full h-full' aria-hidden>
+        <Image
+          src={StarImage}
+          alt='star icon'
+          aria-hidden
+          width={141}
+          height={119}
+          className='left-[48%] top-[4%] relative'
+        />
+      </div>
+
       <h2 className='text-neutral-950 font-poppins font-bold flex'>
-        Find your topic <span className='text-purple-600'>Faster</span>
+        Find your topic <span className='text-purple-600 ml-1'>Faster</span>
       </h2>
       <div className='relative w-4/6'>
         <FaMagnifyingGlass className='w-6 h-6 absolute top-1/2 transform -translate-y-1/2 left-4 text-purple-600 pointer-events-none' />
