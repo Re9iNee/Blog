@@ -8,6 +8,7 @@ import {
 import { Suspense } from "react";
 import PublishedPostsWrapper from "./published-posts-wrapper";
 import SlideShowWrapper from "./slide-show-wrapper";
+import Search from "@/components/homepage/search";
 
 export const revalidate = 60;
 type Props = {
@@ -35,6 +36,8 @@ export default async function Home({ searchParams }: Props) {
       >
         <SlideShowWrapper />
       </Suspense>
+
+      <Search />
 
       <h1
         className='text-neutral-700 font-bold pt-4 px-4
