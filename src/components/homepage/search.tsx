@@ -1,17 +1,21 @@
+import Image from "next/image";
+import StarImage from "public/icons/star.avif";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Chip from "../ui/chips";
 import { Input } from "../ui/input";
-import StarImage from "public/icons/star.avif";
-import StarIcon from "public/icons/star.svg";
-import Image from "next/image";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 export default function Search() {
   return (
     <section
       aria-label='search'
-      className='hidden md:flex flex-col items-center justify-center min-h-80 relative bg-yellow-500 gap-6'
+      className='hidden md:flex flex-col items-center justify-center min-h-80 relative gap-6'
     >
-      <div className='absolute w-full h-full' aria-hidden>
+      <div className='absolute w-full h-full pointer-events-none' aria-hidden>
         <Image
           src={StarImage}
           alt='star icon'
@@ -25,6 +29,7 @@ export default function Search() {
       <h2 className='text-neutral-950 font-poppins font-bold flex'>
         Find your topic <span className='text-purple-600 ml-1'>Faster</span>
       </h2>
+
       <div className='relative w-4/6'>
         <FaMagnifyingGlass className='w-6 h-6 absolute top-1/2 transform -translate-y-1/2 left-4 text-purple-600 pointer-events-none' />
         <Input
@@ -32,11 +37,12 @@ export default function Search() {
           placeholder='Find your topic here...'
           className='pl-14 pr-20 text-md w-full min-h-14 shadow-xl rounded-2xl placeholder:text-neutral-400'
         />
-        <div className='hidden absolute top-1/2 transform -translate-y-1/2 right-4 text-neutral-500 pointer-events-none items-center gap-0.5 text-xs font-bold'>
+        <div className='absolute top-1/2 transform -translate-y-1/2 right-4 text-neutral-500 pointer-events-none items-center gap-1 text-xs font-bold flex'>
           <EnterIcon />
           Enter
         </div>
       </div>
+
       <section aria-label='trending topics'>
         <h3 className='text-neutral-600 font-bold text-xs'>Trending Topics</h3>
         <Chip>#AI</Chip>
