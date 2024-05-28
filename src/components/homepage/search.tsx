@@ -22,15 +22,15 @@ export default function Search() {
           aria-hidden
           width={141}
           height={119}
-          className='left-[48%] top-[4%] relative'
+          className='left-[54%] top-[4%] relative object-none'
         />
       </div>
 
-      <h2 className='text-neutral-950 font-poppins font-bold flex'>
+      <h2 className='text-neutral-950 font-poppins font-bold flex text-2xl'>
         Find your topic <span className='text-purple-600 ml-1'>Faster</span>
       </h2>
 
-      <div className='relative w-4/6'>
+      <div className='relative w-4/6 max-w-[550px]'>
         <FaMagnifyingGlass className='w-6 h-6 absolute top-1/2 transform -translate-y-1/2 left-4 text-purple-600 pointer-events-none' />
         <Input
           type='text'
