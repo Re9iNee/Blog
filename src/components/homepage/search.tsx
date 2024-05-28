@@ -3,11 +3,6 @@ import StarImage from "public/icons/star.avif";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Chip from "../ui/chips";
 import { Input } from "../ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
 export default function Search() {
   return (
@@ -43,9 +38,15 @@ export default function Search() {
         </div>
       </div>
 
-      <section aria-label='trending topics'>
-        <h3 className='text-neutral-600 font-bold text-xs'>Trending Topics</h3>
-        <Chip>#AI</Chip>
+      <section aria-label='trending topics' className='space-y-3'>
+        <h3 className='text-neutral-600 font-bold text-sm'>Trending Topics</h3>
+        {/* chips container */}
+        <div className='flex gap-2 p-1'>
+          <Chip>#AI</Chip>
+          <Chip>#DevX2024</Chip>
+          <Chip>#Config2024</Chip>
+          <Chip>#AnnualComp</Chip>
+        </div>
       </section>
     </section>
   );
