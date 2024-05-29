@@ -1,9 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import StarImage from "public/icons/star.avif";
 import Chip from "../ui/chips";
 import SearchInput from "./search-input";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export default function Search() {
+  const [isTyping, setIsTyping] = useState(false);
+
   return (
     <section
       aria-label='search'
@@ -16,7 +22,11 @@ export default function Search() {
           aria-hidden
           width={141}
           height={119}
-          className='left-[52%] top-[4%] relative object-none transition-all group-hover:rotate-[60deg] group-hover:scale-110'
+          placeholder='empty'
+          className={cn(
+            "left-[52%] top-[4%] relative object-none transition-all",
+            isTyping && "rotate-[60deg] scale-110"
+          )}
         />
       </div>
 
@@ -24,7 +34,11 @@ export default function Search() {
         Find your topic <span className='text-purple-600 ml-1'>Faster</span>
       </h2>
 
-      <SearchInput className='relative w-4/6 max-w-[550px]' />
+      <SearchInput
+        isTyping={isTyping}
+        setIsTyping={setIsTyping}
+        className='relative w-4/6 max-w-[550px]'
+      />
 
       <section aria-label='trending topics' className='space-y-3'>
         <h3 className='text-neutral-600 font-bold text-sm'>Trending Topics</h3>
