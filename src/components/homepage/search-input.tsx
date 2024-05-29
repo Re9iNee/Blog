@@ -3,10 +3,11 @@ import { cn } from "@/lib/utils";
 import { ClassValue } from "clsx";
 import Image from "next/image";
 import LittleFlame from "public/images/little-flame.avif";
-import { Dispatch, SetStateAction, useRef } from "react";
+import { Dispatch, SetStateAction, useMemo, useRef } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useDebouncedCallback } from "use-debounce";
 import { Input } from "../ui/input";
+import { useSearchParams } from "next/navigation";
 
 type Props = {
   className?: ClassValue;
@@ -19,6 +20,11 @@ export default function SearchInput({
   setIsTyping,
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const searchParams = useSearchParams();
+  const query = useMemo(
+    () => new URLSearchParams(searchParams).get("query"),
+    [searchParams]
+  );
 
   const { set } = useSetManyUrlParams();
 
@@ -55,6 +61,7 @@ export default function SearchInput({
       <Input
         type='text'
         ref={inputRef}
+        defaultValue={query ?? ""}
         className={cn(
           "pl-14 pr-20 text-md font-medium w-full min-h-14 shadow-xl rounded-2xl placeholder:text-neutral-400 relative"
         )}

@@ -8,7 +8,7 @@ type Props = {
 function Chip({ children, isActive }: Props) {
   return (
     <Link
-      href={`/tags/${children.toLowerCase()}`}
+      href={`#`}
       className={cn(
         "rounded-[32px] text-xs text-neutral-600 bg-neutral-50 px-4 py-1.5 dark:bg-blue-950 dark:text-white",
         isActive &&
