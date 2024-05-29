@@ -1,5 +1,6 @@
 import Image from "next/image";
 import StarImage from "public/icons/star.avif";
+import LittleFlame from "/public/images/little-flame.avif";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Chip from "../ui/chips";
 import { Input } from "../ui/input";
@@ -8,7 +9,7 @@ export default function Search() {
   return (
     <section
       aria-label='search'
-      className='hidden md:flex flex-col items-center justify-center min-h-80 relative gap-6'
+      className='hidden md:flex flex-col items-center justify-center min-h-80 relative gap-6 group'
     >
       <div className='absolute w-full h-full pointer-events-none' aria-hidden>
         <Image
@@ -17,7 +18,7 @@ export default function Search() {
           aria-hidden
           width={141}
           height={119}
-          className='left-[54%] top-[4%] relative object-none'
+          className='left-[52%] top-[4%] relative object-none transition-all group-hover:rotate-[60deg] group-hover:scale-110'
         />
       </div>
 
@@ -26,12 +27,20 @@ export default function Search() {
       </h2>
 
       <div className='relative w-4/6 max-w-[550px]'>
-        <FaMagnifyingGlass className='w-6 h-6 absolute top-1/2 transform -translate-y-1/2 left-4 text-purple-600 pointer-events-none' />
+        <Image
+          aria-hidden
+          src={LittleFlame}
+          placeholder={"empty"}
+          alt='little flame icon'
+          className='w-[57px] h-[67px] object-none absolute right-3 -top-[67px] transition-all group-hover:top-0 group-hover:scale-50'
+        />
+
         <Input
           type='text'
           placeholder='Find your topic here...'
-          className='pl-14 pr-20 text-md w-full min-h-14 shadow-xl rounded-2xl placeholder:text-neutral-400'
+          className='pl-14 pr-20 text-md font-medium w-full min-h-14 shadow-xl rounded-2xl placeholder:text-neutral-400 relative'
         />
+        <FaMagnifyingGlass className='w-6 h-6 absolute top-1/2 transform -translate-y-1/2 left-4 text-purple-600 pointer-events-none' />
         <div className='absolute top-1/2 transform -translate-y-1/2 right-4 text-neutral-500 pointer-events-none items-center gap-1 text-xs font-bold flex'>
           <EnterIcon />
           Enter
