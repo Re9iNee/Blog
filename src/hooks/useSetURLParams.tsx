@@ -30,3 +30,24 @@ function useSetURLParams({ key, defaultValue }: Props) {
   return { setToUrl };
 }
 export default useSetURLParams;
+
+export function useSetManyUrlParams() {
+  const { replace } = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const set = useCallback(
+    (params: { key: string; value: string }[]) => {
+      const newParams = new URLSearchParams(searchParams);
+
+      params.forEach(({ key, value }) => {
+        newParams.set(key, value);
+      });
+
+      replace(`${pathname}?${newParams.toString()}`, { scroll: false });
+    },
+    [searchParams, pathname, replace]
+  );
+
+  return { set };
+}
