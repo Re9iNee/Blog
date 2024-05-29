@@ -14,10 +14,12 @@ export const revalidate = 60;
 type Props = {
   searchParams: {
     page?: string;
+    query?: string;
   };
 };
 export default async function Home({ searchParams }: Props) {
   const page = Number(searchParams.page) || 1;
+  const query = searchParams.query || "";
 
   return (
     <main>
@@ -54,8 +56,8 @@ export default async function Home({ searchParams }: Props) {
         xl:grid-cols-4
         '
       >
-        <Suspense fallback={<BlogCardsSkeleton />}>
-          <PublishedPostsWrapper page={page} />
+        <Suspense fallback={<BlogCardsSkeleton />} key={query + page}>
+          <PublishedPostsWrapper page={page} query={query} />
         </Suspense>
       </section>
     </main>

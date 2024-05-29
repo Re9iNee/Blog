@@ -4,6 +4,7 @@ import LittleFlame from "/public/images/little-flame.avif";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Chip from "../ui/chips";
 import { Input } from "../ui/input";
+import SearchInput from "./search-input";
 
 export default function Search() {
   return (
@@ -35,11 +36,7 @@ export default function Search() {
           className='w-[57px] h-[67px] object-none absolute right-3 -top-[67px] transition-all group-hover:top-0 group-hover:scale-50'
         />
 
-        <Input
-          type='text'
-          placeholder='Find your topic here...'
-          className='pl-14 pr-20 text-md font-medium w-full min-h-14 shadow-xl rounded-2xl placeholder:text-neutral-400 relative'
-        />
+        <SearchInput className='pl-14 pr-20 text-md font-medium w-full min-h-14 shadow-xl rounded-2xl placeholder:text-neutral-400 relative' />
         <FaMagnifyingGlass className='w-6 h-6 absolute top-1/2 transform -translate-y-1/2 left-4 text-purple-600 pointer-events-none' />
         <div className='absolute top-1/2 transform -translate-y-1/2 right-4 text-neutral-500 pointer-events-none items-center gap-1 text-xs font-bold flex'>
           <EnterIcon />
@@ -74,16 +71,16 @@ function EnterIcon() {
         d='M5.99935 6.66748L2.66602 10.0008L5.99935 13.3341'
         stroke='#737373'
         style={{ stroke: "#737373" }}
-        stroke-width='1.5'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M13.3327 2.66748V7.33415C13.3327 8.04139 13.0517 8.71967 12.5516 9.21977C12.0515 9.71986 11.3733 10.0008 10.666 10.0008H2.66602'
         stroke='#737373'
-        stroke-width='1.5'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   );
