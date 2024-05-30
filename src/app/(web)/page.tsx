@@ -8,15 +8,18 @@ import {
 import { Suspense } from "react";
 import PublishedPostsWrapper from "./published-posts-wrapper";
 import SlideShowWrapper from "./slide-show-wrapper";
+import Search from "@/components/homepage/search";
 
 export const revalidate = 60;
 type Props = {
   searchParams: {
     page?: string;
+    query?: string;
   };
 };
 export default async function Home({ searchParams }: Props) {
   const page = Number(searchParams.page) || 1;
+  const query = searchParams.query || "";
 
   return (
     <main>
@@ -36,6 +39,8 @@ export default async function Home({ searchParams }: Props) {
         <SlideShowWrapper />
       </Suspense>
 
+      <Search />
+
       <h1
         className='text-neutral-700 font-bold pt-4 px-4
         md:pt-8
@@ -51,8 +56,8 @@ export default async function Home({ searchParams }: Props) {
         xl:grid-cols-4
         '
       >
-        <Suspense fallback={<BlogCardsSkeleton />}>
-          <PublishedPostsWrapper page={page} />
+        <Suspense fallback={<BlogCardsSkeleton />} key={query + page}>
+          <PublishedPostsWrapper page={page} query={query} />
         </Suspense>
       </section>
     </main>

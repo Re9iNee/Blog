@@ -8,7 +8,7 @@ type Props = {
   defaultValue: string;
 };
 function useSetURLParams({ key, defaultValue }: Props) {
-  const { replace } = useRouter();
+  const { push } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -22,11 +22,32 @@ function useSetURLParams({ key, defaultValue }: Props) {
         params.delete(key);
       }
 
-      replace(`${pathname}?${params.toString()}`);
+      push(`${pathname}?${params.toString()}`);
     },
-    [pathname, searchParams, replace, key, defaultValue]
+    [pathname, searchParams, push, key, defaultValue]
   );
 
   return { setToUrl };
 }
 export default useSetURLParams;
+
+export function useSetManyUrlParams() {
+  const { push } = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const set = useCallback(
+    (params: { key: string; value: string }[]) => {
+      const newParams = new URLSearchParams(searchParams);
+
+      params.forEach(({ key, value }) => {
+        newParams.set(key, value);
+      });
+
+      push(`${pathname}?${newParams.toString()}`, { scroll: false });
+    },
+    [searchParams, pathname, push]
+  );
+
+  return { set };
+}
