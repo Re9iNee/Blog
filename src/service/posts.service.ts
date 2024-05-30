@@ -14,6 +14,18 @@ export async function getSlideshowContents(): Promise<PostModel[]> {
   return posts;
 }
 
+// getting published posts id and updated date for sitemap
+export async function getAllPublishedPostsId(): Promise<
+  Pick<PostModel, "id" | "updatedAt">[]
+> {
+  const posts = await prisma.post.findMany({
+    where: { status: PostStatus.published },
+    select: { id: true, updatedAt: true },
+  });
+
+  return posts;
+}
+
 type getAllPublishedPosts = {
   page: number;
   query: string;
