@@ -8,7 +8,7 @@ type Props = {
   defaultValue: string;
 };
 function useSetURLParams({ key, defaultValue }: Props) {
-  const { replace } = useRouter();
+  const { push } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -22,9 +22,9 @@ function useSetURLParams({ key, defaultValue }: Props) {
         params.delete(key);
       }
 
-      replace(`${pathname}?${params.toString()}`);
+      push(`${pathname}?${params.toString()}`);
     },
-    [pathname, searchParams, replace, key, defaultValue]
+    [pathname, searchParams, push, key, defaultValue]
   );
 
   return { setToUrl };
@@ -32,7 +32,7 @@ function useSetURLParams({ key, defaultValue }: Props) {
 export default useSetURLParams;
 
 export function useSetManyUrlParams() {
-  const { replace } = useRouter();
+  const { push } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -44,9 +44,9 @@ export function useSetManyUrlParams() {
         newParams.set(key, value);
       });
 
-      replace(`${pathname}?${newParams.toString()}`, { scroll: false });
+      push(`${pathname}?${newParams.toString()}`, { scroll: false });
     },
-    [searchParams, pathname, replace]
+    [searchParams, pathname, push]
   );
 
   return { set };
