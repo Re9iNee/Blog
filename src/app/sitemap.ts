@@ -1,4 +1,3 @@
-import { getServerSiteUrl } from "./../lib/utils/urlUtils";
 import { getAllPublishedPostsId } from "@/service/posts.service";
 import { MetadataRoute } from "next";
 
@@ -10,7 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   )
     return [];
 
-  const baseUrl = getServerSiteUrl();
+  const baseUrl = "https://mora-ed.com";
   const publishedPosts = await getAllPublishedPostsId();
 
   const posts: MetadataRoute.Sitemap = publishedPosts.map((post) => {
