@@ -14,16 +14,15 @@ export const metadata: Metadata = {
 
 function layout({ children }: { children: React.ReactNode }) {
   const gtmId = process.env.GTMID;
-  const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION;
-  if (!gtmId || !googleSiteVerification) {
-    throw new Error("GTMID OR google site verification code is not defined");
+
+  if (!gtmId) {
+    throw new Error("GTMID code is not defined");
   }
 
   return (
     <div
       className={`max-w-screen-xl min-h-screen mx-auto flex flex-col ${notoSans.className} ${poppins.variable}`}
     >
-      <meta name='google-site-verification' content={googleSiteVerification} />
       <GoogleTagManager gtmId={gtmId} />
       <Header />
       <div className='flex-grow relative'>{children}</div>
