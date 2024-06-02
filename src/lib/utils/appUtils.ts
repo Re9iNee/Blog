@@ -46,6 +46,6 @@ export function getMainImagePlaceholderUrl(): string {
 export function makeSlugWithTitle(
   title: string | undefined
 ): string | undefined {
-  const slug = title?.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  const slug = title?.replace(/[^a-z0-9]+/gi, "-").replace(/^-+|-+$/g, "");
   return slug;
 }

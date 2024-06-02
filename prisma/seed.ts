@@ -156,5 +156,6 @@ main()
 
 // I had to bring this function here. cause seeder runtime is running without tsconfig path file and setup.
 function makeSlugWithTitle(title: string): string {
-  return title.toLowerCase().replace(/\s+/g, "-");
+  const slug = title?.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  return slug;
 }

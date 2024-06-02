@@ -17,7 +17,7 @@ export const postSchema = z.object({
     .max(80, { message: "Title should be less than 80 characters" }),
   slug: z
     .string()
-    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, { message: "Slug is invalid" }),
+    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/i, { message: "Slug is invalid" }),
   summary: z
     .string({
       invalid_type_error: "Please write down a summary",

@@ -32,11 +32,11 @@ import { FaMarkdown } from "react-icons/fa6";
 import { Switch } from "@/components/ui/switch";
 import { Uploader } from "@/components/ui/uploader";
 import { updatePost } from "@/lib/actions/post.actions";
+import { getSiteUrl, makeSlugWithTitle } from "@/lib/utils";
 import { AuthorField } from "@/types/author";
 import { postSchema } from "@/types/schemas/post-schema";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
 
 function EditPostForm({
   postId,
@@ -55,6 +55,8 @@ function EditPostForm({
     resolver: zodResolver(postSchema),
     defaultValues: { ...initialValues },
   });
+
+  const slugInput = form.watch("slug");
 
   const onUploadFinished = (url: string) => {
     form.setValue("mainImageUrl", url, {
@@ -82,24 +84,54 @@ function EditPostForm({
       <form
         action={formAction}
         className='space-y-8'
-        name='create-post-form'
-        data-cy='create-post-form'
+        name='edit-post-form'
+        data-cy='edit-post-form'
       >
         <FormField
           name='title'
           control={form.control}
-          render={({ field }) => (
+          render={({ field: { onChange, ...rest } }) => (
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
                 <Input
                   required
                   data-cy='name'
+                  onChange={(e) => {
+                    form.setValue(
+                      "slug",
+                      makeSlugWithTitle(e.target.value) ?? ""
+                    );
+                    onChange(e);
+                  }}
                   placeholder='Enter post title'
+                  {...rest}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          name='slug'
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Slug</FormLabel>
+              <FormControl>
+                <Input
+                  required
+                  data-cy='slug'
+                  placeholder='Enter post slug'
                   {...field}
                 />
               </FormControl>
               <FormMessage />
+              <FormDescription>
+                Slug is used for navigating through posts in the webpage{" "}
+                {getSiteUrl() + "/posts/" + (slugInput ?? "{slug_value}")}
+              </FormDescription>
             </FormItem>
           )}
         />

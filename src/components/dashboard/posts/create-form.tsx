@@ -56,7 +56,6 @@ function CreatePostForm({
   });
 
   const slugInput = form.watch("slug");
-  const titleInput = form.watch("title");
 
   const onUploadFinished = (url: string) => {
     form.setValue("mainImageUrl", url, {
@@ -96,14 +95,22 @@ function CreatePostForm({
         <FormField
           name='title'
           control={form.control}
-          render={({ field }) => (
+          render={({ field: { onChange, ...rest } }) => (
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
                 <Input
                   data-cy='name'
+                  onChange={(e) => {
+                    form.setValue(
+                      "slug",
+                      makeSlugWithTitle(e.target.value) ?? ""
+                    );
+
+                    onChange(e);
+                  }}
                   placeholder='Enter post title'
-                  {...field}
+                  {...rest}
                 />
               </FormControl>
               <FormMessage />
@@ -120,7 +127,6 @@ function CreatePostForm({
               <FormControl>
                 <Input
                   data-cy='slug'
-                  defaultValue={makeSlugWithTitle(titleInput)}
                   placeholder='Enter post slug'
                   {...field}
                 />
@@ -128,11 +134,7 @@ function CreatePostForm({
               <FormMessage />
               <FormDescription>
                 Slug is used for navigating through posts in the webpage{" "}
-                {getSiteUrl() +
-                  "/posts/" +
-                  (slugInput ??
-                    makeSlugWithTitle(titleInput) ??
-                    "{slug_value}")}
+                {getSiteUrl() + "/posts/" + (slugInput ?? "{slug_value}")}
               </FormDescription>
             </FormItem>
           )}

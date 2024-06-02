@@ -41,6 +41,7 @@ export async function updatePost(
 ) {
   const validatedFields = UpdatePostSchema.safeParse({
     body: formData.get("body"),
+    slug: formData.get("slug"),
     title: formData.get("title"),
     status: formData.get("status"),
     summary: formData.get("summary"),
