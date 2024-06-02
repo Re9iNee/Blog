@@ -75,7 +75,6 @@ export async function getAllPosts({
   perPage = 10,
   query,
 }: getAllPosts): Promise<PostModel[]> {
-  console.count("get all posts");
   noStore();
 
   const posts = await prisma.post.findMany({
