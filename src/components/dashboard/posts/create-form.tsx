@@ -81,7 +81,14 @@ function CreatePostForm({
     setIsPending(true);
 
     // if its successful it would redirect to posts page, so no need to update isPending state
-    await createPost(values).catch(() => setIsPending(false));
+    await createPost(values).catch(() => {
+      setIsPending(false);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "Failed to Create a Post.",
+      });
+    });
   };
 
   return (
