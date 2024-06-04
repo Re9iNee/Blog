@@ -34,21 +34,8 @@ export async function createPost(data: PostModel) {
   redirect("/dashboard/posts");
 }
 
-export async function updatePost(
-  id: number,
-  prevState: unknown,
-  formData: FormData
-) {
-  const validatedFields = UpdatePostSchema.safeParse({
-    body: formData.get("body"),
-    slug: formData.get("slug"),
-    title: formData.get("title"),
-    status: formData.get("status"),
-    summary: formData.get("summary"),
-    authorId: formData.get("authorId"),
-    readingTime: formData.get("readingTime"),
-    mainImageUrl: formData.get("mainImageUrl"),
-  });
+export async function updatePost(id: number, data: PostModel) {
+  const validatedFields = UpdatePostSchema.safeParse(data);
 
   if (!validatedFields.success) {
     return {
