@@ -105,19 +105,36 @@ export async function fetchTotalPostsCount(query?: string): Promise<number> {
   return count;
 }
 
-export async function getPost(id: number): Promise<PostModel | null> {
+export async function getPostById(id: number): Promise<PostModel | null> {
   noStore();
 
   try {
     const post = await prisma.post.findUnique({
       where: { id },
+      include: {
+        author: true,
+        categories: true,
+      },
+    });
+    return post;
+  } catch (e) {
+    console.error(e);
+    throw new Error("Post not found");
+  }
+}
+export async function getPostBySlug(slug: string): Promise<PostModel | null> {
+  noStore();
+
+  try {
+    const post = await prisma.post.findUnique({
+      where: { slug },
       include: { author: true, categories: true },
     });
 
     return post;
   } catch (e) {
     console.error(e);
-    throw new Error("Post not found");
+    return null;
   }
 }
 
@@ -192,12 +209,15 @@ export async function deleteManyPosts(
   return deleteCount;
 }
 
-export async function clapToPost(id: number, amount: number): Promise<number> {
+export async function clapToPost(
+  slug: string,
+  amount: number
+): Promise<number> {
   noStore();
-  if (!id) throw new Error("post ID is required");
+  if (!slug) throw new Error("post Slug is required");
 
   const updatedPost = await prisma.post.update({
-    where: { id },
+    where: { slug },
     data: {
       claps: {
         increment: amount,

@@ -1,7 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import { markdownToHTML } from "@/lib/markdownToHTML";
 
-import { getPost } from "@/service/posts.service";
+import { getPostBySlug } from "@/service/posts.service";
 
 import Image from "next/image";
 
@@ -17,8 +17,8 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const id = params.id;
-  const data = await getPost(+id);
+  const slug = params.slug;
+  const data = await getPostBySlug(slug);
   if (!data) notFound();
 
   const previousImage = (await parent).openGraph?.images || [];
@@ -32,7 +32,7 @@ export async function generateMetadata(
       authors: data.author.name,
       description: data.summary,
       title: `${data.title} | Mora Blog`,
-      url: `https://mora-ed.com/posts/${id}`,
+      url: `https://mora-ed.com/posts/${slug}`,
       images: [openGraphImage, ...previousImage],
       publishedTime: data?.publishedAt?.toUTCString(),
     },
@@ -42,13 +42,13 @@ export async function generateMetadata(
 }
 
 type Props = {
-  params: { id: string };
+  params: { slug: string };
 };
 
 async function PostPage({ params }: Props) {
-  const id = params.id;
+  const slug = params.slug;
 
-  const data = await getPost(+id);
+  const data = await getPostBySlug(slug);
   if (!data) notFound();
 
   const htmlContent = await markdownToHTML(data.body ?? "");
@@ -94,7 +94,7 @@ async function PostPage({ params }: Props) {
           <RxDotFilled />
           <span>{data.readingTime} min read</span>
 
-          <ClapContainer postId={id} className='pb-1' total={data.claps} />
+          <ClapContainer slug={slug} className='pb-1' total={data.claps} />
         </section>
       </div>
 
