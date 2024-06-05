@@ -6,33 +6,30 @@ import { notFound } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import Claps from "./claps";
 
-function getClapsFromLocalStorage(postId: string): number {
-  return Number(localStorage.getItem(`clap-${postId}`)) ?? 0;
+function getClapsFromLocalStorage(slug: string): number {
+  return Number(localStorage.getItem(`clap-${slug}`)) ?? 0;
 }
 
 interface ClapContainerProps {
-  postId: string;
+  slug: string;
   total: number;
   className: ClassValue;
 }
-function ClapContainer({ total, postId, ...rest }: ClapContainerProps) {
+function ClapContainer({ total, slug, ...rest }: ClapContainerProps) {
   if (typeof window === "undefined") notFound();
 
-  const currentClaps = useMemo(
-    () => getClapsFromLocalStorage(postId),
-    [postId]
-  );
+  const currentClaps = useMemo(() => getClapsFromLocalStorage(slug), [slug]);
 
   const onClap = useCallback(
     async (totalUserClaps: number) => {
       // get the updated version of the claps
-      const savedLocalClaps = getClapsFromLocalStorage(postId);
+      const savedLocalClaps = getClapsFromLocalStorage(slug);
 
       const addedClaps = totalUserClaps - savedLocalClaps;
-      await clapToPost(+postId, addedClaps);
-      localStorage.setItem(`clap-${postId}`, String(totalUserClaps));
+      await clapToPost(slug, addedClaps);
+      localStorage.setItem(`clap-${slug}`, String(totalUserClaps));
     },
-    [postId]
+    [slug]
   );
 
   return (

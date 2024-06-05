@@ -4,6 +4,7 @@ import {
   convertDateToDayMonthAndYear,
   getAvatarPlaceholderUrl,
   getMainImagePlaceholderUrl,
+  getPostUrl,
 } from "@/lib/utils";
 import { PostModel } from "@/types/post";
 import Image from "next/image";
@@ -13,13 +14,13 @@ type Props = {
   data: Omit<PostModel, "categories">;
 };
 function BlogCard({ data }: Props) {
-  const { id, title, author, mainImageUrl, publishedAt, summary, createdAt } =
+  const { slug, title, author, mainImageUrl, publishedAt, summary, createdAt } =
     data;
 
   return (
     <article className='flex flex-col gap-2'>
       <Link
-        href={`/posts/${id}`}
+        href={getPostUrl(slug)}
         className='group relative w-full h-32 rounded-xl cursor-pointer'
       >
         <Image
@@ -36,7 +37,7 @@ function BlogCard({ data }: Props) {
       </Link>
 
       <h2 className='text-neutral-950 flex-grow font-bold leading-tight dark:text-neutral-300'>
-        <Link href={`/posts/${id}`}>{title}</Link>
+        <Link href={getPostUrl(slug)}>{title}</Link>
       </h2>
       <summary
         className='text-neutral-700 dark:text-neutral-500 text-xs leading-none max-h-max line-clamp-2

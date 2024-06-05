@@ -12,7 +12,7 @@ async function main() {
   await insertAdmin();
   // console.log(await getHash("examplePassword"));
   // await insertUsers(2);
-  // await insertPosts(60);
+  // await insertPosts(5);
   // await getAllAuthors();
   // await getAllDB();
 }
@@ -118,10 +118,14 @@ async function insertPosts(limit: number = 10) {
   for (let i = 0; i < limit; i++) {
     const randomAuthor = users[Math.floor(Math.random() * users.length)];
 
+    const title = faker.lorem.sentence();
+    const slug = makeSlugWithTitle(title);
+
     const newPost = {
+      slug,
+      title,
       authorId: randomAuthor.id,
       status: PostStatus.published,
-      title: faker.lorem.sentence(),
       summary: faker.lorem.sentence(),
       body: faker.lorem.paragraphs(10),
       readingTime: faker.number.int({ max: 30 }),
@@ -149,3 +153,9 @@ main()
     await prisma.$disconnect();
     process.exit(1);
   });
+
+// I had to bring this function here. cause seeder runtime is running without tsconfig path file and setup.
+function makeSlugWithTitle(title: string): string {
+  const slug = title?.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  return slug;
+}
