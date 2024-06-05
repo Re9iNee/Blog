@@ -42,3 +42,13 @@ export function getAvatarPlaceholderUrl(): string {
 export function getMainImagePlaceholderUrl(): string {
   return "https://placehold.co/192x128";
 }
+
+export function makeSlugWithTitle(
+  title: string | undefined
+): string | undefined {
+  const slug = title
+    ?.toLowerCase()
+    .replace(/[^a-z0-9]+/gi, "-")
+    .replace(/^-+|-+$/g, "");
+  return slug;
+}

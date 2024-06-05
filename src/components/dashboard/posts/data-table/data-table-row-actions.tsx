@@ -17,6 +17,7 @@ import { deletePost as deletePostService } from "@/service/posts.service";
 import { postSchema } from "@/types/schemas/post-schema";
 import Link from "next/link";
 import { useCallback } from "react";
+import { getPostUrl } from "@/lib/utils";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -26,7 +27,6 @@ export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const parsed = postSchema.safeParse(row.original);
-  const post = parsed.data;
 
   const deletePost = useCallback(async (id: number) => {
     try {
@@ -47,6 +47,7 @@ export function DataTableRowActions<TData>({
     console.error(parsed.error);
     return <></>;
   }
+  const post = parsed.data;
 
   return (
     <DropdownMenu>
@@ -62,9 +63,9 @@ export function DataTableRowActions<TData>({
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='w-[160px]'>
         <DropdownMenuItem data-cy='edit-post' asChild>
-          <Link href={`/dashboard/posts/${post?.id}/edit`}>Edit</Link>
+          <Link href={`/dashboard/posts/${post.id}/edit`}>Edit</Link>
         </DropdownMenuItem>
-        <Link href={`/posts/${post?.id}`} target='_blank'>
+        <Link href={getPostUrl(post.slug)} target='_blank'>
           <DropdownMenuItem>Visit post</DropdownMenuItem>
         </Link>
         <DropdownMenuItem className='cursor-not-allowed'>
@@ -90,7 +91,7 @@ export function DataTableRowActions<TData>({
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className='cursor-pointer'
-          onClick={() => deletePost(post?.id!)}
+          onClick={() => deletePost(post.id!)}
         >
           Delete
           <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>

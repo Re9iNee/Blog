@@ -7,7 +7,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { getPost } from "@/service/posts.service";
+import { getPostById, getPostBySlug } from "@/service/posts.service";
 import { fetchAuthors } from "@/service/user.service";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -23,7 +23,7 @@ export default async function EditPostPage({
   params: { id: string };
 }) {
   const { id } = params;
-  const [post, authors] = await Promise.all([getPost(+id), fetchAuthors()]);
+  const [post, authors] = await Promise.all([getPostById(+id), fetchAuthors()]);
 
   if (!post) notFound();
 

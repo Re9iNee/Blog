@@ -8,7 +8,6 @@ export default function Uploader() {
   const [fileString, setFileString] = useState<ArrayBuffer | null>(null);
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("running");
     // get file from input
     const file = e.target.files ? e.target.files[0] : null;
     if (!file) return;

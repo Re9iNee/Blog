@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
-import { cn } from "@/lib/utils";
+import { cn, getPostUrl } from "@/lib/utils";
 import { PostModel } from "@/types/post";
 import Link from "next/link";
 import { Button } from "./button";
@@ -98,7 +98,7 @@ export function SlideShow({ className, cards }: Props) {
 }
 
 function SlideShowCard({
-  id,
+  slug,
   page,
   title,
   author,
@@ -186,7 +186,7 @@ function SlideShowCard({
             By {author.name}
           </span>
           <Link
-            href={`/posts/${id}`}
+            href={getPostUrl(slug)}
             className='group inline-flex border-1.5 border-white whitespace-nowrap bg-neutral-800 bg-opacity-0 rounded-lg py-2 pl-8 pr-6 items-center justify-center hover:bg-opacity-30 hover:px-6 transition-all mt-3 mb-2'
           >
             <span className='text-white text-sm font-medium group-active:scale-85 duration-500 origin-center'>
@@ -207,7 +207,7 @@ function SlideShowCard({
             </span>
           </div>
           <Link
-            href={`/posts/${id}`}
+            href={getPostUrl(slug)}
             className='group inline-flex border whitespace-nowrap bg-neutral-800 bg-opacity-0 rounded-3xl py-2 pl-8 pr-6 items-center justify-center w-40 hover:bg-opacity-30 hover:px-6 transition-all'
           >
             <span className='text-white text-sm font-medium group-active:scale-85 duration-500 origin-center'>

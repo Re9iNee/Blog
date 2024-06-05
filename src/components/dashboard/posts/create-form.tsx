@@ -13,7 +13,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 
 import {
@@ -32,8 +31,9 @@ import { FaMarkdown } from "react-icons/fa6";
 import { Switch } from "@/components/ui/switch";
 import { Uploader } from "@/components/ui/uploader";
 import { createPost } from "@/lib/actions/post.actions";
+import { getSiteUrl, makeSlugWithTitle } from "@/lib/utils";
 import { AuthorField } from "@/types/author";
-import { CreatePostSchema, postSchema } from "@/types/schemas/post-schema";
+import { CreatePostSchema } from "@/types/schemas/post-schema";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -54,6 +54,8 @@ function CreatePostForm({
     },
     resolver: zodResolver(CreatePostSchema),
   });
+
+  const slugInput = form.watch("slug");
 
   const onUploadFinished = (url: string) => {
     form.setValue("mainImageUrl", url, {
@@ -79,7 +81,14 @@ function CreatePostForm({
     setIsPending(true);
 
     // if its successful it would redirect to posts page, so no need to update isPending state
-    await createPost(values).catch(() => setIsPending(false));
+    await createPost(values).catch(() => {
+      setIsPending(false);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "Failed to Create a Post.",
+      });
+    });
   };
 
   return (
@@ -93,17 +102,47 @@ function CreatePostForm({
         <FormField
           name='title'
           control={form.control}
-          render={({ field }) => (
+          render={({ field: { onChange, ...rest } }) => (
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
                 <Input
                   data-cy='name'
+                  onChange={(e) => {
+                    form.setValue(
+                      "slug",
+                      makeSlugWithTitle(e.target.value) ?? ""
+                    );
+
+                    onChange(e);
+                  }}
                   placeholder='Enter post title'
+                  {...rest}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          name='slug'
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Slug</FormLabel>
+              <FormControl>
+                <Input
+                  data-cy='slug'
+                  placeholder='Enter post slug'
                   {...field}
                 />
               </FormControl>
               <FormMessage />
+              <FormDescription>
+                Slug is used for navigating through posts in the webpage{" "}
+                {getSiteUrl() + "/posts/" + (slugInput ?? "{slug_value}")}
+              </FormDescription>
             </FormItem>
           )}
         />
