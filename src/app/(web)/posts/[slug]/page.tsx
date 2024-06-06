@@ -12,6 +12,7 @@ import { notFound } from "next/navigation";
 import PostNavigationGroup from "../nav";
 import { Metadata, ResolvingMetadata } from "next";
 import { convertDateToDayMonthAndYear } from "@/lib/utils";
+import { PostModel } from "@/types/post";
 
 export async function generateMetadata(
   { params }: Props,
@@ -41,6 +42,18 @@ export async function generateMetadata(
   return metadata;
 }
 
+function generateSchemaJson(post: PostModel) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: post.title,
+    image: post.mainImageUrl,
+    description: post.summary,
+  };
+
+  return jsonLd;
+}
+
 type Props = {
   params: { slug: string };
 };
@@ -51,11 +64,16 @@ async function PostPage({ params }: Props) {
   const data = await getPostBySlug(slug);
   if (!data) notFound();
 
+  const schema = generateSchemaJson(data);
   const htmlContent = await markdownToHTML(data.body ?? "");
 
   return (
     <div className='pt-8 flex flex-col gap-4 px-4 mb-8 max-w-screen-md mx-auto'>
       {/* metadata */}
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <title>{data.title}</title>
 
       <PostNavigationGroup />
