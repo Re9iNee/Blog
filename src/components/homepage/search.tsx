@@ -8,7 +8,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 export default function Search() {
-  const [isTyping, setIsTyping] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   return (
     <section
@@ -25,7 +25,7 @@ export default function Search() {
           placeholder='empty'
           className={cn(
             "left-[52%] top-[4%] relative object-none transition-all",
-            isTyping && "rotate-[60deg] scale-110"
+            isFocused && "rotate-[60deg] scale-110"
           )}
         />
       </div>
@@ -35,8 +35,8 @@ export default function Search() {
       </h2>
 
       <SearchInput
-        isTyping={isTyping}
-        setIsTyping={setIsTyping}
+        isFocused={isFocused}
+        setIsFocused={setIsFocused}
         className='relative w-4/6 max-w-[550px]'
       />
 
