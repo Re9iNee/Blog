@@ -1,4 +1,4 @@
-import { getAllPublishedPostsId } from "@/service/posts.service";
+import { getAllPublishedPostsSlug } from "@/service/posts.service";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -10,16 +10,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return [];
 
   const baseUrl = "https://mora-ed.com";
-  const publishedPosts = await getAllPublishedPostsId();
+  const publishedPosts = await getAllPublishedPostsSlug();
 
   const posts: MetadataRoute.Sitemap = publishedPosts.map((post) => {
     return {
       priority: 0.8,
-      changeFrequency: "weekly",
+      changeFrequency: "never",
       lastModified: post.updatedAt,
-      url: `${baseUrl}/posts/${post.id}`,
+      url: `${baseUrl}/posts/${post.slug}`,
     };
   });
+
   return [
     {
       priority: 1,
