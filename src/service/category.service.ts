@@ -1,3 +1,5 @@
+"use server";
+
 import { prisma } from "@/lib/prisma";
 import { fetchAllParams } from "@/types/common";
 import { Category } from "@prisma/client";
