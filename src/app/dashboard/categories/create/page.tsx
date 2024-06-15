@@ -1,5 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import CreatePostForm from "@/components/dashboard/posts/create-form";
+import CreateCategoryForm from "@/components/dashboard/categories/create-form";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,26 +7,14 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { fetchAuthors } from "@/service/user.service";
 import { Metadata } from "next";
-import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Create Post",
+  title: "Create Category",
 };
 
-export default async function CreatePostPage() {
-  const [authors, session] = await Promise.all([
-    fetchAuthors(),
-    getServerSession(authOptions),
-  ]);
-
-  const authorId = session?.user.id;
-
-  if (!authorId) notFound();
-
+export default async function CreateCategoryPage() {
   return (
     <div className='p-8 space-y-8'>
       <Breadcrumb>
@@ -38,17 +25,17 @@ export default async function CreatePostPage() {
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href={"/dashboard/posts"}>Posts</Link>
+              <Link href={"/dashboard/categories"}>Categories</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Create a new Post</BreadcrumbPage>
+            <BreadcrumbPage>Create a new Category</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
 
-      <CreatePostForm authors={authors} authorId={authorId} />
+      <CreateCategoryForm />
     </div>
   );
 }

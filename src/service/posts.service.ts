@@ -160,25 +160,6 @@ export async function updatePost(
   return post;
 }
 
-export async function createPost(data: PostModel): Promise<PostModel> {
-  const { categories, author, ...rest } = data;
-
-  const post = await prisma.post.create({
-    data: {
-      ...rest,
-    },
-    include: {
-      author: true,
-      categories: true,
-    },
-  });
-
-  revalidatePath("/dashboard/posts");
-  revalidatePath(`/`);
-
-  return post;
-}
-
 export async function deletePost(
   id: number
 ): Promise<Omit<PostModel, "author" | "categories">> {
