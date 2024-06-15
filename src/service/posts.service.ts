@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { fetchAllParams } from "@/types/common";
 import { PostModel } from "@/types/post";
 import { PostStatus } from "@prisma/client";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
@@ -65,16 +66,11 @@ export async function getPublishedPostsCount({
   return count;
 }
 
-type getAllPosts = {
-  page?: number;
-  perPage?: number;
-  query?: string;
-};
 export async function getAllPosts({
   page = 1,
   perPage = 10,
   query,
-}: getAllPosts): Promise<PostModel[]> {
+}: fetchAllParams): Promise<PostModel[]> {
   noStore();
 
   const posts = await prisma.post.findMany({

@@ -12,17 +12,19 @@ import { DataTableToolbar } from "../../dashboard/posts/data-table/data-table-to
 import { DataTablePagination } from "./data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
-  table: ReturnType<typeof useReactTable<TData>>;
+  toolbar: JSX.Element;
   columns: ColumnDef<TData, TValue>[];
+  table: ReturnType<typeof useReactTable<TData>>;
 }
 
 export function DataTable<TData, TValue>({
   table,
   columns,
+  toolbar,
 }: DataTableProps<TData, TValue>) {
   return (
     <div className='space-y-4'>
-      <DataTableToolbar table={table} />
+      {toolbar}
       <div className='rounded-md border'>
         <Table>
           <TableHeader>
