@@ -31,3 +31,9 @@ export const postSchema = z.object({
 
 export const CreatePostSchema = postSchema.omit({ id: true });
 export const UpdatePostSchema = postSchema.omit({ id: true });
+
+export const postSelectSchema = postSchema.pick({
+  id: true,
+  title: true,
+  mainImageUrl: true,
+});

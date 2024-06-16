@@ -13,13 +13,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "@/components/ui/use-toast";
-import { deletePost as deletePostService } from "@/service/posts.service";
-import { postSchema } from "@/types/schemas/post-schema";
+import { deleteManyCategories } from "@/service/category.service";
+import { categorySchema } from "@/types/schemas/category-schema";
 import Link from "next/link";
 import { useCallback } from "react";
-import { getPostUrl } from "@/lib/utils";
-import { categorySchema } from "@/types/schemas/category-schema";
-import { deleteManyCategories } from "@/service/category.service";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;

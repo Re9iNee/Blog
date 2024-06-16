@@ -5,10 +5,11 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import { DataTableColumnHeader } from "@/components/ui/table/data-table-column-header";
-import { Category } from "@prisma/client";
-import { DataTableRowActions } from "./data-table-row-actions";
 
-export const columns: ColumnDef<Category>[] = [
+import { DataTableRowActions } from "./data-table-row-actions";
+import { CategoryModel } from "@/types/category.type";
+
+export const columns: ColumnDef<CategoryModel>[] = [
   {
     id: "select",
     header: ({ table }) => (

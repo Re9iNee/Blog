@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import { PostModel } from "@/types/post";
+import { PostModel } from "@/types/post.type";
 import { PostStatus } from "@prisma/client";
 import { FaMarkdown } from "react-icons/fa6";
 

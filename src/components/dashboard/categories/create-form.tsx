@@ -15,18 +15,33 @@ import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 import { toast } from "@/components/ui/use-toast";
+
+import {
+  MultiSelector,
+  MultiSelectorContent,
+  MultiSelectorInput,
+  MultiSelectorItem,
+  MultiSelectorList,
+  MultiSelectorTrigger,
+} from "@/components/ui/multi-select";
+import { createCategory } from "@/service/category.service";
+import { CategoryInsertType, CategoryModel } from "@/types/category.type";
+import { PostSelect } from "@/types/post.type";
+import { CreateCategorySchema } from "@/types/schemas/category-schema";
+import Image from "next/image";
+import { useState } from "react";
 import { Category } from "@prisma/client";
 
-import { createCategory } from "@/service/category.service";
-import { CreateCategorySchema } from "@/types/schemas/category-schema";
-import { useState } from "react";
-
-function CreateCategoryForm() {
+type Props = {
+  posts: PostSelect[];
+};
+function CreateCategoryForm({ posts }: Props) {
   const [isPending, setIsPending] = useState<boolean>(false);
 
-  const form = useForm<Category>({
+  const form = useForm<CategoryInsertType>({
     defaultValues: {
       name: "",
+      posts: [],
     },
     resolver: zodResolver(CreateCategorySchema),
   });
@@ -66,6 +81,43 @@ function CreateCategoryForm() {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          name='posts'
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Select Posts</FormLabel>
+              <MultiSelector
+                values={field.value}
+                onValuesChange={field.onChange}
+              >
+                <MultiSelectorTrigger>
+                  <MultiSelectorInput placeholder='Select people to invite' />
+                </MultiSelectorTrigger>
+                <MultiSelectorContent>
+                  <MultiSelectorList>
+                    {posts.map((post) => (
+                      <MultiSelectorItem key={post.id} value={String(post.id)}>
+                        <div className='flex items-center space-x-2'>
+                          <Image
+                            width={32}
+                            height={32}
+                            alt={post.title}
+                            src={post.mainImageUrl ?? ""}
+                            className='w-8 h-8 rounded-full'
+                          />
+                          <span>{post.title}</span>
+                        </div>
+                      </MultiSelectorItem>
+                    ))}
+                  </MultiSelectorList>
+                </MultiSelectorContent>
+              </MultiSelector>
               <FormMessage />
             </FormItem>
           )}

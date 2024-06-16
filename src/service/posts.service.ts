@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { fetchAllParams } from "@/types/common";
-import { PostModel } from "@/types/post";
+import { PostModel, PostSelect } from "@/types/post.type";
 import { PostStatus } from "@prisma/client";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 
@@ -229,4 +229,12 @@ export async function slideshowTogglePostVisibility(
 
   const updatedPostVisibility = updatedPost.isSlideshow;
   return updatedPostVisibility;
+}
+
+export async function fetchPostsTitleAndImage(): Promise<PostSelect[]> {
+  const posts = await prisma.post.findMany({
+    select: { title: true, id: true, mainImageUrl: true },
+  });
+
+  return posts;
 }

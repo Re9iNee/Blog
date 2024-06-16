@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { CategoryModel } from "@/types/category.type";
 import { fetchAllParams } from "@/types/common";
 import { CreateCategorySchema } from "@/types/schemas/category-schema";
 import { Category } from "@prisma/client";
@@ -25,14 +26,16 @@ export async function fetchCategories({
   query,
   page = 1,
   perPage = 10,
-}: fetchAllParams): Promise<Category[]> {
+}: fetchAllParams): Promise<CategoryModel[]> {
   noStore();
 
   const categories = await prisma.category.findMany({
     where: {
       name: { contains: query, mode: "insensitive" },
     },
-    include: { posts: { select: { title: true, id: true } } },
+    include: {
+      posts: { select: { title: true, id: true, mainImageUrl: true } },
+    },
     take: perPage,
     orderBy: { id: "desc" },
     skip: (page - 1) * perPage,
@@ -68,9 +71,17 @@ export async function createCategory(data: Category) {
     };
   }
 
+  const { posts, ...categoryData } = validatedFields.data;
+
   try {
     await prisma.category.create({
-      data: validatedFields.data,
+      data: {
+        ...categoryData,
+        posts: { connect: posts.map((id) => ({ id })) },
+      },
+      include: {
+        posts: { select: { title: true, id: true, mainImageUrl: true } },
+      },
     });
   } catch (e) {
     console.error(e);

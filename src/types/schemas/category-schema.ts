@@ -1,19 +1,33 @@
 import { z } from "zod";
-import { postSchema } from "./post-schema";
+import { postSelectSchema } from "./post-schema";
 
-export const categorySchema = z.object({
+const baseSchema = z.object({
   id: z.number(),
+  updatedAt: z.date().default(new Date()),
+  createdAt: z.date().default(new Date()),
+
   name: z
     .string()
     .min(3, { message: "Name must be at least 3 characters." })
     .max(50, { message: "Name must be at most 50 characters." }),
-  posts: z.array(postSchema),
-  updatedAt: z.date().default(new Date()),
-  createdAt: z.date().default(new Date()),
 });
 
-export const CreateCategorySchema = categorySchema.pick({ name: true });
+export const categorySchema = baseSchema.extend({
+  posts: postSelectSchema.array(),
+});
 
-export const UpdateCategorySchema = categorySchema
-  .pick({ id: true, posts: true })
-  .partial({ posts: true });
+const postsSelectForm = z.array(z.coerce.number().nonnegative()).default([]);
+
+export const CreateCategorySchema = baseSchema
+  .pick({
+    name: true,
+  })
+  .extend({
+    posts: postsSelectForm,
+  });
+
+export const UpdateCategorySchema = baseSchema
+  .pick({ id: true, name: true })
+  .extend({
+    posts: postsSelectForm,
+  });
