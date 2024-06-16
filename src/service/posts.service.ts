@@ -232,6 +232,8 @@ export async function slideshowTogglePostVisibility(
 }
 
 export async function fetchPostsTitleAndImage(): Promise<PostSelect[]> {
+  noStore();
+
   const posts = await prisma.post.findMany({
     select: { title: true, id: true, mainImageUrl: true },
   });

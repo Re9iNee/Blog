@@ -3,7 +3,7 @@
 import { DataTable } from "@/components/ui/table/data-table";
 import { toast } from "@/components/ui/use-toast";
 import { deleteManyPosts } from "@/service/posts.service";
-import { PostModel } from "@/types/post";
+import { PostModel } from "@/types/post.type";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -21,6 +21,7 @@ import {
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
+import { DataTableToolbar } from "./data-table/data-table-toolbar";
 
 type Props = {
   page: number;
@@ -137,7 +138,13 @@ function PostTable({ perPage, rowCount, posts, columns, page, query }: Props) {
     [table]
   );
 
-  return <DataTable table={table} columns={columns} />;
+  return (
+    <DataTable
+      table={table}
+      columns={columns}
+      toolbar={<DataTableToolbar table={table} />}
+    />
+  );
 }
 
 export default PostTable;
