@@ -5,6 +5,6 @@ export interface CategoryModel extends Category {
   posts: PostSelect[];
 }
 
-export interface CategoryInsertType extends Category {
+export interface CategoryUpsertType extends Category {
   posts: string[];
 }

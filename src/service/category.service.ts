@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { CategoryModel } from "@/types/category.type";
+import { CategoryUpsertType, CategoryModel } from "@/types/category.type";
 import { fetchAllParams } from "@/types/common";
 import { CreateCategorySchema } from "@/types/schemas/category-schema";
 import { Category } from "@prisma/client";
@@ -86,6 +86,44 @@ export async function createCategory(data: Category) {
   } catch (e) {
     console.error(e);
     throw new Error("Failed to create category.");
+  }
+
+  revalidatePath("/dashboard/categories");
+  redirect("/dashboard/categories");
+}
+
+export async function getCategoryById(
+  id: number
+): Promise<CategoryModel | null> {
+  noStore();
+
+  const category = await prisma.category.findUnique({
+    where: { id },
+    include: {
+      posts: { select: { title: true, id: true, mainImageUrl: true } },
+    },
+  });
+
+  return category;
+}
+
+export async function updateCategoryById(
+  id: number,
+  values: CategoryUpsertType
+) {
+  const { posts, ...categoryData } = values;
+
+  try {
+    await prisma.category.update({
+      where: { id },
+      data: {
+        ...categoryData,
+        posts: { set: posts.map((id) => ({ id: +id })) },
+      },
+    });
+  } catch (e) {
+    console.error(e);
+    throw new Error("Failed to update category.");
   }
 
   revalidatePath("/dashboard/categories");

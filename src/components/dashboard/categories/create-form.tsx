@@ -25,7 +25,7 @@ import {
   MultiSelectorTrigger,
 } from "@/components/ui/multi-select";
 import { createCategory } from "@/service/category.service";
-import { CategoryInsertType, CategoryModel } from "@/types/category.type";
+import { CategoryUpsertType, CategoryModel } from "@/types/category.type";
 import { PostSelect } from "@/types/post.type";
 import { CreateCategorySchema } from "@/types/schemas/category-schema";
 import Image from "next/image";
@@ -38,7 +38,7 @@ type Props = {
 function CreateCategoryForm({ posts }: Props) {
   const [isPending, setIsPending] = useState<boolean>(false);
 
-  const form = useForm<CategoryInsertType>({
+  const form = useForm<CategoryUpsertType>({
     defaultValues: {
       name: "",
       posts: [],

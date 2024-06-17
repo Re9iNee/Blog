@@ -1,6 +1,6 @@
 "use server";
 
-import { PostModel } from "@/types/post";
+import { PostModel } from "@/types/post.type";
 import {
   CreatePostSchema,
   UpdatePostSchema,
