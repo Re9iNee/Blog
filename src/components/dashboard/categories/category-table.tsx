@@ -22,14 +22,15 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { DataTableToolbar } from "./data-table/data-table-toolbar";
+import { CategoryModel } from "@/types/category.type";
 
 type Props = {
   page: number;
   query?: string;
   perPage: number;
   rowCount: number;
-  categories: Category[];
-  columns: ColumnDef<Category, Category>[];
+  categories: CategoryModel[];
+  columns: ColumnDef<CategoryModel, CategoryModel>[];
 };
 function CategoryTable({
   page,

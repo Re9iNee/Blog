@@ -7,9 +7,8 @@ import { useMemo, useState } from "react";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 import { cn, getPostUrl } from "@/lib/utils";
-import { PostModel } from "@/types/post";
+import { PostModel } from "@/types/post.type";
 import Link from "next/link";
-import { Button } from "./button";
 
 type Props = {
   cards: PostModel[];

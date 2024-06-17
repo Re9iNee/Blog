@@ -6,7 +6,7 @@ import {
   getMainImagePlaceholderUrl,
   getPostUrl,
 } from "@/lib/utils";
-import { PostModel } from "@/types/post";
+import { PostModel } from "@/types/post.type";
 import Image from "next/image";
 import Link from "next/link";
 

@@ -6,8 +6,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 import { DataTableColumnHeader } from "@/components/ui/table/data-table-column-header";
 
-import { DataTableRowActions } from "./data-table-row-actions";
 import { CategoryModel } from "@/types/category.type";
+import { DataTableRowActions } from "./data-table-row-actions";
 
 export const columns: ColumnDef<CategoryModel>[] = [
   {
