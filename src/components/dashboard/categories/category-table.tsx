@@ -2,8 +2,8 @@
 
 import { DataTable } from "@/components/ui/table/data-table";
 import { toast } from "@/components/ui/use-toast";
-import { deleteManyPosts } from "@/service/posts.service";
-import { PostModel } from "@/types/post.type";
+import { deleteManyCategories } from "@/service/category.service";
+import { Category } from "@prisma/client";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -22,16 +22,24 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { DataTableToolbar } from "./data-table/data-table-toolbar";
+import { CategoryModel } from "@/types/category.type";
 
 type Props = {
   page: number;
   query?: string;
   perPage: number;
   rowCount: number;
-  posts: PostModel[];
-  columns: ColumnDef<PostModel, PostModel>[];
+  categories: CategoryModel[];
+  columns: ColumnDef<CategoryModel, CategoryModel>[];
 };
-function PostTable({ perPage, rowCount, posts, columns, page, query }: Props) {
+function CategoryTable({
+  page,
+  query,
+  columns,
+  perPage,
+  rowCount,
+  categories,
+}: Props) {
   const { replace } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -40,7 +48,7 @@ function PostTable({ perPage, rowCount, posts, columns, page, query }: Props) {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([
-    { id: "title", value: query ?? "" },
+    { id: "name", value: query ?? "" },
   ]);
   const [pagination, setPagination] = useState<PaginationState>({
     pageSize: perPage,
@@ -50,7 +58,7 @@ function PostTable({ perPage, rowCount, posts, columns, page, query }: Props) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const table = useReactTable({
-    data: posts,
+    data: categories,
     columns,
     state: {
       sorting,
@@ -127,12 +135,12 @@ function PostTable({ perPage, rowCount, posts, columns, page, query }: Props) {
       if (!selectedRowIDs.length) return;
 
       try {
-        toast({ variant: "default", title: "Deleting posts..." });
-        const { count } = await deleteManyPosts(selectedRowIDs);
-        toast({ variant: "default", title: `${count} Posts deleted!` });
+        toast({ variant: "default", title: "Deleting categories..." });
+        const { count } = await deleteManyCategories(selectedRowIDs);
+        toast({ variant: "default", title: `${count} Categories deleted!` });
       } catch (e) {
         console.error(e);
-        toast({ variant: "destructive", title: "Error deleting posts!" });
+        toast({ variant: "destructive", title: "Error deleting categories!" });
       }
     },
     [table]
@@ -147,4 +155,4 @@ function PostTable({ perPage, rowCount, posts, columns, page, query }: Props) {
   );
 }
 
-export default PostTable;
+export default CategoryTable;

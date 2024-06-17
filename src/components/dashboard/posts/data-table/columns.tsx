@@ -9,7 +9,7 @@ import { statuses } from "./data";
 import SpinnerCheckbox from "@/components/dashboard/spinner-checkbox";
 import { DataTableColumnHeader } from "@/components/ui/table/data-table-column-header";
 import { slideshowTogglePostVisibility } from "@/service/posts.service";
-import { PostModel } from "@/types/post";
+import { PostModel } from "@/types/post.type";
 import { DataTableRowActions } from "./data-table-row-actions";
 
 export const columns: ColumnDef<PostModel>[] = [

@@ -22,7 +22,7 @@ export const postSchema = z.object({
     .string({
       invalid_type_error: "Please write down a summary",
     })
-    .max(300, { message: "Summery should be less than 80 characters" }),
+    .max(300, { message: "Summery should be less than 300 characters" }),
 
   // TODO
   // author: z.any().optional(),
@@ -31,3 +31,9 @@ export const postSchema = z.object({
 
 export const CreatePostSchema = postSchema.omit({ id: true });
 export const UpdatePostSchema = postSchema.omit({ id: true });
+
+export const postSelectSchema = postSchema.pick({
+  id: true,
+  title: true,
+  mainImageUrl: true,
+});

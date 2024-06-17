@@ -10,11 +10,27 @@ const prisma = new PrismaClient().$extends(withAccelerate());
 async function main() {
   // await clearDB();
   await insertAdmin();
+  // await insertCategories();
   // console.log(await getHash("examplePassword"));
   // await insertUsers(2);
   // await insertPosts(5);
   // await getAllAuthors();
   // await getAllDB();
+}
+
+async function insertCategories() {
+  const data = await prisma.category.createMany({
+    data: [
+      { name: "Technology" },
+      { name: "Business" },
+      { name: "Health" },
+      { name: "Science" },
+      { name: "Sports" },
+      { name: "Entertainment" },
+    ],
+  });
+
+  console.log("Inserted categories: ", data.count);
 }
 
 async function getHash(pwd: string) {
