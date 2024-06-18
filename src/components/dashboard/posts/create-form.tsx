@@ -305,7 +305,7 @@ function CreatePostForm({
                 You can use{" "}
                 <a
                   target='_blank'
-                  href='https://stackedit.io/app#'
+                  href='https://dillinger.io/'
                   className='underline text-blue-500'
                 >
                   StackEdit website
