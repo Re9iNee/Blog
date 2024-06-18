@@ -1,5 +1,4 @@
 import EditCategoryForm from "@/components/dashboard/categories/edit-form";
-import EditPostForm from "@/components/dashboard/posts/edit-form";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,12 +8,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { getCategoryById } from "@/service/category.service";
-import {
-  fetchPostsTitleAndImage,
-  getPostById,
-  getPostBySlug,
-} from "@/service/posts.service";
-import { fetchAuthors } from "@/service/user.service";
+import { fetchPostsTitleAndImage } from "@/service/posts.service";
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";

@@ -8,3 +8,5 @@ export interface CategoryModel extends Category {
 export interface CategoryUpsertType extends Category {
   posts: string[];
 }
+
+export type CategorySelect = Pick<Category, "id" | "name">;

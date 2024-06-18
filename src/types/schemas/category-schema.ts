@@ -1,7 +1,8 @@
 import { z } from "zod";
-import { postSelectSchema } from "./post-schema";
+import { MultiSelectSchema } from "../common";
+import { basePost } from "./post-schema";
 
-const baseSchema = z.object({
+export const baseCategory = z.object({
   id: z.number(),
   updatedAt: z.date().default(new Date()),
   createdAt: z.date().default(new Date()),
@@ -12,22 +13,22 @@ const baseSchema = z.object({
     .max(50, { message: "Name must be at most 50 characters." }),
 });
 
-export const categorySchema = baseSchema.extend({
-  posts: postSelectSchema.array(),
+export const categorySchema = baseCategory.extend({
+  posts: z.array(
+    z.lazy(() => basePost.pick({ id: true, title: true, mainImageUrl: true }))
+  ),
 });
 
-const postsSelectForm = z.array(z.coerce.number().nonnegative()).default([]);
-
-export const CreateCategorySchema = baseSchema
+export const CreateCategorySchema = baseCategory
   .pick({
     name: true,
   })
   .extend({
-    posts: postsSelectForm,
+    posts: MultiSelectSchema,
   });
 
-export const UpdateCategorySchema = baseSchema
+export const UpdateCategorySchema = baseCategory
   .pick({ id: true, name: true })
   .extend({
-    posts: postsSelectForm,
+    posts: MultiSelectSchema,
   });

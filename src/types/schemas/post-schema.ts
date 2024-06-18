@@ -1,6 +1,8 @@
 import { z } from "zod";
+import { MultiSelectSchema } from "../common";
+import { baseCategory } from "./category-schema";
 
-export const postSchema = z.object({
+export const basePost = z.object({
   id: z.number(),
   body: z.string(),
   readingTime: z.coerce.number(),
@@ -26,14 +28,17 @@ export const postSchema = z.object({
 
   // TODO
   // author: z.any().optional(),
-  // categories: z.array(z.any()).optional(),
 });
 
-export const CreatePostSchema = postSchema.omit({ id: true });
-export const UpdatePostSchema = postSchema.omit({ id: true });
+export const postSchema = basePost.extend({
+  categories: z
+    .array(z.lazy(() => baseCategory.pick({ name: true, id: true })))
+    .default([]),
+});
 
-export const postSelectSchema = postSchema.pick({
-  id: true,
-  title: true,
-  mainImageUrl: true,
+export const CreatePostSchema = basePost.omit({ id: true }).extend({
+  categories: MultiSelectSchema,
+});
+export const UpdatePostSchema = basePost.omit({ id: true }).extend({
+  categories: MultiSelectSchema,
 });

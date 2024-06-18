@@ -1,6 +1,6 @@
 "use server";
 
-import { PostModel } from "@/types/post.type";
+import { PostModel, PostUpsertType } from "@/types/post.type";
 import {
   CreatePostSchema,
   UpdatePostSchema,
@@ -34,7 +34,7 @@ export async function createPost(data: PostModel) {
   redirect("/dashboard/posts");
 }
 
-export async function updatePost(id: number, data: PostModel) {
+export async function updatePost(id: number, data: PostUpsertType) {
   const validatedFields = UpdatePostSchema.safeParse(data);
 
   if (!validatedFields.success) {
@@ -44,10 +44,15 @@ export async function updatePost(id: number, data: PostModel) {
     };
   }
 
+  const { categories, ...values } = validatedFields.data;
+
   try {
     await prisma.post.update({
       where: { id },
-      data: validatedFields.data,
+      data: {
+        ...values,
+        categories: { set: categories.map((id) => ({ id: +id })) },
+      },
     });
   } catch (e) {
     console.log(e);
