@@ -83,9 +83,6 @@ export async function createCategory(data: Category) {
         ...categoryData,
         posts: { connect: posts.map((id) => ({ id })) },
       },
-      include: {
-        posts: { select: { title: true, id: true, mainImageUrl: true } },
-      },
     });
   } catch (e) {
     console.error(e);

@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import { PostModel } from "@/types/post.type";
+import { PostModel, PostUpsertType } from "@/types/post.type";
 import { PostStatus } from "@prisma/client";
 import { FaMarkdown } from "react-icons/fa6";
 
@@ -37,20 +37,33 @@ import { CreatePostSchema } from "@/types/schemas/post-schema";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import {
+  MultiSelector,
+  MultiSelectorContent,
+  MultiSelectorInput,
+  MultiSelectorItem,
+  MultiSelectorList,
+  MultiSelectorTrigger,
+} from "@/components/ui/multi-select";
+import { CategorySelect } from "@/types/category.type";
 
+type Props = {
+  authorId: number;
+  authors: AuthorField[];
+  categories: CategorySelect[];
+};
 function CreatePostForm({
   authors,
   authorId,
-}: {
-  authorId: number;
-  authors: AuthorField[];
-}) {
+  categories: allCategories,
+}: Props) {
   const [isPending, setIsPending] = useState<boolean>(false);
 
-  const form = useForm<PostModel>({
+  const form = useForm<PostUpsertType>({
     mode: "onChange",
     defaultValues: {
       authorId,
+      categories: [],
     },
     resolver: zodResolver(CreatePostSchema),
   });
@@ -77,7 +90,7 @@ function CreatePostForm({
       ),
     });
   };
-  const onSubmit = async (values: PostModel) => {
+  const onSubmit = async (values: PostUpsertType) => {
     setIsPending(true);
 
     // if its successful it would redirect to posts page, so no need to update isPending state
@@ -312,6 +325,39 @@ function CreatePostForm({
                 </a>{" "}
                 to see your markdown result in realtime.
               </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          name='categories'
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Select Categories</FormLabel>
+              <MultiSelector
+                values={field.value}
+                onValuesChange={field.onChange}
+              >
+                <MultiSelectorTrigger>
+                  <MultiSelectorInput placeholder='Select people to invite' />
+                </MultiSelectorTrigger>
+                <MultiSelectorContent>
+                  <MultiSelectorList>
+                    {allCategories.map((category) => (
+                      <MultiSelectorItem
+                        key={category.id}
+                        value={String(category.id)}
+                      >
+                        <div className='flex items-center space-x-2'>
+                          <span>{category.name}</span>
+                        </div>
+                      </MultiSelectorItem>
+                    ))}
+                  </MultiSelectorList>
+                </MultiSelectorContent>
+              </MultiSelector>
               <FormMessage />
             </FormItem>
           )}
