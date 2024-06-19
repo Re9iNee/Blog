@@ -6,3 +6,7 @@ export interface PostModel extends Post {
 }
 
 export type PostSelect = Pick<PostModel, "id" | "title" | "mainImageUrl">;
+
+export interface PostUpsertType extends Post {
+  categories: string[];
+}

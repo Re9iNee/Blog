@@ -24,36 +24,53 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import { PostModel } from "@/types/post.type";
+import { PostModel, PostUpsertType } from "@/types/post.type";
 import { PostStatus } from "@prisma/client";
 import { FaMarkdown } from "react-icons/fa6";
 
+import {
+  MultiSelector,
+  MultiSelectorContent,
+  MultiSelectorInput,
+  MultiSelectorItem,
+  MultiSelectorList,
+  MultiSelectorTrigger,
+} from "@/components/ui/multi-select";
 import { Switch } from "@/components/ui/switch";
 import { Uploader } from "@/components/ui/uploader";
 import { updatePost } from "@/lib/actions/post.actions";
 import { getSiteUrl, makeSlugWithTitle } from "@/lib/utils";
 import { AuthorField } from "@/types/author";
-import { postSchema } from "@/types/schemas/post-schema";
+import { CategorySelect } from "@/types/category.type";
+import { UpdatePostSchema } from "@/types/schemas/post-schema";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+type Props = {
+  postId: number;
+  authors: AuthorField[];
+  initialValues: PostModel;
+  categories: CategorySelect[];
+};
 function EditPostForm({
   postId,
   authors,
   initialValues,
-}: {
-  postId: number;
-  authors: AuthorField[];
-  initialValues: PostModel;
-}) {
+  categories: allCategories,
+}: Props) {
   const [isPending, setIsPending] = useState<boolean>(false);
   const updatePostWithId = updatePost.bind(null, postId);
 
-  const form = useForm<PostModel>({
+  const { categories, ...rest } = initialValues;
+
+  const form = useForm<PostUpsertType>({
     mode: "onChange",
-    resolver: zodResolver(postSchema),
-    defaultValues: { ...initialValues },
+    resolver: zodResolver(UpdatePostSchema),
+    defaultValues: {
+      ...rest,
+      categories: categories.map((cat) => String(cat.id)),
+    },
   });
 
   const slugInput = form.watch("slug");
@@ -79,7 +96,7 @@ function EditPostForm({
     });
   };
 
-  const onSubmit = async (values: PostModel) => {
+  const onSubmit = async (values: PostUpsertType) => {
     setIsPending(true);
 
     // if its successful it would redirect to posts page, so no need to update isPending state
@@ -317,6 +334,39 @@ function EditPostForm({
                 </a>{" "}
                 to see your markdown result in realtime.
               </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          name='categories'
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Select Categories</FormLabel>
+              <MultiSelector
+                values={field.value}
+                onValuesChange={field.onChange}
+              >
+                <MultiSelectorTrigger>
+                  <MultiSelectorInput placeholder='Select people to invite' />
+                </MultiSelectorTrigger>
+                <MultiSelectorContent>
+                  <MultiSelectorList>
+                    {allCategories.map((category) => (
+                      <MultiSelectorItem
+                        key={category.id}
+                        value={String(category.id)}
+                      >
+                        <div className='flex items-center space-x-2'>
+                          <span>{category.name}</span>
+                        </div>
+                      </MultiSelectorItem>
+                    ))}
+                  </MultiSelectorList>
+                </MultiSelectorContent>
+              </MultiSelector>
               <FormMessage />
             </FormItem>
           )}

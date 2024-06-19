@@ -1,7 +1,11 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { CategoryUpsertType, CategoryModel } from "@/types/category.type";
+import {
+  CategoryModel,
+  CategorySelect,
+  CategoryUpsertType,
+} from "@/types/category.type";
 import { fetchAllParams } from "@/types/common";
 import { CreateCategorySchema } from "@/types/schemas/category-schema";
 import { Category } from "@prisma/client";
@@ -79,9 +83,6 @@ export async function createCategory(data: Category) {
         ...categoryData,
         posts: { connect: posts.map((id) => ({ id })) },
       },
-      include: {
-        posts: { select: { title: true, id: true, mainImageUrl: true } },
-      },
     });
   } catch (e) {
     console.error(e);
@@ -128,4 +129,14 @@ export async function updateCategoryById(
 
   revalidatePath("/dashboard/categories");
   redirect("/dashboard/categories");
+}
+
+export async function fetchCategoriesName(): Promise<CategorySelect[]> {
+  noStore();
+
+  const categories = await prisma.category.findMany({
+    select: { id: true, name: true },
+  });
+
+  return categories;
 }
