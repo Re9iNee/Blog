@@ -9,15 +9,21 @@ const PER_PAGE = 12;
 type Props = {
   page: number;
   query: string;
+  category: string;
 };
-export default async function PublishedPostsWrapper({ page, query }: Props) {
+export default async function PublishedPostsWrapper({
+  page,
+  query,
+  category,
+}: Props) {
   const [recentPosts, postsCount] = await Promise.all([
     getAllPublishedPosts({
       page,
       query,
+      category,
       perPage: PER_PAGE,
     }),
-    getPublishedPostsCount({ query }),
+    getPublishedPostsCount({ query, category }),
   ]);
   const totalPages = Math.ceil(postsCount / PER_PAGE);
 

@@ -1,7 +1,8 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { PostModel } from "@/types/post";
+import { fetchAllParams } from "@/types/common";
+import { PostModel, PostSelect } from "@/types/post.type";
 import { PostStatus } from "@prisma/client";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 
@@ -30,11 +31,13 @@ type getAllPublishedPosts = {
   page: number;
   query: string;
   perPage: number;
+  category: string;
 };
 export async function getAllPublishedPosts({
   page,
   query,
   perPage,
+  category,
 }: getAllPublishedPosts): Promise<Omit<PostModel, "categories">[]> {
   const posts = await prisma.post.findMany({
     take: perPage,
@@ -43,6 +46,7 @@ export async function getAllPublishedPosts({
     orderBy: { createdAt: "desc" },
     where: {
       status: PostStatus.published,
+      categories: { some: { name: category } },
       title: { contains: query, mode: "insensitive" },
     },
   });
@@ -52,12 +56,15 @@ export async function getAllPublishedPosts({
 
 export async function getPublishedPostsCount({
   query,
+  category,
 }: {
   query: string;
+  category: string;
 }): Promise<number> {
   const count = await prisma.post.count({
     where: {
       status: PostStatus.published,
+      categories: { some: { name: category } },
       title: { contains: query, mode: "insensitive" },
     },
   });
@@ -65,16 +72,11 @@ export async function getPublishedPostsCount({
   return count;
 }
 
-type getAllPosts = {
-  page?: number;
-  perPage?: number;
-  query?: string;
-};
 export async function getAllPosts({
   page = 1,
   perPage = 10,
   query,
-}: getAllPosts): Promise<PostModel[]> {
+}: fetchAllParams): Promise<PostModel[]> {
   noStore();
 
   const posts = await prisma.post.findMany({
@@ -164,25 +166,6 @@ export async function updatePost(
   return post;
 }
 
-export async function createPost(data: PostModel): Promise<PostModel> {
-  const { categories, author, ...rest } = data;
-
-  const post = await prisma.post.create({
-    data: {
-      ...rest,
-    },
-    include: {
-      author: true,
-      categories: true,
-    },
-  });
-
-  revalidatePath("/dashboard/posts");
-  revalidatePath(`/`);
-
-  return post;
-}
-
 export async function deletePost(
   id: number
 ): Promise<Omit<PostModel, "author" | "categories">> {
@@ -252,4 +235,14 @@ export async function slideshowTogglePostVisibility(
 
   const updatedPostVisibility = updatedPost.isSlideshow;
   return updatedPostVisibility;
+}
+
+export async function fetchPostsTitleAndImage(): Promise<PostSelect[]> {
+  noStore();
+
+  const posts = await prisma.post.findMany({
+    select: { title: true, id: true, mainImageUrl: true },
+  });
+
+  return posts;
 }

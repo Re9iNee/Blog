@@ -1,13 +1,20 @@
 "use client";
 
+import { cn } from "@/lib/utils";
+import { CategorySelect } from "@/types/category.type";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import StarImage from "public/icons/star.avif";
+import { useState } from "react";
 import Chip from "../ui/chips";
 import SearchInput from "./search-input";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
 
-export default function Search() {
+type Props = {
+  categories: CategorySelect[];
+};
+export default function Search({ categories }: Props) {
+  const searchParams = useSearchParams();
+  const selectedCategory = searchParams.get("category");
   const [isFocused, setIsFocused] = useState(false);
 
   return (
@@ -44,10 +51,11 @@ export default function Search() {
         <h3 className='text-neutral-600 font-bold text-sm'>Trending Topics</h3>
         {/* chips container */}
         <div className='flex gap-2 p-1'>
-          <Chip>#AI</Chip>
-          <Chip>#DevX2024</Chip>
-          <Chip>#Config2024</Chip>
-          <Chip>#AnnualComp</Chip>
+          {categories.map((cat) => (
+            <Chip key={cat.id} isActive={cat.name === selectedCategory}>
+              {cat.name}
+            </Chip>
+          ))}
         </div>
       </section>
     </section>

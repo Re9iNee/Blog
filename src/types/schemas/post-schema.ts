@@ -1,6 +1,8 @@
 import { z } from "zod";
+import { MultiSelectSchema } from "../common";
+import { baseCategory } from "./category-schema";
 
-export const postSchema = z.object({
+export const basePost = z.object({
   id: z.number(),
   body: z.string(),
   readingTime: z.coerce.number(),
@@ -22,12 +24,21 @@ export const postSchema = z.object({
     .string({
       invalid_type_error: "Please write down a summary",
     })
-    .max(300, { message: "Summery should be less than 80 characters" }),
+    .max(300, { message: "Summery should be less than 300 characters" }),
 
   // TODO
   // author: z.any().optional(),
-  // categories: z.array(z.any()).optional(),
 });
 
-export const CreatePostSchema = postSchema.omit({ id: true });
-export const UpdatePostSchema = postSchema.omit({ id: true });
+export const postSchema = basePost.extend({
+  categories: z
+    .array(z.lazy(() => baseCategory.pick({ name: true, id: true })))
+    .default([]),
+});
+
+export const CreatePostSchema = basePost.omit({ id: true }).extend({
+  categories: MultiSelectSchema,
+});
+export const UpdatePostSchema = basePost.omit({ id: true }).extend({
+  categories: MultiSelectSchema,
+});

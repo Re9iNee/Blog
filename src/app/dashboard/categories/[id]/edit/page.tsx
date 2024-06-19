@@ -1,4 +1,4 @@
-import EditPostForm from "@/components/dashboard/posts/edit-form";
+import EditCategoryForm from "@/components/dashboard/categories/edit-form";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,9 +7,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { fetchCategoriesName } from "@/service/category.service";
-import { getPostById } from "@/service/posts.service";
-import { fetchAuthors } from "@/service/user.service";
+import { getCategoryById } from "@/service/category.service";
+import { fetchPostsTitleAndImage } from "@/service/posts.service";
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -24,13 +23,10 @@ export default async function EditPostPage({
   params: { id: string };
 }) {
   const { id } = params;
-  const [post, authors, categories] = await Promise.all([
-    getPostById(+id),
-    fetchAuthors(),
-    fetchCategoriesName(),
-  ]);
+  const data = await getCategoryById(+id);
+  const posts = await fetchPostsTitleAndImage();
 
-  if (!post) notFound();
+  if (!data) notFound();
 
   return (
     <div className='p-8 space-y-8'>
@@ -42,22 +38,17 @@ export default async function EditPostPage({
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href={"/dashboard/posts"}>Posts</Link>
+              <Link href={"/dashboard/categories"}>Categories</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Edit &quot;{post.title}&quot;</BreadcrumbPage>
+            <BreadcrumbPage>Edit &quot;{data.name}&quot;</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
 
-      <EditPostForm
-        postId={post.id}
-        authors={authors}
-        initialValues={post}
-        categories={categories}
-      />
+      <EditCategoryForm initialValues={data} posts={posts} />
     </div>
   );
 }

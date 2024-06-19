@@ -8,6 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { fetchCategoriesName } from "@/service/category.service";
 import { fetchAuthors } from "@/service/user.service";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
@@ -19,8 +20,9 @@ export const metadata: Metadata = {
 };
 
 export default async function CreatePostPage() {
-  const [authors, session] = await Promise.all([
+  const [authors, categories, session] = await Promise.all([
     fetchAuthors(),
+    fetchCategoriesName(),
     getServerSession(authOptions),
   ]);
 
@@ -48,7 +50,11 @@ export default async function CreatePostPage() {
         </BreadcrumbList>
       </Breadcrumb>
 
-      <CreatePostForm authors={authors} authorId={authorId} />
+      <CreatePostForm
+        authors={authors}
+        authorId={authorId}
+        categories={categories}
+      />
     </div>
   );
 }

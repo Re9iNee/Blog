@@ -1,15 +1,18 @@
 "use server";
 
-import { PostModel } from "@/types/post";
+import { PostModel, PostUpsertType } from "@/types/post.type";
 import {
   CreatePostSchema,
   UpdatePostSchema,
 } from "@/types/schemas/post-schema";
-import { revalidatePath } from "next/cache";
+import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "../prisma";
 
-export async function createPost(data: PostModel) {
+export async function createPost(data: PostUpsertType) {
+  // if we don't use noStore, NextJS will cache the response and return the same response for same request
+  noStore();
+
   // Validate form using Zod
   const validatedFields = CreatePostSchema.safeParse(data);
 
@@ -21,9 +24,14 @@ export async function createPost(data: PostModel) {
     };
   }
 
+  const { categories, ...values } = validatedFields.data;
+
   try {
     await prisma.post.create({
-      data: validatedFields.data,
+      data: {
+        ...values,
+        categories: { connect: categories.map((id) => ({ id: +id })) },
+      },
     });
   } catch (e) {
     console.error(e);
@@ -34,7 +42,10 @@ export async function createPost(data: PostModel) {
   redirect("/dashboard/posts");
 }
 
-export async function updatePost(id: number, data: PostModel) {
+export async function updatePost(id: number, data: PostUpsertType) {
+  // if we don't use noStore, NextJS will cache the response and return the same response for same request
+  noStore();
+
   const validatedFields = UpdatePostSchema.safeParse(data);
 
   if (!validatedFields.success) {
@@ -44,10 +55,15 @@ export async function updatePost(id: number, data: PostModel) {
     };
   }
 
+  const { categories, ...values } = validatedFields.data;
+
   try {
     await prisma.post.update({
       where: { id },
-      data: validatedFields.data,
+      data: {
+        ...values,
+        categories: { set: categories.map((id) => ({ id: +id })) },
+      },
     });
   } catch (e) {
     console.log(e);

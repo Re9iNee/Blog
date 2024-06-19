@@ -52,15 +52,6 @@ const Footer = () => {
             >
               <FiLinkedin className='text-sky-700 w-8 h-8 dark:text-sky-500 cursor-pointer' />
             </Link>
-            <Link
-              target='_blank'
-              prefetch={false}
-              className='w-8 h-8 relative'
-              aria-label="About Nuwa's website-google websites"
-              href={"https://sites.google.com/view/nuwa-company/home"}
-            >
-              <Image fill alt='Nuwa website' src={"/logos/mora-logo.ico"} />
-            </Link>
 
             {/* <FiInstagram className='text-pink-600 w-8 h-8 dark:text-pink-400 cursor-pointer' /> */}
             <Link

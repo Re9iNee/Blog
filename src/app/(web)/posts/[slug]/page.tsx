@@ -12,7 +12,7 @@ import { notFound } from "next/navigation";
 import PostNavigationGroup from "../nav";
 import { Metadata, ResolvingMetadata } from "next";
 import { convertDateToDayMonthAndYear } from "@/lib/utils";
-import { PostModel } from "@/types/post";
+import { PostModel } from "@/types/post.type";
 
 export async function generateMetadata(
   { params }: Props,
