@@ -31,11 +31,13 @@ type getAllPublishedPosts = {
   page: number;
   query: string;
   perPage: number;
+  category: string;
 };
 export async function getAllPublishedPosts({
   page,
   query,
   perPage,
+  category,
 }: getAllPublishedPosts): Promise<Omit<PostModel, "categories">[]> {
   const posts = await prisma.post.findMany({
     take: perPage,
@@ -44,6 +46,7 @@ export async function getAllPublishedPosts({
     orderBy: { createdAt: "desc" },
     where: {
       status: PostStatus.published,
+      categories: { some: { name: category } },
       title: { contains: query, mode: "insensitive" },
     },
   });
@@ -53,12 +56,15 @@ export async function getAllPublishedPosts({
 
 export async function getPublishedPostsCount({
   query,
+  category,
 }: {
   query: string;
+  category: string;
 }): Promise<number> {
   const count = await prisma.post.count({
     where: {
       status: PostStatus.published,
+      categories: { some: { name: category } },
       title: { contains: query, mode: "insensitive" },
     },
   });

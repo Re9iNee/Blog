@@ -1,25 +1,30 @@
 import DottedBackground from "@/components/homepage/dotted-background";
 import HeroSection from "@/components/homepage/hero";
 
+import Search from "@/components/homepage/search";
 import {
   BlogCardsSkeleton,
   SlideshowSkeleton,
 } from "@/components/homepage/skeletons";
+import { fetchCategoriesName } from "@/service/category.service";
 import { Suspense } from "react";
 import PublishedPostsWrapper from "./published-posts-wrapper";
 import SlideShowWrapper from "./slide-show-wrapper";
-import Search from "@/components/homepage/search";
 
 export const revalidate = 60;
 type Props = {
   searchParams: {
     page?: string;
     query?: string;
+    category?: string;
   };
 };
 export default async function Home({ searchParams }: Props) {
   const page = Number(searchParams.page) || 1;
   const query = searchParams.query || "";
+  const category = searchParams.category || "";
+
+  const topCategories = (await fetchCategoriesName()).slice(0, 4);
 
   return (
     <main>
@@ -39,7 +44,7 @@ export default async function Home({ searchParams }: Props) {
         <SlideShowWrapper />
       </Suspense>
 
-      <Search />
+      <Search categories={topCategories} />
 
       <h1
         className='text-neutral-700 font-bold pt-4 px-4
@@ -57,7 +62,11 @@ export default async function Home({ searchParams }: Props) {
         '
       >
         <Suspense fallback={<BlogCardsSkeleton />} key={query + page}>
-          <PublishedPostsWrapper page={page} query={query} />
+          <PublishedPostsWrapper
+            page={page}
+            query={query}
+            category={category}
+          />
         </Suspense>
       </section>
     </main>
