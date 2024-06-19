@@ -46,8 +46,8 @@ export async function getAllPublishedPosts({
     orderBy: { createdAt: "desc" },
     where: {
       status: PostStatus.published,
-      categories: { some: { name: category } },
       title: { contains: query, mode: "insensitive" },
+      categories: category ? { some: { name: category } } : {},
     },
   });
 
