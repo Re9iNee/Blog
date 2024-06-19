@@ -22,7 +22,7 @@ type Props = {
 export default async function Home({ searchParams }: Props) {
   const page = Number(searchParams.page) || 1;
   const query = searchParams.query || "";
-  const category = searchParams.category || "";
+  const category = searchParams.category;
 
   const topCategories = (await fetchCategoriesName()).slice(0, 4);
 
