@@ -31,7 +31,7 @@ type getAllPublishedPosts = {
   page: number;
   query: string;
   perPage: number;
-  category: string;
+  category?: string;
 };
 export async function getAllPublishedPosts({
   page,
@@ -59,7 +59,7 @@ export async function getPublishedPostsCount({
   category,
 }: {
   query: string;
-  category: string;
+  category?: string;
 }): Promise<number> {
   const count = await prisma.post.count({
     where: {

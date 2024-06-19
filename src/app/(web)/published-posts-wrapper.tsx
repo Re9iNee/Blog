@@ -9,7 +9,7 @@ const PER_PAGE = 12;
 type Props = {
   page: number;
   query: string;
-  category: string;
+  category?: string;
 };
 export default async function PublishedPostsWrapper({
   page,
