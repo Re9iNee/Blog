@@ -64,8 +64,8 @@ export async function getPublishedPostsCount({
   const count = await prisma.post.count({
     where: {
       status: PostStatus.published,
-      categories: { some: { name: category } },
       title: { contains: query, mode: "insensitive" },
+      categories: category ? { some: { name: category } } : {},
     },
   });
 
