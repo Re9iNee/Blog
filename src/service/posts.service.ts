@@ -38,20 +38,24 @@ export async function getAllPublishedPosts({
   query,
   perPage,
   category,
-}: getAllPublishedPosts): Promise<Omit<PostModel, "categories">[]> {
-  const posts = await prisma.post.findMany({
-    take: perPage,
-    include: { author: true },
-    skip: (page - 1) * perPage,
-    orderBy: { createdAt: "desc" },
-    where: {
-      status: PostStatus.published,
-      title: { contains: query, mode: "insensitive" },
-      categories: category ? { some: { name: category } } : {},
-    },
-  });
+}: getAllPublishedPosts): Promise<Omit<PostModel, "categories">[] | void> {
+  try {
+    const posts = await prisma.post.findMany({
+      take: perPage,
+      include: { author: true },
+      skip: (page - 1) * perPage,
+      orderBy: { createdAt: "desc" },
+      where: {
+        status: PostStatus.published,
+        title: { contains: query, mode: "insensitive" },
+        categories: category ? { some: { name: category } } : {},
+      },
+    });
 
-  return posts;
+    return posts;
+  } catch (e) {
+    console.error("fetching published posts", e);
+  }
 }
 
 export async function getPublishedPostsCount({
@@ -60,16 +64,20 @@ export async function getPublishedPostsCount({
 }: {
   query: string;
   category?: string;
-}): Promise<number> {
-  const count = await prisma.post.count({
-    where: {
-      status: PostStatus.published,
-      title: { contains: query, mode: "insensitive" },
-      categories: category ? { some: { name: category } } : {},
-    },
-  });
+}): Promise<number | void> {
+  try {
+    const count = await prisma.post.count({
+      where: {
+        status: PostStatus.published,
+        title: { contains: query, mode: "insensitive" },
+        categories: category ? { some: { name: category } } : {},
+      },
+    });
 
-  return count;
+    return count;
+  } catch (e) {
+    console.error("fetching published posts count error", e);
+  }
 }
 
 export async function getAllPosts({

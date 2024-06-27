@@ -4,6 +4,7 @@ import {
   getAllPublishedPosts,
   getPublishedPostsCount,
 } from "@/service/posts.service";
+import { notFound } from "next/navigation";
 
 const PER_PAGE = 12;
 type Props = {
@@ -25,6 +26,9 @@ export default async function PublishedPostsWrapper({
     }),
     getPublishedPostsCount({ query, category }),
   ]);
+  if (!recentPosts) notFound();
+  if (!postsCount) notFound();
+
   const totalPages = Math.ceil(postsCount / PER_PAGE);
 
   return (
