@@ -9,6 +9,9 @@ export function BlogCardImageSkeleton() {
 function BlogCardSkeleton() {
   return (
     <div className='flex flex-col gap-2 cursor-wait'>
+      {/* main image */}
+      <BlogCardImageSkeleton />
+
       {/* title */}
       <Skeleton className='w-[50%] h-6' />
       {/* summary */}

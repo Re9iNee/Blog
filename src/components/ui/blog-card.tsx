@@ -55,7 +55,7 @@ function BlogCard({ data }: Props) {
         className='flex justify-between text-neutral-500 text-xs leading-none items-center pt-2'
       >
         <div className='flex items-center gap-2'>
-          <Image
+          <BlurImage
             width={20}
             height={20}
             loading='lazy'
