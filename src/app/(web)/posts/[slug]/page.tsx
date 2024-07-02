@@ -46,7 +46,7 @@ export async function generateMetadata(
       authors: data.author.name,
       description: data.summary,
       title: `${data.title} | Mora Blog`,
-      url: `https://mora-ed.com/posts/${slug}`,
+      url: `https://www.mora-ed.com/posts/${slug}`,
       images: [openGraphImage, ...previousImage],
       publishedTime: data?.publishedAt?.toUTCString(),
     },
@@ -67,7 +67,7 @@ function generateSchemaJson(post: PostModel) {
     dateCreated: post.createdAt,
     dateModified: post.updatedAt,
     "@context": "https://schema.org",
-    url: "https://mora-ed.com/posts/" + post.slug,
+    url: "https://www.mora-ed.com/posts/" + post.slug,
     datePublished: post.publishedAt ?? post.createdAt,
     mainEntityOfPage: "https://mora-ed.com/posts/" + post.slug,
 
@@ -78,7 +78,7 @@ function generateSchemaJson(post: PostModel) {
     publisher: {
       name: "Mora Blog",
       "@type": "Organization",
-      url: "https://mora-ed.com",
+      url: "https://www.mora-ed.com",
       logo: {
         "@type": "ImageObject",
         url: "https://d1ntfq67otjmwh.cloudfront.net/mora-blog-files/1717948463820-logo-small.svg",
