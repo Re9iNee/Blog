@@ -9,7 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   )
     return [];
 
-  const baseUrl = "https://mora-ed.com";
+  const baseUrl = "https://www.mora-ed.com";
   const publishedPosts = await getAllPublishedPostsSlug();
 
   const posts: MetadataRoute.Sitemap = publishedPosts.map((post) => {
