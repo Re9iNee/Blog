@@ -161,7 +161,6 @@ function SlideShowCard({
         <div className='z-0 col-span-full row-span-full'>
           <BlurImage
             fill
-            loading='eager'
             alt={`main image of post: ${title}`}
             src={mainImageUrl ?? "/slideshow/mainImagePlaceholder.svg"}
             className='pointer-events-none rounded-2xl aspect-video object-cover -z-10'
