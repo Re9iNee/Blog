@@ -10,7 +10,9 @@ async function generateBase64(src: string) {
         console.error("fetching error", e);
       });
 
-    const newBuffer = await sharp(buffer).jpeg({ quality: 10 }).toBuffer();
+    const newBuffer = await sharp(buffer as any)
+      .jpeg({ quality: 10 })
+      .toBuffer();
 
     const { base64 } = await getPlaiceholder(newBuffer);
 
