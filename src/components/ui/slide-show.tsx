@@ -2,12 +2,12 @@
 
 import { ClassValue } from "clsx";
 import { AnimatePresence, DragHandlers, motion } from "framer-motion";
-import Image from "next/image";
 import { useMemo, useState } from "react";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 import { cn, getPostUrl } from "@/lib/utils";
 import { PostModel } from "@/types/post.type";
+import Image from "next/image";
 import Link from "next/link";
 
 type Props = {
@@ -96,6 +96,11 @@ export function SlideShow({ className, cards }: Props) {
   );
 }
 
+type SlideShowCardProps = PostModel & {
+  direction: number;
+  page: number;
+  onDragEndFn: DragHandlers["onDragEnd"];
+};
 function SlideShowCard({
   slug,
   page,
@@ -104,7 +109,7 @@ function SlideShowCard({
   direction,
   onDragEndFn,
   mainImageUrl,
-}: PostModel & { direction: number; page: number; onDragEndFn: any }) {
+}: SlideShowCardProps) {
   const variants = useMemo(
     () => ({
       enter: (direction: number) => {
@@ -162,6 +167,8 @@ function SlideShowCard({
           <Image
             fill
             loading='eager'
+            placeholder='blur'
+            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
             alt={`main image of post: ${title}`}
             src={mainImageUrl ?? "/slideshow/mainImagePlaceholder.svg"}
             className='pointer-events-none rounded-2xl aspect-video object-cover -z-10'
