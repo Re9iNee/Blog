@@ -2,13 +2,13 @@
 
 import { ClassValue } from "clsx";
 import { AnimatePresence, DragHandlers, motion } from "framer-motion";
-import Image from "next/image";
 import { useMemo, useState } from "react";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 import { cn, getPostUrl } from "@/lib/utils";
 import { PostModel } from "@/types/post.type";
 import Link from "next/link";
+import BlurImage from "../global/image-blur";
 
 type Props = {
   cards: PostModel[];
@@ -159,7 +159,7 @@ function SlideShowCard({
 
         {/* overlay and main image */}
         <div className='z-0 col-span-full row-span-full'>
-          <Image
+          <BlurImage
             fill
             loading='eager'
             alt={`main image of post: ${title}`}
