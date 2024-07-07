@@ -44,7 +44,7 @@ export function DataTableRowActions<TData>({
   }, []);
 
   if (!parsed.success) {
-    console.error(parsed.error);
+    console.error(parsed.error.flatten().fieldErrors);
     return <></>;
   }
   const post = parsed.data;
