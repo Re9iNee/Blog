@@ -102,9 +102,15 @@ function SlideShowCard({
   title,
   author,
   direction,
+  blurDataURL,
   onDragEndFn,
   mainImageUrl,
-}: PostModel & { direction: number; page: number; onDragEndFn: any }) {
+}: PostModel & {
+  direction: number;
+  page: number;
+  onDragEndFn: any;
+  blurDataURL?: string;
+}) {
   const variants = useMemo(
     () => ({
       enter: (direction: number) => {
@@ -162,6 +168,12 @@ function SlideShowCard({
           <Image
             fill
             loading='eager'
+            placeholder='blur'
+            // base64 placeholder
+            blurDataURL={
+              blurDataURL ??
+              "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+            }
             alt={`main image of post: ${title}`}
             src={mainImageUrl ?? "/slideshow/mainImagePlaceholder.svg"}
             className='pointer-events-none rounded-2xl aspect-video object-cover -z-10'
