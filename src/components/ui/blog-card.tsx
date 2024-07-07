@@ -24,7 +24,7 @@ function BlogCard({ data }: Props) {
         href={getPostUrl(slug)}
         className='group relative w-full h-32 rounded-xl cursor-pointer'
       >
-        <Suspense fallback={<BlogCardMainImageSkeleton />}>
+        <Suspense fallback={<BlogCardMainImageSkeleton slug={slug} />}>
           <BlurImage
             fill
             loading='lazy'

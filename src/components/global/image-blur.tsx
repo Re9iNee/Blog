@@ -11,7 +11,7 @@ async function generateBase64(src: string) {
       });
 
     const newBuffer = await sharp(buffer as any)
-      .jpeg({ quality: 10 })
+      .webp({ quality: 10 })
       .toBuffer();
 
     const { base64 } = await getPlaiceholder(newBuffer);
