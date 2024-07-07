@@ -3,7 +3,15 @@ import { Skeleton } from "../ui/skeleton";
 import { ClassValue } from "clsx";
 
 function MainImageSkeleton() {
-  return <Skeleton className='w-full h-32 rounded-xl' />;
+  return (
+    <>
+      <Skeleton className='w-full h-32 rounded-xl' />
+      <div className='w-full h-full absolute opacity-0 group-hover:opacity-75 bg-gradient-to-l from-violet-500 to-violet-900 rounded-xl backdrop-blur-none group-active:opacity-100 duration-400 text-white font-bold grid place-items-center'>
+        Read More
+        <span className='sr-only'>read more button</span>
+      </div>
+    </>
+  );
 }
 function BlogCardSkeleton() {
   return (
