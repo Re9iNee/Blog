@@ -8,7 +8,7 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { cn, getPostUrl } from "@/lib/utils";
 import { PostModel } from "@/types/post.type";
 import Link from "next/link";
-import BlurImage from "../global/image-blur";
+import Image from "next/image";
 
 type Props = {
   cards: PostModel[];
@@ -159,8 +159,9 @@ function SlideShowCard({
 
         {/* overlay and main image */}
         <div className='z-0 col-span-full row-span-full'>
-          <BlurImage
+          <Image
             fill
+            loading='eager'
             alt={`main image of post: ${title}`}
             src={mainImageUrl ?? "/slideshow/mainImagePlaceholder.svg"}
             className='pointer-events-none rounded-2xl aspect-video object-cover -z-10'
