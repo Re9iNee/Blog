@@ -7,6 +7,7 @@ import {
 import { PostModel } from "@/types/post.type";
 import Image from "next/image";
 import Link from "next/link";
+import BlurImage from "../global/image-blur";
 
 type Props = {
   data: Omit<PostModel, "categories">;
@@ -21,7 +22,7 @@ function BlogCard({ data }: Props) {
         href={getPostUrl(slug)}
         className='group relative w-full h-32 rounded-xl cursor-pointer'
       >
-        <Image
+        <BlurImage
           fill
           loading='lazy'
           alt={`${title} main image`}

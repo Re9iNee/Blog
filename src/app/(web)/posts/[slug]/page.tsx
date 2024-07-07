@@ -13,6 +13,7 @@ import PostNavigationGroup from "../nav";
 import { Metadata, ResolvingMetadata } from "next";
 import { convertDateToDayMonthAndYear } from "@/lib/utils";
 import { PostModel } from "@/types/post.type";
+import BlurImage from "@/components/global/image-blur";
 
 export async function generateMetadata(
   { params }: Props,
@@ -114,7 +115,7 @@ async function PostPage({ params }: Props) {
       <PostNavigationGroup />
 
       <h1 className='text-3xl font-extrabold leading-9 pt-2'>{data.title}</h1>
-      <Image
+      <BlurImage
         width={"288"}
         height={"160"}
         loading='lazy'
