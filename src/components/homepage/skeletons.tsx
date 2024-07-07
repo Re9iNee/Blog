@@ -20,7 +20,7 @@ function MainImageSkeleton({ slug }: { slug: string }) {
 function BlogCardSkeleton() {
   return (
     <div className='flex flex-col gap-2 cursor-wait'>
-      <MainImageSkeleton />
+      <MainImageSkeleton slug='' />
 
       {/* title */}
       <Skeleton className='w-[50%] h-6' />
