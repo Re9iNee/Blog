@@ -7,8 +7,8 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 import { cn, getPostUrl } from "@/lib/utils";
 import { PostModel } from "@/types/post.type";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
   cards: PostModel[];
@@ -96,21 +96,20 @@ export function SlideShow({ className, cards }: Props) {
   );
 }
 
+type SlideShowCardProps = PostModel & {
+  direction: number;
+  page: number;
+  onDragEndFn: DragHandlers["onDragEnd"];
+};
 function SlideShowCard({
   slug,
   page,
   title,
   author,
   direction,
-  blurDataURL,
   onDragEndFn,
   mainImageUrl,
-}: PostModel & {
-  direction: number;
-  page: number;
-  onDragEndFn: any;
-  blurDataURL?: string;
-}) {
+}: SlideShowCardProps) {
   const variants = useMemo(
     () => ({
       enter: (direction: number) => {
@@ -169,11 +168,7 @@ function SlideShowCard({
             fill
             loading='eager'
             placeholder='blur'
-            // base64 placeholder
-            blurDataURL={
-              blurDataURL ??
-              "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-            }
+            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
             alt={`main image of post: ${title}`}
             src={mainImageUrl ?? "/slideshow/mainImagePlaceholder.svg"}
             className='pointer-events-none rounded-2xl aspect-video object-cover -z-10'
