@@ -7,7 +7,8 @@ function MainImageSkeleton({ slug }: { slug: string }) {
   return (
     <Link
       href={getPostUrl(slug)}
-      className='group relative w-full h-32 rounded-xl cursor-pointer'
+      // By adding flex to the parent, the hover effect will and skeleton animation will be on top of each other. instead of new line (block display)
+      className='group relative w-full h-32 rounded-xl cursor-pointer flex'
     >
       <Skeleton className='w-full h-32 rounded-xl' />
       <div className='w-full h-full absolute opacity-0 group-hover:opacity-75 bg-gradient-to-l from-violet-500 to-violet-900 rounded-xl backdrop-blur-none group-active:opacity-100 duration-400 text-white font-bold grid place-items-center'>
