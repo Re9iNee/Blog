@@ -1,12 +1,27 @@
-import { cn } from "@/lib/utils";
+import { cn, getPostUrl } from "@/lib/utils";
 import { Skeleton } from "../ui/skeleton";
 import { ClassValue } from "clsx";
+import Link from "next/link";
 
+function MainImageSkeleton({ slug }: { slug: string }) {
+  return (
+    <Link
+      href={getPostUrl(slug)}
+      // By adding flex to the parent, the hover effect will and skeleton animation will be on top of each other. instead of new line (block display)
+      className='group relative w-full h-32 rounded-xl cursor-pointer flex'
+    >
+      <Skeleton className='w-full h-32 rounded-xl' />
+      <div className='w-full h-full absolute opacity-0 group-hover:opacity-75 bg-gradient-to-l from-violet-500 to-violet-900 rounded-xl backdrop-blur-none group-active:opacity-100 duration-400 text-white font-bold grid place-items-center'>
+        Read More
+        <span className='sr-only'>read more button</span>
+      </div>
+    </Link>
+  );
+}
 function BlogCardSkeleton() {
   return (
     <div className='flex flex-col gap-2 cursor-wait'>
-      {/* main image */}
-      <Skeleton className='w-full h-32 rounded-xl' />
+      <MainImageSkeleton slug='' />
 
       {/* title */}
       <Skeleton className='w-[50%] h-6' />
@@ -74,3 +89,5 @@ export function SlideshowSkeleton({ className }: { className?: ClassValue }) {
     </div>
   );
 }
+
+export { MainImageSkeleton as BlogCardMainImageSkeleton };
