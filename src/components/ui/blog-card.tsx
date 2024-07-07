@@ -8,6 +8,7 @@ import { PostModel } from "@/types/post.type";
 import Image from "next/image";
 import Link from "next/link";
 import BlurImage from "../global/image-blur";
+import { Suspense } from "react";
 
 type Props = {
   data: Omit<PostModel, "categories">;
@@ -22,13 +23,15 @@ function BlogCard({ data }: Props) {
         href={getPostUrl(slug)}
         className='group relative w-full h-32 rounded-xl cursor-pointer'
       >
-        <BlurImage
-          fill
-          loading='lazy'
-          alt={`${title} main image`}
-          className='object-cover rounded-xl'
-          src={mainImageUrl ?? getMainImagePlaceholderUrl()}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <BlurImage
+            fill
+            loading='lazy'
+            alt={`${title} main image`}
+            className='object-cover rounded-xl'
+            src={mainImageUrl ?? getMainImagePlaceholderUrl()}
+          />
+        </Suspense>
         <div className='w-full h-full absolute opacity-0 group-hover:opacity-75 bg-gradient-to-l from-violet-500 to-violet-900 rounded-xl backdrop-blur-none group-active:opacity-100 duration-400 text-white font-bold grid place-items-center'>
           Read More
           <span className='sr-only'>read more about {title}</span>
