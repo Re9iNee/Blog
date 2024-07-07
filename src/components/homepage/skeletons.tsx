@@ -2,11 +2,13 @@ import { cn } from "@/lib/utils";
 import { Skeleton } from "../ui/skeleton";
 import { ClassValue } from "clsx";
 
+function MainImageSkeleton() {
+  return <Skeleton className='w-full h-32 rounded-xl' />;
+}
 function BlogCardSkeleton() {
   return (
     <div className='flex flex-col gap-2 cursor-wait'>
-      {/* main image */}
-      <Skeleton className='w-full h-32 rounded-xl' />
+      <MainImageSkeleton />
 
       {/* title */}
       <Skeleton className='w-[50%] h-6' />
@@ -74,3 +76,5 @@ export function SlideshowSkeleton({ className }: { className?: ClassValue }) {
     </div>
   );
 }
+
+export { MainImageSkeleton as BlogCardMainImageSkeleton };

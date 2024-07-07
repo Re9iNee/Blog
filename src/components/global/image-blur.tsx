@@ -1,13 +1,18 @@
 import Image, { ImageProps } from "next/image";
+import sharp from "sharp";
 import { getPlaiceholder } from "plaiceholder";
 
 async function generateBase64(src: string) {
   try {
-    const buffer = await fetch(src).then(async (res) =>
-      Buffer.from(await res.arrayBuffer())
-    );
+    const buffer = await fetch(src)
+      .then(async (res) => Buffer.from(await res.arrayBuffer()))
+      .catch((e) => {
+        console.error("fetching error", e);
+      });
 
-    const { base64 } = await getPlaiceholder(buffer);
+    const newBuffer = await sharp(buffer).jpeg({ quality: 10 }).toBuffer();
+
+    const { base64 } = await getPlaiceholder(newBuffer);
 
     return base64;
   } catch (e) {

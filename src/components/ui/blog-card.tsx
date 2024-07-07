@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import BlurImage from "../global/image-blur";
 import { Suspense } from "react";
+import { BlogCardMainImageSkeleton } from "../homepage/skeletons";
 
 type Props = {
   data: Omit<PostModel, "categories">;
@@ -23,7 +24,7 @@ function BlogCard({ data }: Props) {
         href={getPostUrl(slug)}
         className='group relative w-full h-32 rounded-xl cursor-pointer'
       >
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<BlogCardMainImageSkeleton />}>
           <BlurImage
             fill
             loading='lazy'
