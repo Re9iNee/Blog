@@ -8,6 +8,9 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useDebouncedCallback } from "use-debounce";
 import { Input } from "../ui/input";
 import { useSearchParams } from "next/navigation";
+import { Button } from "../ui/button";
+import { EnterIcon } from "@radix-ui/react-icons";
+import { XIcon } from "lucide-react";
 
 type Props = {
   className?: ClassValue;
@@ -61,7 +64,7 @@ export default function SearchInput({
         ref={inputRef}
         defaultValue={query ?? ""}
         className={cn(
-          "pl-14 pr-20 text-md font-medium w-full min-h-14 shadow-xl rounded-2xl placeholder:text-neutral-400 relative active:shadow-2xl focus:shadow-2xl  focus-visible:ring-opacity-30 focus-visible:ring-violet-500"
+          "pl-14 pr-20 text-md font-medium w-full min-h-14 shadow-xl rounded-2xl placeholder:text-neutral-400 relative active:shadow-2xl focus:shadow-2xl  focus-visible:ring-opacity-30 focus-visible:ring-violet-500 dark:placeholder:text-neutral-600"
         )}
         onFocus={() => {
           setIsFocused(true);
@@ -79,10 +82,10 @@ export default function SearchInput({
         variant={"ghost"}
         className='absolute top-1/2 transform -translate-y-1/2 right-1 text-neutral-500 items-center gap-1 text-xs font-bold flex cursor-pointer min-w-12 min-h-12 rounded-xl'
         onClick={() => {
-          clearQuery();
+          // clearQuery();
         }}
       >
-        {isTyping || inputRef.current?.value !== "" ? (
+        {isFocused || inputRef.current?.value !== "" ? (
           <>
             <EnterIcon />
             Enter
