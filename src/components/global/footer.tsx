@@ -27,9 +27,9 @@ const Footer = () => {
             What is Mora?
           </h3>
           <p className='text-neutral-600 text-sm leading-5 sm:max-w-xs dark:text-neutral-400'>
-            Mora is a library of AI tools and courses on how to use them to
-            their fullest and like a master. Our mission is to help you take the
-            most out of upcoming AI tools.
+            Mora is a series of products designed to improve the educational
+            experience for schools, institutes, instructors, parents, and
+            students.
           </p>
         </section>
       </section>

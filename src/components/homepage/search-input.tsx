@@ -61,7 +61,7 @@ export default function SearchInput({
         ref={inputRef}
         defaultValue={query ?? ""}
         className={cn(
-          "pl-14 pr-20 text-md font-medium w-full min-h-14 shadow-xl rounded-2xl placeholder:text-neutral-400 relative active:shadow-2xl focus:shadow-2xl  focus-visible:ring-opacity-30 focus-visible:ring-black"
+          "pl-14 pr-20 text-md font-medium w-full min-h-14 shadow-xl rounded-2xl placeholder:text-neutral-400 relative active:shadow-2xl focus:shadow-2xl  focus-visible:ring-opacity-30 focus-visible:ring-violet-500"
         )}
         onFocus={() => {
           setIsFocused(true);
