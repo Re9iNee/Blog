@@ -2,10 +2,7 @@ import DottedBackground from "@/components/homepage/dotted-background";
 import HeroSection from "@/components/homepage/hero";
 
 import Search from "@/components/homepage/search";
-import {
-  BlogCardsSkeleton,
-  SlideshowSkeleton,
-} from "@/components/homepage/skeletons";
+import { SlideshowSkeleton } from "@/components/homepage/skeletons";
 import { fetchCategoriesName } from "@/service/category.service";
 import { Suspense } from "react";
 import PublishedPostsWrapper from "./published-posts-wrapper";
@@ -55,13 +52,7 @@ export default async function Home({ searchParams }: Props) {
         {query === "" ? "Published Posts" : "Searched Results"}
       </h1>
       <section aria-labelledby='published-posts' className='p-4 pb-14'>
-        <Suspense fallback={<BlogCardsSkeleton />} key={query + page}>
-          <PublishedPostsWrapper
-            page={page}
-            query={query}
-            category={category}
-          />
-        </Suspense>
+        <PublishedPostsWrapper page={page} query={query} category={category} />
       </section>
     </main>
   );

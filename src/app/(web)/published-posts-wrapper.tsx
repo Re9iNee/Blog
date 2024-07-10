@@ -1,4 +1,5 @@
 import { MyPagination as Pagination } from "@/components/homepage/pagination";
+import { BlogCardsSkeleton } from "@/components/homepage/skeletons";
 import BlogCard from "@/components/ui/blog-card";
 import {
   getAllPublishedPosts,
@@ -6,6 +7,7 @@ import {
 } from "@/service/posts.service";
 import Image from "next/image";
 import ShruggingManImage from "public/images/shrugging-man.png";
+import { Suspense } from "react";
 
 const PER_PAGE = 12;
 type Props = {
@@ -38,6 +40,7 @@ export default async function PublishedPostsWrapper({
           placeholder='blur'
           alt='No Result Image.'
           src={ShruggingManImage}
+          className='pointer-events-none'
         />
         <h2 className='text-lg text-neutral-300'>
           We couldn’t find any results that matches your search
@@ -53,17 +56,19 @@ export default async function PublishedPostsWrapper({
         lg:grid-cols-3
         xl:grid-cols-4'
     >
-      {recentPosts.map((post) => (
-        <BlogCard key={post.id} data={post} />
-      ))}
+      <Suspense fallback={<BlogCardsSkeleton />} key={query + page}>
+        {recentPosts.map((post) => (
+          <BlogCard key={post.id} data={post} />
+        ))}
 
-      {postsCount > 0 && (
-        <Pagination
-          currentPage={page}
-          totalPages={totalPages}
-          className='col-span-full'
-        />
-      )}
+        {postsCount > 0 && (
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            className='col-span-full'
+          />
+        )}
+      </Suspense>
     </div>
   );
 }
