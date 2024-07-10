@@ -49,18 +49,12 @@ export default async function Home({ searchParams }: Props) {
       <h1
         className='text-neutral-700 font-bold pt-4 px-4
         md:pt-8
+        dark:text-neutral-50
         '
       >
-        Published Posts
+        {query === "" ? "Published Posts" : "Searched Results"}
       </h1>
-      <section
-        aria-labelledby='published-posts'
-        className='flex p-4 flex-col gap-8 pb-14
-        md:grid md:grid-cols-2
-        lg:grid-cols-3
-        xl:grid-cols-4
-        '
-      >
+      <section aria-labelledby='published-posts' className='p-4 pb-14'>
         <Suspense fallback={<BlogCardsSkeleton />} key={query + page}>
           <PublishedPostsWrapper
             page={page}
