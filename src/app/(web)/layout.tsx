@@ -10,6 +10,17 @@ export const metadata: Metadata = {
     default: "Homepage | Mora Blog",
   },
   description: "The official blog of Mora",
+  openGraph: {
+    // images: ""
+    siteName: "Mora Blog",
+    type: "website",
+    url: "https://www.mora-ed.com",
+    description: "The official blog of Mora",
+  },
+  twitter: {
+    card: "summary_large_image",
+    description: "The official blog of Mora",
+  },
 };
 
 function layout({ children }: { children: React.ReactNode }) {
