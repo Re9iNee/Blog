@@ -10,7 +10,15 @@ export const metadata: Metadata = {
   title: "404 Not Found",
   description: "The page you are looking for is not found.",
   openGraph: {
+    siteName: "Mora Blog",
+    url: `https://www.mora-ed.com/404`,
+    title: "404 Not Found | Mora Blog",
+    description: "The page you are looking for is not found.",
     images: ["/404/og.png", { url: "/404/og.png", alt: "404 Not Found" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    description: "The page you are looking for is not found.",
   },
 };
 

@@ -6,6 +6,25 @@ import TeamSection from "@/components/about-us/team-section/team-section";
 
 export const metadata: Metadata = {
   title: "About us",
+  openGraph: {
+    siteName: "Mora Blog",
+    title: "About us | Mora Blog",
+    url: `https://www.mora-ed.com/about-us`,
+    description:
+      "Meet the MORA team and learn more about our mission and values.",
+    images: [
+      "https://d1ntfq67otjmwh.cloudfront.net/mora-blog-files/1720898315006-about-us@2x.jpg",
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "About us | Mora Blog",
+    description:
+      "Meet the MORA team and learn more about our mission and values.",
+    images: [
+      "https://d1ntfq67otjmwh.cloudfront.net/mora-blog-files/1720898315006-about-us@2x.jpg",
+    ],
+  },
 };
 
 export default function AboutUsPage() {

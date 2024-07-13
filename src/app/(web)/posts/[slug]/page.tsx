@@ -44,12 +44,16 @@ export async function generateMetadata(
     title: data.title,
     openGraph: {
       type: "article",
+      siteName: "Mora Blog",
       authors: data.author.name,
       description: data.summary,
       title: `${data.title} | Mora Blog`,
-      url: `https://www.mora-ed.com/posts/${slug}`,
       images: [openGraphImage, ...previousImage],
+      url: `https://www.mora-ed.com/posts/${slug}`,
       publishedTime: data?.publishedAt?.toUTCString(),
+    },
+    twitter: {
+      description: data.summary,
     },
   };
 
