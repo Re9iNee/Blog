@@ -11,15 +11,20 @@ export const metadata: Metadata = {
   },
   description: "The official blog of Mora",
   openGraph: {
-    // images: ""
     siteName: "Mora Blog",
     type: "website",
     url: "https://www.mora-ed.com",
     description: "The official blog of Mora",
+    images: [
+      "https://d1ntfq67otjmwh.cloudfront.net/mora-blog-files/1720898328299-homepage@2x.jpg",
+    ],
   },
   twitter: {
     card: "summary_large_image",
     description: "The official blog of Mora",
+    images: [
+      "https://d1ntfq67otjmwh.cloudfront.net/mora-blog-files/1720898328299-homepage@2x.jpg",
+    ],
   },
 };
 
