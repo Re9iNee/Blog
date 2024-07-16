@@ -37,7 +37,7 @@ export default function Search({ categories }: Props) {
         />
       </div>
 
-      <h2 className='text-neutral-950 font-poppins font-bold flex text-2xl'>
+      <h2 className='text-neutral-950 font-poppins font-bold flex text-2xl dark:text-neutral-50'>
         Find your topic <span className='text-purple-600 ml-1'>Faster</span>
       </h2>
 
@@ -48,7 +48,9 @@ export default function Search({ categories }: Props) {
       />
 
       <section aria-label='trending topics' className='space-y-3'>
-        <h3 className='text-neutral-600 font-bold text-sm'>Trending Topics</h3>
+        <h3 className='text-neutral-600 font-bold text-xs dark:text-neutral-200'>
+          Trending Topics
+        </h3>
         {/* chips container */}
         <div className='flex gap-2 p-1'>
           {categories.map((cat) => (

@@ -1,6 +1,4 @@
 import { SlideShow } from "@/components/ui/slide-show";
-import { getMainImagePlaceholderUrl } from "@/lib/utils";
-import { generateBlurredBase64 } from "@/lib/utils/imageUtils";
 import { getSlideshowContents } from "@/service/posts.service";
 
 export default async function SlideShowWrapper() {

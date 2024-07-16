@@ -21,6 +21,7 @@ function BlogCard({ data }: Props) {
   return (
     <article className='flex flex-col gap-2'>
       <Link
+        prefetch={false}
         href={getPostUrl(slug)}
         className='group relative w-full h-32 rounded-xl cursor-pointer'
       >
@@ -40,7 +41,9 @@ function BlogCard({ data }: Props) {
       </Link>
 
       <h2 className='text-neutral-950 flex-grow font-bold leading-tight dark:text-neutral-300'>
-        <Link href={getPostUrl(slug)}>{title}</Link>
+        <Link href={getPostUrl(slug)} prefetch={false}>
+          {title}
+        </Link>
       </h2>
       <summary
         className='text-neutral-700 dark:text-neutral-500 text-xs leading-none max-h-max line-clamp-2
