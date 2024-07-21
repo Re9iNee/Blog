@@ -1,6 +1,7 @@
 import Footer from "@/components/global/footer";
 import Header from "@/components/global/header";
 import { notoSans, poppins } from "@/lib/fonts";
+import { getHomepageOGImageLink } from "@/lib/utils/imageUtils";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { Metadata } from "next";
 
@@ -15,16 +16,12 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://www.mora-ed.com",
     description: "The official blog of Mora",
-    images: [
-      "https://d1ntfq67otjmwh.cloudfront.net/mora-blog-files/1720898328299-homepage@2x.jpg",
-    ],
+    images: [getHomepageOGImageLink()],
   },
   twitter: {
     card: "summary_large_image",
     description: "The official blog of Mora",
-    images: [
-      "https://d1ntfq67otjmwh.cloudfront.net/mora-blog-files/1720898328299-homepage@2x.jpg",
-    ],
+    images: [getHomepageOGImageLink()],
   },
 };
 

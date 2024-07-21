@@ -14,6 +14,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import { convertDateToDayMonthAndYear } from "@/lib/utils";
 import { PostModel } from "@/types/post.type";
 import BlurImage from "@/components/global/image-blur";
+import { getHomepageOGImageLink } from "@/lib/utils/imageUtils";
 
 export async function generateMetadata(
   { params }: Props,
@@ -22,10 +23,6 @@ export async function generateMetadata(
   const slug = params.slug;
   const data = await getPostBySlug(slug);
   if (!data) notFound();
-
-  const previousImage = (await parent).openGraph?.images || [];
-
-  const openGraphImage = data.mainImageUrl ?? "/images/placeholder.png";
 
   const metadata: Metadata = {
     robots: {
@@ -48,9 +45,9 @@ export async function generateMetadata(
       authors: data.author.name,
       description: data.summary,
       title: `${data.title} | Mora Blog`,
-      images: [openGraphImage, ...previousImage],
       url: `https://www.mora-ed.com/posts/${slug}`,
       publishedTime: data?.publishedAt?.toUTCString(),
+      images: [data.mainImageUrl ?? getHomepageOGImageLink()],
     },
     twitter: {
       description: data.summary,
