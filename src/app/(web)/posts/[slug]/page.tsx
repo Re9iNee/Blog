@@ -113,7 +113,7 @@ async function PostPage({ params }: Props) {
       />
       <title>{data.title}</title>
 
-      <PostNavigationGroup />
+      <PostNavigationGroup postId={data.id} />
 
       <h1 className='text-3xl font-extrabold leading-9 pt-2'>{data.title}</h1>
       <BlurImage
