@@ -7,13 +7,14 @@ import Image from "next/image";
 
 import { RxDotFilled } from "react-icons/rx";
 
+import placeholderImage from "public/images/placeholder.png";
+import BlurImage from "@/components/global/image-blur";
 import ClapContainer from "@/components/posts/claps/clap-container";
-import { notFound } from "next/navigation";
-import PostNavigationGroup from "../nav";
-import { Metadata, ResolvingMetadata } from "next";
 import { convertDateToDayMonthAndYear } from "@/lib/utils";
 import { PostModel } from "@/types/post.type";
-import BlurImage from "@/components/global/image-blur";
+import { Metadata, ResolvingMetadata } from "next";
+import { notFound } from "next/navigation";
+import PostNavigationGroup from "../nav";
 import { getHomepageOGImageLink } from "@/lib/utils/imageUtils";
 
 export async function generateMetadata(
@@ -32,25 +33,48 @@ export async function generateMetadata(
       googleBot: {
         index: true,
         follow: true,
+        "max-snippet": -1,
         noimageindex: false,
         "max-video-preview": -1,
         "max-image-preview": "large",
-        "max-snippet": -1,
       },
     },
     title: data.title,
     openGraph: {
       type: "article",
+      locale: "en_US",
       siteName: "Mora Blog",
       authors: data.author.name,
       description: data.summary,
       title: `${data.title} | Mora Blog`,
       url: `https://www.mora-ed.com/posts/${slug}`,
       publishedTime: data?.publishedAt?.toUTCString(),
-      images: [data.mainImageUrl ?? getHomepageOGImageLink()],
+      modifiedTime: data?.updatedAt?.toUTCString(),
+      images: [
+        {
+          width: "1080",
+          height: "1080",
+          alt: data.title,
+          type: "image/jpeg",
+          url: data.mainImageUrl ?? getHomepageOGImageLink(),
+        },
+      ],
     },
     twitter: {
+      site: "@",
       description: data.summary,
+      card: "summary_large_image",
+      images: [
+        {
+          width: "1080",
+          height: "1080",
+          alt: data.title,
+          type: "image/jpeg",
+          url: data.mainImageUrl ?? getHomepageOGImageLink(),
+        },
+      ],
+      siteId: "https://www.mora-ed.com",
+      title: `${data.title} | Mora Blog`,
     },
   };
 
@@ -121,7 +145,7 @@ async function PostPage({ params }: Props) {
         height={"160"}
         loading='lazy'
         alt={data.title + " " + "main image"}
-        src={data.mainImageUrl ?? "/images/placeholder.png"}
+        src={data.mainImageUrl ?? placeholderImage}
         className='rounded-lg self-center w-full object-contain'
       />
       <h3 className='text-lg leading-6 text-neutral-500 dark:text-neutral-400'>

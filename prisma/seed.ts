@@ -8,14 +8,27 @@ dotenv.config(); // Load the environment variables
 const prisma = new PrismaClient().$extends(withAccelerate());
 
 async function main() {
-  // await clearDB();
   await insertAdmin();
+  // console.log(await getPosts(1));
   // await insertCategories();
   // console.log(await getHash("examplePassword"));
   // await insertUsers(2);
   // await insertPosts(5);
   // await getAllAuthors();
   // await getAllDB();
+}
+
+async function getPosts(take: number = 1) {
+  const posts = await prisma.post.findMany({
+    orderBy: { id: "desc" },
+    include: {
+      author: true,
+      categories: true,
+    },
+    take: take,
+  });
+
+  return posts;
 }
 
 async function insertCategories() {
