@@ -1,9 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { isLoggedIn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useMemo } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import { HiOutlineChevronLeft } from "react-icons/hi";
@@ -12,7 +12,7 @@ import { toast } from "sonner";
 
 function PostNavigationGroup({ postId }: { postId: number }) {
   const { status } = useSession();
-  const isLoggedIn = useMemo(() => status === "authenticated", [status]);
+
   const router = useRouter();
   const handleBack = () => {
     router.back();
@@ -42,7 +42,7 @@ function PostNavigationGroup({ postId }: { postId: number }) {
       </Button>
 
       <div>
-        {isLoggedIn && (
+        {isLoggedIn(status) && (
           <Button
             variant={"link"}
             onClick={handleEdit}
