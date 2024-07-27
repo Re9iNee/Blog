@@ -31,7 +31,7 @@ function layout({ children }: { children: React.ReactNode }) {
       className={`mx-auto flex min-h-screen max-w-screen-xl flex-col ${notoSans.className} ${poppins.variable}`}
     >
       <Header />
-      <div className="relative flex-grow">{children}</div>
+      <div className="relative min-h-screen flex-grow">{children}</div>
       <Footer />
     </div>
   );

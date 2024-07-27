@@ -168,10 +168,11 @@ function SlideShowCard({
             fill
             priority
             placeholder="blur"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
             alt={`main image of post: ${title}`}
+            sizes="(min-width: 1360px) 1248px, calc(94.23vw - 15px)"
             src={mainImageUrl ?? "/slideshow/mainImagePlaceholder.svg"}
             className="pointer-events-none -z-10 aspect-video rounded-2xl object-cover"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
           />
           <div className="h-full w-full rounded-2xl bg-gradient-to-t from-black/80" />
         </div>

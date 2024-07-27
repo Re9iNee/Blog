@@ -24,11 +24,11 @@ export default function Search({ categories }: Props) {
     >
       <div className="pointer-events-none absolute h-full w-full" aria-hidden>
         <Image
-          src={StarImage}
-          alt="star icon"
           aria-hidden
           width={141}
-          height={119}
+          height={135}
+          alt="star icon"
+          src={StarImage}
           placeholder="empty"
           className={cn(
             "relative left-[52%] top-[4%] object-none transition-all",
