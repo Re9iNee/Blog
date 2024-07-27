@@ -1,12 +1,15 @@
 import DottedBackground from "@/components/homepage/dotted-background";
 import HeroSection from "@/components/homepage/hero";
 
-import Search from "@/components/homepage/search";
-import { SlideshowSkeleton } from "@/components/homepage/skeletons";
-import { fetchCategoriesName } from "@/service/category.service";
+import {
+  SlideshowSkeleton,
+  TrendingCategoriesSkeleton,
+} from "@/components/homepage/skeletons";
 import { Suspense } from "react";
 import PublishedPostsWrapper from "./published-posts-wrapper";
 import SlideShowWrapper from "./slide-show-wrapper";
+import Search from "@/components/homepage/search";
+import TrendingCategoriesWrapper from "@/components/homepage/trending-categories";
 
 export const revalidate = 60;
 type Props = {
@@ -14,14 +17,14 @@ type Props = {
     page?: string;
     query?: string;
     category?: string;
+    selectedCategory?: string;
   };
 };
 export default async function Home({ searchParams }: Props) {
   const page = Number(searchParams.page) || 1;
   const query = searchParams.query || "";
   const category = searchParams.category;
-
-  const topCategories = (await fetchCategoriesName()).slice(0, 4);
+  const selectedCategory = searchParams.category;
 
   return (
     <main>
@@ -41,7 +44,12 @@ export default async function Home({ searchParams }: Props) {
         <SlideShowWrapper />
       </Suspense>
 
-      <Search categories={topCategories} />
+      <section className="relative hidden min-h-80 flex-col items-center justify-center gap-6 md:flex">
+        <Search />
+        <Suspense fallback={<TrendingCategoriesSkeleton />}>
+          <TrendingCategoriesWrapper selectedCategory={selectedCategory} />
+        </Suspense>
+      </section>
 
       <h1 className="px-4 pt-4 font-bold text-neutral-700 dark:text-neutral-50 md:pt-8">
         {query === "" ? "Published Posts" : "Searched Results"}

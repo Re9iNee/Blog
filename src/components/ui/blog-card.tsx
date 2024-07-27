@@ -28,10 +28,11 @@ function BlogCard({ data }: Props) {
         <Suspense fallback={<BlogCardMainImageSkeleton slug={slug} />}>
           <BlurImage
             fill
-            loading="lazy"
+            priority={false}
             alt={`${title} main image`}
             className="rounded-xl object-cover"
             src={mainImageUrl ?? getMainImagePlaceholderUrl()}
+            sizes="(min-width: 1280px) 280px, (min-width: 1040px) calc(33.18vw - 41px), (min-width: 780px) calc(50vw - 48px), calc(100vw - 64px)"
           />
           <div className="absolute grid h-full w-full place-items-center rounded-xl bg-gradient-to-l from-violet-500 to-violet-900 font-bold text-white opacity-0 backdrop-blur-none duration-400 group-hover:opacity-75 group-active:opacity-100">
             Read More
@@ -57,7 +58,7 @@ function BlogCard({ data }: Props) {
           <Image
             width={20}
             height={20}
-            loading="lazy"
+            priority={false}
             alt="Author's profile picture"
             className="aspect-square rounded-full object-cover"
             src={author.avatarUrl ?? getAvatarPlaceholderUrl()}

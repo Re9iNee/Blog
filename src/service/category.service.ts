@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { wait } from "@/lib/utils";
 import {
   CategoryModel,
   CategorySelect,
@@ -81,7 +82,7 @@ export async function createCategory(data: Category) {
     await prisma.category.create({
       data: {
         ...categoryData,
-        posts: { connect: posts.map((id) => ({ id })) },
+        posts: { connect: posts.map((id: number) => ({ id })) },
       },
     });
   } catch (e) {

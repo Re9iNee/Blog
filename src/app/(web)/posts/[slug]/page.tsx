@@ -47,10 +47,11 @@ async function PostPage({ params }: Props) {
 
       <h1 className="pt-2 text-3xl font-extrabold leading-9">{data.title}</h1>
       <BlurImage
+        priority
         width={"288"}
-        height={"160"}
-        loading="lazy"
+        height={"288"}
         alt={data.title + " " + "main image"}
+        sizes="(min-width: 820px) 736px, 93.6vw"
         src={data.mainImageUrl ?? placeholderImage}
         className="w-full self-center rounded-lg object-contain"
       />
@@ -63,6 +64,7 @@ async function PostPage({ params }: Props) {
           <Image
             width={32}
             height={32}
+            priority={false}
             alt="Author Avatar"
             className="aspect-square rounded-full object-cover"
             src={data.author.avatarUrl ?? "/images/main-image-placeholder.png"}

@@ -1,4 +1,3 @@
-import Loader from "@/app/(web)/loading";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import CategoryTableWrapper from "./category-table-wrapper";
@@ -31,7 +30,10 @@ async function DashboardCategoryPage({
         </div>
       </div>
 
-      <Suspense key={query + currentPage + perPage} fallback={<Loader />}>
+      <Suspense
+        fallback={<div>Loading ...</div>}
+        key={query + currentPage + perPage}
+      >
         <CategoryTableWrapper
           query={query}
           perPage={perPage}
