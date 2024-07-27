@@ -1,15 +1,14 @@
-import DottedBackground from "@/components/homepage/dotted-background";
 import HeroSection from "@/components/homepage/hero";
 
+import Search from "@/components/homepage/search";
 import {
   SlideshowSkeleton,
   TrendingCategoriesSkeleton,
 } from "@/components/homepage/skeletons";
+import TrendingCategoriesWrapper from "@/components/homepage/trending-categories";
 import { Suspense } from "react";
 import PublishedPostsWrapper from "./published-posts-wrapper";
 import SlideShowWrapper from "./slide-show-wrapper";
-import Search from "@/components/homepage/search";
-import TrendingCategoriesWrapper from "@/components/homepage/trending-categories";
 
 export const revalidate = 60;
 type Props = {
@@ -28,14 +27,6 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <main>
-      <DottedBackground position="right" top={2} className="hidden md:block" />
-      <DottedBackground position="left" top={18} className="hidden md:block" />
-      <DottedBackground
-        top={35}
-        position="right"
-        className="scale-110 md:hidden"
-      />
-
       <HeroSection />
 
       <Suspense
