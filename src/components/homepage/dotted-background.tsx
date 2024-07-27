@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { ClassValue } from "clsx";
 import Image from "next/image";
-import bgImage from "public/HeroImages/Dot.png";
+import bgImage from "public/HeroImages/dot.png";
 
 type Props = {
   // in VH
