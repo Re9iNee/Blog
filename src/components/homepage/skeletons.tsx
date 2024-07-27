@@ -86,4 +86,29 @@ export function SlideshowSkeleton({ className }: { className?: ClassValue }) {
   );
 }
 
+export function TrendingCategoriesSkeleton() {
+  const categories = Array.from({ length: 4 });
+  const differentWidths = [24, 16, 24, 16];
+
+  return (
+    <section aria-label="trending topics" className="space-y-3">
+      <h3 className="text-xs font-bold text-neutral-600 dark:text-neutral-200">
+        Trending Topics
+      </h3>
+
+      <div className="flex gap-2 p-1">
+        {categories.map((_, index) => (
+          <Skeleton
+            key={index}
+            className={cn(
+              "h-7 rounded-[32px] px-4 py-1.5",
+              `w-${differentWidths[index]}`,
+            )}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export { MainImageSkeleton as BlogCardMainImageSkeleton };
