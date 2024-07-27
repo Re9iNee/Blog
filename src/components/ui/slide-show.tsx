@@ -9,6 +9,7 @@ import { cn, getPostUrl } from "@/lib/utils";
 import { PostModel } from "@/types/post.type";
 import Image from "next/image";
 import Link from "next/link";
+import BlurImage from "../global/image-blur";
 
 type Props = {
   cards: PostModel[];
@@ -164,15 +165,13 @@ function SlideShowCard({
 
         {/* overlay and main image */}
         <div className="z-0 col-span-full row-span-full">
-          <Image
+          <BlurImage
             fill
             priority
-            placeholder="blur"
             alt={`main image of post: ${title}`}
             sizes="(min-width: 1360px) 1248px, calc(94.23vw - 15px)"
             src={mainImageUrl ?? "/slideshow/mainImagePlaceholder.svg"}
             className="pointer-events-none -z-10 aspect-video rounded-2xl object-cover"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
           />
           <div className="h-full w-full rounded-2xl bg-gradient-to-t from-black/80" />
         </div>
