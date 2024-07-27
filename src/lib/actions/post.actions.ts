@@ -1,6 +1,6 @@
 "use server";
 
-import { PostModel, PostUpsertType } from "@/types/post.type";
+import { PostUpsertType } from "@/types/post.type";
 import {
   CreatePostSchema,
   UpdatePostSchema,
@@ -30,7 +30,7 @@ export async function createPost(data: PostUpsertType) {
     await prisma.post.create({
       data: {
         ...values,
-        categories: { connect: categories.map((id) => ({ id: +id })) },
+        categories: { connect: categories.map((id: number) => ({ id: +id })) },
       },
     });
   } catch (e) {
@@ -43,7 +43,6 @@ export async function createPost(data: PostUpsertType) {
 }
 
 export async function updatePost(id: number, data: PostUpsertType) {
-  // if we don't use noStore, NextJS will cache the response and return the same response for same request
   noStore();
 
   const validatedFields = UpdatePostSchema.safeParse(data);
@@ -62,7 +61,7 @@ export async function updatePost(id: number, data: PostUpsertType) {
       where: { id },
       data: {
         ...values,
-        categories: { set: categories.map((id) => ({ id: +id })) },
+        categories: { set: categories.map((id: number) => ({ id: +id })) },
       },
     });
   } catch (e) {

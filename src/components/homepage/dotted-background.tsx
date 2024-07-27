@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { ClassValue } from "clsx";
 import Image from "next/image";
-import bgImage from "public/HeroImages/Dot.png";
+import bgImage from "public/HeroImages/vector.png";
 
 type Props = {
   // in VH
@@ -17,8 +17,8 @@ function DottedBackground({ position, top, className }: Props) {
         width={337}
         height={429}
         src={bgImage}
-        priority={false}
-        placeholder="empty"
+        priority={true}
+        placeholder="blur"
         alt="Dotted Background"
         style={{ top: `${top}vh` }}
         className={cn(

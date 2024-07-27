@@ -2,6 +2,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import React, { useMemo } from "react";
 
+import RocketGirl from "public/HeroImages/rocket-girl.avif";
+import VRGuy from "public/HeroImages/vr-guy.webp";
+import FloatingGuy from "public/HeroImages/floating-guy.webp";
+
 type Props = {
   activeIndex: number;
 };
@@ -9,16 +13,16 @@ function HeroImage({ activeIndex }: Props) {
   const dynamicImages = useMemo(
     () => [
       {
+        src: FloatingGuy,
         alt: "Floating Guy",
-        src: "/HeroImages/Floating-Guy.png",
       },
       {
+        src: RocketGirl,
         alt: "Rocket Girl",
-        src: "/HeroImages/Rocket-Girl.png",
       },
       {
+        src: VRGuy,
         alt: "VR Guy",
-        src: "/HeroImages/VR-Guy.png",
       },
     ],
     [],
