@@ -13,9 +13,9 @@ function Chip({ children, isActive }: Props) {
         query: isActive ? {} : { category: children },
       }}
       className={cn(
-        "rounded-[32px] text-xs text-neutral-600 bg-neutral-50 px-4 py-1.5  transition-all dark:text-neutral-200 dark:bg-neutral-900",
+        "rounded-[32px] bg-neutral-50 px-4 py-1.5 text-xs text-neutral-600 transition-all dark:bg-neutral-900 dark:text-neutral-200",
         isActive &&
-          "bg-gradient-to-tr to-[#9767FE] from-[#5F14FF] text-neutral-50"
+          "bg-gradient-to-tr from-[#5F14FF] to-[#9767FE] text-neutral-50",
       )}
     >
       {children}

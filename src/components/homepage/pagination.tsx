@@ -57,7 +57,7 @@ export function MyPagination({ className, currentPage, totalPages }: Props) {
           </>
         )}
         <PaginationItem>
-          <PaginationLink href='#' isActive>
+          <PaginationLink href="#" isActive>
             {currentPage}
           </PaginationLink>
         </PaginationItem>

@@ -30,7 +30,7 @@ export default async function BlurImage({ src, alt, ...rest }: ImageProps) {
     <Image
       alt={alt}
       src={src}
-      placeholder='blur'
+      placeholder="blur"
       blurDataURL={
         imagesPlaceholderdata[
           Math.floor(Math.random() * imagesPlaceholderdata.length)

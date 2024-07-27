@@ -2,6 +2,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import React, { useMemo } from "react";
 
+import RocketGirl from "public/HeroImages/rocket-girl.avif";
+import VRGuy from "public/HeroImages/vr-guy.webp";
+import FloatingGuy from "public/HeroImages/floating-guy.webp";
+
 type Props = {
   activeIndex: number;
 };
@@ -9,27 +13,27 @@ function HeroImage({ activeIndex }: Props) {
   const dynamicImages = useMemo(
     () => [
       {
+        src: FloatingGuy,
         alt: "Floating Guy",
-        src: "/HeroImages/Floating-Guy.png",
       },
       {
+        src: RocketGirl,
         alt: "Rocket Girl",
-        src: "/HeroImages/Rocket-Girl.png",
       },
       {
+        src: VRGuy,
         alt: "VR Guy",
-        src: "/HeroImages/VR-Guy.png",
       },
     ],
-    []
+    [],
   );
 
   return (
-    <div className='rounded-full w-72 h-72 shadow border-2 border-white bg-white z-10 col-start-1 col-end-1 row-start-1 row-end-1'>
-      <AnimatePresence mode='wait'>
+    <div className="z-10 col-start-1 col-end-1 row-start-1 row-end-1 h-72 w-72 rounded-full border-2 border-white bg-white shadow">
+      <AnimatePresence mode="wait">
         <motion.div
           key={activeIndex}
-          className='w-72 h-72 relative'
+          className="relative h-72 w-72"
           exit={{ opacity: 0, translateX: -288, translateY: 140, scale: 0 }}
           animate={{ opacity: 1, translateX: 0, translateY: 0, scale: 1 }}
           initial={{ opacity: 0, translateX: 288, translateY: 140, scale: 0 }}
@@ -39,8 +43,9 @@ function HeroImage({ activeIndex }: Props) {
             width={312}
             height={375}
             quality={100}
-            loading='lazy'
-            aria-hidden='true'
+            priority={false}
+            aria-hidden="true"
+            placeholder="empty"
             src={dynamicImages[activeIndex].src}
             alt={dynamicImages[activeIndex].alt}
           />

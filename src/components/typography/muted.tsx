@@ -4,5 +4,5 @@ type Props = {
   children: ReactNode;
 };
 export function TypographyMuted({ children }: Props) {
-  return <p className='text-sm text-muted-foreground'>{children}</p>;
+  return <p className="text-sm text-muted-foreground">{children}</p>;
 }

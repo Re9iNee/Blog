@@ -142,7 +142,7 @@ export async function getPostBySlug(slug: string): Promise<PostModel | null> {
 
 export async function updatePost(
   data: Partial<PostModel>,
-  id?: number
+  id?: number,
 ): Promise<PostModel> {
   if (!id) throw new Error("id is required");
 
@@ -167,7 +167,7 @@ export async function updatePost(
 }
 
 export async function deletePost(
-  id: number
+  id: number,
 ): Promise<Omit<PostModel, "author" | "categories">> {
   const post = await prisma.post.delete({
     where: { id },
@@ -180,7 +180,7 @@ export async function deletePost(
 }
 
 export async function deleteManyPosts(
-  ids: number[]
+  ids: number[],
 ): Promise<{ count: number }> {
   const deleteCount = await prisma.post.deleteMany({
     where: { id: { in: ids } },
@@ -194,7 +194,7 @@ export async function deleteManyPosts(
 
 export async function clapToPost(
   slug: string,
-  amount: number
+  amount: number,
 ): Promise<number> {
   noStore();
   if (!slug) throw new Error("post Slug is required");
@@ -217,7 +217,7 @@ export async function clapToPost(
 // change the visibility of a post in the slideshow
 export async function slideshowTogglePostVisibility(
   id: number,
-  show: boolean
+  show: boolean,
 ): Promise<boolean> {
   noStore();
 

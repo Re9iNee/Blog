@@ -13,15 +13,15 @@ function RotatingTexts({ activeIndex }: Props) {
       { text: "Productivity Hacks 🚀", classNames: "text-rose-500" },
       { text: "Industry Updates 📰", classNames: "text-blue-800" },
     ],
-    []
+    [],
   );
 
   return (
-    <AnimatePresence mode='wait'>
+    <AnimatePresence mode="wait">
       <motion.h2
         className={cn(
-          "-z-0 text-3xl font-bold font-poppins leading-10 pb-3 h-20 md:h-auto md:whitespace-nowrap",
-          dynamicTexts[activeIndex].classNames
+          "-z-0 h-20 pb-3 font-poppins text-3xl font-bold leading-10 md:h-auto md:whitespace-nowrap",
+          dynamicTexts[activeIndex].classNames,
         )}
         exit={{ y: -40 }}
         animate={{ y: 0 }}

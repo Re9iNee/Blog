@@ -26,19 +26,12 @@ export const metadata: Metadata = {
 };
 
 function layout({ children }: { children: React.ReactNode }) {
-  const gtmId = process.env.GTMID;
-
-  if (!gtmId) {
-    throw new Error("GTMID code is not defined");
-  }
-
   return (
     <div
-      className={`max-w-screen-xl min-h-screen mx-auto flex flex-col ${notoSans.className} ${poppins.variable}`}
+      className={`mx-auto flex min-h-screen max-w-screen-xl flex-col ${notoSans.className} ${poppins.variable}`}
     >
-      <GoogleTagManager gtmId={gtmId} />
       <Header />
-      <div className='flex-grow relative'>{children}</div>
+      <div className="relative min-h-screen flex-grow">{children}</div>
       <Footer />
     </div>
   );

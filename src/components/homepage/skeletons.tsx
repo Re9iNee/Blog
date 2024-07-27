@@ -8,39 +8,39 @@ function MainImageSkeleton({ slug }: { slug: string }) {
     <Link
       href={getPostUrl(slug)}
       // By adding flex to the parent, the hover effect will and skeleton animation will be on top of each other. instead of new line (block display)
-      className='group relative w-full h-32 rounded-xl cursor-pointer flex'
+      className="group relative flex h-32 w-full cursor-pointer rounded-xl"
     >
-      <Skeleton className='w-full h-32 rounded-xl' />
-      <div className='w-full h-full absolute opacity-0 group-hover:opacity-75 bg-gradient-to-l from-violet-500 to-violet-900 rounded-xl backdrop-blur-none group-active:opacity-100 duration-400 text-white font-bold grid place-items-center'>
+      <Skeleton className="h-32 w-full rounded-xl" />
+      <div className="absolute grid h-full w-full place-items-center rounded-xl bg-gradient-to-l from-violet-500 to-violet-900 font-bold text-white opacity-0 backdrop-blur-none duration-400 group-hover:opacity-75 group-active:opacity-100">
         Read More
-        <span className='sr-only'>read more button</span>
+        <span className="sr-only">read more button</span>
       </div>
     </Link>
   );
 }
 function BlogCardSkeleton() {
   return (
-    <div className='flex flex-col gap-2 cursor-wait'>
-      <MainImageSkeleton slug='' />
+    <div className="flex cursor-wait flex-col gap-2">
+      <MainImageSkeleton slug="" />
 
       {/* title */}
-      <Skeleton className='w-[50%] h-6' />
+      <Skeleton className="h-6 w-[50%]" />
       {/* summary */}
-      <Skeleton className='flex-grow h-3' />
-      <Skeleton className='flex-grow w-[30%] h-3' />
+      <Skeleton className="h-3 flex-grow" />
+      <Skeleton className="h-3 w-[30%] flex-grow" />
 
       <section
-        aria-labelledby='post info'
-        className='flex justify-between items-center pt-2'
+        aria-labelledby="post info"
+        className="flex items-center justify-between pt-2"
       >
-        <div className='flex items-center gap-2'>
+        <div className="flex items-center gap-2">
           {/* Author's image */}
-          <Skeleton className='w-5 h-5 rounded-full aspect-square' />
+          <Skeleton className="aspect-square h-5 w-5 rounded-full" />
           {/* Author's name */}
-          <Skeleton className='w-16 h-3' />
+          <Skeleton className="h-3 w-16" />
         </div>
 
-        <Skeleton className='w-16 h-3' />
+        <Skeleton className="h-3 w-16" />
       </section>
     </div>
   );
@@ -57,36 +57,57 @@ export function SlideshowSkeleton({ className }: { className?: ClassValue }) {
   return (
     <div
       className={cn(
-        "h-[342px] relative grid grid-cols-6 md:grid-cols-12 grid-rows-6 bg-gray-200 rounded-2xl",
-        className
+        "relative grid h-[342px] grid-cols-6 grid-rows-6 rounded-2xl bg-gray-200 md:grid-cols-12",
+        className,
       )}
     >
       {/* only xs */}
-      <section
-        className='col-span-full row-start-4 row-span-full flex flex-col gap-1 justify-end px-2
-          md:hidden
-          '
-      >
+      <section className="col-span-full row-span-full row-start-4 flex flex-col justify-end gap-1 px-2 md:hidden">
         {/* Title */}
-        <Skeleton className='w-48 h-8' />
+        <Skeleton className="h-8 w-48" />
         {/* Author's name */}
-        <Skeleton className='w-16 h-3' />
+        <Skeleton className="h-3 w-16" />
         {/* Start Reading Button */}
-        <Skeleton className='rounded-lg py-2 px-8 mb-3 items-center justify-center w-full h-10' />
+        <Skeleton className="mb-3 h-10 w-full items-center justify-center rounded-lg px-8 py-2" />
       </section>
 
-      <section className='hidden col-span-full row-start-4 row-span-full md:flex justify-between gap-11 items-end px-4 pb-4'>
-        <div className='flex flex-col justify-end items-start gap-2 text-white'>
+      <section className="col-span-full row-span-full row-start-4 hidden items-end justify-between gap-11 px-4 pb-4 md:flex">
+        <div className="flex flex-col items-start justify-end gap-2 text-white">
           {/* title */}
-          <Skeleton className='w-96 h-11' />
+          <Skeleton className="h-11 w-96" />
           {/* Author's name */}
-          <Skeleton className='w-16 h-3' />
+          <Skeleton className="h-3 w-16" />
         </div>
 
         {/* Start Reading button */}
-        <Skeleton className='rounded-3xl py-2 px-8 items-center justify-center w-48 h-10' />
+        <Skeleton className="h-10 w-48 items-center justify-center rounded-3xl px-8 py-2" />
       </section>
     </div>
+  );
+}
+
+export function TrendingCategoriesSkeleton() {
+  const categories = Array.from({ length: 4 });
+  const differentWidths = [24, 16, 24, 16];
+
+  return (
+    <section aria-label="trending topics" className="space-y-3">
+      <h3 className="text-xs font-bold text-neutral-600 dark:text-neutral-200">
+        Trending Topics
+      </h3>
+
+      <div className="flex gap-2 p-1">
+        {categories.map((_, index) => (
+          <Skeleton
+            key={index}
+            className={cn(
+              "h-7 rounded-[32px] px-4 py-1.5",
+              `w-${differentWidths[index]}`,
+            )}
+          />
+        ))}
+      </div>
+    </section>
   );
 }
 

@@ -10,7 +10,7 @@ describe("Login", () => {
 
     cy.get("#input-email-for-credentials-provider").type(email);
     cy.get("#input-password-for-credentials-provider").type(
-      `${password}{enter}`
+      `${password}{enter}`,
     );
 
     cy.getCookie("next-auth.csrf-token").should("exist");

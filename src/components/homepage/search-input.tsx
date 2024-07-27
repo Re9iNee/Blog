@@ -26,7 +26,7 @@ export default function SearchInput({
   const searchParams = useSearchParams();
   const query = useMemo(
     () => new URLSearchParams(searchParams).get("query"),
-    [searchParams]
+    [searchParams],
   );
 
   const { set } = useSetManyUrlParams();
@@ -53,18 +53,18 @@ export default function SearchInput({
         aria-hidden
         src={LittleFlame}
         placeholder={"empty"}
-        alt='little flame icon'
+        alt="little flame icon"
         className={cn(
-          "w-[57px] h-[67px] object-none absolute right-3 -top-[65px] transition-all",
-          isFocused && "top-0 scale-50"
+          "absolute -top-[65px] right-3 h-[67px] w-[57px] object-none transition-all",
+          isFocused && "top-0 scale-50",
         )}
       />
       <Input
-        type='text'
+        type="text"
         ref={inputRef}
         defaultValue={query ?? ""}
         className={cn(
-          "pl-14 pr-20 text-md font-medium w-full min-h-14 shadow-xl rounded-2xl placeholder:text-neutral-400 relative active:shadow-2xl focus:shadow-2xl  focus-visible:ring-opacity-30 focus-visible:ring-violet-500 dark:placeholder:text-neutral-600"
+          "text-md relative min-h-14 w-full rounded-2xl pl-14 pr-20 font-medium shadow-xl placeholder:text-neutral-400 focus:shadow-2xl focus-visible:ring-violet-500 focus-visible:ring-opacity-30 active:shadow-2xl dark:placeholder:text-neutral-600",
         )}
         onFocus={() => {
           setIsFocused(true);
@@ -75,9 +75,9 @@ export default function SearchInput({
         onChange={(e) => {
           onChange(e.target.value);
         }}
-        placeholder='Find your topic here...'
+        placeholder="Find your topic here..."
       />
-      <FaMagnifyingGlass className='w-6 h-6 absolute top-1/2 transform -translate-y-1/2 left-4 text-purple-600 pointer-events-none' />
+      <FaMagnifyingGlass className="pointer-events-none absolute left-4 top-1/2 h-6 w-6 -translate-y-1/2 transform text-purple-600" />
       {/* <Button
         variant={"ghost"}
         className='absolute top-1/2 transform -translate-y-1/2 right-1 text-neutral-500 items-center gap-1 text-xs font-bold flex cursor-pointer min-w-12 min-h-12 rounded-xl'

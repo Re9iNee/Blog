@@ -33,16 +33,16 @@ export default async function PublishedPostsWrapper({
 
   if (postsCount === 0) {
     return (
-      <div className='flex flex-col justify-center items-center gap-16'>
+      <div className="flex flex-col items-center justify-center gap-16">
         <Image
           width={320}
           height={330}
-          placeholder='blur'
-          alt='No Result Image.'
+          placeholder="blur"
+          alt="No Result Image."
           src={ShruggingManImage}
-          className='pointer-events-none'
+          className="pointer-events-none"
         />
-        <h2 className='text-lg text-neutral-300'>
+        <h2 className="text-lg text-neutral-300">
           We couldn’t find any results that matches your search
         </h2>
       </div>
@@ -50,12 +50,7 @@ export default async function PublishedPostsWrapper({
   }
 
   return (
-    <div
-      className='flex p-4 flex-col gap-8 pb-14
-        md:grid md:grid-cols-2
-        lg:grid-cols-3
-        xl:grid-cols-4'
-    >
+    <div className="flex flex-col gap-8 p-4 pb-14 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       <Suspense fallback={<BlogCardsSkeleton />} key={query + page}>
         {recentPosts.map((post) => (
           <BlogCard key={post.id} data={post} />
@@ -65,7 +60,7 @@ export default async function PublishedPostsWrapper({
           <Pagination
             currentPage={page}
             totalPages={totalPages}
-            className='col-span-full'
+            className="col-span-full"
           />
         )}
       </Suspense>

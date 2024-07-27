@@ -39,7 +39,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
         class: "pop-bottom-left",
       },
     ],
-    []
+    [],
   );
 
   useEffect(() => {
@@ -73,7 +73,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
   const runAnimationCycle = useCallback(function (
     el: HTMLElement | null,
     className: string,
-    duration?: number
+    duration?: number,
   ) {
     if (!el) {
       return;
@@ -86,8 +86,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
       void el.offsetWidth; // Trigger a reflow in between removing and adding the class name
       el.classList.add(className);
     }
-  },
-  []);
+  }, []);
 
   const upClickCounter = useCallback(
     function () {
@@ -107,13 +106,13 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
       }
       runAnimationCycle(totalCounterRef.current, "fader");
     },
-    [runAnimationCycle, setUnRegisteredClaps, setLocalClaps, localClaps]
+    [runAnimationCycle, setUnRegisteredClaps, setLocalClaps, localClaps],
   );
 
   const runParticleAnimationCycle = useCallback(function (
     el: HTMLElement,
     className: string,
-    duration: number
+    duration: number,
   ) {
     if (el && !el.classList.contains(className)) {
       el.classList.add(className);
@@ -122,18 +121,16 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
         el.classList.remove(className);
       }, duration);
     }
-  },
-  []);
+  }, []);
 
   const addRandomParticlesRotation = useCallback(function (
     particlesEl: HTMLElement,
     minDeg: number,
-    maxDeg: number
+    maxDeg: number,
   ) {
     const randomRotationAngle = getRandomInt(minDeg, maxDeg) + "deg";
     particlesEl.style.transform = `rotate(${randomRotationAngle})`;
-  },
-  []);
+  }, []);
 
   const animateParticles = useCallback(
     function (particles: HTMLDivElement | null, dur: number) {
@@ -144,7 +141,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
         runParticleAnimationCycle(
           particles.children[i] as HTMLElement,
           particlesClasses[i].class,
-          dur
+          dur,
         );
       }
       // Boolean functionality only to activate particles2, particles3 when needed
@@ -153,7 +150,7 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
         particles.classList.remove("animating");
       }, dur);
     },
-    [addRandomParticlesRotation, runParticleAnimationCycle, particlesClasses]
+    [addRandomParticlesRotation, runParticleAnimationCycle, particlesClasses],
   );
 
   const onClapClick = useCallback(
@@ -171,17 +168,17 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
         animateParticles(particles3Ref.current, 700);
       }
     },
-    [animateParticles, upClickCounter, runAnimationCycle]
+    [animateParticles, upClickCounter, runAnimationCycle],
   );
 
   return (
     <>
-      <Container color='#6c5ce7' className={cn(className)}>
-        <div className='canvas'>
+      <Container color="#6c5ce7" className={cn(className)}>
+        <div className="canvas">
           <div
-            id='clap'
+            id="clap"
             ref={clapRef}
-            className='clap-container bg-background text-lg'
+            className="clap-container bg-background text-lg"
             onClick={onClapClick}
             onMouseOver={onClapHover}
           >
@@ -191,81 +188,81 @@ function Claps({ className, onClapChange, total, currentClaps }: ClapsProps) {
 
           <div
             ref={clickerCounterRef}
-            id='clicker'
-            className='click-counter select-none'
+            id="clicker"
+            className="click-counter select-none"
           >
-            <span className='counter'>{"+" + " " + localClaps}</span>
+            <span className="counter">{"+" + " " + localClaps}</span>
           </div>
 
           <div
             ref={sonarClapRef}
-            id='sonar-clap'
-            className='clap-container-sonar'
+            id="sonar-clap"
+            className="clap-container-sonar"
           ></div>
 
           <div
             ref={particlesRef}
-            id='particles'
-            className='particles-container'
+            id="particles"
+            className="particles-container"
           >
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
           </div>
 
           <div
             ref={particles2Ref}
-            id='particles-2'
-            className='particles-container'
+            id="particles-2"
+            className="particles-container"
           >
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
           </div>
 
           <div
             ref={particles3Ref}
-            id='particles-3'
-            className='particles-container'
+            id="particles-3"
+            className="particles-container"
           >
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
-            <div className='triangle'>
-              <div className='square'></div>
+            <div className="triangle">
+              <div className="square"></div>
             </div>
           </div>
         </div>

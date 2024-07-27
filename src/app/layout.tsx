@@ -14,17 +14,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' className='!scroll-smooth'>
+    <html lang="en" className="!scroll-smooth">
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          fontSans.variable,
         )}
       >
         <ThemeProvider
           enableSystem
-          attribute='class'
-          defaultTheme='system'
+          attribute="class"
+          defaultTheme="system"
           disableTransitionOnChange
         >
           <NextAuthProvider>{children}</NextAuthProvider>

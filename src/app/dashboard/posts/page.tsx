@@ -1,4 +1,3 @@
-import Loader from "@/app/(web)/loading";
 import { Suspense } from "react";
 import PostTableWrapper from "./post-table-wrapper";
 import { Metadata } from "next";
@@ -21,17 +20,20 @@ async function DashboardPostPage({
   const perPage = Number(searchParams?.per_page) || 10;
 
   return (
-    <div className='h-full flex-1 flex-col space-y-8 p-8 md:flex'>
-      <div className='flex items-center justify-between space-y-2'>
+    <div className="h-full flex-1 flex-col space-y-8 p-8 md:flex">
+      <div className="flex items-center justify-between space-y-2">
         <div>
-          <h2 className='text-2xl font-bold tracking-tight'>Welcome back!</h2>
-          <p className='text-muted-foreground'>
+          <h2 className="text-2xl font-bold tracking-tight">Welcome back!</h2>
+          <p className="text-muted-foreground">
             Here&apos;s a list of all posts.
           </p>
         </div>
       </div>
 
-      <Suspense key={query + currentPage + perPage} fallback={<Loader />}>
+      <Suspense
+        fallback={<div>Loading...</div>}
+        key={query + currentPage + perPage}
+      >
         <PostTableWrapper perPage={perPage} query={query} page={currentPage} />
       </Suspense>
     </div>

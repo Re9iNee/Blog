@@ -7,54 +7,38 @@ export default function HeroSection() {
     <>
       {" "}
       <section
-        aria-label='hero-section'
-        className='relative flex justify-center items-center h-[60vh]
-        sm:justify-start
-        '
+        aria-label="hero-section"
+        className="relative flex h-[60vh] items-center justify-center sm:justify-start"
       >
         <Image
           fill
-          sizes='100vw'
+          sizes="100vw"
           quality={100}
           priority={true}
           src={HeroImage}
-          alt='Hero Image'
-          placeholder='blur'
-          aria-hidden='true'
-          className='object-cover rounded-b-2xl'
+          alt="Hero Image"
+          placeholder="blur"
+          aria-hidden="true"
+          className="rounded-b-2xl object-cover"
         />
-        <h2
-          className='text-center font-poppins z-0 flex flex-col
-          sm:text-left sm:p-4 sm:ml-4
-          '
-        >
-          <span className='uppercase text-neutral-300 font-bold text-sm'>
+        <h2 className="z-0 flex flex-col text-center font-poppins sm:ml-4 sm:p-4 sm:text-left">
+          <span className="text-sm font-bold uppercase text-neutral-300">
             at mora
           </span>
-          <span
-            className='font-bold text-2xl text-neutral-50
-            sm:text-3xl
-            '
-          >
+          <span className="text-2xl font-bold text-neutral-50 sm:text-3xl">
             We aim to elevate the
           </span>
-          <span
-            className='font-bold text-2xl text-purple-500
-            sm:text-3xl
-            '
-          >
+          <span className="text-2xl font-bold text-purple-500 sm:text-3xl">
             Educational Experience
           </span>
         </h2>
       </section>
-      <a href='#how-we-envision-section'>
+      <a href="#how-we-envision-section">
         <button
-          aria-hidden='true'
-          className='rounded-full border-1 w-12 h-12 flex justify-center items-center relative -top-5 bg-white left-1/2 -translate-x-1/2
-          md:w-16 md:h-16
-          '
+          aria-hidden="true"
+          className="relative -top-5 left-1/2 flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full border-1 bg-white md:h-16 md:w-16"
         >
-          <CiCircleChevDown className='text-6xl text-violet-700' />
+          <CiCircleChevDown className="text-6xl text-violet-700" />
         </button>
       </a>
     </>

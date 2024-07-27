@@ -12,7 +12,7 @@ function EllipseGroup({ activeIndex }: Props) {
       { classNames: "bg-indigo-600" },
       { classNames: "bg-gray-300" },
     ],
-    []
+    [],
   );
 
   const variants: Variants = {
@@ -31,8 +31,8 @@ function EllipseGroup({ activeIndex }: Props) {
   };
 
   return (
-    <div className='w-72 h-72 col-start-1 col-end-1 row-start-1 row-end-1 scrollbar-hide'>
-      <div className='relative'>
+    <div className="col-start-1 col-end-1 row-start-1 row-end-1 h-72 w-72 scrollbar-hide">
+      <div className="relative">
         {dynamicEllipses.map((ellipse, key) => (
           <motion.div
             key={key}

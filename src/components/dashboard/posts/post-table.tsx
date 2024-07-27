@@ -90,7 +90,7 @@ function PostTable({ perPage, rowCount, posts, columns, page, query }: Props) {
 
       replace(`${pathname}?${params.toString()}`);
     },
-    [pathname, searchParams, replace]
+    [pathname, searchParams, replace],
   );
 
   const setCurrentPageToURL = useCallback(
@@ -104,7 +104,7 @@ function PostTable({ perPage, rowCount, posts, columns, page, query }: Props) {
       }
       replace(`${pathname}?${params.toString()}`);
     },
-    [pathname, searchParams, replace]
+    [pathname, searchParams, replace],
   );
 
   useEffect(() => {
@@ -135,7 +135,7 @@ function PostTable({ perPage, rowCount, posts, columns, page, query }: Props) {
         toast({ variant: "destructive", title: "Error deleting posts!" });
       }
     },
-    [table]
+    [table],
   );
 
   return (

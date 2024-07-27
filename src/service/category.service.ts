@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { wait } from "@/lib/utils";
 import {
   CategoryModel,
   CategorySelect,
@@ -13,7 +14,7 @@ import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function fetchCategoriesCount(
-  query: string | undefined
+  query: string | undefined,
 ): Promise<number> {
   noStore();
 
@@ -49,7 +50,7 @@ export async function fetchCategories({
 }
 
 export async function deleteManyCategories(
-  ids: number[]
+  ids: number[],
 ): Promise<{ count: number }> {
   const deleteCount = await prisma.category.deleteMany({
     where: { id: { in: ids } },
@@ -81,7 +82,7 @@ export async function createCategory(data: Category) {
     await prisma.category.create({
       data: {
         ...categoryData,
-        posts: { connect: posts.map((id) => ({ id })) },
+        posts: { connect: posts.map((id: number) => ({ id })) },
       },
     });
   } catch (e) {
@@ -94,7 +95,7 @@ export async function createCategory(data: Category) {
 }
 
 export async function getCategoryById(
-  id: number
+  id: number,
 ): Promise<CategoryModel | null> {
   noStore();
 
@@ -110,7 +111,7 @@ export async function getCategoryById(
 
 export async function updateCategoryById(
   id: number,
-  values: CategoryUpsertType
+  values: CategoryUpsertType,
 ) {
   const { posts, ...categoryData } = values;
 

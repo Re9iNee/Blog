@@ -6,7 +6,7 @@ describe("Upload", () => {
     cy.visit("/dashboard/posts/create");
 
     cy.get('[data-cy="uploader"]').selectFile(
-      "cypress/fixtures/test-image.png"
+      "cypress/fixtures/test-image.png",
     );
     cy.get('[data-cy="upload-btn"]').click();
     cy.get('[data-cy="upload-btn"]').contains("Uploading...");
@@ -19,7 +19,7 @@ describe("Upload", () => {
     cy.visit("/dashboard/upload");
 
     cy.get('[data-cy="uploader"]').selectFile(
-      "cypress/fixtures/test-image.png"
+      "cypress/fixtures/test-image.png",
     );
     cy.get('[data-cy="upload-btn"]').click();
     cy.get('[data-cy="upload-btn"]').contains("Uploading...");

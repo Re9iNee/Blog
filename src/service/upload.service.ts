@@ -35,7 +35,7 @@ export async function uploadToS3(data: FormData): Promise<string> {
       Key: fileKey,
       Bucket: process.env.S3_BUCKET,
       ACL: "bucket-owner-full-control",
-    })
+    }),
   );
 
   const url = getS3ObjectURLFromKey(fileKey);
@@ -70,7 +70,7 @@ export async function getUploadedFiles(): Promise<S3File[]> {
       // removes the date prefix and removes the number prefix
       name: file.Key.replace(`${process.env.S3_UPLOAD_DIR}/`, "").replace(
         /\d+\-/g,
-        ""
+        "",
       ),
     };
 
@@ -89,7 +89,7 @@ export async function deleteFileFromS3(key: string) {
       new DeleteObjectCommand({
         Key: key,
         Bucket: process.env.S3_BUCKET,
-      })
+      }),
     );
 
     revalidatePath("/dashboard/upload");

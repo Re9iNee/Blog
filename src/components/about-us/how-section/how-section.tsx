@@ -51,30 +51,20 @@ type Props = {
 export default function HowSection({ className }: Props) {
   return (
     <section
-      id='how-we-envision-section'
-      aria-label='infos'
+      id="how-we-envision-section"
+      aria-label="infos"
       className={cn(
         className,
-        "flex flex-col items-center text-center font-poppins"
+        "flex flex-col items-center text-center font-poppins",
       )}
     >
-      <h2 className='flex flex-col gap-2 py-12'>
-        <span
-          className='text-neutral-600 text-sm
-            sm:text-base
-            lg:text-lg
-            '
-        >
+      <h2 className="flex flex-col gap-2 py-12">
+        <span className="text-sm text-neutral-600 sm:text-base lg:text-lg">
           How We
         </span>
-        <span
-          className='font-bold text-2xl
-            sm:text-3xl
-            lg:text-4xl
-            '
-        >
-          <span className='text-purple-500'>Envision</span>{" "}
-          <span className='text-neutral-800'>the Education</span>
+        <span className="text-2xl font-bold sm:text-3xl lg:text-4xl">
+          <span className="text-purple-500">Envision</span>{" "}
+          <span className="text-neutral-800">the Education</span>
         </span>
       </h2>
 

@@ -24,7 +24,7 @@ function useSetURLParams({ key, defaultValue }: Props) {
 
       push(`${pathname}?${params.toString()}`);
     },
-    [pathname, searchParams, push, key, defaultValue]
+    [pathname, searchParams, push, key, defaultValue],
   );
 
   return { setToUrl };
@@ -46,7 +46,7 @@ export function useSetManyUrlParams() {
 
       push(`${pathname}?${newParams.toString()}`, { scroll: false });
     },
-    [searchParams, pathname, push]
+    [searchParams, pathname, push],
   );
 
   return { set };

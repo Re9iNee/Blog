@@ -18,13 +18,13 @@ function Modal({ isOpen, children, onOpenChange, header }: Props) {
     <NextUiModal
       isOpen={isOpen}
       isDismissable={false}
-      placement='top-center'
+      placement="top-center"
       onOpenChange={onOpenChange}
     >
-      <ModalContent className='max-h-[90vh] overflow-scroll'>
+      <ModalContent className="max-h-[90vh] overflow-scroll">
         {() => (
           <>
-            <ModalHeader className='flex flex-col gap-1'>{header}</ModalHeader>
+            <ModalHeader className="flex flex-col gap-1">{header}</ModalHeader>
             <ModalBody>{children}</ModalBody>
             <ModalFooter />
           </>

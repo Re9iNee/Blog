@@ -82,8 +82,8 @@ function CreatePostForm({
       description: (
         <Link
           href={url}
-          target='_blank'
-          className='font-medium text-blue-600 dark:text-blue-500 hover:underline'
+          target="_blank"
+          className="font-medium text-blue-600 hover:underline dark:text-blue-500"
         >
           Link
         </Link>
@@ -107,29 +107,29 @@ function CreatePostForm({
   return (
     <Form {...form}>
       <form
-        className='space-y-8'
-        name='create-post-form'
-        data-cy='create-post-form'
+        className="space-y-8"
+        name="create-post-form"
+        data-cy="create-post-form"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
-          name='title'
+          name="title"
           control={form.control}
           render={({ field: { onChange, ...rest } }) => (
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
                 <Input
-                  data-cy='name'
+                  data-cy="name"
                   onChange={(e) => {
                     form.setValue(
                       "slug",
-                      makeSlugWithTitle(e.target.value) ?? ""
+                      makeSlugWithTitle(e.target.value) ?? "",
                     );
 
                     onChange(e);
                   }}
-                  placeholder='Enter post title'
+                  placeholder="Enter post title"
                   {...rest}
                 />
               </FormControl>
@@ -139,15 +139,15 @@ function CreatePostForm({
         />
 
         <FormField
-          name='slug'
+          name="slug"
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Slug</FormLabel>
               <FormControl>
                 <Input
-                  data-cy='slug'
-                  placeholder='Enter post slug'
+                  data-cy="slug"
+                  placeholder="Enter post slug"
                   {...field}
                 />
               </FormControl>
@@ -166,11 +166,11 @@ function CreatePostForm({
             height={"160"}
             src={form.getValues("mainImageUrl")!}
             alt={form.getValues("title") + " " + "main image"}
-            className='rounded-lg self-center mx-auto border-2 border-gray-200 dark:border-gray-800 aspect-video object-contain'
+            className="mx-auto aspect-video self-center rounded-lg border-2 border-gray-200 object-contain dark:border-gray-800"
           />
         )}
         <FormField
-          name='mainImageUrl'
+          name="mainImageUrl"
           control={form.control}
           render={() => {
             return (
@@ -178,7 +178,7 @@ function CreatePostForm({
                 <FormLabel>Main Image</FormLabel>
                 <FormControl>
                   <Uploader
-                    name='mainImageUrl'
+                    name="mainImageUrl"
                     onUploadFinished={onUploadFinished}
                   />
                 </FormControl>
@@ -189,7 +189,7 @@ function CreatePostForm({
         />
 
         <FormField
-          name='status'
+          name="status"
           control={form.control}
           render={({ field }) => (
             <FormItem>
@@ -201,15 +201,15 @@ function CreatePostForm({
                   // if the post goes to draft or archived, isSlideshow will be false
                   form.setValue(
                     "isSlideshow",
-                    val !== PostStatus.draft && val !== PostStatus.archived
+                    val !== PostStatus.draft && val !== PostStatus.archived,
                   );
 
                   return field.onChange(val);
                 }}
               >
                 <FormControl>
-                  <SelectTrigger data-cy='status-select-trigger'>
-                    <SelectValue placeholder='Select a Status' />
+                  <SelectTrigger data-cy="status-select-trigger">
+                    <SelectValue placeholder="Select a Status" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -229,19 +229,19 @@ function CreatePostForm({
           )}
         />
         <FormField
-          name='authorId'
+          name="authorId"
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Author</FormLabel>
               <Select
-                name='authorId'
+                name="authorId"
                 onValueChange={field.onChange}
                 defaultValue={String(field.value)}
               >
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder='Select an author' />
+                    <SelectValue placeholder="Select an author" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -258,16 +258,16 @@ function CreatePostForm({
         />
 
         <FormField
-          name='readingTime'
+          name="readingTime"
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>time to read</FormLabel>
               <FormControl>
                 <Input
-                  type='number'
-                  data-cy='reading-time'
-                  placeholder='Enter post reading time'
+                  type="number"
+                  data-cy="reading-time"
+                  placeholder="Enter post reading time"
                   {...field}
                 />
               </FormControl>
@@ -279,7 +279,7 @@ function CreatePostForm({
           )}
         />
         <FormField
-          name='summary'
+          name="summary"
           control={form.control}
           render={({ field }) => (
             <FormItem>
@@ -287,10 +287,10 @@ function CreatePostForm({
               <FormControl>
                 <Textarea
                   {...field}
-                  data-cy='summary'
-                  className='resize-y h-2'
+                  data-cy="summary"
+                  className="h-2 resize-y"
                   value={field.value ?? ""}
-                  placeholder='Paste the summary of post'
+                  placeholder="Paste the summary of post"
                 />
               </FormControl>
               <FormMessage />
@@ -298,28 +298,28 @@ function CreatePostForm({
           )}
         />
         <FormField
-          name='body'
+          name="body"
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='inline-flex gap-2'>
+              <FormLabel className="inline-flex gap-2">
                 Content <FaMarkdown />
               </FormLabel>
               <FormControl>
                 <Textarea
                   {...field}
-                  data-cy='body'
-                  className='resize-y 2xl:h-80'
+                  data-cy="body"
+                  className="resize-y 2xl:h-80"
                   value={field.value ?? ""}
-                  placeholder='Paste the content of post'
+                  placeholder="Paste the content of post"
                 />
               </FormControl>
               <FormDescription>
                 You can use{" "}
                 <a
-                  target='_blank'
-                  href='https://dillinger.io/'
-                  className='underline text-blue-500'
+                  target="_blank"
+                  href="https://dillinger.io/"
+                  className="text-blue-500 underline"
                 >
                   StackEdit website
                 </a>{" "}
@@ -331,7 +331,7 @@ function CreatePostForm({
         />
 
         <FormField
-          name='categories'
+          name="categories"
           control={form.control}
           render={({ field }) => (
             <FormItem>
@@ -341,7 +341,7 @@ function CreatePostForm({
                 onValuesChange={field.onChange}
               >
                 <MultiSelectorTrigger>
-                  <MultiSelectorInput placeholder='Select people to invite' />
+                  <MultiSelectorInput placeholder="Select people to invite" />
                 </MultiSelectorTrigger>
                 <MultiSelectorContent>
                   <MultiSelectorList>
@@ -350,7 +350,7 @@ function CreatePostForm({
                         key={category.id}
                         value={String(category.id)}
                       >
-                        <div className='flex items-center space-x-2'>
+                        <div className="flex items-center space-x-2">
                           <span>{category.name}</span>
                         </div>
                       </MultiSelectorItem>
@@ -364,14 +364,14 @@ function CreatePostForm({
         />
 
         <div>
-          <h3 className='mb-4 text-lg font-medium'>Post Settings</h3>
-          <div className='space-y-4'>
+          <h3 className="mb-4 text-lg font-medium">Post Settings</h3>
+          <div className="space-y-4">
             <FormField
               control={form.control}
-              name='isSlideshow'
+              name="isSlideshow"
               render={({ field }) => (
-                <FormItem className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm'>
-                  <div className='space-y-0.5'>
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                  <div className="space-y-0.5">
                     <FormLabel>Show in Slideshow</FormLabel>
                     <FormDescription>
                       published posts can be shown in the slideshow
@@ -393,15 +393,15 @@ function CreatePostForm({
           </div>
         </div>
 
-        <Button type='submit' data-cy='submit-btn' aria-disabled={isPending}>
-          {isPending && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
+        <Button type="submit" data-cy="submit-btn" aria-disabled={isPending}>
+          {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Create Post
         </Button>
 
         {/* hide on production */}
         {process.env.NODE_ENV === "development" && (
           <Button
-            className='m-8'
+            className="m-8"
             variant={"outline"}
             onClick={() => console.log(form.formState.errors)}
           >

@@ -54,22 +54,22 @@ export function DataTableRowActions<TData>({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant='ghost'
-          data-cy='action-menu'
-          className='flex h-8 w-8 p-0 data-[state=open]:bg-muted'
+          variant="ghost"
+          data-cy="action-menu"
+          className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
         >
-          <DotsHorizontalIcon className='h-4 w-4' />
-          <span className='sr-only'>Open menu</span>
+          <DotsHorizontalIcon className="h-4 w-4" />
+          <span className="sr-only">Open menu</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end' className='w-[160px]'>
-        <DropdownMenuItem data-cy='edit-post' asChild>
+      <DropdownMenuContent align="end" className="w-[160px]">
+        <DropdownMenuItem data-cy="edit-post" asChild>
           <Link href={`/dashboard/categories/${category.id}/edit`}>Edit</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className='cursor-not-allowed'>
+        <DropdownMenuItem className="cursor-not-allowed">
           Make a copy
         </DropdownMenuItem>
-        <DropdownMenuItem className='cursor-not-allowed'>
+        <DropdownMenuItem className="cursor-not-allowed">
           Favorite
         </DropdownMenuItem>
         {/* TODO: fetch categories to show in labels */}
@@ -88,7 +88,7 @@ export function DataTableRowActions<TData>({
         </DropdownMenuSub> */}
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          className='cursor-pointer'
+          className="cursor-pointer"
           onClick={() => deleteCategory(category.id!)}
         >
           Delete

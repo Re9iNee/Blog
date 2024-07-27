@@ -31,11 +31,11 @@ export default async function CreatePostPage() {
   if (!authorId) notFound();
 
   return (
-    <div className='p-8 space-y-8'>
+    <div className="space-y-8 p-8">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href='/dashboard'>Home</BreadcrumbLink>
+            <BreadcrumbLink href="/dashboard">Home</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>

@@ -18,10 +18,10 @@ describe("Post", () => {
     cy.get('[data-cy="status-published"]').click();
 
     cy.get('[data-cy="reading-time"]').type(
-      faker.number.int({ min: 1, max: 20 }).toString()
+      faker.number.int({ min: 1, max: 20 }).toString(),
     );
     cy.get('[data-cy="summary"]').type(
-      faker.lorem.sentence({ min: 5, max: 10 })
+      faker.lorem.sentence({ min: 5, max: 10 }),
     );
     cy.get('[data-cy="body"]').type(faker.lorem.paragraphs(1));
 
@@ -44,10 +44,10 @@ describe("Post", () => {
     cy.get('[data-cy="name"]').type(faker.lorem.slug(20));
     cy.get('[data-cy="status"]').select(PostStatus.published);
     cy.get('[data-cy="reading-time"]').type(
-      faker.number.int({ min: 1, max: 20 }).toString()
+      faker.number.int({ min: 1, max: 20 }).toString(),
     );
     cy.get('[data-cy="summary"]').type(
-      faker.lorem.sentence({ min: 5, max: 10 })
+      faker.lorem.sentence({ min: 5, max: 10 }),
     );
     cy.get('[data-cy="body"]').type(faker.lorem.paragraphs(1));
 
