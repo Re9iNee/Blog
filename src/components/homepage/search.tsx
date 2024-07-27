@@ -19,40 +19,40 @@ export default function Search({ categories }: Props) {
 
   return (
     <section
-      aria-label='search'
-      className='hidden md:flex flex-col items-center justify-center min-h-80 relative gap-6 group'
+      aria-label="search"
+      className="group relative hidden min-h-80 flex-col items-center justify-center gap-6 md:flex"
     >
-      <div className='absolute w-full h-full pointer-events-none' aria-hidden>
+      <div className="pointer-events-none absolute h-full w-full" aria-hidden>
         <Image
           src={StarImage}
-          alt='star icon'
+          alt="star icon"
           aria-hidden
           width={141}
           height={119}
-          placeholder='empty'
+          placeholder="empty"
           className={cn(
-            "left-[52%] top-[4%] relative object-none transition-all",
-            isFocused && "rotate-[60deg] scale-110"
+            "relative left-[52%] top-[4%] object-none transition-all",
+            isFocused && "rotate-[60deg] scale-110",
           )}
         />
       </div>
 
-      <h2 className='text-neutral-950 font-poppins font-bold flex text-2xl dark:text-neutral-50'>
-        Find your topic <span className='text-purple-600 ml-1'>Faster</span>
+      <h2 className="flex font-poppins text-2xl font-bold text-neutral-950 dark:text-neutral-50">
+        Find your topic <span className="ml-1 text-purple-600">Faster</span>
       </h2>
 
       <SearchInput
         isFocused={isFocused}
         setIsFocused={setIsFocused}
-        className='relative w-4/6 max-w-[550px]'
+        className="relative w-4/6 max-w-[550px]"
       />
 
-      <section aria-label='trending topics' className='space-y-3'>
-        <h3 className='text-neutral-600 font-bold text-xs dark:text-neutral-200'>
+      <section aria-label="trending topics" className="space-y-3">
+        <h3 className="text-xs font-bold text-neutral-600 dark:text-neutral-200">
           Trending Topics
         </h3>
         {/* chips container */}
-        <div className='flex gap-2 p-1'>
+        <div className="flex gap-2 p-1">
           {categories.map((cat) => (
             <Chip key={cat.id} isActive={cat.name === selectedCategory}>
               {cat.name}

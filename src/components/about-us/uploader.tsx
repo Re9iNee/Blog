@@ -24,19 +24,19 @@ export default function Uploader() {
 
   return (
     <label
-      htmlFor='upload'
-      className='border-dashed border-2 rounded-2xl border-indigo-500 bg-indigo-100 w-32 h-44 flex items-center justify-center cursor-pointer hover:bg-indigo-200 transition-all duration-300 ease-in-out relative'
+      htmlFor="upload"
+      className="relative flex h-44 w-32 cursor-pointer items-center justify-center rounded-2xl border-2 border-dashed border-indigo-500 bg-indigo-100 transition-all duration-300 ease-in-out hover:bg-indigo-200"
     >
-      <span className='text-indigo-500 flex flex-col items-center justify-center w-full h-full'>
-        <FiUploadCloud className='text-indigo-500' />
+      <span className="flex h-full w-full flex-col items-center justify-center text-indigo-500">
+        <FiUploadCloud className="text-indigo-500" />
         Upload CV
       </span>
       <input
-        id='upload'
-        type='file'
-        name='upload'
+        id="upload"
+        type="file"
+        name="upload"
         onChange={onInputChange}
-        className='opacity-0 absolute'
+        className="absolute opacity-0"
       />
     </label>
   );

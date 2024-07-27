@@ -36,7 +36,7 @@ function SpinnerCheckbox({ id, checked, onChange, disabled = false }: Props) {
   return (
     <>
       {isLoading ? (
-        <Loader2 className='animate-spin' />
+        <Loader2 className="animate-spin" />
       ) : (
         <Checkbox
           checked={isChecked}

@@ -47,35 +47,35 @@ export function DataTableToolbar<TData>({
   };
 
   return (
-    <div className='flex items-center justify-between'>
-      <div className='flex flex-1 items-center space-x-2'>
-        <Button size='sm' data-cy='create' asChild>
+    <div className="flex items-center justify-between">
+      <div className="flex flex-1 items-center space-x-2">
+        <Button size="sm" data-cy="create" asChild>
           <Link href={"/dashboard/posts/create"}>
-            <FaPlus className='mr-2 h-4 w-4' />
+            <FaPlus className="mr-2 h-4 w-4" />
             Create a post
           </Link>
         </Button>
         <Input
-          placeholder='Filter posts...'
+          placeholder="Filter posts..."
           defaultValue={searchParams.get("query")?.toString()}
           onChange={(event) => handleSearch(event.target.value)}
-          className='h-8 w-[150px] lg:w-[250px]'
+          className="h-8 w-[150px] lg:w-[250px]"
         />
         {table.getColumn("status") && (
           <DataTableFacetedFilter
             column={table.getColumn("status")}
-            title='Status'
+            title="Status"
             options={statuses}
           />
         )}
         {isFiltered && (
           <Button
-            variant='ghost'
+            variant="ghost"
             onClick={() => handleReset()}
-            className='h-8 px-2 lg:px-3'
+            className="h-8 px-2 lg:px-3"
           >
             Reset
-            <Cross2Icon className='ml-2 h-4 w-4' />
+            <Cross2Icon className="ml-2 h-4 w-4" />
           </Button>
         )}
       </div>

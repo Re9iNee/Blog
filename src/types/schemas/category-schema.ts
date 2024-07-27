@@ -15,7 +15,7 @@ export const baseCategory = z.object({
 
 export const categorySchema = baseCategory.extend({
   posts: z.array(
-    z.lazy(() => basePost.pick({ id: true, title: true, mainImageUrl: true }))
+    z.lazy(() => basePost.pick({ id: true, title: true, mainImageUrl: true })),
   ),
 });
 

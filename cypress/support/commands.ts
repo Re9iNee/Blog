@@ -21,7 +21,7 @@ Cypress.Commands.add("login", (email, password) => {
       });
       cy.get("#input-password-for-credentials-provider").type(
         `${password}{enter}`,
-        { log: false }
+        { log: false },
       );
     },
     {
@@ -29,7 +29,7 @@ Cypress.Commands.add("login", (email, password) => {
         cy.getCookie("next-auth.csrf-token").should("exist");
         cy.getCookie("next-auth.session-token").should("exist");
       },
-    }
+    },
   );
 });
 //

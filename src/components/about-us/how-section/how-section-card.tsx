@@ -18,10 +18,7 @@ export default function HowSectionCard({
 }: HowSectionProps) {
   return (
     <section
-      className='flex flex-col items-center gap-4
-          sm:pb-32 sm:flex-row-reverse sm:relative sm:max-h-[416px] sm:px-4
-          md:pb-40
-          '
+      className="flex flex-col items-center gap-4 sm:relative sm:max-h-[416px] sm:flex-row-reverse sm:px-4 sm:pb-32 md:pb-40"
       aria-label={ariaLabel}
     >
       <PatternImage src={patternImage} />
@@ -29,21 +26,18 @@ export default function HowSectionCard({
         aria-hidden
         width={220}
         height={260}
-        placeholder='blur'
+        placeholder="blur"
         src={illustrationImage.src}
         alt={illustrationImage.alt}
         // applies z-10 to be the upper layer of the pattern behind it.
-        className='sm:z-10 sm:w-72 sm:h-72 pointer-events-none'
+        className="pointer-events-none sm:z-10 sm:h-72 sm:w-72"
       />
-      <section aria-label='section text' className='sm:text-left'>
+      <section aria-label="section text" className="sm:text-left">
         <h3
-          className='text-neutral-800 p-2 flex flex-col font-poppins font-bold text-xl
-              sm:text-2xl
-              lg:text-3xl
-              '
+          className="flex flex-col p-2 font-poppins text-xl font-bold text-neutral-800 sm:text-2xl lg:text-3xl"
           dangerouslySetInnerHTML={{ __html: header ?? "" }}
         />
-        <p className='text-neutral-500 p-2 lg:text-lg'>{paragraph}</p>
+        <p className="p-2 text-neutral-500 lg:text-lg">{paragraph}</p>
       </section>
     </section>
   );

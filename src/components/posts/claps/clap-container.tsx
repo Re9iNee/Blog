@@ -29,7 +29,7 @@ function ClapContainer({ total, slug, ...rest }: ClapContainerProps) {
       await clapToPost(slug, addedClaps);
       localStorage.setItem(`clap-${slug}`, String(totalUserClaps));
     },
-    [slug]
+    [slug],
   );
 
   return (

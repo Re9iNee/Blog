@@ -16,37 +16,23 @@ export default function TeamCard({
   return (
     <div
       // applying z index to the card - to prevent shifting of the description when hovered.
-      className='bg-neutral-100 rounded-2xl flex flex-col text-center items-center gap-3 group/card z-0
-      sm:flex-row sm:w-full
-      md:items-stretch
-      '
+      className="group/card z-0 flex flex-col items-center gap-3 rounded-2xl bg-neutral-100 text-center sm:w-full sm:flex-row md:items-stretch"
     >
       <Image
         src={image}
         width={120}
         height={180}
-        placeholder='blur'
+        placeholder="blur"
         alt="Founder's Image"
-        className='-translate-y-2 group rounded-2xl transition-all
-        sm:translate-y-0
-        md:object-cover md:group-hover/card:scale-110'
+        className="group -translate-y-2 rounded-2xl transition-all sm:translate-y-0 md:object-cover md:group-hover/card:scale-110"
       />
       {/* Card text */}
-      <section
-        className='px-4 pb-4 flex flex-col gap-3 
-        sm:text-left
-        md:self-center
-        md:h-12 md:overflow-hidden md:group-hover/card:h-40 transition-height duration-400 ease-in-out'
-      >
-        <section aria-label='about member' className='flex flex-col gap-0.5'>
-          <h3 className='text-lg text-neutral-950 font-bold'>{name}</h3>
-          <h4 className='text-blue-500 text-sm'>{role}</h4>
+      <section className="flex flex-col gap-3 px-4 pb-4 duration-400 ease-in-out transition-height sm:text-left md:h-12 md:self-center md:overflow-hidden md:group-hover/card:h-40">
+        <section aria-label="about member" className="flex flex-col gap-0.5">
+          <h3 className="text-lg font-bold text-neutral-950">{name}</h3>
+          <h4 className="text-sm text-blue-500">{role}</h4>
         </section>
-        <p
-          className='text-neutral-600 [&>span]:text-neutral-950 [&>span]:font-bold text-center
-          sm:text-left
-          '
-        >
+        <p className="text-center text-neutral-600 sm:text-left [&>span]:font-bold [&>span]:text-neutral-950">
           {description}
         </p>
       </section>

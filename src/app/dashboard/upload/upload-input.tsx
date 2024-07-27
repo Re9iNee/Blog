@@ -50,8 +50,8 @@ function UploadInput() {
       description: (
         <Link
           href={url}
-          target='_blank'
-          className='font-medium text-blue-600 dark:text-blue-500 hover:underline'
+          target="_blank"
+          className="font-medium text-blue-600 hover:underline dark:text-blue-500"
         >
           Link
         </Link>
@@ -70,9 +70,9 @@ function UploadInput() {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form name='upload-form' data-cy='upload-form' className='space-y-8'>
+          <form name="upload-form" data-cy="upload-form" className="space-y-8">
             <FormField
-              name='file'
+              name="file"
               control={form.control}
               render={() => {
                 return (
@@ -80,7 +80,7 @@ function UploadInput() {
                     <FormLabel>File</FormLabel>
                     <FormControl>
                       <Uploader
-                        name='file'
+                        name="file"
                         onUploadFinished={onUploadFinished}
                       />
                     </FormControl>
@@ -92,15 +92,15 @@ function UploadInput() {
           </form>
         </Form>
       </CardContent>
-      <CardFooter className='flex-col items-start gap-4'>
+      <CardFooter className="flex-col items-start gap-4">
         {links.map((link) => (
-          <div key={link} className='inline-flex gap-4 items-center'>
-            <Link href={link} data-cy='uploaded-file' className='text-blue-500'>
+          <div key={link} className="inline-flex items-center gap-4">
+            <Link href={link} data-cy="uploaded-file" className="text-blue-500">
               {link}
             </Link>
             <Button
-              variant='outline'
-              data-cy='uploaded-link-copy-btn'
+              variant="outline"
+              data-cy="uploaded-link-copy-btn"
               onClick={() => copyClickHandler(link)}
             >
               {copied === link ? <FaCheck /> : <FaRegCopy />}

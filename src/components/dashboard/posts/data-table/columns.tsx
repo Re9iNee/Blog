@@ -22,16 +22,16 @@ export const columns: ColumnDef<PostModel>[] = [
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label='Select all'
-        className='translate-y-[2px]'
+        aria-label="Select all"
+        className="translate-y-[2px]"
       />
     ),
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label='Select row'
-        className='translate-y-[2px]'
+        aria-label="Select row"
+        className="translate-y-[2px]"
       />
     ),
     enableSorting: false,
@@ -40,20 +40,20 @@ export const columns: ColumnDef<PostModel>[] = [
   {
     accessorKey: "id",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Post' />
+      <DataTableColumnHeader column={column} title="Post" />
     ),
-    cell: ({ row }) => <div className='w-[80px]'>{row.getValue("id")}</div>,
+    cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
     enableSorting: false,
     enableHiding: false,
   },
   {
     accessorKey: "title",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Title' />
+      <DataTableColumnHeader column={column} title="Title" />
     ),
     cell: ({ row }) => (
-      <div className='flex space-x-2'>
-        <span className='max-w-[500px] truncate font-medium'>
+      <div className="flex space-x-2">
+        <span className="max-w-[500px] truncate font-medium">
           {row.getValue("title")}
         </span>
       </div>
@@ -62,11 +62,11 @@ export const columns: ColumnDef<PostModel>[] = [
   {
     accessorKey: "status",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Status' />
+      <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => {
       const status = statuses.find(
-        (status) => status.value === row.getValue("status")
+        (status) => status.value === row.getValue("status"),
       );
 
       if (!status) {
@@ -74,9 +74,9 @@ export const columns: ColumnDef<PostModel>[] = [
       }
 
       return (
-        <div className='flex w-[100px] items-center'>
+        <div className="flex w-[100px] items-center">
           {status.icon && (
-            <status.icon className='mr-2 h-4 w-4 text-muted-foreground' />
+            <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
           )}
           <span>{status.label}</span>
         </div>
@@ -89,7 +89,7 @@ export const columns: ColumnDef<PostModel>[] = [
   {
     accessorKey: "isSlideshow",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Show in slideshow' />
+      <DataTableColumnHeader column={column} title="Show in slideshow" />
     ),
     cell: ({ row }) => {
       const isSlideshow: boolean = row.getValue("isSlideshow");
@@ -103,7 +103,7 @@ export const columns: ColumnDef<PostModel>[] = [
       const postId: number = row.getValue("id");
 
       return (
-        <div className='flex w-[100px] items-center'>
+        <div className="flex w-[100px] items-center">
           <SpinnerCheckbox
             id={postId}
             disabled={disabled}

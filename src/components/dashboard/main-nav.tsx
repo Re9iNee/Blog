@@ -46,7 +46,7 @@ export function MainNav({
             key={href}
             href={href}
             target={target ?? undefined}
-            className={`text-sm font-medium transition-colors hover:text-primary text-muted-foreground ${
+            className={`text-sm font-medium text-muted-foreground transition-colors hover:text-primary ${
               pathname === href && "text-primary"
             }`}
           >

@@ -48,40 +48,40 @@ function ImageCard({ files }: Props) {
 
   return (
     <div>
-      <div className='flex gap-4 flex-wrap'>
+      <div className="flex flex-wrap gap-4">
         {paginate(files, OFFSET, page).map((file) => {
           return (
             <div
               key={file.id}
-              className='border w-full rounded-sm flex relative justify-between p-4'
+              className="relative flex w-full justify-between rounded-sm border p-4"
             >
-              <div className='flex gap-2 items-center'>
+              <div className="flex items-center gap-2">
                 <Image
                   width={150}
                   height={50}
                   key={file.key}
                   src={file.url}
                   alt={file.name}
-                  loading='lazy'
-                  className='rounded-lg object-cover aspect-square hover:shadow-lg transition-shadow duration-300 ease-in-out'
+                  loading="lazy"
+                  className="aspect-square rounded-lg object-cover transition-shadow duration-300 ease-in-out hover:shadow-lg"
                 />
                 <TypographyMuted>{file.name}</TypographyMuted>
               </div>
-              <div className='flex items-center gap-4'>
+              <div className="flex items-center gap-4">
                 <Button
-                  data-cy='delete-btn'
+                  data-cy="delete-btn"
                   size={"icon"}
                   variant={"outline"}
                   onClick={() => onDelete(file.key)}
                 >
-                  <FaTrash className='w-4 h-4' />
+                  <FaTrash className="h-4 w-4" />
                 </Button>
                 <Button
                   size={"icon"}
                   variant={"outline"}
                   onClick={() => onImageContainerClick(file.url)}
                 >
-                  <FaRegCopy className='w-4 h-4' />
+                  <FaRegCopy className="h-4 w-4" />
                 </Button>
               </div>
             </div>
@@ -89,13 +89,13 @@ function ImageCard({ files }: Props) {
         })}
       </div>
 
-      <Pagination className='mt-6'>
+      <Pagination className="mt-6">
         <PaginationContent>
           {page > 1 && (
             <PaginationItem>
               <PaginationPrevious
                 href={{}}
-                className='cursor-pointer'
+                className="cursor-pointer"
                 onClick={() => setPage((prev) => prev - 1)}
               />
             </PaginationItem>
@@ -103,8 +103,8 @@ function ImageCard({ files }: Props) {
           {page > 1 && (
             <PaginationItem>
               <PaginationLink
-                href='#'
-                className='cursor-pointer'
+                href="#"
+                className="cursor-pointer"
                 onClick={() => setPage((prev) => prev - 1)}
               >
                 {page - 1}
@@ -112,7 +112,7 @@ function ImageCard({ files }: Props) {
             </PaginationItem>
           )}
           <PaginationItem>
-            <PaginationLink href='#' isActive>
+            <PaginationLink href="#" isActive>
               {page}
             </PaginationLink>
           </PaginationItem>
@@ -120,8 +120,8 @@ function ImageCard({ files }: Props) {
             <>
               <PaginationItem>
                 <PaginationLink
-                  href='#'
-                  className='cursor-pointer'
+                  href="#"
+                  className="cursor-pointer"
                   onClick={() => setPage((prev) => prev + 1)}
                 >
                   {page + 1}
@@ -132,8 +132,8 @@ function ImageCard({ files }: Props) {
               </PaginationItem>
               <PaginationItem>
                 <PaginationNext
-                  href='#'
-                  className='cursor-pointer'
+                  href="#"
+                  className="cursor-pointer"
                   onClick={() => setPage((prev) => prev + 1)}
                 />
               </PaginationItem>

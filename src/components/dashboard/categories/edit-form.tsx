@@ -63,21 +63,21 @@ function EditCategoryForm({ initialValues, posts: allPosts }: Props) {
   return (
     <Form {...form}>
       <form
-        className='space-y-8'
-        name='edit-category-form'
-        data-cy='edit-category-form'
+        className="space-y-8"
+        name="edit-category-form"
+        data-cy="edit-category-form"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
-          name='name'
+          name="name"
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
                 <Input
-                  data-cy='name'
-                  placeholder='Enter category name'
+                  data-cy="name"
+                  placeholder="Enter category name"
                   {...field}
                 />
               </FormControl>
@@ -87,7 +87,7 @@ function EditCategoryForm({ initialValues, posts: allPosts }: Props) {
         />
 
         <FormField
-          name='posts'
+          name="posts"
           control={form.control}
           render={({ field }) => (
             <FormItem>
@@ -97,19 +97,19 @@ function EditCategoryForm({ initialValues, posts: allPosts }: Props) {
                 onValuesChange={field.onChange}
               >
                 <MultiSelectorTrigger>
-                  <MultiSelectorInput placeholder='Select people to invite' />
+                  <MultiSelectorInput placeholder="Select people to invite" />
                 </MultiSelectorTrigger>
                 <MultiSelectorContent>
                   <MultiSelectorList>
                     {allPosts.map((post) => (
                       <MultiSelectorItem key={post.id} value={String(post.id)}>
-                        <div className='flex items-center space-x-2'>
+                        <div className="flex items-center space-x-2">
                           <Image
                             width={32}
                             height={32}
                             alt={post.title}
                             src={post.mainImageUrl ?? ""}
-                            className='w-8 h-8 rounded-full'
+                            className="h-8 w-8 rounded-full"
                           />
                           <span>{post.title}</span>
                         </div>
@@ -123,15 +123,15 @@ function EditCategoryForm({ initialValues, posts: allPosts }: Props) {
           )}
         />
 
-        <Button type='submit' data-cy='submit-btn' aria-disabled={isPending}>
-          {isPending && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
+        <Button type="submit" data-cy="submit-btn" aria-disabled={isPending}>
+          {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Update Post
         </Button>
 
         {/* hide on production */}
         {process.env.NODE_ENV === "development" && (
           <Button
-            className='m-8'
+            className="m-8"
             variant={"outline"}
             onClick={() => console.log(form.formState.errors)}
           >

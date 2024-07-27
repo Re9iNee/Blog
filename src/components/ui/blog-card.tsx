@@ -19,51 +19,47 @@ function BlogCard({ data }: Props) {
     data;
 
   return (
-    <article className='flex flex-col gap-2'>
+    <article className="flex flex-col gap-2">
       <Link
         prefetch={false}
         href={getPostUrl(slug)}
-        className='group relative w-full h-32 rounded-xl cursor-pointer'
+        className="group relative h-32 w-full cursor-pointer rounded-xl"
       >
         <Suspense fallback={<BlogCardMainImageSkeleton slug={slug} />}>
           <BlurImage
             fill
-            loading='lazy'
+            loading="lazy"
             alt={`${title} main image`}
-            className='object-cover rounded-xl'
+            className="rounded-xl object-cover"
             src={mainImageUrl ?? getMainImagePlaceholderUrl()}
           />
-          <div className='w-full h-full absolute opacity-0 group-hover:opacity-75 bg-gradient-to-l from-violet-500 to-violet-900 rounded-xl backdrop-blur-none group-active:opacity-100 duration-400 text-white font-bold grid place-items-center'>
+          <div className="absolute grid h-full w-full place-items-center rounded-xl bg-gradient-to-l from-violet-500 to-violet-900 font-bold text-white opacity-0 backdrop-blur-none duration-400 group-hover:opacity-75 group-active:opacity-100">
             Read More
-            <span className='sr-only'>read more about {title}</span>
+            <span className="sr-only">read more about {title}</span>
           </div>
         </Suspense>
       </Link>
 
-      <h2 className='text-neutral-950 flex-grow font-bold leading-tight dark:text-neutral-300'>
+      <h2 className="flex-grow font-bold leading-tight text-neutral-950 dark:text-neutral-300">
         <Link href={getPostUrl(slug)} prefetch={false}>
           {title}
         </Link>
       </h2>
-      <summary
-        className='text-neutral-700 dark:text-neutral-500 text-xs leading-none max-h-max line-clamp-2
-          md:text-sm md:leading-normal
-          '
-      >
+      <summary className="line-clamp-2 max-h-max text-xs leading-none text-neutral-700 dark:text-neutral-500 md:text-sm md:leading-normal">
         {summary}
       </summary>
 
       <section
-        aria-labelledby='post info'
-        className='flex justify-between text-neutral-500 text-xs leading-none items-center pt-2'
+        aria-labelledby="post info"
+        className="flex items-center justify-between pt-2 text-xs leading-none text-neutral-500"
       >
-        <div className='flex items-center gap-2'>
+        <div className="flex items-center gap-2">
           <Image
             width={20}
             height={20}
-            loading='lazy'
+            loading="lazy"
             alt="Author's profile picture"
-            className='rounded-full aspect-square object-cover'
+            className="aspect-square rounded-full object-cover"
             src={author.avatarUrl ?? getAvatarPlaceholderUrl()}
           />
           <p>{author.name}</p>

@@ -42,24 +42,24 @@ export function SlideShow({ className, cards }: Props) {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center overflow-x-hidden'>
+    <div className="flex flex-col items-center justify-center overflow-x-hidden">
       {/* container */}
       <div
         className={cn(
-          "grid grid-cols-6 md:grid-cols-12 grid-rows-5 h-[432px] self-stretch",
-          className
+          "grid h-[432px] grid-cols-6 grid-rows-5 self-stretch md:grid-cols-12",
+          className,
         )}
       >
         {/* left button */}
         <button
-          aria-label='Previous slide'
+          aria-label="Previous slide"
           onClick={() => paginate(1)}
-          className={`slideshow-action col-start-1 col-span-1 row-start-3 pr-0.5 z-20 place-self-center justify-self-center`}
+          className={`slideshow-action z-20 col-span-1 col-start-1 row-start-3 place-self-center justify-self-center pr-0.5`}
         >
           <IoChevronBack />
         </button>
 
-        <section className='col-start-1 col-span-12 row-start-1 row-span-full'>
+        <section className="col-span-12 col-start-1 row-span-full row-start-1">
           <SlideShowCard
             {...cards[page]}
             page={page}
@@ -70,24 +70,24 @@ export function SlideShow({ className, cards }: Props) {
 
         {/* right button */}
         <button
-          aria-label='Next slide'
+          aria-label="Next slide"
           onClick={() => paginate(-1)}
-          className={`slideshow-action col-start-6 md:col-start-12 col-span-1 row-start-3 pl-0.5 z-20 place-self-center justify-self-center`}
+          className={`slideshow-action z-20 col-span-1 col-start-6 row-start-3 place-self-center justify-self-center pl-0.5 md:col-start-12`}
         >
           <IoChevronForward />
         </button>
       </div>
 
       {/* pagination */}
-      <div className='mt-4 mb-12 gap-2 inline-flex justify-center items-center z-10 md:hidden'>
+      <div className="z-10 mb-12 mt-4 inline-flex items-center justify-center gap-2 md:hidden">
         {cards.map((card) => (
           <div
             key={card.title}
             className={cn(
               "rounded-full duration-400",
               cards[page].title === card.title
-                ? "w-2.5 h-2.5 bg-purple-700"
-                : "w-2 h-2 bg-violet-200"
+                ? "h-2.5 w-2.5 bg-purple-700"
+                : "h-2 w-2 bg-violet-200",
             )}
           />
         ))}
@@ -133,25 +133,25 @@ function SlideShowCard({
         };
       },
     }),
-    []
+    [],
   );
 
   return (
-    <AnimatePresence initial={false} custom={direction} mode='wait'>
+    <AnimatePresence initial={false} custom={direction} mode="wait">
       <motion.section
         key={page}
-        drag='x'
-        exit='exit'
-        initial='enter'
+        drag="x"
+        exit="exit"
+        initial="enter"
         dragElastic={1}
-        animate='center'
+        animate="center"
         custom={direction}
         variants={variants}
         onDragEnd={onDragEndFn}
         transition={{ duration: 0.4 }}
         dragConstraints={{ left: 0, right: 0 }}
         className={cn(
-          "relative grid grid-cols-6 md:grid-cols-12 grid-rows-6 min-h-full"
+          "relative grid min-h-full grid-cols-6 grid-rows-6 md:grid-cols-12",
         )}
       >
         {/* <Image
@@ -163,17 +163,17 @@ function SlideShowCard({
         /> */}
 
         {/* overlay and main image */}
-        <div className='z-0 col-span-full row-span-full'>
+        <div className="z-0 col-span-full row-span-full">
           <Image
             fill
             priority
-            placeholder='blur'
-            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
             alt={`main image of post: ${title}`}
             src={mainImageUrl ?? "/slideshow/mainImagePlaceholder.svg"}
-            className='pointer-events-none rounded-2xl aspect-video object-cover -z-10'
+            className="pointer-events-none -z-10 aspect-video rounded-2xl object-cover"
           />
-          <div className='w-full h-full bg-gradient-to-t from-black/80 rounded-2xl' />
+          <div className="h-full w-full rounded-2xl bg-gradient-to-t from-black/80" />
         </div>
 
         {/* only xs */}
@@ -182,44 +182,40 @@ function SlideShowCard({
         </h5> */}
 
         {/* only xs */}
-        <section
-          className='col-span-full row-start-4 row-span-full z-10 flex flex-col gap-1 justify-end px-2
-          md:hidden
-          '
-        >
-          <h3 className='text-white font-bold'>{title}</h3>
-          <span className='text-neutral-400 text-xs font-light leading-none'>
+        <section className="z-10 col-span-full row-span-full row-start-4 flex flex-col justify-end gap-1 px-2 md:hidden">
+          <h3 className="font-bold text-white">{title}</h3>
+          <span className="text-xs font-light leading-none text-neutral-400">
             By {author.name}
           </span>
           <Link
             href={getPostUrl(slug)}
-            className='group inline-flex border-1.5 border-white whitespace-nowrap bg-neutral-800 bg-opacity-0 rounded-lg py-2 pl-8 pr-6 items-center justify-center hover:bg-opacity-30 hover:px-6 transition-all mt-3 mb-2'
+            className="group mb-2 mt-3 inline-flex items-center justify-center whitespace-nowrap rounded-lg border-1.5 border-white bg-neutral-800 bg-opacity-0 py-2 pl-8 pr-6 transition-all hover:bg-opacity-30 hover:px-6"
           >
-            <span className='text-white text-sm font-medium group-active:scale-85 duration-500 origin-center'>
+            <span className="origin-center text-sm font-medium text-white duration-500 group-active:scale-85">
               Start Reading
             </span>
-            <ArrowIcon className='opacity-0 w-2 h-5 text-white group-hover:opacity-100 group-hover:ml-2 text-xl group-active:scale-75 duration-500 pt-0.5' />
+            <ArrowIcon className="h-5 w-2 pt-0.5 text-xl text-white opacity-0 duration-500 group-hover:ml-2 group-hover:opacity-100 group-active:scale-75" />
           </Link>
         </section>
 
-        <section className='hidden col-span-full row-start-4 row-span-full z-10 md:flex justify-between gap-11 items-end px-4 pb-4'>
-          <div className='flex flex-col justify-end items-start gap-2 text-white'>
+        <section className="z-10 col-span-full row-span-full row-start-4 hidden items-end justify-between gap-11 px-4 pb-4 md:flex">
+          <div className="flex flex-col items-start justify-end gap-2 text-white">
             {/* <h5 className='bg-neutral-800 px-3 py-1 rounded-xl bg-opacity-40 text-xs font-light leading-none'>
               {category}
             </h5> */}
-            <h3 className='text-white text-2xl font-bold max-w-lg'>{title}</h3>
-            <span className='text-neutral-100 text-xs font-light leading-none'>
+            <h3 className="max-w-lg text-2xl font-bold text-white">{title}</h3>
+            <span className="text-xs font-light leading-none text-neutral-100">
               By {author.name}
             </span>
           </div>
           <Link
             href={getPostUrl(slug)}
-            className='group inline-flex border whitespace-nowrap bg-neutral-800 bg-opacity-0 rounded-3xl py-2 pl-8 pr-6 items-center justify-center w-40 hover:bg-opacity-30 hover:px-6 transition-all'
+            className="group inline-flex w-40 items-center justify-center whitespace-nowrap rounded-3xl border bg-neutral-800 bg-opacity-0 py-2 pl-8 pr-6 transition-all hover:bg-opacity-30 hover:px-6"
           >
-            <span className='text-white text-sm font-medium group-active:scale-85 duration-500 origin-center'>
+            <span className="origin-center text-sm font-medium text-white duration-500 group-active:scale-85">
               Start Reading
             </span>
-            <ArrowIcon className='opacity-0 w-2 h-5 text-white group-hover:opacity-100 group-hover:ml-2 text-xl group-active:scale-75 duration-500 pt-0.5' />
+            <ArrowIcon className="h-5 w-2 pt-0.5 text-xl text-white opacity-0 duration-500 group-hover:ml-2 group-hover:opacity-100 group-active:scale-75" />
           </Link>
         </section>
       </motion.section>
@@ -230,19 +226,19 @@ function SlideShowCard({
 const ArrowIcon = ({ className }: { className: ClassValue }) => {
   return (
     <svg
-      width='8'
-      height='20'
-      fill='none'
-      viewBox='0 0 8 20'
+      width="8"
+      height="20"
+      fill="none"
+      viewBox="0 0 8 20"
       className={cn(className)}
-      xmlns='http://www.w3.org/2000/svg'
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        stroke='white'
-        strokeWidth='1.2'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        d='M1.5 4.1665L3.16667 6.11067M1.5 15.8332L6.5 9.99984L5.25 8.5415'
+        stroke="white"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M1.5 4.1665L3.16667 6.11067M1.5 15.8332L6.5 9.99984L5.25 8.5415"
       />
     </svg>
   );

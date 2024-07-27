@@ -20,7 +20,7 @@ export function Uploader({
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleImageChange: MouseEventHandler<HTMLButtonElement> = async (
-    ev
+    ev,
   ) => {
     ev.preventDefault();
     const files = ref.current?.files;
@@ -48,25 +48,25 @@ export function Uploader({
   };
 
   return (
-    <div className='flex flex-col gap-4'>
-      <input type='hidden' name={name} defaultValue={defaultValue} />
+    <div className="flex flex-col gap-4">
+      <input type="hidden" name={name} defaultValue={defaultValue} />
       <Input
         ref={ref}
-        type='file'
-        data-cy='uploader'
-        accept='audio/*,video/*,image/*'
+        type="file"
+        data-cy="uploader"
+        accept="audio/*,video/*,image/*"
         {...props}
       />
       <Button
         disabled={isLoading}
-        data-cy='upload-btn'
-        className='self-end'
+        data-cy="upload-btn"
+        className="self-end"
         variant={"secondary"}
         onClick={handleImageChange}
       >
         {isLoading ? (
           <>
-            <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             Uploading...
           </>
         ) : (

@@ -25,33 +25,28 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <main>
-      <DottedBackground position='right' top={2} className='hidden md:block' />
-      <DottedBackground position='left' top={18} className='hidden md:block' />
+      <DottedBackground position="right" top={2} className="hidden md:block" />
+      <DottedBackground position="left" top={18} className="hidden md:block" />
       <DottedBackground
         top={35}
-        position='right'
-        className='md:hidden scale-110'
+        position="right"
+        className="scale-110 md:hidden"
       />
 
       <HeroSection />
 
       <Suspense
-        fallback={<SlideshowSkeleton className='px-4 mt-14 mb-3 m-4' />}
+        fallback={<SlideshowSkeleton className="m-4 mb-3 mt-14 px-4" />}
       >
         <SlideShowWrapper />
       </Suspense>
 
       <Search categories={topCategories} />
 
-      <h1
-        className='text-neutral-700 font-bold pt-4 px-4
-        md:pt-8
-        dark:text-neutral-50
-        '
-      >
+      <h1 className="px-4 pt-4 font-bold text-neutral-700 dark:text-neutral-50 md:pt-8">
         {query === "" ? "Published Posts" : "Searched Results"}
       </h1>
-      <section aria-labelledby='published-posts' className='p-4 pb-14'>
+      <section aria-labelledby="published-posts" className="p-4 pb-14">
         <PublishedPostsWrapper page={page} query={query} category={category} />
       </section>
     </main>

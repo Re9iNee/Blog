@@ -4,9 +4,9 @@ import { Input } from "../ui/input";
 function Search() {
   return (
     <Input
-      type='search'
-      placeholder='Search...'
-      className='md:w-[100px] lg:w-[300px] cursor-not-allowed'
+      type="search"
+      placeholder="Search..."
+      className="cursor-not-allowed md:w-[100px] lg:w-[300px]"
     />
   );
 }

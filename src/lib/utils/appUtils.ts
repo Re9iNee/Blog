@@ -20,7 +20,7 @@ export const copyTextToClipboard = (text: string) => {
 export function paginate<T>(
   array: T[],
   page_size: number,
-  page_number: number
+  page_number: number,
 ): T[] {
   // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
   return array.slice((page_number - 1) * page_size, page_number * page_size);
@@ -44,7 +44,7 @@ export function getMainImagePlaceholderUrl(): string {
 }
 
 export function makeSlugWithTitle(
-  title: string | undefined
+  title: string | undefined,
 ): string | undefined {
   const slug = title
     ?.toLowerCase()
@@ -54,7 +54,7 @@ export function makeSlugWithTitle(
 }
 
 export function isLoggedIn(
-  status: "loading" | "authenticated" | "unauthenticated"
+  status: "loading" | "authenticated" | "unauthenticated",
 ) {
   return status === "authenticated";
 }

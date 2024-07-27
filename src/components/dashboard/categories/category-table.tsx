@@ -98,7 +98,7 @@ function CategoryTable({
 
       replace(`${pathname}?${params.toString()}`);
     },
-    [pathname, searchParams, replace]
+    [pathname, searchParams, replace],
   );
 
   const setCurrentPageToURL = useCallback(
@@ -112,7 +112,7 @@ function CategoryTable({
       }
       replace(`${pathname}?${params.toString()}`);
     },
-    [pathname, searchParams, replace]
+    [pathname, searchParams, replace],
   );
 
   useEffect(() => {
@@ -143,7 +143,7 @@ function CategoryTable({
         toast({ variant: "destructive", title: "Error deleting categories!" });
       }
     },
-    [table]
+    [table],
   );
 
   return (

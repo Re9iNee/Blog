@@ -31,11 +31,11 @@ function PostNavigationGroup({ postId }: { postId: number }) {
   };
 
   return (
-    <div className='flex justify-between'>
+    <div className="flex justify-between">
       <Button
         variant={"link"}
         onClick={handleBack}
-        className='gap-1 inline-flex items-center cursor-pointer py-1.5 pl-0 text-gray-500 leading-tight dark:text-gray-400'
+        className="inline-flex cursor-pointer items-center gap-1 py-1.5 pl-0 leading-tight text-gray-500 dark:text-gray-400"
       >
         <HiOutlineChevronLeft />
         Back
@@ -46,7 +46,7 @@ function PostNavigationGroup({ postId }: { postId: number }) {
           <Button
             variant={"link"}
             onClick={handleEdit}
-            className='inline-flex gap-1 items-center py-1.5 cursor-pointer pr-0 text-gray-500 leading-tight dark:text-gray-400'
+            className="inline-flex cursor-pointer items-center gap-1 py-1.5 pr-0 leading-tight text-gray-500 dark:text-gray-400"
           >
             <FaRegEdit />
             Edit
@@ -55,7 +55,7 @@ function PostNavigationGroup({ postId }: { postId: number }) {
         <Button
           variant={"link"}
           onClick={handleShare}
-          className='inline-flex gap-1 items-center py-1.5 cursor-pointer pr-0 text-gray-500 leading-tight dark:text-gray-400'
+          className="inline-flex cursor-pointer items-center gap-1 py-1.5 pr-0 leading-tight text-gray-500 dark:text-gray-400"
         >
           <FaRegShareFromSquare />
           Share

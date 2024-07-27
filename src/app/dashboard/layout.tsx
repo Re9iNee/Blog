@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 function layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className='flex flex-col'>
+    <div className="flex flex-col">
       <Providers>
         <DashboardHeader />
         {children}

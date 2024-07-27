@@ -18,21 +18,15 @@ function HeroSection() {
 
   return (
     <section
-      id='hero-container'
-      className='mx-3 pt-12 pb-4 flex justify-center items-center overflow-hidden pointer-events-none 
-      md:px-6 md:pt-6 md:gap-20
-      '
+      id="hero-container"
+      className="pointer-events-none mx-3 flex items-center justify-center overflow-hidden pb-4 pt-12 md:gap-20 md:px-6 md:pt-6"
     >
-      <div
-        className='flex flex-col flex-shrink 
-        md:max-w-[50%]
-        '
-      >
-        <h1 className='z-10 text-3xl font-bold leading-10 bg-background font-poppins'>
+      <div className="flex flex-shrink flex-col md:max-w-[50%]">
+        <h1 className="z-10 bg-background font-poppins text-3xl font-bold leading-10">
           Read About New
         </h1>
         <RotatingTexts activeIndex={activeIndex} />
-        <h2 className='z-10 text-neutral-500 dark:text-neutral-400 text-sm leading-6 max-w-sm'>
+        <h2 className="z-10 max-w-sm text-sm leading-6 text-neutral-500 dark:text-neutral-400">
           Join out MORA blog community to stay updated on the latest in
           technology&apos;s frontiers
         </h2>
@@ -40,8 +34,8 @@ function HeroSection() {
 
       {/* section VR Guy and hero image component */}
       <div
-        className='hidden md:grid grid-cols-1 grid-rows-1 place-items-end flex-grow'
-        aria-hidden='true'
+        className="hidden flex-grow grid-cols-1 grid-rows-1 place-items-end md:grid"
+        aria-hidden="true"
       >
         <EllipseGroup activeIndex={activeIndex} />
         <HeroImage activeIndex={activeIndex} />

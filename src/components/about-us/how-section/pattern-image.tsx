@@ -7,9 +7,9 @@ export default function PatternImage({ src }: { src: StaticImageData }) {
       aria-hidden
       width={530}
       height={300}
-      placeholder='blur'
-      alt='image of the pattern'
-      className='hidden pointer-events-none sm:block absolute -right-24 scale-75 object-cover'
+      placeholder="blur"
+      alt="image of the pattern"
+      className="pointer-events-none absolute -right-24 hidden scale-75 object-cover sm:block"
     />
   );
 }
