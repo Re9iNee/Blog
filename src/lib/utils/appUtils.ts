@@ -52,3 +52,9 @@ export function makeSlugWithTitle(
     .replace(/^-+|-+$/g, "");
   return slug;
 }
+
+export function isLoggedIn(
+  status: "loading" | "authenticated" | "unauthenticated"
+) {
+  return status === "authenticated";
+}

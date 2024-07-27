@@ -3,8 +3,13 @@
 import Link from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
 import MoraLogo from "/public/logos/logo-small.svg";
+import { useSession } from "next-auth/react";
+import { useMemo } from "react";
+import { isLoggedIn } from "@/lib/utils";
 
 const Header = () => {
+  const { status } = useSession();
+
   return (
     <header
       className='px-2 py-4 flex justify-between max-w-screen-xl border-b sticky top-0 bg-background z-50 border-slate-100 dark:border-slate-800
@@ -19,6 +24,14 @@ const Header = () => {
             BLOGS
           </span>
         </Link>
+        {isLoggedIn(status) && (
+          <Link
+            className='p-2 text-xs cursor-pointer  hidden sm:block'
+            href={"/dashboard"}
+          >
+            Dashboard
+          </Link>
+        )}
         <Link
           className='p-2 text-xs cursor-pointer  hidden 
                     sm:block

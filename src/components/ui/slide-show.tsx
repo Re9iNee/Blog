@@ -166,7 +166,7 @@ function SlideShowCard({
         <div className='z-0 col-span-full row-span-full'>
           <Image
             fill
-            loading='eager'
+            priority
             placeholder='blur'
             blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
             alt={`main image of post: ${title}`}

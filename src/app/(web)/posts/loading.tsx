@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 function PostLoading() {
   return (
     <div className='pt-8 flex flex-col gap-4 px-4 mb-8 max-w-screen-md mx-auto'>
-      <PostNavigationGroup />
+      <PostNavigationGroup postId={1} />
 
       {/* Title */}
       <Skeleton className='w-72 h-6 pt-2' />
