@@ -17,8 +17,8 @@ function DottedBackground({ position, top, className }: Props) {
         width={337}
         height={429}
         src={bgImage}
-        priority={false}
-        placeholder="empty"
+        priority={true}
+        placeholder="blur"
         alt="Dotted Background"
         style={{ top: `${top}vh` }}
         className={cn(
