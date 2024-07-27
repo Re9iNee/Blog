@@ -58,7 +58,7 @@ function BlogCard({ data }: Props) {
           <Image
             width={20}
             height={20}
-            loading="lazy"
+            priority={false}
             alt="Author's profile picture"
             className="aspect-square rounded-full object-cover"
             src={author.avatarUrl ?? getAvatarPlaceholderUrl()}

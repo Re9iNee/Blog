@@ -39,8 +39,9 @@ function HeroImage({ activeIndex }: Props) {
             width={312}
             height={375}
             quality={100}
-            loading="lazy"
+            priority={false}
             aria-hidden="true"
+            placeholder="empty"
             src={dynamicImages[activeIndex].src}
             alt={dynamicImages[activeIndex].alt}
           />

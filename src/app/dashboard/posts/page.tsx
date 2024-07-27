@@ -1,4 +1,3 @@
-import Loader from "@/app/(web)/loading";
 import { Suspense } from "react";
 import PostTableWrapper from "./post-table-wrapper";
 import { Metadata } from "next";
@@ -31,7 +30,10 @@ async function DashboardPostPage({
         </div>
       </div>
 
-      <Suspense key={query + currentPage + perPage} fallback={<Loader />}>
+      <Suspense
+        fallback={<div>Loading...</div>}
+        key={query + currentPage + perPage}
+      >
         <PostTableWrapper perPage={perPage} query={query} page={currentPage} />
       </Suspense>
     </div>
