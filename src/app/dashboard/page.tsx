@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { fetchTotalPostsCount } from "@/service/posts.service";
+import { getTotalPostsCount } from "@/service/posts.service";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 async function page() {
-  const postsCount = await fetchTotalPostsCount();
+  const postsCount = await getTotalPostsCount();
 
   return (
     <div className="flex-1 space-y-4 p-8 pt-6">

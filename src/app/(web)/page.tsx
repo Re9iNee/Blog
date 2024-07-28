@@ -22,7 +22,6 @@ type Props = {
 export default async function Home({ searchParams }: Props) {
   const page = Number(searchParams.page) || 1;
   const query = searchParams.query || "";
-  const category = searchParams.category;
   const selectedCategory = searchParams.category;
 
   return (
@@ -42,12 +41,11 @@ export default async function Home({ searchParams }: Props) {
         </Suspense>
       </section>
 
-      <h1 className="px-4 pt-4 font-bold text-neutral-700 dark:text-neutral-50 md:pt-8">
-        {query === "" ? "Published Posts" : "Searched Results"}
-      </h1>
-      <section aria-labelledby="published-posts" className="p-4 pb-14">
-        <PublishedPostsWrapper page={page} query={query} category={category} />
-      </section>
+      <PublishedPostsWrapper
+        page={page}
+        query={query}
+        selectedCategory={selectedCategory}
+      />
     </main>
   );
 }

@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { fetchAllParams } from "@/types/common";
+import { getAllParams } from "@/types/common";
 import { PostModel, PostSelect } from "@/types/post.type";
 import { PostStatus } from "@prisma/client";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
@@ -31,13 +31,13 @@ type getAllPublishedPosts = {
   page: number;
   query: string;
   perPage: number;
-  category?: string;
+  selectedCategory?: string;
 };
 export async function getAllPublishedPosts({
   page,
   query,
   perPage,
-  category,
+  selectedCategory,
 }: getAllPublishedPosts): Promise<Omit<PostModel, "categories">[]> {
   const posts = await prisma.post.findMany({
     take: perPage,
@@ -47,7 +47,7 @@ export async function getAllPublishedPosts({
     where: {
       status: PostStatus.published,
       title: { contains: query, mode: "insensitive" },
-      categories: category ? { some: { name: category } } : {},
+      categories: selectedCategory ? { some: { name: selectedCategory } } : {},
     },
   });
 
@@ -76,7 +76,7 @@ export async function getAllPosts({
   page = 1,
   perPage = 10,
   query,
-}: fetchAllParams): Promise<PostModel[]> {
+}: getAllParams): Promise<PostModel[]> {
   noStore();
 
   const posts = await prisma.post.findMany({
@@ -95,7 +95,7 @@ export async function getAllPosts({
   return posts;
 }
 
-export async function fetchTotalPostsCount(query?: string): Promise<number> {
+export async function getTotalPostsCount(query?: string): Promise<number> {
   noStore();
 
   const count = await prisma.post.count({
@@ -237,7 +237,7 @@ export async function slideshowTogglePostVisibility(
   return updatedPostVisibility;
 }
 
-export async function fetchPostsTitleAndImage(): Promise<PostSelect[]> {
+export async function getPostsTitleAndImage(): Promise<PostSelect[]> {
   noStore();
 
   const posts = await prisma.post.findMany({

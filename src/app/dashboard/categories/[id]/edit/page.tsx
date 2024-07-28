@@ -8,7 +8,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { getCategoryById } from "@/service/category.service";
-import { fetchPostsTitleAndImage } from "@/service/posts.service";
+import { getPostsTitleAndImage } from "@/service/posts.service";
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -24,7 +24,7 @@ export default async function EditPostPage({
 }) {
   const { id } = params;
   const data = await getCategoryById(+id);
-  const posts = await fetchPostsTitleAndImage();
+  const posts = await getPostsTitleAndImage();
 
   if (!data) notFound();
 

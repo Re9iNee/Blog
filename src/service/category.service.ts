@@ -7,7 +7,7 @@ import {
   CategorySelect,
   CategoryUpsertType,
 } from "@/types/category.type";
-import { fetchAllParams } from "@/types/common";
+import { getAllParams } from "@/types/common";
 import { CreateCategorySchema } from "@/types/schemas/category-schema";
 import { Category } from "@prisma/client";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
@@ -31,7 +31,7 @@ export async function fetchCategories({
   query,
   page = 1,
   perPage = 10,
-}: fetchAllParams): Promise<CategoryModel[]> {
+}: getAllParams): Promise<CategoryModel[]> {
   noStore();
 
   const categories = await prisma.category.findMany({

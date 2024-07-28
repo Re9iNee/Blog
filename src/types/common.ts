@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export interface fetchAllParams {
+export interface getAllParams {
   page?: number;
   query?: string;
   perPage?: number;
