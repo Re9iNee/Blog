@@ -2,7 +2,7 @@ export const SITE_URL = getSiteURL();
 
 function getSiteURL(): string {
   if (process.env.NODE_ENV === "production" && process.env.VERCEL_URL) {
-    return "https://" + process.env.VERCEL_URL;
+    return "https://" + process.env.VERCEL_PROJECT_PRODUCTION_URL;
   }
   try {
     if (!document) throw new Error("Document is not defined");
