@@ -41,11 +41,11 @@ function BlogCard({ data }: Props) {
         </Suspense>
       </Link>
 
-      <h2 className="flex-grow font-bold leading-tight text-neutral-950 dark:text-neutral-300">
+      <h3 className="flex-grow font-bold leading-tight text-neutral-950 dark:text-neutral-300">
         <Link href={getPostUrl(slug)} prefetch={false}>
           {title}
         </Link>
-      </h2>
+      </h3>
       <summary className="line-clamp-2 max-h-max text-xs leading-none text-neutral-700 dark:text-neutral-500 md:text-sm md:leading-normal">
         {summary}
       </summary>

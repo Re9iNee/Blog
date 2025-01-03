@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: "Homepage | Mora Blog",
   },
   alternates: {
-    canonical: "./",
+    canonical: `${SITE_URL}`,
   },
   description: "The official blog of Mora",
   openGraph: {

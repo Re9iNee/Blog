@@ -1,19 +1,21 @@
 "use client";
 
+import { isLoggedIn } from "@/lib/utils";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
 import MoraLogo from "/public/logos/logo-small.svg";
-import { useSession } from "next-auth/react";
-import { useMemo } from "react";
-import { isLoggedIn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const { status } = useSession();
+  const isOnHomepage = usePathname() === "/";
 
   return (
     <header className="sticky top-0 z-50 flex max-w-screen-xl justify-between border-b border-slate-100 bg-background px-2 py-4 dark:border-slate-800 md:p-4">
       <div className="inline-flex items-center gap-2">
         <Link href={"/"} className="flex cursor-pointer items-center gap-1 p-2">
+          {isOnHomepage && <h1 className="hidden">Mora Blog</h1>}
           <MoraLogo />
 
           <span className="text-sm font-semibold italic leading-3 text-indigo-600">

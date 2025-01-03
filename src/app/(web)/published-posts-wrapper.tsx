@@ -37,9 +37,9 @@ export default async function PublishedPostsWrapper({
 
   return (
     <>
-      <h1 className="px-4 pt-4 font-bold text-neutral-700 dark:text-neutral-50 md:pt-8">
+      <h2 className="px-4 pt-4 font-bold text-neutral-700 dark:text-neutral-50 md:pt-8">
         {query === "" ? "Published Posts" : "Searched Results"}
-      </h1>
+      </h2>
       <section aria-labelledby="published-posts" className="p-4 pb-14">
         <div className="flex flex-col gap-8 p-4 pb-14 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           <Suspense fallback={<BlogCardsSkeleton />} key={query + page}>
@@ -62,7 +62,7 @@ export default async function PublishedPostsWrapper({
 
 function showNoPostsFound() {
   return (
-    <div className="flex flex-col items-center justify-center gap-16">
+    <div className="mb-12 flex flex-col items-center justify-center gap-16">
       <Image
         width={320}
         height={330}

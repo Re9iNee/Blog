@@ -22,9 +22,9 @@ function HeroSection() {
       className="pointer-events-none mx-3 flex items-center justify-center overflow-hidden pb-4 pt-12 md:gap-20 md:px-6 md:pt-6"
     >
       <div className="flex flex-shrink flex-col md:max-w-[50%]">
-        <h1 className="z-10 bg-background font-poppins text-3xl font-bold leading-10">
+        <h2 className="z-10 bg-background font-poppins text-3xl font-bold leading-10">
           Read About New
-        </h1>
+        </h2>
         <RotatingTexts activeIndex={activeIndex} />
         <h2 className="z-10 max-w-sm text-sm leading-6 text-neutral-500 dark:text-neutral-400">
           Join out MORA blog community to stay updated on the latest in
