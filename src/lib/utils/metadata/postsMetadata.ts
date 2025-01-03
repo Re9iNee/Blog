@@ -1,20 +1,27 @@
 import { PostModel } from "@/types/post.type";
 import { Metadata } from "next";
 import { getHomepageOGImageLink } from "../imageUtils";
+import { SITE_URL } from "../constants";
 
 export function generateMetadataForPost(data: PostModel): Metadata {
   const metadata: Metadata = {
     title: data.title,
+    publisher: "Mora Blog",
+    description: data.summary,
     robots: getRobotsMetadata(),
     twitter: getTwitterMetadata(data),
     openGraph: getOpenGraphMetadata(data),
+    keywords: data.categories.map((c) => c.name),
+    alternates: {
+      canonical: `${SITE_URL}/posts/${data.slug}`,
+    },
   };
 
   return metadata;
 }
 
 function getRobotsMetadata(): Metadata["robots"] {
-  return {
+  const metadata: Metadata["robots"] = {
     index: true,
     follow: true,
     nocache: true,
@@ -27,6 +34,7 @@ function getRobotsMetadata(): Metadata["robots"] {
       "max-image-preview": "large",
     },
   };
+  return metadata;
 }
 
 function getOpenGraphMetadata(data: PostModel): Metadata["openGraph"] {
