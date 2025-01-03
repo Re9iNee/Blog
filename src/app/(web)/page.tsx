@@ -6,6 +6,8 @@ import {
   TrendingCategoriesSkeleton,
 } from "@/components/homepage/skeletons";
 import TrendingCategoriesWrapper from "@/components/homepage/trending-categories";
+import { SITE_URL } from "@/lib/utils";
+import { Metadata } from "next";
 import { Suspense } from "react";
 import PublishedPostsWrapper from "./published-posts-wrapper";
 import SlideShowWrapper from "./slide-show-wrapper";
@@ -19,6 +21,19 @@ type Props = {
     selectedCategory?: string;
   };
 };
+
+export async function generateMetadata({
+  searchParams,
+}: Props): Promise<Metadata> {
+  const isSearching = !!searchParams.query;
+
+  return {
+    alternates: {
+      canonical: isSearching ? `${SITE_URL}/search` : `${SITE_URL}`,
+    },
+  };
+}
+
 export default async function Home({ searchParams }: Props) {
   const page = Number(searchParams.page) || 1;
   const query = searchParams.query || "";
