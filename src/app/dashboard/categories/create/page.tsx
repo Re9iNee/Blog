@@ -7,7 +7,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { fetchPostsTitleAndImage } from "@/service/posts.service";
+import { getPostsTitleAndImage } from "@/service/posts.service";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CreateCategoryPage() {
-  const posts = await fetchPostsTitleAndImage();
+  const posts = await getPostsTitleAndImage();
 
   return (
     <div className="space-y-8 p-8">

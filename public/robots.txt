@@ -1,5 +1,12 @@
 User-agent: *
+
+Allow: /$
+
+Disallow: /*?*
 Disallow: /api/
-Allow: /
+Disallow: /_next/
+Disallow: /public/
+Disallow: /?category=*
+Disallow: /dashboard/*
 
 Sitemap: https://www.mora-ed.com/sitemap.xml

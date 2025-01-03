@@ -1,11 +1,12 @@
 import Footer from "@/components/global/footer";
 import Header from "@/components/global/header";
 import { notoSans, poppins } from "@/lib/fonts";
+import { SITE_URL } from "@/lib/utils/constants";
 import { getHomepageOGImageLink } from "@/lib/utils/imageUtils";
-import { GoogleTagManager } from "@next/third-parties/google";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     template: "%s | Mora Blog",
     default: "Homepage | Mora Blog",

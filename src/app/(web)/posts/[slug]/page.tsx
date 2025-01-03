@@ -27,7 +27,6 @@ type Props = {
 
 async function PostPage({ params }: Props) {
   const slug = params.slug;
-
   const data = await getPostBySlug(slug);
   if (!data) notFound();
 
@@ -36,7 +35,6 @@ async function PostPage({ params }: Props) {
 
   return (
     <div className="mx-auto mb-8 flex max-w-screen-md flex-col gap-4 px-4 pt-8">
-      {/* metadata */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

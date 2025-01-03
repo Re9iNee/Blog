@@ -1,6 +1,6 @@
 import { columns } from "@/components/dashboard/posts/data-table/columns";
 import PostTable from "@/components/dashboard/posts/post-table";
-import { fetchTotalPostsCount, getAllPosts } from "@/service/posts.service";
+import { getTotalPostsCount, getAllPosts } from "@/service/posts.service";
 
 type Props = {
   page: number;
@@ -13,7 +13,7 @@ export default async function PostTableWrapper({
   perPage,
 }: Props) {
   const [totalPosts, posts] = await Promise.all([
-    fetchTotalPostsCount(query),
+    getTotalPostsCount(query),
     getAllPosts({
       page,
       query,
