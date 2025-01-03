@@ -51,6 +51,7 @@
     "micromark": "^4.0.0",
     "micromark-extension-directive": "^3.0.0",
     "micromark-extension-gfm": "^3.0.0",
+    "my-app": "link:",
     "next": "14.0.3",
     "next-auth": "^4.24.7",
     "next-mdx-remote": "^4.4.1",
