@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   // await insertAdmin();
-  // console.log(await getPosts(1));
+  console.log(await getPosts(1));
   // await insertCategories();
   // console.log(await getHash("examplePassword"));
   // await insertUsers(2);
