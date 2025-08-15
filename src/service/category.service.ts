@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { wait } from "@/lib/utils";
 import {
   CategoryModel,
   CategorySelect,

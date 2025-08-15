@@ -1,25 +1,14 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("AWS_POSTGRES_URL")
-}
-
-enum PostStatus {
-  draft
-  archived
-  published
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Post {
-  id Int @id @default(autoincrement())
-
+  id           Int        @id @default(autoincrement())
   body         String?
   slug         String     @unique
   title        String
@@ -29,38 +18,41 @@ model Post {
   authorId     Int
   updatedAt    DateTime   @updatedAt
   createdAt    DateTime   @default(now())
-  categories   Category[]
   publishedAt  DateTime?
   readingTime  Int
   isSlideshow  Boolean    @default(false)
   mainImageUrl String?
-
-  author User @relation(fields: [authorId], references: [id])
+  author       User       @relation(fields: [authorId], references: [id])
+  categories   Category[] @relation("CategoryToPost")
 
   @@map("posts")
 }
 
 model User {
-  id Int @id @default(autoincrement())
-
+  id        Int      @id @default(autoincrement())
   name      String
-  posts     Post[]
   password  String
   avatarUrl String?
   email     String   @unique
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
+  posts     Post[]
 
   @@map("users")
 }
 
 model Category {
-  id Int @id @default(autoincrement())
-
-  posts     Post[]
+  id        Int      @id @default(autoincrement())
   name      String   @unique
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
+  posts     Post[]   @relation("CategoryToPost")
 
   @@map("categories")
+}
+
+enum PostStatus {
+  draft
+  archived
+  published
 }
