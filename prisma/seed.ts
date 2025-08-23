@@ -1,15 +1,14 @@
 import { faker } from "@faker-js/faker";
 import { PostStatus, PrismaClient } from "@prisma/client";
-import { withAccelerate } from "@prisma/extension-accelerate";
 import { hash } from "bcryptjs";
 import * as dotenv from "dotenv";
 dotenv.config(); // Load the environment variables
 
-const prisma = new PrismaClient().$extends(withAccelerate());
+const prisma = new PrismaClient();
 
 async function main() {
-  await insertAdmin();
-  // console.log(await getPosts(1));
+  // await insertAdmin();
+  console.log(await getPosts(1));
   // await insertCategories();
   // console.log(await getHash("examplePassword"));
   // await insertUsers(2);
