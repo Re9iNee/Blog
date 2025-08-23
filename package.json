@@ -9,9 +9,9 @@
     "build": "next build",
     "cy:run": "npx cypress run",
     "cy:open": "npx cypress open",
+    "postinstall": "npx prisma generate",
     "component": "cypress open --component",
     "component:headless": "cypress run --component",
-    "postinstall": "prisma generate --no-engine && npx prisma db seed",
     "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
     "e2e": "start-server-and-test dev http://localhost:3000 \"cypress open --e2e\"",
     "e2e:headless": "start-server-and-test dev http://localhost:3000 \"cypress run --e2e\""
@@ -89,8 +89,5 @@
     "tailwindcss": "^3.4.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
-  },
-  "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   }
 }
